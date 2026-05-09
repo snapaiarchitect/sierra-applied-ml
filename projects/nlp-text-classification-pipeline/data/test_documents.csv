@@ -1,0 +1,269 @@
+doc_id,category,text,created_date,agency,word_count,has_attachment,priority
+DOC-00000,Policy,"Direct final rule amending education funding allocation without objection. Effective March 09, 2024 unless adverse comments received.",2023-09-12,Small Business Administration,17,False,Medium
+DOC-00001,Budget,"Contract modification request for veterans services. Increase scope by $4,140. Justification: emergency need.",2024-05-07,Department of Housing,13,False,Medium
+DOC-00002,Budget,"FY2024 budget request for education funding allocation. Total allocation: $2,800. Breakdown: personnel $1,838, equipment $751, contracts $1,311.",2023-05-04,Environmental Protection Agency,17,False,Medium
+DOC-00003,Service_Request,Street light outage at 9012 Georgia Avenue. Complete darkness on block creating safety concerns for pedestrians.,2023-04-25,DC 311,16,False,Medium
+DOC-00004,Budget,"Budget reprogramming notification: $3,591 transferred from transportation equity to small business support. Approved by Deputy Mayor.",2024-08-10,Environmental Protection Agency,16,True,Medium
+DOC-00005,Policy,"Interim final rule with request for comments on affordable housing initiatives. Effective immediately. Comments due December 13, 2024.",2024-01-27,Federal Transit Administration,18,False,High
+DOC-00006,Budget,"Contract modification request for climate adaptation planning. Increase scope by $2,503. Justification: cost overrun.",2024-10-19,Department of Education,14,False,High
+DOC-00007,Policy,Notice of availability: draft environmental impact statement for small business support. Public comment period 2022-2020.,2024-02-07,Department of Education,15,True,Medium
+DOC-00008,Budget,"Grant award notification: emergency response protocols. Award amount $4,130. Performance period: 2022-2022.",2024-10-09,Environmental Protection Agency,12,False,High
+DOC-00009,Policy,Advance notice of proposed rulemaking: seeking public input on digital service delivery. Comment period 2023-2020.,2024-09-21,Department of Transportation,15,True,High
+DOC-00010,Policy,"Final rule amending regulations for digital service delivery. Effective date September 05, 2024. Compliance required within 90 days.",2024-04-03,Federal Transit Administration,18,True,High
+DOC-00011,Service_Request,Sidewalk repair needed at 123 H Street NE. Uneven surface creating tripping hazard for elderly residents.,2024-02-13,DC 311,16,False,High
+DOC-00012,Service_Request,Illegal dumping observed at 456 U Street NW. Construction debris and household waste accumulating for over a week.,2023-09-01,DC 311,18,True,Low
+DOC-00013,Policy,Advance notice of proposed rulemaking: seeking public input on digital service delivery. Comment period 2020-2022.,2024-06-29,Department of Health,15,False,Urgent
+DOC-00014,Policy,Request for information regarding public safety technology. Agency seeking data and feedback from stakeholders.,2024-08-24,Small Business Administration,14,True,Low
+DOC-00015,Policy,Notice of information collection under review: emergency response protocols. OMB control number renewal requested.,2023-07-13,Office of Emergency Management,14,True,High
+DOC-00016,Policy,Advance notice of proposed rulemaking: seeking public input on public health surveillance. Comment period 2023-2021.,2024-05-07,Department of Agriculture,15,False,Low
+DOC-00017,Service_Request,Graffiti removal request at 5678 14th Street SE. Multiple tags on public building facade.,2024-01-24,DC 311,14,False,Low
+DOC-00018,Policy,"Notice of proposed rulemaking regarding digital service delivery. Comments accepted through November 22, 2024. Public hearing scheduled.",2024-03-19,Department of Housing,17,False,High
+DOC-00019,Policy,Request for information regarding transit infrastructure maintenance. Agency seeking data and feedback from stakeholders.,2023-01-20,Department of Housing,14,True,High
+DOC-00020,Budget,"Contract modification request for food security programs. Increase scope by $4,701. Justification: funding gap.",2024-07-04,Department of Housing,14,False,Low
+DOC-00021,FOIA,Requesting disclosure of all records pertaining to public health surveillance maintained by Department of Veterans Affairs. Time period: 2022-2023. Please expedite if possible.,2023-06-29,Department of Veterans Affairs,23,False,Medium
+DOC-00022,Budget,Supplemental appropriation request: education funding allocation. Emergency funding needed due to cost overrun. Amount: $657.,2023-10-21,Small Business Administration,15,False,Urgent
+DOC-00023,Policy,"Notice of proposed rulemaking regarding public health surveillance. Comments accepted through October 05, 2024. Public hearing scheduled.",2024-07-29,Department of Education,17,True,High
+DOC-00024,Budget,Grant award notification: transit infrastructure maintenance. Award amount $220. Performance period: 2022-2022.,2024-02-15,Office of Emergency Management,12,True,High
+DOC-00025,Service_Request,Illegal dumping observed at 9012 Georgia Avenue. Construction debris and household waste accumulating for over a week.,2024-04-27,DC 311,17,False,Medium
+DOC-00026,FOIA,Requesting disclosure of all records pertaining to environmental compliance maintained by Environmental Protection Agency. Time period: 2023-2020. Please expedite if possible.,2024-02-24,Environmental Protection Agency,21,False,Medium
+DOC-00027,FOIA,"Request for records related to environmental compliance under the Freedom of Information Act. Seeking documents from 2022-2020 including emails, memos, and reports.",2023-03-01,Federal Transit Administration,22,False,High
+DOC-00028,FOIA,"FOIA request for environmental compliance records. Specifically seeking: budgets, expenditures, contracts, and correspondence related to this matter from 2023-2023.",2024-03-02,Department of Labor,19,False,Low
+DOC-00029,Service_Request,Rodent complaint at 456 U Street NW. Multiple sightings reported in basement and alley. Request extermination services.,2023-06-28,DC 311,17,False,Urgent
+DOC-00030,Policy,Notice of availability: draft environmental impact statement for education funding allocation. Public comment period 2023-2023.,2024-11-05,Department of Education,15,True,Medium
+DOC-00031,Service_Request,Graffiti removal request at 123 H Street NE. Multiple tags on public building facade.,2023-06-09,DC 311,14,True,Urgent
+DOC-00032,Service_Request,Tree down blocking roadway at 9012 Georgia Avenue. Storm damage from last night. Emergency removal needed.,2023-11-24,DC 311,16,False,Medium
+DOC-00033,FOIA,"FOIA request for digital service delivery records. Specifically seeking: budgets, expenditures, contracts, and correspondence related to this matter from 2020-2021.",2023-03-27,Department of Housing,20,False,Medium
+DOC-00034,Policy,Notice of information collection under review: workforce development programs. OMB control number renewal requested.,2023-12-03,Department of Veterans Affairs,14,False,Medium
+DOC-00035,Service_Request,Street light outage at 7890 Constitution Ave. Complete darkness on block creating safety concerns for pedestrians.,2024-08-07,DC 311,16,False,High
+DOC-00036,Service_Request,"Abandoned vehicle at 789 7th Street SW. White sedan, no plates, parked for 3+ weeks.",2023-06-18,DC 311,15,False,Medium
+DOC-00037,Budget,"Quarterly expenditure report for workforce development programs. Spent: $3,074 of $391 budget. Variance: -1%.",2023-04-21,Federal Transit Administration,14,True,High
+DOC-00038,Budget,"Supplemental appropriation request: digital service delivery. Emergency funding needed due to emergency need. Amount: $3,389.",2023-03-13,Department of Health,15,False,High
+DOC-00039,FOIA,"FOIA request for climate adaptation planning records. Specifically seeking: budgets, expenditures, contracts, and correspondence related to this matter from 2022-2022.",2023-04-23,Department of Transportation,20,False,Medium
+DOC-00040,Policy,"Final rule amending regulations for climate adaptation planning. Effective date February 19, 2024. Compliance required within 90 days.",2024-09-22,Department of Agriculture,18,False,Medium
+DOC-00041,Budget,Quarterly expenditure report for community health centers. Spent: $397 of $448 budget. Variance: 15%.,2024-01-02,Department of Veterans Affairs,14,False,High
+DOC-00042,Service_Request,Sidewalk repair needed at 3456 Pennsylvania Ave. Uneven surface creating tripping hazard for elderly residents.,2024-04-10,DC 311,15,False,Medium
+DOC-00043,FOIA,Requesting disclosure of all records pertaining to public health surveillance maintained by Department of Housing. Time period: 2022-2022. Please expedite if possible.,2023-08-28,Department of Housing,22,False,High
+DOC-00044,Service_Request,"Abandoned vehicle at 123 H Street NE. White sedan, no plates, parked for 3+ weeks.",2024-04-13,DC 311,15,False,Medium
+DOC-00045,Budget,"Quarterly expenditure report for emergency response protocols. Spent: $3,025 of $1,735 budget. Variance: 12%.",2024-03-27,Department of Labor,14,False,Low
+DOC-00046,Policy,Request for information regarding food security programs. Agency seeking data and feedback from stakeholders.,2023-10-18,Small Business Administration,14,False,Low
+DOC-00047,FOIA,Requesting disclosure of all records pertaining to community health centers maintained by General Services Administration. Time period: 2021-2020. Please expedite if possible.,2024-07-05,General Services Administration,22,True,High
+DOC-00048,Budget,"Grant award notification: public safety technology. Award amount $4,966. Performance period: 2020-2021.",2024-05-08,Small Business Administration,12,True,Urgent
+DOC-00049,Service_Request,Illegal dumping observed at 789 7th Street SW. Construction debris and household waste accumulating for over a week.,2024-05-04,DC 311,18,False,High
+DOC-00050,Policy,"Interim final rule with request for comments on small business support. Effective immediately. Comments due April 15, 2024.",2024-03-31,Department of Veterans Affairs,18,False,Medium
+DOC-00051,Budget,"Supplemental appropriation request: education funding allocation. Emergency funding needed due to emergency need. Amount: $2,675.",2024-04-15,Department of Labor,15,False,High
+DOC-00052,Budget,"Budget reprogramming notification: $4,269 transferred from climate adaptation planning to emergency response protocols. Approved by Program Manager.",2024-01-11,Department of Education,17,False,High
+DOC-00053,Service_Request,Tree down blocking roadway at 123 H Street NE. Storm damage from last night. Emergency removal needed.,2023-02-21,DC 311,17,False,Medium
+DOC-00054,Budget,"Supplemental appropriation request: public safety technology. Emergency funding needed due to cost overrun. Amount: $2,982.",2023-05-16,Department of Transportation,15,True,Medium
+DOC-00055,Policy,"Interim final rule with request for comments on small business support. Effective immediately. Comments due July 05, 2024.",2024-06-28,General Services Administration,18,False,Low
+DOC-00056,FOIA,"Under the Freedom of Information Act, 5 U.S.C. § 552, I request access to records regarding public safety technology from General Services Administration for the period 2022-2022.",2024-07-10,General Services Administration,27,True,High
+DOC-00057,Policy,Advance notice of proposed rulemaking: seeking public input on emergency response protocols. Comment period 2022-2020.,2024-12-08,Department of Transportation,15,False,Medium
+DOC-00058,Service_Request,Water main break at 123 H Street NE. Flooding street and sidewalk. Low water pressure in surrounding area.,2024-03-13,DC 311,18,False,High
+DOC-00059,Service_Request,Pothole repair needed at 456 U Street NW. Large pothole causing vehicle damage and safety hazard for cyclists.,2023-06-09,DC 311,18,True,Urgent
+DOC-00060,FOIA,"Pursuant to FOIA, I request all documents concerning transportation equity prepared between 2020-2023. Please include drafts and internal correspondence.",2024-09-15,Department of Education,19,True,Medium
+DOC-00061,Policy,"Direct final rule amending small business support without objection. Effective July 22, 2024 unless adverse comments received.",2023-03-14,Department of Housing,17,False,Medium
+DOC-00062,Budget,Grant award notification: community health centers. Award amount $288. Performance period: 2021-2023.,2024-06-11,Department of Education,12,False,High
+DOC-00063,Policy,Request for information regarding environmental compliance. Agency seeking data and feedback from stakeholders.,2023-03-02,Department of Housing,13,False,High
+DOC-00064,Policy,"Interim final rule with request for comments on community health centers. Effective immediately. Comments due January 05, 2024.",2023-10-19,Department of Education,18,False,Medium
+DOC-00065,Service_Request,Street light outage at 6789 Connecticut Ave. Complete darkness on block creating safety concerns for pedestrians.,2023-04-13,DC 311,16,False,Urgent
+DOC-00066,Budget,"Budget reprogramming notification: $4,745 transferred from digital service delivery to transit infrastructure maintenance. Approved by Deputy Mayor.",2024-12-20,Environmental Protection Agency,17,False,High
+DOC-00067,FOIA,"Request for records related to community health centers under the Freedom of Information Act. Seeking documents from 2021-2020 including emails, memos, and reports.",2024-06-29,Department of Health,23,False,High
+DOC-00068,Budget,"Supplemental appropriation request: education funding allocation. Emergency funding needed due to funding gap. Amount: $4,635.",2023-07-13,Department of Agriculture,15,False,High
+DOC-00069,Budget,"Grant award notification: transportation equity. Award amount $3,092. Performance period: 2023-2023.",2023-09-23,Department of Housing,11,False,Medium
+DOC-00070,Policy,"Direct final rule amending public health surveillance without objection. Effective January 21, 2024 unless adverse comments received.",2024-05-07,Department of Housing,17,False,Medium
+DOC-00071,FOIA,"Request for records related to food security programs under the Freedom of Information Act. Seeking documents from 2021-2020 including emails, memos, and reports.",2023-07-25,Small Business Administration,23,False,Low
+DOC-00072,Budget,"Quarterly expenditure report for affordable housing initiatives. Spent: $1,744 of $2,347 budget. Variance: 3%.",2024-11-10,Department of Labor,14,False,Medium
+DOC-00073,Service_Request,Sidewalk repair needed at 5678 14th Street SE. Uneven surface creating tripping hazard for elderly residents.,2023-10-22,DC 311,16,False,Medium
+DOC-00074,Service_Request,Graffiti removal request at 6789 Connecticut Ave. Multiple tags on public building facade.,2024-02-05,DC 311,13,True,Urgent
+DOC-00075,Policy,"Final rule amending regulations for veterans services. Effective date September 25, 2024. Compliance required within 90 days.",2023-04-03,Environmental Protection Agency,17,False,Medium
+DOC-00076,Policy,Request for information regarding education funding allocation. Agency seeking data and feedback from stakeholders.,2023-01-20,General Services Administration,14,True,Urgent
+DOC-00077,Budget,"Budget reprogramming notification: $1,716 transferred from veterans services to emergency response protocols. Approved by Program Manager.",2023-08-04,Department of Health,16,False,Urgent
+DOC-00078,Budget,"Budget reprogramming notification: $1,926 transferred from education funding allocation to small business support. Approved by Budget Director.",2023-03-03,Department of Education,17,True,Medium
+DOC-00079,FOIA,"FOIA request for education funding allocation records. Specifically seeking: budgets, expenditures, contracts, and correspondence related to this matter from 2023-2020.",2024-03-23,Department of Health,20,True,Medium
+DOC-00080,Service_Request,Rodent complaint at 456 U Street NW. Multiple sightings reported in basement and alley. Request extermination services.,2024-07-02,DC 311,17,False,Urgent
+DOC-00081,Service_Request,"Abandoned vehicle at 456 U Street NW. White sedan, no plates, parked for 3+ weeks.",2024-09-20,DC 311,15,False,High
+DOC-00082,FOIA,Requesting disclosure of all records pertaining to climate adaptation planning maintained by Office of Emergency Management. Time period: 2020-2023. Please expedite if possible.,2023-09-16,Office of Emergency Management,23,True,High
+DOC-00083,Policy,Notice of availability: draft environmental impact statement for environmental compliance. Public comment period 2021-2022.,2024-10-18,Department of Transportation,14,False,Urgent
+DOC-00084,Policy,"Direct final rule amending emergency response protocols without objection. Effective July 27, 2024 unless adverse comments received.",2024-12-25,General Services Administration,17,False,High
+DOC-00085,FOIA,"Request for records related to public health surveillance under the Freedom of Information Act. Seeking documents from 2021-2020 including emails, memos, and reports.",2024-02-16,Department of Health,23,False,High
+DOC-00086,Policy,Notice of information collection under review: veterans services. OMB control number renewal requested.,2023-09-14,Department of Education,13,True,High
+DOC-00087,Service_Request,"Abandoned vehicle at 2345 Massachusetts Ave. White sedan, no plates, parked for 3+ weeks.",2024-11-12,DC 311,14,True,High
+DOC-00088,Budget,"Quarterly expenditure report for public safety technology. Spent: $2,839 of $1,413 budget. Variance: -16%.",2024-04-15,Office of Emergency Management,14,False,High
+DOC-00089,Service_Request,Illegal dumping observed at 9012 Georgia Avenue. Construction debris and household waste accumulating for over a week.,2024-03-23,DC 311,17,False,High
+DOC-00090,Budget,"FY2023 budget request for education funding allocation. Total allocation: $4,140. Breakdown: personnel $1,746, equipment $233, contracts $250.",2024-11-07,Department of Agriculture,17,False,Low
+DOC-00091,FOIA,"FOIA request for affordable housing initiatives records. Specifically seeking: budgets, expenditures, contracts, and correspondence related to this matter from 2023-2023.",2023-12-24,Small Business Administration,20,True,High
+DOC-00092,Budget,"Quarterly expenditure report for small business support. Spent: $661 of $4,018 budget. Variance: 1%.",2024-03-20,Department of Agriculture,14,True,High
+DOC-00093,Budget,"FY2024 budget request for community health centers. Total allocation: $4,907. Breakdown: personnel $1,551, equipment $635, contracts $213.",2024-12-25,Federal Transit Administration,17,True,Medium
+DOC-00094,Policy,"Notice of proposed rulemaking regarding community health centers. Comments accepted through April 05, 2024. Public hearing scheduled.",2024-08-10,Department of Housing,17,False,Low
+DOC-00095,Budget,"Grant award notification: education funding allocation. Award amount $2,269. Performance period: 2023-2021.",2024-02-07,Department of Housing,12,False,Medium
+DOC-00096,Service_Request,Pothole repair needed at 9012 Georgia Avenue. Large pothole causing vehicle damage and safety hazard for cyclists.,2024-10-01,DC 311,17,False,Medium
+DOC-00097,Service_Request,Noise complaint: loud construction at 6789 Connecticut Ave before 7 AM on weekday.,2023-12-26,DC 311,13,False,Low
+DOC-00098,Service_Request,Tree down blocking roadway at 123 H Street NE. Storm damage from last night. Emergency removal needed.,2024-10-13,DC 311,17,True,High
+DOC-00099,Service_Request,Sidewalk repair needed at 789 7th Street SW. Uneven surface creating tripping hazard for elderly residents.,2023-07-18,DC 311,16,True,Low
+DOC-00100,Service_Request,"Abandoned vehicle at 789 7th Street SW. White sedan, no plates, parked for 3+ weeks.",2024-04-14,DC 311,15,False,Urgent
+DOC-00101,Budget,"Quarterly expenditure report for climate adaptation planning. Spent: $2,708 of $1,744 budget. Variance: 17%.",2023-01-04,Environmental Protection Agency,14,True,High
+DOC-00102,Budget,"Quarterly expenditure report for workforce development programs. Spent: $2,506 of $378 budget. Variance: -5%.",2024-05-07,General Services Administration,14,False,Low
+DOC-00103,Policy,"Direct final rule amending food security programs without objection. Effective December 30, 2024 unless adverse comments received.",2024-05-23,Department of Veterans Affairs,17,False,Medium
+DOC-00104,Service_Request,Graffiti removal request at 6789 Connecticut Ave. Multiple tags on public building facade.,2024-09-11,DC 311,13,False,Low
+DOC-00105,FOIA,"Pursuant to FOIA, I request all documents concerning affordable housing initiatives prepared between 2023-2023. Please include drafts and internal correspondence.",2024-04-08,General Services Administration,20,True,Low
+DOC-00106,Service_Request,"Abandoned vehicle at 6789 Connecticut Ave. White sedan, no plates, parked for 3+ weeks.",2024-02-15,DC 311,14,False,Medium
+DOC-00107,Service_Request,"Abandoned vehicle at 9012 Georgia Avenue. White sedan, no plates, parked for 3+ weeks.",2023-03-01,DC 311,14,False,Urgent
+DOC-00108,Service_Request,Rodent complaint at 6789 Connecticut Ave. Multiple sightings reported in basement and alley. Request extermination services.,2024-11-03,DC 311,16,False,Urgent
+DOC-00109,Budget,"FY2025 budget request for food security programs. Total allocation: $1,019. Breakdown: personnel $171, equipment $554, contracts $1,181.",2024-03-18,Department of Agriculture,17,False,High
+DOC-00110,Budget,"Budget reprogramming notification: $3,585 transferred from food security programs to public health surveillance. Approved by Budget Director.",2023-06-06,Department of Labor,17,False,High
+DOC-00111,Service_Request,Pothole repair needed at 5678 14th Street SE. Large pothole causing vehicle damage and safety hazard for cyclists.,2023-04-11,DC 311,18,False,Medium
+DOC-00112,Service_Request,Graffiti removal request at 3456 Pennsylvania Ave. Multiple tags on public building facade.,2023-04-10,DC 311,13,False,Low
+DOC-00113,Budget,"Contract modification request for digital service delivery. Increase scope by $4,736. Justification: emergency need.",2024-05-21,General Services Administration,14,False,Urgent
+DOC-00114,Service_Request,Street light outage at 7890 Constitution Ave. Complete darkness on block creating safety concerns for pedestrians.,2024-02-14,DC 311,16,False,Urgent
+DOC-00115,Service_Request,"Abandoned vehicle at 789 7th Street SW. White sedan, no plates, parked for 3+ weeks.",2024-02-28,DC 311,15,True,Urgent
+DOC-00116,Policy,Notice of information collection under review: digital service delivery. OMB control number renewal requested.,2024-09-10,Department of Transportation,14,False,Medium
+DOC-00117,Service_Request,Illegal dumping observed at 1234 K Street NW. Construction debris and household waste accumulating for over a week.,2023-05-07,DC 311,18,False,Medium
+DOC-00118,Service_Request,Street light outage at 1234 K Street NW. Complete darkness on block creating safety concerns for pedestrians.,2023-02-01,DC 311,17,False,Medium
+DOC-00119,Policy,"Direct final rule amending climate adaptation planning without objection. Effective April 05, 2024 unless adverse comments received.",2024-06-02,Department of Veterans Affairs,17,False,Low
+DOC-00120,Policy,Advance notice of proposed rulemaking: seeking public input on workforce development programs. Comment period 2020-2020.,2024-04-25,Department of Veterans Affairs,15,True,High
+DOC-00121,Service_Request,Rodent complaint at 123 H Street NE. Multiple sightings reported in basement and alley. Request extermination services.,2023-09-03,DC 311,17,True,High
+DOC-00122,Policy,"Interim final rule with request for comments on affordable housing initiatives. Effective immediately. Comments due December 08, 2024.",2023-02-18,General Services Administration,18,False,High
+DOC-00123,Service_Request,Water main break at 5678 14th Street SE. Flooding street and sidewalk. Low water pressure in surrounding area.,2023-10-30,DC 311,18,True,Urgent
+DOC-00124,Service_Request,Sidewalk repair needed at 9012 Georgia Avenue. Uneven surface creating tripping hazard for elderly residents.,2024-05-18,DC 311,15,False,Low
+DOC-00125,Budget,"Quarterly expenditure report for environmental compliance. Spent: $3,025 of $2,014 budget. Variance: -7%.",2023-12-25,Office of Emergency Management,13,True,Low
+DOC-00126,Service_Request,Sidewalk repair needed at 456 U Street NW. Uneven surface creating tripping hazard for elderly residents.,2023-09-18,DC 311,16,False,Medium
+DOC-00127,Policy,"Final rule amending regulations for digital service delivery. Effective date March 13, 2024. Compliance required within 90 days.",2023-05-07,Department of Labor,18,False,High
+DOC-00128,Budget,"Contract modification request for education funding allocation. Increase scope by $4,477. Justification: scope expansion.",2024-06-13,Office of Emergency Management,14,True,Low
+DOC-00129,Policy,"Direct final rule amending affordable housing initiatives without objection. Effective March 15, 2024 unless adverse comments received.",2024-04-16,General Services Administration,17,False,Medium
+DOC-00130,Policy,"Direct final rule amending veterans services without objection. Effective November 06, 2024 unless adverse comments received.",2024-12-19,Department of Veterans Affairs,16,False,Medium
+DOC-00131,Budget,"Quarterly expenditure report for food security programs. Spent: $1,831 of $845 budget. Variance: -3%.",2024-03-29,Federal Transit Administration,14,True,Low
+DOC-00132,Policy,Notice of information collection under review: workforce development programs. OMB control number renewal requested.,2024-12-08,Department of Veterans Affairs,14,False,Medium
+DOC-00133,Service_Request,Graffiti removal request at 123 H Street NE. Multiple tags on public building facade.,2024-06-18,DC 311,14,False,High
+DOC-00134,FOIA,Requesting disclosure of all records pertaining to digital service delivery maintained by Federal Transit Administration. Time period: 2021-2023. Please expedite if possible.,2024-05-11,Federal Transit Administration,22,False,High
+DOC-00135,FOIA,"Request for records related to digital service delivery under the Freedom of Information Act. Seeking documents from 2023-2020 including emails, memos, and reports.",2023-10-21,Federal Transit Administration,23,False,High
+DOC-00136,Service_Request,Water main break at 456 U Street NW. Flooding street and sidewalk. Low water pressure in surrounding area.,2023-09-09,DC 311,18,False,Low
+DOC-00137,Service_Request,Graffiti removal request at 2345 Massachusetts Ave. Multiple tags on public building facade.,2023-06-18,DC 311,13,False,Urgent
+DOC-00138,Policy,"Notice of proposed rulemaking regarding education funding allocation. Comments accepted through October 15, 2024. Public hearing scheduled.",2024-02-09,Small Business Administration,17,True,Medium
+DOC-00139,Service_Request,Illegal dumping observed at 6789 Connecticut Ave. Construction debris and household waste accumulating for over a week.,2024-05-12,DC 311,17,False,Medium
+DOC-00140,Policy,"Notice of proposed rulemaking regarding community health centers. Comments accepted through August 26, 2024. Public hearing scheduled.",2023-03-18,Department of Education,17,False,High
+DOC-00141,Service_Request,Rodent complaint at 3456 Pennsylvania Ave. Multiple sightings reported in basement and alley. Request extermination services.,2024-07-12,DC 311,16,False,Urgent
+DOC-00142,FOIA,"FOIA request for education funding allocation records. Specifically seeking: budgets, expenditures, contracts, and correspondence related to this matter from 2022-2021.",2024-02-08,Department of Veterans Affairs,20,False,Medium
+DOC-00143,FOIA,"Request for records related to affordable housing initiatives under the Freedom of Information Act. Seeking documents from 2023-2021 including emails, memos, and reports.",2023-01-03,Federal Transit Administration,23,True,Low
+DOC-00144,Budget,"FY2023 budget request for environmental compliance. Total allocation: $3,923. Breakdown: personnel $129, equipment $126, contracts $404.",2024-06-19,Department of Education,16,False,Medium
+DOC-00145,Service_Request,Tree down blocking roadway at 456 U Street NW. Storm damage from last night. Emergency removal needed.,2024-02-12,DC 311,17,True,High
+DOC-00146,Service_Request,Rodent complaint at 5678 14th Street SE. Multiple sightings reported in basement and alley. Request extermination services.,2024-06-30,DC 311,17,False,Medium
+DOC-00147,Budget,"FY2024 budget request for education funding allocation. Total allocation: $2,148. Breakdown: personnel $389, equipment $268, contracts $1,013.",2023-04-04,Department of Health,17,False,Urgent
+DOC-00148,Service_Request,Sidewalk repair needed at 9012 Georgia Avenue. Uneven surface creating tripping hazard for elderly residents.,2024-06-01,DC 311,15,True,Medium
+DOC-00149,FOIA,Requesting disclosure of all records pertaining to community health centers maintained by Department of Agriculture. Time period: 2021-2023. Please expedite if possible.,2023-11-30,Department of Agriculture,22,True,Urgent
+DOC-00150,Service_Request,"Abandoned vehicle at 1234 K Street NW. White sedan, no plates, parked for 3+ weeks.",2024-08-12,DC 311,15,True,Medium
+DOC-00151,Budget,"Supplemental appropriation request: community health centers. Emergency funding needed due to scope expansion. Amount: $2,589.",2024-05-29,Federal Transit Administration,15,True,Medium
+DOC-00152,Policy,Notice of availability: draft environmental impact statement for workforce development programs. Public comment period 2021-2022.,2023-11-04,Department of Transportation,15,True,Medium
+DOC-00153,Budget,"Quarterly expenditure report for climate adaptation planning. Spent: $2,065 of $3,790 budget. Variance: 16%.",2024-02-11,Department of Labor,14,False,Low
+DOC-00154,Budget,"Quarterly expenditure report for affordable housing initiatives. Spent: $961 of $4,142 budget. Variance: -5%.",2023-10-03,Department of Housing,14,False,Medium
+DOC-00155,Service_Request,Pothole repair needed at 5678 14th Street SE. Large pothole causing vehicle damage and safety hazard for cyclists.,2024-04-25,DC 311,18,False,Low
+DOC-00156,Policy,Notice of availability: draft environmental impact statement for affordable housing initiatives. Public comment period 2023-2022.,2023-11-06,Environmental Protection Agency,15,False,Low
+DOC-00157,Policy,Advance notice of proposed rulemaking: seeking public input on affordable housing initiatives. Comment period 2020-2022.,2023-02-13,Department of Housing,15,False,Low
+DOC-00158,Service_Request,Rodent complaint at 6789 Connecticut Ave. Multiple sightings reported in basement and alley. Request extermination services.,2024-07-02,DC 311,16,False,Low
+DOC-00159,Service_Request,Illegal dumping observed at 123 H Street NE. Construction debris and household waste accumulating for over a week.,2024-06-09,DC 311,18,False,Low
+DOC-00160,Service_Request,Illegal dumping observed at 5678 14th Street SE. Construction debris and household waste accumulating for over a week.,2024-11-19,DC 311,18,True,High
+DOC-00161,Budget,"Supplemental appropriation request: emergency response protocols. Emergency funding needed due to cost overrun. Amount: $4,637.",2023-10-12,Department of Veterans Affairs,15,False,High
+DOC-00162,FOIA,"Under the Freedom of Information Act, 5 U.S.C. § 552, I request access to records regarding education funding allocation from Department of Health for the period 2023-2020.",2024-11-11,Department of Health,27,False,Low
+DOC-00163,Budget,"FY2023 budget request for veterans services. Total allocation: $2,118. Breakdown: personnel $174, equipment $746, contracts $825.",2023-02-08,Department of Housing,16,False,Medium
+DOC-00164,Policy,"Final rule amending regulations for small business support. Effective date November 08, 2024. Compliance required within 90 days.",2024-07-18,Federal Transit Administration,18,False,High
+DOC-00165,FOIA,Requesting disclosure of all records pertaining to emergency response protocols maintained by Office of Emergency Management. Time period: 2020-2021. Please expedite if possible.,2024-07-03,Office of Emergency Management,23,False,Low
+DOC-00166,Service_Request,Sidewalk repair needed at 5678 14th Street SE. Uneven surface creating tripping hazard for elderly residents.,2023-08-09,DC 311,16,False,Medium
+DOC-00167,Policy,Advance notice of proposed rulemaking: seeking public input on education funding allocation. Comment period 2023-2020.,2023-07-09,Department of Housing,15,False,Medium
+DOC-00168,Policy,"Interim final rule with request for comments on education funding allocation. Effective immediately. Comments due June 18, 2024.",2024-01-27,Department of Labor,18,False,Medium
+DOC-00169,Budget,"Quarterly expenditure report for community health centers. Spent: $1,560 of $4,727 budget. Variance: -13%.",2023-03-17,Department of Education,14,True,Low
+DOC-00170,Budget,"Grant award notification: digital service delivery. Award amount $4,407. Performance period: 2021-2020.",2024-02-14,Department of Labor,12,False,Urgent
+DOC-00171,Service_Request,Pothole repair needed at 456 U Street NW. Large pothole causing vehicle damage and safety hazard for cyclists.,2023-06-24,DC 311,18,False,Urgent
+DOC-00172,Budget,"FY2025 budget request for transportation equity. Total allocation: $1,872. Breakdown: personnel $1,589, equipment $533, contracts $1,422.",2024-02-07,Department of Transportation,16,False,Medium
+DOC-00173,FOIA,"Request for records related to public health surveillance under the Freedom of Information Act. Seeking documents from 2020-2022 including emails, memos, and reports.",2024-05-21,General Services Administration,23,True,Low
+DOC-00174,Budget,"Supplemental appropriation request: environmental compliance. Emergency funding needed due to funding gap. Amount: $1,063.",2024-12-24,Office of Emergency Management,14,False,Low
+DOC-00175,Service_Request,Graffiti removal request at 5678 14th Street SE. Multiple tags on public building facade.,2023-06-16,DC 311,14,False,Low
+DOC-00176,Budget,"Quarterly expenditure report for affordable housing initiatives. Spent: $2,310 of $2,474 budget. Variance: 2%.",2023-03-16,Department of Veterans Affairs,14,True,Low
+DOC-00177,FOIA,"Under the Freedom of Information Act, 5 U.S.C. § 552, I request access to records regarding food security programs from Department of Labor for the period 2023-2020.",2024-06-03,Department of Labor,27,False,Urgent
+DOC-00178,Service_Request,"Abandoned vehicle at 3456 Pennsylvania Ave. White sedan, no plates, parked for 3+ weeks.",2023-03-31,DC 311,14,False,Low
+DOC-00179,Budget,"Grant award notification: climate adaptation planning. Award amount $2,602. Performance period: 2022-2022.",2023-02-14,General Services Administration,12,True,Medium
+DOC-00180,Budget,"FY2023 budget request for transit infrastructure maintenance. Total allocation: $4,105. Breakdown: personnel $887, equipment $471, contracts $149.",2023-03-11,Department of Housing,17,True,Medium
+DOC-00181,Budget,"Supplemental appropriation request: workforce development programs. Emergency funding needed due to cost overrun. Amount: $3,781.",2023-10-07,General Services Administration,15,False,Urgent
+DOC-00182,Budget,"Contract modification request for education funding allocation. Increase scope by $1,278. Justification: emergency need.",2023-11-16,Office of Emergency Management,14,False,High
+DOC-00183,Budget,Contract modification request for digital service delivery. Increase scope by $979. Justification: scope expansion.,2023-12-30,Environmental Protection Agency,14,False,High
+DOC-00184,Budget,"Grant award notification: emergency response protocols. Award amount $2,546. Performance period: 2021-2021.",2024-03-10,Department of Education,12,False,Medium
+DOC-00185,Budget,"FY2023 budget request for community health centers. Total allocation: $4,877. Breakdown: personnel $822, equipment $325, contracts $1,252.",2024-12-26,Department of Veterans Affairs,17,False,Medium
+DOC-00186,Service_Request,Water main break at 9012 Georgia Avenue. Flooding street and sidewalk. Low water pressure in surrounding area.,2024-01-25,DC 311,17,False,Medium
+DOC-00187,FOIA,"Under the Freedom of Information Act, 5 U.S.C. § 552, I request access to records regarding education funding allocation from Department of Health for the period 2023-2020.",2023-01-21,Department of Health,27,False,Urgent
+DOC-00188,Service_Request,Tree down blocking roadway at 6789 Connecticut Ave. Storm damage from last night. Emergency removal needed.,2024-02-15,DC 311,16,True,Medium
+DOC-00189,FOIA,Requesting disclosure of all records pertaining to digital service delivery maintained by Department of Housing. Time period: 2020-2023. Please expedite if possible.,2024-04-19,Department of Housing,22,False,Medium
+DOC-00190,Service_Request,Sidewalk repair needed at 2345 Massachusetts Ave. Uneven surface creating tripping hazard for elderly residents.,2024-12-28,DC 311,15,False,High
+DOC-00191,Budget,"Quarterly expenditure report for public safety technology. Spent: $3,330 of $3,308 budget. Variance: -17%.",2024-10-22,Department of Transportation,14,False,Medium
+DOC-00192,Service_Request,Rodent complaint at 789 7th Street SW. Multiple sightings reported in basement and alley. Request extermination services.,2024-07-18,DC 311,17,True,Urgent
+DOC-00193,Service_Request,Tree down blocking roadway at 1234 K Street NW. Storm damage from last night. Emergency removal needed.,2024-06-21,DC 311,17,False,Urgent
+DOC-00194,Service_Request,Rodent complaint at 9012 Georgia Avenue. Multiple sightings reported in basement and alley. Request extermination services.,2024-05-03,DC 311,16,True,Medium
+DOC-00195,Budget,"Budget reprogramming notification: $1,104 transferred from small business support to environmental compliance. Approved by Program Manager.",2024-05-12,Department of Education,16,False,Low
+DOC-00196,Service_Request,Street light outage at 123 H Street NE. Complete darkness on block creating safety concerns for pedestrians.,2023-11-23,DC 311,17,False,Low
+DOC-00197,FOIA,"Under the Freedom of Information Act, 5 U.S.C. § 552, I request access to records regarding food security programs from Department of Housing for the period 2023-2022.",2024-06-13,Department of Housing,27,False,Low
+DOC-00198,Service_Request,Rodent complaint at 789 7th Street SW. Multiple sightings reported in basement and alley. Request extermination services.,2023-04-04,DC 311,17,True,High
+DOC-00199,Budget,"Quarterly expenditure report for emergency response protocols. Spent: $2,286 of $4,450 budget. Variance: -2%.",2023-06-24,Department of Transportation,14,False,Medium
+DOC-00200,Service_Request,"Abandoned vehicle at 1234 K Street NW. White sedan, no plates, parked for 3+ weeks.",2023-07-04,DC 311,15,False,Medium
+DOC-00201,Budget,"Supplemental appropriation request: affordable housing initiatives. Emergency funding needed due to cost overrun. Amount: $4,000.",2023-12-29,Department of Education,15,False,Low
+DOC-00202,FOIA,"FOIA request for workforce development programs records. Specifically seeking: budgets, expenditures, contracts, and correspondence related to this matter from 2023-2020.",2024-03-10,Environmental Protection Agency,20,False,Medium
+DOC-00203,Service_Request,Sidewalk repair needed at 6789 Connecticut Ave. Uneven surface creating tripping hazard for elderly residents.,2023-08-06,DC 311,15,False,Medium
+DOC-00204,Policy,Notice of information collection under review: affordable housing initiatives. OMB control number renewal requested.,2023-11-02,Department of Health,14,False,High
+DOC-00205,Policy,"Final rule amending regulations for education funding allocation. Effective date February 24, 2024. Compliance required within 90 days.",2023-05-13,Office of Emergency Management,18,False,Medium
+DOC-00206,Budget,"Quarterly expenditure report for workforce development programs. Spent: $1,703 of $2,069 budget. Variance: 7%.",2023-10-08,Department of Labor,14,False,Medium
+DOC-00207,Budget,"Budget reprogramming notification: $2,393 transferred from workforce development programs to community health centers. Approved by Program Manager.",2023-04-16,Department of Education,17,False,Medium
+DOC-00208,FOIA,Requesting disclosure of all records pertaining to affordable housing initiatives maintained by Department of Housing. Time period: 2021-2021. Please expedite if possible.,2023-05-02,Department of Housing,22,False,Urgent
+DOC-00209,Service_Request,Rodent complaint at 6789 Connecticut Ave. Multiple sightings reported in basement and alley. Request extermination services.,2023-02-01,DC 311,16,False,Medium
+DOC-00210,Service_Request,Rodent complaint at 789 7th Street SW. Multiple sightings reported in basement and alley. Request extermination services.,2023-07-26,DC 311,17,False,High
+DOC-00211,Budget,Supplemental appropriation request: transit infrastructure maintenance. Emergency funding needed due to scope expansion. Amount: $356.,2024-05-29,Department of Transportation,15,False,Low
+DOC-00212,Service_Request,Water main break at 7890 Constitution Ave. Flooding street and sidewalk. Low water pressure in surrounding area.,2024-07-01,DC 311,17,False,High
+DOC-00213,Service_Request,Water main break at 5678 14th Street SE. Flooding street and sidewalk. Low water pressure in surrounding area.,2024-02-24,DC 311,18,True,Low
+DOC-00214,Policy,"Final rule amending regulations for public health surveillance. Effective date July 05, 2024. Compliance required within 90 days.",2024-09-04,Department of Agriculture,18,False,Low
+DOC-00215,FOIA,"Under the Freedom of Information Act, 5 U.S.C. § 552, I request access to records regarding small business support from Office of Emergency Management for the period 2020-2020.",2024-04-16,Office of Emergency Management,28,False,Low
+DOC-00216,FOIA,"Under the Freedom of Information Act, 5 U.S.C. § 552, I request access to records regarding education funding allocation from General Services Administration for the period 2020-2021.",2024-01-04,General Services Administration,27,True,Medium
+DOC-00217,Policy,Notice of availability: draft environmental impact statement for community health centers. Public comment period 2022-2021.,2023-09-29,Federal Transit Administration,15,False,High
+DOC-00218,Service_Request,"Abandoned vehicle at 123 H Street NE. White sedan, no plates, parked for 3+ weeks.",2024-10-01,DC 311,15,False,Medium
+DOC-00219,Service_Request,"Abandoned vehicle at 456 U Street NW. White sedan, no plates, parked for 3+ weeks.",2024-10-10,DC 311,15,False,High
+DOC-00220,Policy,"Final rule amending regulations for affordable housing initiatives. Effective date January 14, 2024. Compliance required within 90 days.",2024-07-21,Department of Transportation,18,True,Medium
+DOC-00221,Service_Request,Rodent complaint at 5678 14th Street SE. Multiple sightings reported in basement and alley. Request extermination services.,2024-03-08,DC 311,17,False,Medium
+DOC-00222,Policy,"Final rule amending regulations for transportation equity. Effective date January 16, 2024. Compliance required within 90 days.",2024-04-06,Department of Veterans Affairs,17,False,Medium
+DOC-00223,Budget,"Grant award notification: workforce development programs. Award amount $1,386. Performance period: 2021-2020.",2024-02-15,Department of Education,12,False,Medium
+DOC-00224,Policy,"Final rule amending regulations for workforce development programs. Effective date December 25, 2024. Compliance required within 90 days.",2024-09-28,Department of Transportation,18,False,Medium
+DOC-00225,Service_Request,Graffiti removal request at 2345 Massachusetts Ave. Multiple tags on public building facade.,2023-04-07,DC 311,13,False,Medium
+DOC-00226,Budget,"Supplemental appropriation request: climate adaptation planning. Emergency funding needed due to emergency need. Amount: $4,819.",2024-07-14,Department of Labor,15,False,High
+DOC-00227,Policy,"Notice of proposed rulemaking regarding environmental compliance. Comments accepted through July 19, 2024. Public hearing scheduled.",2024-03-02,General Services Administration,16,False,Low
+DOC-00228,Policy,Request for information regarding environmental compliance. Agency seeking data and feedback from stakeholders.,2024-06-30,Federal Transit Administration,13,False,Medium
+DOC-00229,Service_Request,"Abandoned vehicle at 789 7th Street SW. White sedan, no plates, parked for 3+ weeks.",2023-06-20,DC 311,15,True,Medium
+DOC-00230,Policy,Request for information regarding environmental compliance. Agency seeking data and feedback from stakeholders.,2023-01-03,Office of Emergency Management,13,True,High
+DOC-00231,Service_Request,Rodent complaint at 456 U Street NW. Multiple sightings reported in basement and alley. Request extermination services.,2024-02-10,DC 311,17,False,Medium
+DOC-00232,Budget,"Grant award notification: transit infrastructure maintenance. Award amount $4,971. Performance period: 2020-2020.",2023-08-31,Office of Emergency Management,12,False,Medium
+DOC-00233,Policy,"Direct final rule amending veterans services without objection. Effective September 05, 2024 unless adverse comments received.",2023-02-05,Environmental Protection Agency,16,True,Medium
+DOC-00234,Service_Request,"Abandoned vehicle at 1234 K Street NW. White sedan, no plates, parked for 3+ weeks.",2024-06-17,DC 311,15,True,High
+DOC-00235,Budget,"Budget reprogramming notification: $3,818 transferred from small business support to small business support. Approved by Deputy Mayor.",2023-08-17,Department of Agriculture,17,False,Low
+DOC-00236,Service_Request,"Abandoned vehicle at 456 U Street NW. White sedan, no plates, parked for 3+ weeks.",2024-03-03,DC 311,15,False,Medium
+DOC-00237,Policy,Notice of information collection under review: public health surveillance. OMB control number renewal requested.,2024-09-29,Office of Emergency Management,14,False,High
+DOC-00238,Policy,"Final rule amending regulations for education funding allocation. Effective date January 07, 2024. Compliance required within 90 days.",2023-08-19,Department of Agriculture,18,False,Low
+DOC-00239,Budget,"Supplemental appropriation request: food security programs. Emergency funding needed due to funding gap. Amount: $4,012.",2023-03-19,Office of Emergency Management,15,False,High
+DOC-00240,FOIA,"FOIA request for transit infrastructure maintenance records. Specifically seeking: budgets, expenditures, contracts, and correspondence related to this matter from 2022-2023.",2024-01-02,Office of Emergency Management,20,False,Medium
+DOC-00241,Service_Request,"Abandoned vehicle at 123 H Street NE. White sedan, no plates, parked for 3+ weeks.",2024-10-22,DC 311,15,True,Medium
+DOC-00242,Service_Request,Noise complaint: loud construction at 2345 Massachusetts Ave before 7 AM on weekday.,2024-07-25,DC 311,13,False,Low
+DOC-00243,Service_Request,"Abandoned vehicle at 6789 Connecticut Ave. White sedan, no plates, parked for 3+ weeks.",2023-02-06,DC 311,14,True,Medium
+DOC-00244,FOIA,"Pursuant to FOIA, I request all documents concerning affordable housing initiatives prepared between 2022-2023. Please include drafts and internal correspondence.",2024-10-26,Department of Agriculture,20,False,Medium
+DOC-00245,Budget,"Quarterly expenditure report for transportation equity. Spent: $1,189 of $3,065 budget. Variance: 19%.",2023-10-22,Federal Transit Administration,13,True,High
+DOC-00246,FOIA,"FOIA request for digital service delivery records. Specifically seeking: budgets, expenditures, contracts, and correspondence related to this matter from 2023-2020.",2024-04-04,Department of Health,20,False,Medium
+DOC-00247,Service_Request,Street light outage at 2345 Massachusetts Ave. Complete darkness on block creating safety concerns for pedestrians.,2024-01-07,DC 311,16,False,Medium
+DOC-00248,Service_Request,Sidewalk repair needed at 3456 Pennsylvania Ave. Uneven surface creating tripping hazard for elderly residents.,2023-05-30,DC 311,15,False,Medium
+DOC-00249,Service_Request,Pothole repair needed at 123 H Street NE. Large pothole causing vehicle damage and safety hazard for cyclists.,2024-09-13,DC 311,18,False,Medium
+DOC-00250,Policy,"Notice of proposed rulemaking regarding affordable housing initiatives. Comments accepted through June 02, 2024. Public hearing scheduled.",2024-12-24,Department of Veterans Affairs,17,False,High
+DOC-00251,Service_Request,Graffiti removal request at 123 H Street NE. Multiple tags on public building facade.,2023-10-19,DC 311,14,False,Medium
+DOC-00252,Budget,"Grant award notification: public health surveillance. Award amount $4,297. Performance period: 2022-2020.",2024-08-06,Department of Labor,12,True,Urgent
+DOC-00253,FOIA,"Pursuant to FOIA, I request all documents concerning digital service delivery prepared between 2021-2023. Please include drafts and internal correspondence.",2023-05-02,Department of Health,20,False,Medium
+DOC-00254,Budget,"Budget reprogramming notification: $1,941 transferred from emergency response protocols to emergency response protocols. Approved by CFO.",2024-10-25,Federal Transit Administration,16,False,Medium
+DOC-00255,Policy,Advance notice of proposed rulemaking: seeking public input on public health surveillance. Comment period 2023-2021.,2023-06-11,Department of Education,15,False,Medium
+DOC-00256,Policy,"Direct final rule amending climate adaptation planning without objection. Effective January 12, 2024 unless adverse comments received.",2023-02-09,Department of Education,17,True,Medium
+DOC-00257,Policy,"Interim final rule with request for comments on environmental compliance. Effective immediately. Comments due June 01, 2024.",2024-06-01,Department of Agriculture,17,False,High
+DOC-00258,Service_Request,Pothole repair needed at 123 H Street NE. Large pothole causing vehicle damage and safety hazard for cyclists.,2024-12-10,DC 311,18,True,Medium
+DOC-00259,Budget,"Contract modification request for environmental compliance. Increase scope by $4,129. Justification: funding gap.",2023-12-26,Department of Housing,13,False,Urgent
+DOC-00260,Budget,"FY2024 budget request for emergency response protocols. Total allocation: $4,105. Breakdown: personnel $1,791, equipment $549, contracts $782.",2024-06-03,Small Business Administration,17,False,Low
+DOC-00261,Service_Request,Graffiti removal request at 2345 Massachusetts Ave. Multiple tags on public building facade.,2024-11-25,DC 311,13,False,Urgent
+DOC-00262,Service_Request,Rodent complaint at 7890 Constitution Ave. Multiple sightings reported in basement and alley. Request extermination services.,2023-05-03,DC 311,16,False,Medium
+DOC-00263,Budget,"Supplemental appropriation request: digital service delivery. Emergency funding needed due to scope expansion. Amount: $3,573.",2023-01-29,Department of Education,15,False,Low
+DOC-00264,Service_Request,Illegal dumping observed at 3456 Pennsylvania Ave. Construction debris and household waste accumulating for over a week.,2024-06-12,DC 311,17,True,Medium
+DOC-00265,FOIA,"Under the Freedom of Information Act, 5 U.S.C. § 552, I request access to records regarding community health centers from Department of Agriculture for the period 2020-2021.",2023-04-25,Department of Agriculture,27,False,High
+DOC-00266,FOIA,"Under the Freedom of Information Act, 5 U.S.C. § 552, I request access to records regarding small business support from Department of Health for the period 2020-2021.",2023-02-09,Department of Health,27,True,Low
+DOC-00267,Service_Request,Rodent complaint at 456 U Street NW. Multiple sightings reported in basement and alley. Request extermination services.,2023-05-17,DC 311,17,True,Medium
