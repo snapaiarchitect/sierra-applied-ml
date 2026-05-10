@@ -15,13 +15,34 @@
 
 ## 📦 Deliverable Inventory
 
-| # | Project | Domain | Techniques | Impact | Status |
-|---|---------|--------|------------|--------|--------|
-| 1 | **Predictive Maintenance for Transit** | Operations | Survival Analysis, Anomaly Detection, XGBoost | 25% outage reduction, $1M+ savings | ✅ Complete |
-| 2 | **NLP Text Classification Pipeline** | NLP/Document Processing | TF-IDF, BERT Fine-Tuning, LLM Zero-Shot | 87-94% accuracy across 4 document categories | ✅ Complete |
-| 3 | **Demand Forecasting for Operations** | Time Series | ARIMA, Prophet, LSTM | Demand planning with 2-year historical data | ✅ Complete |
+| # | Project | Domain | Techniques | Real Data Source | Records | Status |
+|---|---------|--------|------------|-----------------|---------|--------|
+| 1 | **Predictive Maintenance for Transit** | Operations | Survival Analysis, Anomaly Detection, XGBoost | NASA C-MAPSS FD001 (turbofan engine degradation) | 20,631 cycles / 100 engines | ✅ Complete |
+| 2 | **NLP Text Classification Pipeline** | NLP/Document Processing | TF-IDF, BERT Fine-Tuning, LLM Zero-Shot | 20 Newsgroups (Usenet posts) | 11,314 train / 7,532 test | ✅ Complete |
+| 3 | **Demand Forecasting for Operations** | Time Series | ARIMA, Prophet, LSTM | UCI Bike Sharing (Capital Bikeshare, DC) | 17,379 hourly / 731 daily | ✅ Complete |
 
-**Total**: 3 production projects | 10 notebooks | 9,600+ lines of code | 41 files
+**Total**: 3 production projects | 10 notebooks | Real public datasets | 0 synthetic data
+
+---
+
+## 📊 Real Data Sources
+
+### NASA C-MAPSS (Project 1)
+- **Source**: NASA Ames Prognostics Center of Excellence
+- **Citation**: Saxena, A. and Goebel, K. (2008). "Turbofan Engine Degradation Simulation Data Set"
+- **URL**: https://ti.arc.nasa.gov/tech/dash/groups/pcoe/prognostic-data-repository/
+- **What it is**: Run-to-failure sensor data from 100 turbofan engines — the gold standard for predictive maintenance research
+
+### 20 Newsgroups (Project 2)
+- **Source**: sklearn.datasets.fetch_20newsgroups / MIT CSAIL
+- **Citation**: Rennie, J. (2008). "20 Newsgroups". MIT CSAIL.
+- **What it is**: ~20,000 Usenet posts across 20 discussion groups — the classic benchmark for text classification
+
+### UCI Bike Sharing (Project 3)
+- **Source**: UCI Machine Learning Repository
+- **Citation**: Fanaee-T, H. and Gama, J. (2013). "Event labeling combining ensemble detectors and background knowledge", Progress in Artificial Intelligence
+- **URL**: https://archive.ics.uci.edu/ml/datasets/bike+sharing+dataset
+- **What it is**: 2 years of hourly bike rental data from Capital Bikeshare in Washington, D.C.
 
 ---
 

@@ -1,0 +1,29 @@
+*.pyc
+__pycache__/
+.ipynb_checkpoints/
+*.egg-info/
+dist/
+build/
+.venv/
+venv/
+env/
+.DS_Store
+*.swp
+*.swo
+*~
+.env
+.vscode/
+.idea/
+*.log
+
+# Ignore all CSV/TXT by default
+*.csv
+*.txt
+
+# Re-allow real data files in project data directories
+!projects/**/data/*.csv
+!projects/**/data/*.txt
+!projects/**/data/*.json
+
+# Re-allow figure outputs
+!projects/**/figures/*.png
