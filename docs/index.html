@@ -295,6 +295,153 @@
             color: var(--text-muted);
         }
 
+        /* Project Cards */
+        .project-card {
+            background: var(--bg-surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            margin: 2rem 0;
+            overflow: hidden;
+            transition: border-color 0.3s;
+        }
+        .project-card:hover { border-color: var(--accent-cyan); }
+        .project-header {
+            padding: 1.5rem 2rem;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+        }
+        .project-title { font-size: 1.25rem; font-weight: 700; color: var(--text-primary); }
+        .project-meta { color: var(--text-muted); font-size: 0.85rem; margin-top: 0.25rem; }
+        .badges { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+        .badge {
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        .badge-live { background: rgba(34, 197, 94, 0.15); color: var(--success); border: 1px solid rgba(34, 197, 94, 0.3); }
+        .badge-data { background: var(--bg-elevated); color: var(--accent-cyan); border: 1px solid var(--border); }
+
+        .project-body { padding: 2rem; }
+        .exec-summary {
+            background: var(--bg-elevated);
+            border-left: 3px solid var(--accent-gold);
+            padding: 1.25rem 1.5rem;
+            border-radius: 0 8px 8px 0;
+            margin-bottom: 1.5rem;
+        }
+        .exec-summary h4 {
+            color: var(--accent-gold);
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        .exec-summary p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .project-metrics {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        .metric {
+            background: var(--bg-deep);
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+            border: 1px solid var(--border);
+        }
+        .metric-value {
+            font-size: 1.4rem;
+            color: var(--accent-gold);
+            font-weight: 700;
+        }
+        .metric-label {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-top: 0.25rem;
+        }
+
+        /* Chart Grid */
+        .chart-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+        .chart-box {
+            background: var(--bg-deep);
+            border-radius: 10px;
+            padding: 0.75rem;
+            border: 1px solid var(--border);
+            transition: border-color 0.2s;
+        }
+        .chart-box:hover { border-color: var(--accent-cyan); }
+        .chart-box img {
+            width: 100%;
+            border-radius: 6px;
+            display: block;
+        }
+        .chart-caption {
+            text-align: center;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-top: 0.5rem;
+        }
+
+        .project-footer {
+            padding: 1rem 2rem;
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        .project-footer .data-sources {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+        .repo-link {
+            color: var(--accent-gold);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: color 0.2s;
+        }
+        .repo-link:hover { color: var(--accent-gold-hover); text-decoration: underline; }
+
+        /* Transfer Value Box */
+        .transfer-box {
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.08), rgba(6, 182, 212, 0.05));
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 1rem 1.25rem;
+            margin-top: 1rem;
+        }
+        .transfer-box h5 {
+            color: var(--accent-cyan);
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.4rem;
+        }
+        .transfer-box p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
         /* Contact */
         .contact-section {
             text-align: center;
@@ -341,6 +488,9 @@
             .about-grid { grid-template-columns: 1fr; }
             .nav-links { gap: 1rem; }
             .nav-links a { font-size: 0.8rem; }
+            .chart-grid { grid-template-columns: 1fr; }
+            .project-header { flex-direction: column; }
+            .project-footer { flex-direction: column; align-items: flex-start; }
         }
     </style>
 </head>
@@ -448,6 +598,333 @@
                             <p>Agentic systems, local LLMs, multi-agent orchestration, AI automation pipelines</p>
                         </div>
                     </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PILLAR 1: DATA SCIENCE -->
+        <section id="data-science">
+            <div class="section-accent"></div>
+            <h2 class="section-title">Pillar 1 — Data Science</h2>
+            <p class="section-subtitle">5 live projects with real public data. Each card shows what the analysis is, why it matters, and what I'd bring to your team.</p>
+
+            <!-- #1 Applied ML -->
+            <div class="project-card">
+                <div class="project-header">
+                    <div>
+                        <div class="project-title">Applied ML — Predictive Maintenance, NLP & Demand Forecasting</div>
+                        <div class="project-meta">3 projects · 10 notebooks · 28 charts</div>
+                    </div>
+                    <div class="badges">
+                        <span class="badge badge-live">LIVE</span>
+                        <span class="badge badge-data">NASA · UCI · sklearn</span>
+                    </div>
+                </div>
+                <div class="project-body">
+                    <div class="exec-summary">
+                        <h4>What this is</h4>
+                        <p>A production-grade ML portfolio covering three high-impact domains: NASA turbofan engine failure prediction (RUL regression on 21 sensor channels), 20 Newsgroups text classification (TF-IDF + Naive Bayes achieving 82% F1), and seasonal demand forecasting with ARIMA and XGBoost on 17K hourly bike-share records.</p>
+                    </div>
+                    <div class="exec-summary">
+                        <h4>Why it matters</h4>
+                        <p>Predictive maintenance prevents $2M+ per unplanned outage in aviation. NLP classification at 82% F1 demonstrates production-grade text analysis. Demand forecasting with 2.3x rush-hour baseline capture enables resource optimization. These aren't toy problems — they're the same techniques used in industrial IoT, content moderation, and operations planning.</p>
+                    </div>
+                    <div class="project-metrics">
+                        <div class="metric">
+                            <div class="metric-value">82%</div>
+                            <div class="metric-label">NLP F1-Score</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-value">21</div>
+                            <div class="metric-label">Sensor Channels</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-value">17K+</div>
+                            <div class="metric-label">Hourly Records</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-value">20</div>
+                            <div class="metric-label">Text Classes</div>
+                        </div>
+                    </div>
+                    <div class="chart-grid">
+                        <div class="chart-box">
+                            <img src="https://raw.githubusercontent.com/gosidehustlesisi/sierra-applied-ml/main/projects/predictive-maintenance-transit/figures/01_sensor_distributions.png" alt="NASA Sensor Distributions" loading="lazy">
+                            <div class="chart-caption">NASA C-MAPSS — Sensor Distributions</div>
+                        </div>
+                        <div class="chart-box">
+                            <img src="https://raw.githubusercontent.com/gosidehustlesisi/sierra-applied-ml/main/projects/nlp-text-classification-pipeline/figures/nlp_02_confusion_matrix.png" alt="NLP Confusion Matrix" loading="lazy">
+                            <div class="chart-caption">20 Newsgroups — Confusion Matrix</div>
+                        </div>
+                        <div class="chart-box">
+                            <img src="https://raw.githubusercontent.com/gosidehustlesisi/sierra-applied-ml/main/projects/demand-forecasting-operations/figures/demand_02_arima_forecast.png" alt="ARIMA Forecast" loading="lazy">
+                            <div class="chart-caption">UCI Bike Sharing — ARIMA Demand Forecast</div>
+                        </div>
+                    </div>
+                    <div class="transfer-box">
+                        <h5>What I'd bring to your team</h5>
+                        <p>I can build failure-prediction pipelines for any sensor-monitored asset — manufacturing equipment, energy turbines, logistics fleet. I can deploy NLP classification for content moderation, support ticket routing, or document analysis. And I can forecast demand for operations, staffing, or inventory planning.</p>
+                    </div>
+                </div>
+                <div class="project-footer">
+                    <span class="data-sources">Data: NASA C-MAPSS · UCI Bike Sharing · scikit-learn 20 Newsgroups</span>
+                    <a class="repo-link" href="https://github.com/gosidehustlesisi/sierra-applied-ml">View Repository →</a>
+                </div>
+            </div>
+
+            <!-- #2 GenAI -->
+            <div class="project-card">
+                <div class="project-header">
+                    <div>
+                        <div class="project-title">GenAI Engineering — Research, Legal & Biomedical NLP</div>
+                        <div class="project-meta">3 projects · 3 notebooks · 12 charts</div>
+                    </div>
+                    <div class="badges">
+                        <span class="badge badge-live">LIVE</span>
+                        <span class="badge badge-data">arXiv · SCOTUS · PubMed</span>
+                    </div>
+                </div>
+                <div class="project-body">
+                    <div class="exec-summary">
+                        <h4>What this is</h4>
+                        <p>Generative AI and NLP research using live APIs: arXiv paper analysis (450 papers from cs.LG/AI/CL), SCOTUS opinion text mining across 15 landmark cases (1954–2015), and PubMed biomedical trend analysis with biomarker volcano plots and drug response modeling.</p>
+                    </div>
+                    <div class="exec-summary">
+                        <h4>Why it matters</h4>
+                        <p>Research organizations need to track thousands of papers. Law firms need to analyze decades of precedent. Biotech needs to identify drug-response patterns from clinical data. This work shows I can build NLP pipelines that process domain-specific text at scale — not just generic sentiment analysis.</p>
+                    </div>
+                    <div class="project-metrics">
+                        <div class="metric">
+                            <div class="metric-value">450</div>
+                            <div class="metric-label">arXiv Papers</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-value">15</div>
+                            <div class="metric-label">Landmark Cases</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-value">20</div>
+                            <div class="metric-label">Immunotherapy Trials</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-value">12</div>
+                            <div class="metric-label">Biomarkers Tracked</div>
+                        </div>
+                    </div>
+                    <div class="chart-grid">
+                        <div class="chart-box">
+                            <img src="https://raw.githubusercontent.com/gosidehustlesisi/sierra-genai-engineering/main/projects/arxiv-abstracts/figures/category_distribution.png" alt="arXiv Categories" loading="lazy">
+                            <div class="chart-caption">arXiv API — Paper Distribution by Category</div>
+                        </div>
+                        <div class="chart-box">
+                            <img src="https://raw.githubusercontent.com/gosidehustlesisi/sierra-genai-engineering/main/projects/scotus-opinions/figures/opinion_length_timeline.png" alt="SCOTUS Timeline" loading="lazy">
+                            <div class="chart-caption">SCOTUS — Opinion Length Trend (1954–2015)</div>
+                        </div>
+                        <div class="chart-box">
+                            <img src="https://raw.githubusercontent.com/gosidehustlesisi/sierra-genai-engineering/main/projects/pubmed-research/figures/biomarker_volcano.png" alt="Biomarker Volcano" loading="lazy">
+                            <div class="chart-caption">PubMed — Biomarker Volcano Plot</div>
+                        </div>
+                    </div>
+                    <div class="transfer-box">
+                        <h5>What I'd bring to your team</h5>
+                        <p>I can build research monitoring pipelines that track thousands of papers and flag breakthroughs. I can analyze legal document corpora for precedent patterns. I can process clinical trial data to identify biomarker-response relationships. Any organization drowning in unstructured text — I can structure it.</p>
+                    </div>
+                </div>
+                <div class="project-footer">
+                    <span class="data-sources">Data: arXiv API · SCOTUS Opinions · PubMed/ClinicalTrials.gov</span>
+                    <a class="repo-link" href="https://github.com/gosidehustlesisi/sierra-genai-engineering">View Repository →</a>
+                </div>
+            </div>
+
+            <!-- #3 Mobility -->
+            <div class="project-card">
+                <div class="project-header">
+                    <div>
+                        <div class="project-title">Mobility Data — Transit, Safety & Logistics</div>
+                        <div class="project-meta">3 projects · 3 notebooks · 9 charts</div>
+                    </div>
+                    <div class="badges">
+                        <span class="badge badge-live">LIVE</span>
+                        <span class="badge badge-data">WMATA · NHTSA · BTS</span>
+                    </div>
+                </div>
+                <div class="project-body">
+                    <div class="exec-summary">
+                        <h4>What this is</h4>
+                        <p>Transportation analytics at scale: WMATA DC Metro ridership analysis (175K hourly records, peak station identification), NHTSA FARS crash fatality mapping (41K records by state and vehicle type), and BTS flight delay/freight/commute analysis (27K flight records, commodity flows, mode share breakdown).</p>
+                    </div>
+                    <div class="exec-summary">
+                        <h4>Why it matters</h4>
+                        <p>Transit agencies lose riders when they can't predict peak demand. Airlines lose customers when delays hit 18.7% baseline. Logistics companies lose money when freight mode share is suboptimal. This analysis identifies the operational levers — which stations need more service, which states have safety gaps, which airlines have systemic delay patterns.</p>
+                    </div>
+                    <div class="project-metrics">
+                        <div class="metric">
+                            <div class="metric-value">175K</div>
+                            <div class="metric-label">Ridership Records</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-value">41K</div>
+                            <div class="metric-label">Fatality Records</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-value">27K</div>
+                            <div class="metric-label">Flight Records</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-value">18.7%</div>
+                            <div class="metric-label">Delay Rate</div>
+                        </div>
+                    </div>
+                    <div class="chart-grid">
+                        <div class="chart-box">
+                            <img src="https://raw.githubusercontent.com/gosidehustlesisi/sierra-mobility-data/main/projects/wmata-ridership/figures/hourly_patterns.png" alt="WMATA Hourly" loading="lazy">
+                            <div class="chart-caption">WMATA — Hourly Ridership Patterns</div>
+                        </div>
+                        <div class="chart-box">
+                            <img src="https://raw.githubusercontent.com/gosidehustlesisi/sierra-mobility-data/main/projects/nhtsa-safety/figures/fatalities_heatmap.png" alt="NHTSA Heatmap" loading="lazy">
+                            <div class="chart-caption">NHTSA FARS — Fatality Heatmap by State</div>
+                        </div>
+                        <div class="chart-box">
+                            <img src="https://raw.githubusercontent.com/gosidehustlesisi/sierra-mobility-data/main/projects/bts-transit/figures/airline_delays.png" alt="Airline Delays" loading="lazy">
+                            <div class="chart-caption">BTS — Airline Delay Breakdown</div>
+                        </div>
+                    </div>
+                    <div class="transfer-box">
+                        <h5>What I'd bring to your team</h5>
+                        <p>I can build ridership forecasting for transit agencies, safety profiling for insurance or fleet operators, and delay prediction for logistics companies. Any organization with moving assets and time-series data — I can find the patterns that reduce cost and improve safety.</p>
+                    </div>
+                </div>
+                <div class="project-footer">
+                    <span class="data-sources">Data: WMATA · NHTSA FARS · USDOT BTS</span>
+                    <a class="repo-link" href="https://github.com/gosidehustlesisi/sierra-mobility-data">View Repository →</a>
+                </div>
+            </div>
+
+            <!-- #4 Governance -->
+            <div class="project-card">
+                <div class="project-header">
+                    <div>
+                        <div class="project-title">Data Governance — Federal Catalog, FOIA & Policy</div>
+                        <div class="project-meta">3 projects · 3 notebooks · 11 charts</div>
+                    </div>
+                    <div class="badges">
+                        <span class="badge badge-live">LIVE</span>
+                        <span class="badge badge-data">Data.gov · FOIA · OMB</span>
+                    </div>
+                </div>
+                <div class="project-body">
+                    <div class="exec-summary">
+                        <h4>What this is</h4>
+                        <p>Federal data governance analysis: Data.gov catalog assessment (144K datasets across 22 agencies, topic distribution and update frequency), FOIA compliance monitoring (1.28M FY2024 requests, processing times, backlog trends, exemption rates), and OMB guidance lifecycle tracking (170 active docs, compliance scoring across 17 agencies).</p>
+                    </div>
+                    <div class="exec-summary">
+                        <h4>Why it matters</h4>
+                        <p>Government agencies waste billions on redundant data collection because they don't know what's already cataloged. FOIA backlogs erode public trust when processing times exceed 20 days. OMB guidance expires without agencies noticing, creating compliance gaps. This analysis identifies which agencies are data-rich but insight-poor, which are FOIA-efficient, and which need guidance refresh.</p>
+                    </div>
+                    <div class="project-metrics">
+                        <div class="metric">
+                            <div class="metric-value">144K</div>
+                            <div class="metric-label">Datasets Cataloged</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-value">1.28M</div>
+                            <div class="metric-label">FOIA Requests FY24</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-value">170</div>
+                            <div class="metric-label">OMB Guidance Docs</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-value">73/100</div>
+                            <div class="metric-label">Avg Compliance Score</div>
+                        </div>
+                    </div>
+                    <div class="chart-grid">
+                        <div class="chart-box">
+                            <img src="https://raw.githubusercontent.com/gosidehustlesisi/sierra-data-governance/main/projects/data-gov-catalog/figures/datasets_by_agency.png" alt="Data.gov Agencies" loading="lazy">
+                            <div class="chart-caption">Data.gov — 144K Datasets by Agency</div>
+                        </div>
+                        <div class="chart-box">
+                            <img src="https://raw.githubusercontent.com/gosidehustlesisi/sierra-data-governance/main/projects/foia-compliance/figures/processing_times.png" alt="FOIA Processing" loading="lazy">
+                            <div class="chart-caption">FOIA.gov — Processing Time Distribution</div>
+                        </div>
+                        <div class="chart-box">
+                            <img src="https://raw.githubusercontent.com/gosidehustlesisi/sierra-data-governance/main/projects/omb-guidance/figures/compliance_scores.png" alt="OMB Scores" loading="lazy">
+                            <div class="chart-caption">OMB — Agency Compliance Scores</div>
+                        </div>
+                    </div>
+                    <div class="transfer-box">
+                        <h5>What I'd bring to your team</h5>
+                        <p>I can audit your data catalog for redundancy and gaps. I can build compliance dashboards that track SLA performance against FOIA or regulatory deadlines. I can monitor policy document lifecycles and flag expiration risks. For any regulated organization, I turn governance from a cost center into a risk management tool.</p>
+                    </div>
+                </div>
+                <div class="project-footer">
+                    <span class="data-sources">Data: Data.gov · FOIA.gov · OMB Guidance</span>
+                    <a class="repo-link" href="https://github.com/gosidehustlesisi/sierra-data-governance">View Repository →</a>
+                </div>
+            </div>
+
+            <!-- #5 Public Sector -->
+            <div class="project-card">
+                <div class="project-header">
+                    <div>
+                        <div class="project-title">Public Sector Insights — Demographics, Labor & Development</div>
+                        <div class="project-meta">3 projects · 3 notebooks · 6 charts</div>
+                    </div>
+                    <div class="badges">
+                        <span class="badge badge-live">LIVE</span>
+                        <span class="badge badge-data">Census · BLS · World Bank</span>
+                    </div>
+                </div>
+                <div class="project-body">
+                    <div class="exec-summary">
+                        <h4>What this is</h4>
+                        <p>Public policy analytics: Census ACS demographics (20 states — income vs education correlation r=0.72, poverty and age distributions), BLS employment pulse (72-month series 2019–2024 capturing COVID shock, unemployment vs job openings), and World Bank development indicators (30 countries — GDP vs life expectancy r=0.81, CO2 and literacy analysis).</p>
+                    </div>
+                    <div class="exec-summary">
+                        <h4>Why it matters</h4>
+                        <p>Policy without data is guesswork. These analyses show how income and education correlate across states (r=0.72), how COVID disrupted the unemployment-job openings relationship, and how GDP and life expectancy track across 30 countries (r=0.81). For governments, NGOs, and international development — this is the evidence base for resource allocation.</p>
+                    </div>
+                    <div class="project-metrics">
+                        <div class="metric">
+                            <div class="metric-value">20</div>
+                            <div class="metric-label">States Analyzed</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-value">72</div>
+                            <div class="metric-label">Months of BLS Data</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-value">30</div>
+                            <div class="metric-label">Countries Tracked</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-value">r=0.81</div>
+                            <div class="metric-label">GDP-Life Exp Correlation</div>
+                        </div>
+                    </div>
+                    <div class="chart-grid">
+                        <div class="chart-box">
+                            <img src="https://raw.githubusercontent.com/gosidehustlesisi/sierra-public-sector-insights/main/projects/census-demographics/figures/income_vs_education.png" alt="Income vs Education" loading="lazy">
+                            <div class="chart-caption">Census ACS — Income vs Education (20 States)</div>
+                        </div>
+                        <div class="chart-box">
+                            <img src="https://raw.githubusercontent.com/gosidehustlesisi/sierra-public-sector-insights/main/projects/bls-employment/figures/unemployment_vs_openings.png" alt="Unemployment vs Openings" loading="lazy">
+                            <div class="chart-caption">BLS — Unemployment vs Job Openings (2019–2024)</div>
+                        </div>
+                        <div class="chart-box">
+                            <img src="https://raw.githubusercontent.com/gosidehustlesisi/sierra-public-sector-insights/main/projects/world-bank-indicators/figures/gdp_vs_life_expectancy.png" alt="GDP vs Life Expectancy" loading="lazy">
+                            <div class="chart-caption">World Bank — GDP vs Life Expectancy (30 Countries)</div>
+                        </div>
+                    </div>
+                    <div class="transfer-box">
+                        <h5>What I'd bring to your team</h5>
+                        <p>I can build demographic dashboards for policy planning, labor market monitors for workforce development, and international development scorecards for NGO reporting. Any organization making resource allocation decisions across geography or time — I can give you the evidence base.</p>
+                    </div>
+                </div>
+                <div class="project-footer">
+                    <span class="data-sources">Data: Census ACS 2022 · BLS CPS/JOLTS · World Bank WDI</span>
+                    <a class="repo-link" href="https://github.com/gosidehustlesisi/sierra-public-sector-insights">View Repository →</a>
                 </div>
             </div>
         </section>
