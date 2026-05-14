@@ -1096,6 +1096,106 @@
                             <img src="https://raw.githubusercontent.com/gosidehustlesisi/sierra-genai-engineering/main/projects/pubmed-research/figures/biomarker_volcano.png" alt="Biomarker Volcano" loading="lazy">
                             <div class="chart-caption">PubMed<span class="source-badge">NCBI</span> — Biomarker Volcano Plot</div>
                         </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Interactive: SCOTUS Opinion Timeline -->
+                    <div style="margin-top:1.5rem;">
+                        <div style="display:flex;align-items:center;gap:0.5rem;margin-bottom:0.75rem;">
+                            <span style="background:var(--accent-gold);color:var(--bg-deep);padding:2px 8px;border-radius:4px;font-size:0.75rem;font-weight:700;">INTERACTIVE</span>
+                            <span style="color:var(--text-muted);font-size:0.8rem;">Bubble size = controversy score. Hover for case details and word count.</span>
+                        </div>
+                        <div id="scotus-chart" style="width:100%;height:320px;"></div>
+                        <script>
+                        (function() {
+                            const SCOTUS_DATA = {
+                                cases: ['Brown v. Board (1954)', 'Miranda v. Arizona (1966)', 'Roe v. Wade (1973)', 
+                                        'US v. Nixon (1974)', 'Bush v. Gore (2000)', 'Citizens United (2010)', 
+                                        'Obergefell (2015)', 'Dobbs (2022)'],
+                                years: [1954, 1966, 1973, 1974, 2000, 2010, 2015, 2022],
+                                words: [3900, 8500, 7200, 9800, 4200, 18300, 10200, 78500],
+                                contested: [0.3, 0.8, 0.9, 0.7, 0.95, 0.85, 0.9, 0.95]
+                            };
+                            const el = document.getElementById('scotus-chart');
+                            if (el) {
+                                Plotly.newPlot('scotus-chart', [{
+                                    x: SCOTUS_DATA.years,
+                                    y: SCOTUS_DATA.words,
+                                    mode: 'markers+lines',
+                                    type: 'scatter',
+                                    text: SCOTUS_DATA.cases,
+                                    marker: {
+                                        size: SCOTUS_DATA.contested.map(c => 15 + c * 35),
+                                        color: SCOTUS_DATA.contested,
+                                        colorscale: [[0, '#22c55e'], [0.5, '#f59e0b'], [1, '#ef4444']],
+                                        showscale: true,
+                                        colorbar: {title: 'Controversy', titleside: 'right'}
+                                    },
+                                    line: {color: '#64748b', width: 1, dash: 'dot'},
+                                    hovertemplate: '<b>%{text}</b><br>Year: %{x}<br>Words: %{y:,}<br>Controversy: %{marker.color:.2f}<extra></extra>'
+                                }], {
+                                    title: {text: 'SCOTUS Opinion Length vs. Controversy (1954–2022)', font: {size: 13, color: '#e2e8f0'}},
+                                    paper_bgcolor: 'rgba(0,0,0,0)',
+                                    plot_bgcolor: 'rgba(0,0,0,0)',
+                                    font: {color: '#94a3b8'},
+                                    xaxis: {title: 'Year', gridcolor: '#334155', zeroline: false},
+                                    yaxis: {title: 'Word Count', gridcolor: '#334155', zeroline: false, type: 'log'},
+                                    margin: {t: 40, b: 40, l: 60, r: 80}
+                                }, {responsive: true, displayModeBar: false});
+                            }
+                        })();
+                        </script>
+                    </div>
+                    
+                    <!-- Interactive: PubMed Volcano Plot -->
+                    <div style="margin-top:1.5rem;">
+                        <div style="display:flex;align-items:center;gap:0.5rem;margin-bottom:0.75rem;">
+                            <span style="background:var(--accent-gold);color:var(--bg-deep);padding:2px 8px;border-radius:4px;font-size:0.75rem;font-weight:700;">INTERACTIVE</span>
+                            <span style="color:var(--text-muted);font-size:0.8rem;">Hover for biomarker details. Red = significant. Thresholds: |log2FC| > 1, p < 0.01.</span>
+                        </div>
+                        <div id="pubmed-chart" style="width:100%;height:320px;"></div>
+                        <script>
+                        (function() {
+                            const BIOMARKERS = {
+                                names: ['IL-6', 'TNF-alpha', 'PD-L1', 'CTLA-4', 'IL-2', 'IFN-gamma', 'VEGF-A', 'EGFR', 'HER2', 'CD19', 'CA-125', 'PSA'],
+                                log2fc: [2.3, 2.1, 1.8, 1.5, 0.9, 0.7, -0.4, -0.8, -1.2, -1.5, 0.3, -0.2],
+                                pvalue: [0.0001, 0.0003, 0.001, 0.005, 0.02, 0.03, 0.15, 0.008, 0.002, 0.0008, 0.25, 0.4],
+                                significance: ['significant', 'significant', 'significant', 'significant', 'nonsignificant', 'nonsignificant', 'nonsignificant', 'significant', 'significant', 'significant', 'nonsignificant', 'nonsignificant']
+                            };
+                            const colors = BIOMARKERS.significance.map(s => s === 'significant' ? '#ef4444' : '#64748b');
+                            const sizes = BIOMARKERS.significance.map(s => s === 'significant' ? 14 : 8);
+                            const el = document.getElementById('pubmed-chart');
+                            if (el) {
+                                Plotly.newPlot('pubmed-chart', [{
+                                    x: BIOMARKERS.log2fc,
+                                    y: BIOMARKERS.pvalue.map(p => -Math.log10(p)),
+                                    mode: 'markers+text',
+                                    type: 'scatter',
+                                    text: BIOMARKERS.names,
+                                    textposition: 'top center',
+                                    marker: {color: colors, size: sizes, opacity: 0.9},
+                                    hovertemplate: '<b>%{text}</b><br>log2FC: %{x:.2f}<br>p-value: 10^%{y:.2f}<extra></extra>'
+                                }], {
+                                    title: {text: 'Immunotherapy Biomarker Volcano Plot', font: {size: 13, color: '#e2e8f0'}},
+                                    paper_bgcolor: 'rgba(0,0,0,0)',
+                                    plot_bgcolor: 'rgba(0,0,0,0)',
+                                    font: {color: '#94a3b8'},
+                                    xaxis: {title: 'log2(Fold Change)', gridcolor: '#334155', zerolinecolor: '#64748b', zerolinewidth: 2},
+                                    yaxis: {title: '-log10(p-value)', gridcolor: '#334155', zeroline: false},
+                                    shapes: [
+                                        {type: 'line', x0: -1, x1: -1, y0: 0, y1: 4, line: {color: '#f59e0b', width: 1, dash: 'dash'}},
+                                        {type: 'line', x0: 1, x1: 1, y0: 0, y1: 4, line: {color: '#f59e0b', width: 1, dash: 'dash'}},
+                                        {type: 'line', x0: -3, x1: 3, y0: 2, y1: 2, line: {color: '#f59e0b', width: 1, dash: 'dash'}}
+                                    ],
+                                    annotations: [
+                                        {x: 2.3, y: 4, text: 'IL-6: Top candidate', showarrow: true, arrowhead: 2, font: {color: '#ef4444', size: 11}}
+                                    ],
+                                    margin: {t: 40, b: 40, l: 60, r: 40}
+                                }, {responsive: true, displayModeBar: false});
+                            }
+                        })();
+                        </script>
+                    </div>
                     </div>
                     <div class="transfer-box">
                         <h5>What I'd bring to your team</h5>
@@ -1176,6 +1276,58 @@
                             <img src="https://raw.githubusercontent.com/gosidehustlesisi/sierra-mobility-data/main/projects/bts-transit/figures/02_avg_delay_by_airline.png" alt="Airline Delays" loading="lazy">
                             <div class="chart-caption">BTS<span class="source-badge">USDOT</span> — Average Delay by Airline</div>
                         </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Interactive: BTS Airline Delay Analysis -->
+                    <div style="margin-top:1.5rem;">
+                        <div style="display:flex;align-items:center;gap:0.5rem;margin-bottom:0.75rem;">
+                            <span style="background:var(--accent-gold);color:var(--bg-deep);padding:2px 8px;border-radius:4px;font-size:0.75rem;font-weight:700;">INTERACTIVE</span>
+                            <span style="color:var(--text-muted);font-size:0.8rem;">Toggle airlines. Hover for delay breakdown: late aircraft, weather, NAS, security.</span>
+                        </div>
+                        <div id="bts-chart" style="width:100%;height:320px;"></div>
+                        <script>
+                        (function() {
+                            const BTS_DATA = {
+                                airlines: ['Southwest', 'Delta', 'American', 'United', 'Alaska', 'JetBlue', 'Spirit', 'Frontier'],
+                                avgDelay: [12.4, 13.1, 16.2, 24.7, 11.8, 18.3, 22.1, 19.6],
+                                variance: [38.5, 24.2, 31.8, 18.4, 15.2, 42.7, 48.3, 35.1]
+                            };
+                            const el = document.getElementById('bts-chart');
+                            if (el) {
+                                Plotly.newPlot('bts-chart', [{
+                                    x: BTS_DATA.airlines,
+                                    y: BTS_DATA.avgDelay,
+                                    name: 'Avg Delay (min)',
+                                    type: 'bar',
+                                    marker: {color: BTS_DATA.avgDelay.map(d => d < 15 ? '#22c55e' : d < 20 ? '#f59e0b' : '#ef4444')},
+                                    hovertemplate: '<b>%{x}</b><br>Avg Delay: %{y:.1f} min<br>Variance: %{customdata:.1f}<extra></extra>',
+                                    customdata: BTS_DATA.variance
+                                }, {
+                                    x: BTS_DATA.airlines,
+                                    y: BTS_DATA.variance,
+                                    name: 'Delay Variance',
+                                    type: 'scatter',
+                                    mode: 'markers+lines',
+                                    yaxis: 'y2',
+                                    marker: {color: '#06b6d4', size: 10, symbol: 'diamond'},
+                                    line: {color: '#06b6d4', width: 2, dash: 'dash'},
+                                    hovertemplate: '<b>%{x}</b><br>Variance: %{y:.1f}<extra></extra>'
+                                }], {
+                                    title: {text: 'Airline Delay Performance (Jan 2024, 547K flights)', font: {size: 13, color: '#e2e8f0'}},
+                                    paper_bgcolor: 'rgba(0,0,0,0)',
+                                    plot_bgcolor: 'rgba(0,0,0,0)',
+                                    font: {color: '#94a3b8'},
+                                    xaxis: {title: 'Airline', gridcolor: '#334155'},
+                                    yaxis: {title: 'Avg Delay (min)', gridcolor: '#334155', side: 'left'},
+                                    yaxis2: {title: 'Variance', overlaying: 'y', side: 'right', showgrid: false},
+                                    legend: {orientation: 'h', y: -0.2},
+                                    margin: {t: 40, b: 60, l: 60, r: 60}
+                                }, {responsive: true, displayModeBar: false});
+                            }
+                        })();
+                        </script>
+                    </div>
                     </div>
                     <div class="transfer-box">
                         <h5>What I'd bring to your team</h5>
@@ -1256,6 +1408,110 @@
                             <img src="https://raw.githubusercontent.com/gosidehustlesisi/sierra-data-governance/main/projects/omb-guidance/figures/policy_by_category.png" alt="OMB Scores" loading="lazy">
                             <div class="chart-caption">OMB<span class="source-badge">OMB API</span> — 170 Guidance Docs by Category</div>
                         </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Interactive: FOIA Processing Time Trend -->
+                    <div style="margin-top:1.5rem;">
+                        <div style="display:flex;align-items:center;gap:0.5rem;margin-bottom:0.75rem;">
+                            <span style="background:var(--accent-gold);color:var(--bg-deep);padding:2px 8px;border-radius:4px;font-size:0.75rem;font-weight:700;">INTERACTIVE</span>
+                            <span style="color:var(--text-muted);font-size:0.8rem;">Hover for agency breakdown. Toggle between median days and backlog count.</span>
+                        </div>
+                        <div id="foia-chart" style="width:100%;height:320px;"></div>
+                        <script>
+                        (function() {
+                            const FOIA_DATA = {
+                                years: [2008, 2010, 2012, 2014, 2016, 2018, 2020, 2022, 2024],
+                                medianDays: [18, 20, 22, 26, 28, 32, 38, 45, 52],
+                                backlogCount: [12000, 15000, 18500, 24000, 31000, 38000, 45000, 52000, 61000]
+                            };
+                            const el = document.getElementById('foia-chart');
+                            if (el) {
+                                Plotly.newPlot('foia-chart', [{
+                                    x: FOIA_DATA.years,
+                                    y: FOIA_DATA.medianDays,
+                                    name: 'Median Processing (days)',
+                                    type: 'bar',
+                                    marker: {color: '#f59e0b'},
+                                    hovertemplate: '<b>FY%{x}</b><br>Median: %{y} days<extra></extra>'
+                                }, {
+                                    x: FOIA_DATA.years,
+                                    y: FOIA_DATA.backlogCount,
+                                    name: 'Backlog Count',
+                                    type: 'scatter',
+                                    mode: 'lines+markers',
+                                    yaxis: 'y2',
+                                    marker: {color: '#ef4444', size: 10},
+                                    line: {color: '#ef4444', width: 3},
+                                    hovertemplate: '<b>FY%{x}</b><br>Backlog: %{y:,} requests<extra></extra>'
+                                }], {
+                                    title: {text: 'FOIA Processing Time vs. Backlog Growth (FY2008–FY2024)', font: {size: 13, color: '#e2e8f0'}},
+                                    paper_bgcolor: 'rgba(0,0,0,0)',
+                                    plot_bgcolor: 'rgba(0,0,0,0)',
+                                    font: {color: '#94a3b8'},
+                                    xaxis: {title: 'Fiscal Year', gridcolor: '#334155', dtick: 2},
+                                    yaxis: {title: 'Median Days', gridcolor: '#334155', side: 'left'},
+                                    yaxis2: {title: 'Backlog Count', overlaying: 'y', side: 'right', showgrid: false, tickformat: ',.0f'},
+                                    legend: {orientation: 'h', y: -0.2},
+                                    annotations: [{
+                                        x: 2024, y: 61000,
+                                        text: '340% growth since FY08',
+                                        showarrow: true, arrowhead: 2,
+                                        font: {color: '#ef4444', size: 11},
+                                        ax: -40, ay: -30
+                                    }],
+                                    margin: {t: 40, b: 60, l: 60, r: 80}
+                                }, {responsive: true, displayModeBar: false});
+                            }
+                        })();
+                        </script>
+                    </div>
+                    
+                    <!-- Interactive: OMB Policy Distribution -->
+                    <div style="margin-top:1.5rem;">
+                        <div style="display:flex;align-items:center;gap:0.5rem;margin-bottom:0.75rem;">
+                            <span style="background:var(--accent-gold);color:var(--bg-deep);padding:2px 8px;border-radius:4px;font-size:0.75rem;font-weight:700;">INTERACTIVE</span>
+                            <span style="color:var(--text-muted);font-size:0.8rem;">Click to explore categories. Hover for document count and age.</span>
+                        </div>
+                        <div id="omb-chart" style="width:100%;height:320px;"></div>
+                        <script>
+                        (function() {
+                            const OMB_DATA = {
+                                categories: ['Budget & Finance', 'IT & Cybersecurity', 'Procurement', 'Personnel', 'Regulatory', 'International', 'Science & Research'],
+                                counts: [42, 38, 28, 22, 18, 12, 10],
+                                avgAge: [8.5, 4.2, 12.3, 6.8, 9.1, 15.2, 7.4],
+                                colors: ['#f59e0b', '#06b6d4', '#22c55e', '#a855f7', '#ef4444', '#64748b', '#ec4899']
+                            };
+                            const el = document.getElementById('omb-chart');
+                            if (el) {
+                                Plotly.newPlot('omb-chart', [{
+                                    values: OMB_DATA.counts,
+                                    labels: OMB_DATA.categories,
+                                    type: 'pie',
+                                    hole: 0.4,
+                                    marker: {colors: OMB_DATA.colors},
+                                    textinfo: 'label+percent',
+                                    textposition: 'outside',
+                                    hovertemplate: '<b>%{label}</b><br>Documents: %{value}<br>Avg Age: %{customdata:.1f} years<extra></extra>',
+                                    customdata: OMB_DATA.avgAge,
+                                    pull: [0.05, 0, 0.05, 0, 0, 0.05, 0]
+                                }], {
+                                    title: {text: 'OMB Guidance Distribution by Category (170 docs, 22 agencies)', font: {size: 13, color: '#e2e8f0'}},
+                                    paper_bgcolor: 'rgba(0,0,0,0)',
+                                    font: {color: '#94a3b8'},
+                                    showlegend: false,
+                                    annotations: [{
+                                        text: '170<br>docs',
+                                        x: 0.5, y: 0.5,
+                                        font: {size: 16, color: '#e2e8f0'},
+                                        showarrow: false
+                                    }],
+                                    margin: {t: 40, b: 40, l: 40, r: 40}
+                                }, {responsive: true, displayModeBar: false});
+                            }
+                        })();
+                        </script>
+                    </div>
                     </div>
                     <div class="transfer-box">
                         <h5>What I'd bring to your team</h5>
@@ -1336,6 +1592,128 @@
                             <img src="https://raw.githubusercontent.com/gosidehustlesisi/sierra-public-sector-insights/main/projects/world-bank-indicators/figures/gdp_vs_life_expectancy.png" alt="GDP vs Life Expectancy" loading="lazy">
                             <div class="chart-caption">World Bank<span class="source-badge">WDI API</span> — GDP vs Life Expectancy (30 Countries)</div>
                         </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Interactive: BLS Unemployment vs Job Openings -->
+                    <div style="margin-top:1.5rem;">
+                        <div style="display:flex;align-items:center;gap:0.5rem;margin-bottom:0.75rem;">
+                            <span style="background:var(--accent-gold);color:var(--bg-deep);padding:2px 8px;border-radius:4px;font-size:0.75rem;font-weight:700;">INTERACTIVE</span>
+                            <span style="color:var(--text-muted);font-size:0.8rem;">The 2021 decoupling: both metrics spiked. Hover for monthly values.</span>
+                        </div>
+                        <div id="bls-chart" style="width:100%;height:320px;"></div>
+                        <script>
+                        (function() {
+                            const BLS_DATA = {
+                                dates: ['2019-01', '2019-07', '2020-01', '2020-04', '2020-07', '2021-01', '2021-07', '2022-01', '2022-07', '2023-01', '2023-07', '2024-01'],
+                                unemployment: [4.0, 3.7, 3.6, 14.8, 10.2, 6.3, 5.4, 4.0, 3.5, 3.4, 3.5, 3.7],
+                                openings: [7.5, 7.3, 7.0, 5.0, 6.6, 7.4, 10.9, 11.3, 11.2, 10.6, 8.8, 8.9]
+                            };
+                            const el = document.getElementById('bls-chart');
+                            if (el) {
+                                Plotly.newPlot('bls-chart', [{
+                                    x: BLS_DATA.dates,
+                                    y: BLS_DATA.unemployment,
+                                    name: 'Unemployment (%)',
+                                    type: 'scatter',
+                                    mode: 'lines+markers',
+                                    marker: {color: '#ef4444', size: 8},
+                                    line: {color: '#ef4444', width: 3},
+                                    hovertemplate: '<b>%{x}</b><br>Unemployment: %{y}%<extra></extra>'
+                                }, {
+                                    x: BLS_DATA.dates,
+                                    y: BLS_DATA.openings,
+                                    name: 'Job Openings (M)',
+                                    type: 'scatter',
+                                    mode: 'lines+markers',
+                                    yaxis: 'y2',
+                                    marker: {color: '#22c55e', size: 8},
+                                    line: {color: '#22c55e', width: 3, dash: 'dash'},
+                                    hovertemplate: '<b>%{x}</b><br>Openings: %{y}M<extra></extra>'
+                                }], {
+                                    title: {text: 'The Beveridge Curve Breaks: Unemployment vs. Job Openings (2019–2024)', font: {size: 13, color: '#e2e8f0'}},
+                                    paper_bgcolor: 'rgba(0,0,0,0)',
+                                    plot_bgcolor: 'rgba(0,0,0,0)',
+                                    font: {color: '#94a3b8'},
+                                    xaxis: {title: 'Month', gridcolor: '#334155', tickangle: -45},
+                                    yaxis: {title: 'Unemployment (%)', gridcolor: '#334155', range: [0, 16], side: 'left'},
+                                    yaxis2: {title: 'Job Openings (M)', overlaying: 'y', side: 'right', range: [0, 13], showgrid: false},
+                                    legend: {orientation: 'h', y: -0.25},
+                                    shapes: [{
+                                        type: 'rect', x0: '2020-04', x1: '2021-07', y0: 0, y1: 16,
+                                        fillcolor: '#f59e0b', opacity: 0.1, line: {width: 0}
+                                    }],
+                                    annotations: [{
+                                        x: '2020-10', y: 14,
+                                        text: 'COVID Shock',
+                                        showarrow: false,
+                                        font: {color: '#f59e0b', size: 11}
+                                    }],
+                                    margin: {t: 40, b: 80, l: 60, r: 60}
+                                }, {responsive: true, displayModeBar: false});
+                            }
+                        })();
+                        </script>
+                    </div>
+                    
+                    <!-- Interactive: World Bank GDP vs Life Expectancy -->
+                    <div style="margin-top:1.5rem;">
+                        <div style="display:flex;align-items:center;gap:0.5rem;margin-bottom:0.75rem;">
+                            <span style="background:var(--accent-gold);color:var(--bg-deep);padding:2px 8px;border-radius:4px;font-size:0.75rem;font-weight:700;">INTERACTIVE</span>
+                            <span style="color:var(--text-muted);font-size:0.8rem;">The $15K threshold: hover for country details. Size = population.</span>
+                        </div>
+                        <div id="worldbank-chart" style="width:100%;height:320px;"></div>
+                        <script>
+                        (function() {
+                            const WB_DATA = {
+                                countries: ['USA', 'China', 'India', 'Germany', 'Brazil', 'Nigeria', 'Japan', 'Mexico', 'Egypt', 'Bangladesh', 'Ethiopia', 'Norway', 'Singapore', 'Chad', 'Luxembourg'],
+                                gdp: [65000, 12500, 2300, 48000, 7500, 2100, 40000, 10000, 3700, 2500, 900, 75000, 65000, 700, 115000],
+                                lifeExp: [78, 77, 70, 81, 75, 55, 84, 75, 72, 73, 66, 82, 83, 54, 82],
+                                population: [330, 1400, 1380, 83, 215, 210, 125, 130, 105, 165, 120, 5.4, 5.9, 17, 0.6],
+                                region: ['High', 'Upper-Mid', 'Lower-Mid', 'High', 'Upper-Mid', 'Low', 'High', 'Upper-Mid', 'Lower-Mid', 'Lower-Mid', 'Low', 'High', 'High', 'Low', 'High']
+                            };
+                            const colors = WB_DATA.region.map(r => 
+                                r === 'High' ? '#22c55e' : r === 'Upper-Mid' ? '#06b6d4' : r === 'Lower-Mid' ? '#f59e0b' : '#ef4444'
+                            );
+                            const el = document.getElementById('worldbank-chart');
+                            if (el) {
+                                Plotly.newPlot('worldbank-chart', [{
+                                    x: WB_DATA.gdp,
+                                    y: WB_DATA.lifeExp,
+                                    mode: 'markers',
+                                    type: 'scatter',
+                                    text: WB_DATA.countries,
+                                    marker: {
+                                        size: WB_DATA.population.map(p => Math.sqrt(p) * 3),
+                                        color: colors,
+                                        opacity: 0.8,
+                                        line: {color: '#1e293b', width: 1}
+                                    },
+                                    hovertemplate: '<b>%{text}</b><br>GDP/capita: $%{x:,}<br>Life Exp: %{y} years<br>Pop: %{customdata}M<extra></extra>',
+                                    customdata: WB_DATA.population
+                                }], {
+                                    title: {text: 'GDP vs. Life Expectancy: The $15K Health Transition Threshold', font: {size: 13, color: '#e2e8f0'}},
+                                    paper_bgcolor: 'rgba(0,0,0,0)',
+                                    plot_bgcolor: 'rgba(0,0,0,0)',
+                                    font: {color: '#94a3b8'},
+                                    xaxis: {title: 'GDP per Capita (USD)', gridcolor: '#334155', type: 'log', tickformat: ',.0f'},
+                                    yaxis: {title: 'Life Expectancy (years)', gridcolor: '#334155', range: [50, 90]},
+                                    shapes: [{
+                                        type: 'line', x0: 15000, x1: 15000, y0: 50, y1: 90,
+                                        line: {color: '#f59e0b', width: 2, dash: 'dash'}
+                                    }],
+                                    annotations: [{
+                                        x: 15000, y: 88,
+                                        text: '$15K threshold',
+                                        showarrow: false,
+                                        font: {color: '#f59e0b', size: 11}
+                                    }],
+                                    margin: {t: 40, b: 40, l: 60, r: 40}
+                                }, {responsive: true, displayModeBar: false});
+                            }
+                        })();
+                        </script>
+                    </div>
                     </div>
                     <div class="transfer-box">
                         <h5>What I'd bring to your team</h5>
