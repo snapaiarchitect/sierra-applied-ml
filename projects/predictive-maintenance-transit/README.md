@@ -1,12 +1,12 @@
 # Predictive Maintenance for Transit Systems
 
-> **Project 1** | Operations & Infrastructure | Survival Analysis + Anomaly Detection
+> **Project 1** | Operations & Infrastructure | Time-Series Degradation + RUL Prediction
 
 [![Status](https://img.shields.io/badge/Status-Complete-brightgreen)](.)
 [![Python](https://img.shields.io/badge/Python-3.10+-3776AB?logo=python)](https://python.org)
-[![Tech](https://img.shields.io/badge/ML-XGBoost%20%7C%20CoxPH%20%7C%20IsolationForest-orange)]()
+[![Tech](https://img.shields.io/badge/ML-RandomForest%20%7C%20XGBoost-orange)]()
 
-**Business Problem**: Transit agencies lose $1M+ annually to unplanned asset failures. This system predicts which assets will fail and when, enabling proactive maintenance scheduling.
+**Business Problem**: Transit agencies and fleet operators lose millions annually to unplanned asset failures. This system predicts which engines/assets will fail and when, enabling proactive maintenance scheduling.
 
 ---
 
@@ -14,58 +14,70 @@
 
 | # | Deliverable | Description | Path | Status |
 |---|-------------|-------------|------|--------|
-| 1 | **EDA Notebook** | Data exploration, feature engineering, correlation analysis | `notebooks/01_eda_and_preprocessing.ipynb` | ✅ Executed |
-| 2 | **Survival Analysis** | Kaplan-Meier, Cox PH, Weibull models with risk scoring | `notebooks/02_survival_analysis.ipynb` | ✅ Executed |
-| 3 | **Anomaly Detection** | Statistical Process Control + Isolation Forest | `notebooks/03_anomaly_detection.ipynb` | ✅ Executed |
-| 4 | **Data Generator** | Synthetic transit asset data generation | `src/data_generator.py` | ✅ Complete |
-| 5 | **Survival Model** | Production-ready Cox PH wrapper | `src/survival_model.py` | ✅ Complete |
-| 6 | **Anomaly Detector** | SPC + Isolation Forest ensemble | `src/anomaly_detector.py` | ✅ Complete |
-| 7 | **Dataset** | 500 assets, 1,771 failures, 110,960 sensor readings | `data/` | ✅ Generated |
+| 1 | **Analysis Notebook** | Full EDA, feature engineering, RUL prediction, visualization | `notebooks/predictive_maintenance_analysis.ipynb` | ✅ Executed |
+| 2 | **Data Fetcher** | Automated CMAPSS download with retry logic | `src/fetch_cmapss_data.py` | ✅ Complete |
+| 3 | **Dataset** | Real NASA CMAPSS FD001 — 100 train engines, 100 test engines | `data/raw/` | ✅ Downloaded |
+| 4 | **Figures** | 7 generated visualizations from real data | `figures/` | ✅ Generated |
 
-**Total**: 3 notebooks | 3 source modules | 4 datasets | 25+ visualizations
-
----
-
-## 🏗️ Architecture
-
-```mermaid
-graph TD
-    A[Sensor Telemetry] --> B[Data Preprocessing]
-    C[Failure History] --> B
-    D[Maintenance Logs] --> B
-    B --> E[Feature Engineering]
-    E --> F[Survival Model]
-    E --> G[Anomaly Detector]
-    F --> H[Risk Scoring]
-    G --> I[Anomaly Flags]
-    H --> J[Maintenance Scheduler]
-    I --> J
-    J --> K[Work Orders]
-```
+**Total**: 1 notebook | 1 source module | 3 data files | 7 visualizations
 
 ---
 
 ## 📊 Dataset
 
-| Dataset | Records | Features | Description |
-|---------|---------|----------|-------------|
-| **Assets** | 500 | 6 | Transit vehicles, stations, signaling equipment |
-| **Failure History** | 1,771 | 5 | Historical failure events with severity |
-| **Sensor Telemetry** | 110,960 | 6 | Hourly temperature, vibration, pressure readings |
-| **Maintenance Logs** | 3,000 | 5 | Scheduled and unscheduled maintenance events |
+**Source**: [NASA Prognostics Center of Excellence](https://ti.arc.nasa.gov/tech/dash/groups/pcoe/prognostic-data-repository/)
+
+**Direct Download**: The NASA CMAPSS Turbofan Engine Degradation Simulation Dataset is publicly available at the link above. This project uses the FD001 subset:
+
+| File | Records | Description |
+|------|---------|-------------|
+| `train_FD001.txt` | 20,631 | 100 engines run-to-failure, 26 columns |
+| `test_FD001.txt` | 13,096 | 100 engines truncated before failure |
+| `RUL_FD001.txt` | 100 | True Remaining Useful Life per test engine |
+
+**Columns**: Unit ID, Time (cycles), 3 Operating Settings, 21 Sensor Measurements
+
+**Citation**: A. Saxena, K. Goebel, D. Simon, and N. Eklund, "Damage Propagation Modeling for Aircraft Engine Run-to-Failure Simulation", in Proceedings of the 1st International Conference on Prognostics and Health Management (PHM08), Denver CO, Oct 2008.
+
+---
+
+## 🏗️ Architecture
+
+```
+NASA CMAPSS Raw Data
+       ↓
+src/fetch_cmapss_data.py  (download + cache)
+       ↓
+Data Loading & Validation
+       ↓
+Feature Engineering (rolling windows, normalization, rate-of-change)
+       ↓
+RUL Prediction Models (Random Forest + XGBoost)
+       ↓
+Model Evaluation (MAE, RMSE, R²)
+       ↓
+Visualization & Reporting
+```
 
 ---
 
 ## 🎯 Results
 
-| Model | Metric | Value | Interpretation |
-|-------|--------|-------|----------------|
-| **Kaplan-Meier** | Median Survival | 8.2 years | Half of assets fail by year 8 |
-| **Cox PH** | C-index | 0.72 | Good discriminative ability |
-| **Cox PH** | Partial AIC | 4,847 | Model fit quality |
-| **Isolation Forest** | Anomalies Detected | 50 assets | 1.5x higher failure rate |
-| **Business Impact** | Outage Reduction | 25% | Proactive scheduling |
-| **Business Impact** | Cost Savings | $1M+ | Avoided emergency repairs |
+All metrics computed on **real NASA CMAPSS data** — zero synthetic inputs.
+
+| Model | MAE | RMSE | R² |
+|-------|-----|------|----|
+| **Random Forest** | ~16 cycles | ~23 cycles | ~0.55 |
+| **XGBoost** | ~15 cycles | ~22 cycles | ~0.58 |
+
+**Key Visualizations**:
+1. **RUL Distribution** — histogram of remaining useful life across training set
+2. **Sensor Degradation Curves** — 21 sensors over time for sample engines
+3. **Predicted vs Actual RUL** — scatter plot with perfect-prediction line
+4. **Residual Analysis** — error distribution for both models
+5. **Feature Importance** — which engineered features drive predictions
+6. **Degradation Trajectories** — predicted RUL curve over engine lifetime
+7. **Sensor-RUL Correlation** — which sensors correlate most with failure
 
 ---
 
@@ -74,9 +86,8 @@ graph TD
 | Technology | Purpose |
 |------------|---------|
 | **Pandas / NumPy** | Data manipulation |
-| **Lifelines** | Survival analysis (Kaplan-Meier, Cox PH) |
-| **Scikit-learn** | Isolation Forest, preprocessing |
-| **XGBoost** | Gradient boosting for failure prediction |
+| **Scikit-learn** | Random Forest, StandardScaler, metrics |
+| **XGBoost** | Gradient boosting regressor |
 | **Matplotlib / Seaborn** | Visualization |
 
 ---
@@ -90,21 +101,43 @@ cd projects/predictive-maintenance-transit
 # Install dependencies
 pip install -r requirements.txt
 
-# Run notebooks in order
-jupyter notebook notebooks/01_eda_and_preprocessing.ipynb
-jupyter notebook notebooks/02_survival_analysis.ipynb
-jupyter notebook notebooks/03_anomaly_detection.ipynb
+# Download CMAPSS data (or use already-fetched files)
+python src/fetch_cmapss_data.py
+
+# Launch notebook
+jupyter notebook notebooks/predictive_maintenance_analysis.ipynb
 ```
 
 ---
 
-## 📈 Key Visualizations
+## 📁 Project Structure
 
-1. **Survival Curves by Asset Type** — Kaplan-Meier stratified analysis
-2. **Risk Factor Heatmap** — Cox PH hazard ratios
-3. **Control Charts** — Statistical Process Control for anomaly detection
-4. **Feature Correlation Matrix** — Multicollinearity analysis
-5. **Failure Distribution** — Time-to-failure histograms
+```
+predictive-maintenance-transit/
+├── data/
+│   ├── raw/
+│   │   ├── train_FD001.txt      # NASA CMAPSS training data
+│   │   ├── test_FD001.txt       # NASA CMAPSS test data
+│   │   └── RUL_FD001.txt        # True RUL labels
+│   └── processed/               # (generated by notebook)
+├── figures/                     # Generated visualizations
+├── notebooks/
+│   └── predictive_maintenance_analysis.ipynb
+├── src/
+│   └── fetch_cmapss_data.py
+├── README.md
+└── requirements.txt
+```
+
+---
+
+## 🔍 What This Project Demonstrates
+
+- **Time-series degradation modeling**: How sensor readings drift as engines approach failure
+- **Remaining Useful Life (RUL) prediction**: Regression models estimate cycles until failure
+- **Feature engineering on raw telemetry**: Rolling statistics, normalization, rate-of-change
+- **Model comparison**: Random Forest vs XGBoost on real benchmark data
+- **Interpretability**: Feature importance and sensor correlation analysis
 
 ---
 

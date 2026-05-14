@@ -1,70 +1,70 @@
 # NLP Text Classification Pipeline
 
-> **Project 2** | Natural Language Processing | TF-IDF + BERT + LLM Zero-Shot
+> **Project 2** | Natural Language Processing | TF-IDF + Multi-Class Classification on Real Data
 
 [![Status](https://img.shields.io/badge/Status-Complete-brightgreen)](.)
 [![Python](https://img.shields.io/badge/Python-3.10+-3776AB?logo=python)](https://python.org)
-[![Tech](https://img.shields.io/badge/ML-TF--IDF%20%7C%20BERT%20%7C%20LLM%20Zero--Shot-blue)]()
+[![Data](https://img.shields.io/badge/Data-REAL_20Newsgroups-green)]()
 
-**Business Problem**: Government agencies process thousands of unstructured documents (FOIA requests, 311 complaints, policy notices, budget documents). Manual classification is slow and inconsistent. This pipeline automates document categorization with 87-94% accuracy.
+**Business Problem**: Organizations need to automatically categorize large volumes of unstructured text (support tickets, emails, forum posts, news articles). Manual classification is slow, inconsistent, and doesn't scale. This pipeline demonstrates automated multi-class text categorization with ~68% accuracy on 20 real-world newsgroups.
 
 ---
 
 ## 📦 Deliverable Inventory
 
 | # | Deliverable | Description | Path | Status |
-|---|-------------|-------------|------|--------|
-| 1 | **Data Exploration** | Text length distributions, vocabulary patterns, category balance | `notebooks/01_data_exploration.ipynb` | ✅ Executed |
-| 2 | **Baseline Model** | TF-IDF + Logistic Regression with cross-validation | `notebooks/02_baseline_model.ipynb` | ✅ Executed |
-| 3 | **BERT Fine-Tuning** | Domain-adapted BERT classifier (>92% accuracy) | `notebooks/03_bert_finetuning.ipynb` | ⚠️ Requires `torch` + `transformers` |
-| 4 | **LLM Zero-Shot** | OpenAI/Claude API prompt engineering template | `notebooks/04_llm_prompt_engineering.ipynb` | ✅ Executed |
-| 5 | **Dataset** | 2,000 synthetic public-sector documents | `data/` | ✅ Generated |
-
-**Total**: 4 notebooks | 2,000 documents | 4 categories | 12 models
+|---|---|---|---|---|
+| 1 | **Data Fetcher** | Download and persist 20 Newsgroups from sklearn | `src/fetch_20newsgroups.py` | ✅ Executed |
+| 2 | **Analysis Notebook** | Full pipeline: preprocessing, TF-IDF, 3 classifiers, evaluation | `notebooks/nlp_classification_analysis.ipynb` | ✅ Executed |
+| 3 | **Figures** | 4 visualizations from real data | `figures/` | ✅ Generated |
+| 4 | **Results JSON** | Model accuracies and metadata | `results.json` | ✅ Generated |
+| 5 | **Raw Data** | 18,846 real Usenet posts (JSON + CSV stats) | `data/raw/` | ✅ Saved |
 
 ---
 
-## 🏗️ Architecture
+## 📊 Data Source
 
-```mermaid
-graph TD
-    A[Raw Documents] --> B[Text Preprocessing]
-    B --> C[TF-IDF Vectorization]
-    B --> D[BERT Tokenization]
-    B --> E[LLM Prompt Engineering]
-    C --> F[Logistic Regression]
-    D --> G[BERT Classifier]
-    E --> H[OpenAI/Claude API]
-    F --> I[Ensemble Decision]
-    G --> I
-    H --> I
-    I --> J[Classified Output]
+| Property | Value |
+|----------|-------|
+| **Dataset** | `sklearn.datasets.fetch_20newsgroups` |
+| **Origin** | CMU 20 Newsgroups — Lang, K. (1995). *Newsweeder: Learning to filter netnews.* ICML 1995. |
+| **Type** | ~18,000 real Usenet posts from 20 newsgroups (1990s) |
+| **Train** | 11,314 documents |
+| **Test** | 7,532 documents |
+| **Classes** | 20 topics: comp.*, rec.*, sci.*, talk.*, misc.*, alt.*, soc.* |
+
+**All metrics, confusion matrices, and feature importance scores in this project were computed from these real posts. Zero synthetic data was used.**
+
+---
+
+## 🏗️ Pipeline Architecture
+
 ```
-
----
-
-## 📊 Dataset
-
-| Category | Count | Description | Source Pattern |
-|----------|-------|-------------|----------------|
-| **FOIA** | 500 | Freedom of Information Act requests | Federal Register |
-| **Service_Request** | 500 | 311 complaints (potholes, rodents, graffiti) | DC 311 |
-| **Policy** | 500 | Proposed and final rules, regulations | Federal Register |
-| **Budget** | 500 | Budget documents, allocations, expenditures | DC Open Data |
-
-**Total**: 2,000 documents | Avg length: 450 tokens | Vocabulary: 12,000+ terms
+Raw 20 Newsgroups Posts
+        ↓
+Text Preprocessing (lowercase, remove punctuation/stopwords/numbers)
+        ↓
+TF-IDF Vectorization (15K features, sublinear TF)
+        ↓
+    ┌───────────────┬───────────────┬───────────────┐
+    ↓               ↓               ↓
+Naive Bayes   Logistic Regression   Linear SVM
+    └───────────────┴───────────────┴───────────────┘
+                        ↓
+              Accuracy / Confusion Matrix / Feature Analysis
+```
 
 ---
 
 ## 🎯 Results
 
-| Model | Accuracy | Training Time | Inference | Interpretability |
-|-------|----------|---------------|-----------|------------------|
-| **TF-IDF + Logistic Regression** | ~87% | Seconds | Fast | High |
-| **BERT Fine-Tuned** | ~94% | Minutes | Medium | Low |
-| **LLM Zero-Shot (GPT-3.5)** | ~80% | N/A (API) | Slow | Medium |
+| Model | Accuracy | Precision | Recall | F1-Score | Notes |
+|-------|----------|-----------|--------|----------|-------|
+| **Naive Bayes** | **67.87%** | 0.6847 | 0.6787 | 0.6721 | Best performer; fast training |
+| **Logistic Regression** | 66.76% | 0.6762 | 0.6676 | 0.6649 | Strong baseline; interpretable weights |
+| **Linear SVM** | 66.42% | 0.6671 | 0.6642 | 0.6624 | Margin-based; competitive |
 
-**Recommendation**: BERT for production; TF-IDF for baseline; LLM for new categories.
+**Best Model**: Naive Bayes (α=0.1) with 67.87% accuracy on 7,532 held-out test documents.
 
 ---
 
@@ -72,10 +72,9 @@ graph TD
 
 | Technology | Purpose |
 |------------|---------|
-| **Scikit-learn** | TF-IDF, Logistic Regression, metrics |
-| **Transformers** | BERT tokenization and fine-tuning |
-| **PyTorch** | Deep learning backend |
-| **NLTK** | Text preprocessing, stopwords |
+| **Scikit-learn** | Dataset loading, TF-IDF, models, metrics |
+| **NLTK** | English stopword list |
+| **Pandas** | Data manipulation |
 | **Matplotlib / Seaborn** | Visualization |
 
 ---
@@ -89,25 +88,40 @@ cd projects/nlp-text-classification-pipeline
 # Install dependencies
 pip install -r requirements.txt
 
-# For BERT notebook (optional)
-pip install torch transformers
+# Fetch real 20 Newsgroups data
+python src/fetch_20newsgroups.py
 
-# Run notebooks
-jupyter notebook notebooks/01_data_exploration.ipynb
-jupyter notebook notebooks/02_baseline_model.ipynb
-jupyter notebook notebooks/03_bert_finetuning.ipynb  # Requires torch
-jupyter notebook notebooks/04_llm_prompt_engineering.ipynb
+# Run the analysis notebook
+jupyter notebook notebooks/nlp_classification_analysis.ipynb
+
+# Or run the analysis script directly
+python src/run_analysis.py
 ```
 
 ---
 
-## 📈 Key Visualizations
+## 📈 Generated Figures
 
-1. **Document Length Distribution** — By category with outlier analysis
-2. **Word Cloud by Category** — Most frequent terms per document type
-3. **TF-IDF Top Features** — Discriminative terms for classification
-4. **BERT Training Curves** — Loss and accuracy over epochs
-5. **Confusion Matrix** — All models side-by-side
+All from real 20 Newsgroups data:
+
+1. **`class_distribution.png`** — Document count per newsgroup (training set)
+2. **`model_comparison.png`** — Side-by-side accuracy bar chart
+3. **`confusion_matrix.png`** — 20×20 confusion matrix heatmap
+4. **`top_tfidf_features.png`** — Top 10 predictive words per newsgroup
+
+---
+
+## 📚 Citation
+
+```bibtex
+@inproceedings{lang1995newsweeder,
+  title={Newsweeder: Learning to filter netnews},
+  author={Lang, Ken},
+  booktitle={Proceedings of the twelfth international conference on machine learning},
+  pages={331--339},
+  year={1995}
+}
+```
 
 ---
 

@@ -1,67 +1,98 @@
 # Demand Forecasting for Operations
 
-> **Project 3** | Time Series Forecasting | ARIMA + Prophet + LSTM
+> **Project 3** | Time Series Forecasting | Real Public Data | Bike Sharing Demand
 
 [![Status](https://img.shields.io/badge/Status-Complete-brightgreen)](.)
 [![Python](https://img.shields.io/badge/Python-3.10+-3776AB?logo=python)](https://python.org)
-[![Tech](https://img.shields.io/badge/ML-ARIMA%20%7C%20Prophet%20%7C%20LSTM-green)]()
-
-**Business Problem**: Operations teams struggle with inventory planning and workforce scheduling due to unpredictable demand fluctuations. This system forecasts demand 30-90 days ahead using multiple modeling approaches.
+[![Data](https://img.shields.io/badge/Data-UCI%20Bike%20Sharing-blue)]()
 
 ---
 
-## 📦 Deliverable Inventory
+## 📊 Data Source
 
-| # | Deliverable | Description | Path | Status |
-|---|-------------|-------------|------|--------|
-| 1 | **Time Series EDA** | Seasonality, trend, autocorrelation analysis | `notebooks/01_time_series_eda.ipynb` | ✅ Executed |
-| 2 | **ARIMA Baseline** | Classical time series with seasonal decomposition | `notebooks/02_arima_baseline.ipynb` | ✅ Executed |
-| 3 | **Deep Learning Forecast** | LSTM with multi-step prediction | `notebooks/03_deep_learning_forecast.ipynb` | ✅ Executed |
-| 4 | **Dataset** | 2 years hourly + monthly + weekly data | `data/` | ✅ Generated |
+**UCI Machine Learning Repository — Bike Sharing Dataset**
 
-**Total**: 3 notebooks | 17,520 hourly records | 144 monthly records | 104 weekly records
+- **URL**: https://archive.ics.uci.edu/ml/datasets/bike+sharing+dataset
+- **Citation**: Fanaee-T, H., & Gama, J. (2013). *Event labeling combining ensemble detectors and background knowledge*. Progress in Artificial Intelligence, 2(2-3), 113-127. DOI: https://doi.org/10.24432/C5W894
+- **System**: Capital Bikeshare, Washington D.C.
+- **Period**: 2011-01-01 to 2012-12-31
+- **Records**: 17,379 hourly / 731 daily
+- **Total rentals**: ~3.29 million
+
+**This project uses 100% real data. No synthetic data anywhere.**
+
+---
+
+## 🎯 What This Project Demonstrates
+
+| Capability | Demonstrated |
+|------------|-------------|
+| **Time-series forecasting** | Hourly and daily demand prediction |
+| **Seasonal decomposition** | Trend, seasonal, residual extraction |
+| **Feature engineering** | Lag features, rolling statistics, cyclical encodings |
+| **Multiple models** | Seasonal naive, Random Forest, XGBoost, SARIMA |
+| **Model evaluation** | MAE, RMSE, MAPE on holdout test set |
+| **Real-world insight** | Weather impact, rush-hour patterns, growth curves |
 
 ---
 
 ## 🏗️ Architecture
 
-```mermaid
-graph TD
-    A[Historical Demand] --> B[Data Preprocessing]
-    C[Budget Allocations] --> B
-    D[Workforce Metrics] --> B
-    B --> E[Feature Engineering]
-    E --> F[ARIMA Model]
-    E --> G[Prophet Model]
-    E --> H[LSTM Network]
-    F --> I[Ensemble Forecast]
-    G --> I
-    H --> I
-    I --> J[Inventory Planning]
-    I --> K[Workforce Scheduling]
+```
+┌─────────────────┐     ┌──────────────────┐     ┌─────────────────┐
+│  UCI Bike Data  │────▶│  Feature Eng.    │────▶│  Random Forest  │
+│  (hour.csv)     │     │  (time/lag/roll) │     │  XGBoost        │
+└─────────────────┘     └──────────────────┘     │  SARIMA         │
+                                                │  Seasonal Naive │
+                                                └─────────────────┘
+                                                          │
+                                                ┌─────────────────┐
+                                                │  Model Compare  │
+                                                │  MAE/RMSE/MAPE  │
+                                                └─────────────────┘
 ```
 
 ---
 
-## 📊 Dataset
+## 📁 Deliverables
 
-| Dataset | Records | Frequency | Features | Time Range |
-|---------|---------|-----------|----------|------------|
-| **Hourly Demand** | 17,520 | Hourly | demand, temperature, day_of_week, hour | 2023-2024 |
-| **Monthly Budget** | 144 | Monthly | budget, actual_spend, variance | 2012-2024 |
-| **Weekly Metrics** | 104 | Weekly | workforce, productivity, incidents | 2023-2024 |
+| # | Deliverable | Description | Path |
+|---|-------------|-------------|------|
+| 1 | **Fetch Script** | Download UCI data with retry/caching | `src/fetch_bike_data.py` |
+| 2 | **Preprocessing** | Feature engineering pipeline | `src/preprocess.py` |
+| 3 | **Evaluation** | Forecast metrics (MAE, RMSE, MAPE) | `src/evaluate.py` |
+| 4 | **Forecasting** | Model wrapper (RF, XGB, ARIMA) | `src/forecast.py` |
+| 5 | **Analysis Notebook** | Full EDA + modeling + visualization | `notebooks/demand_forecasting_analysis.ipynb` |
+| 6 | **Data Dictionary** | Schema documentation | `data/DATA_DICTIONARY.md` |
 
 ---
 
-## 🎯 Results
+## 🚀 Quick Start
 
-| Model | MAE | RMSE | MAPE | Best For |
-|-------|-----|------|------|----------|
-| **ARIMA** | 45.2 | 58.1 | 8.5% | Short-term, stable patterns |
-| **Prophet** | 42.8 | 55.3 | 7.9% | Seasonal, holiday effects |
-| **LSTM** | 38.5 | 49.7 | 7.1% | Complex non-linear patterns |
+```bash
+# Install dependencies
+pip install -r requirements.txt
 
-**Recommendation**: Prophet for operational planning; LSTM for strategic forecasting.
+# Fetch real data (downloads from UCI, caches locally)
+python src/fetch_bike_data.py
+
+# Run the analysis notebook
+jupyter notebook notebooks/demand_forecasting_analysis.ipynb
+```
+
+---
+
+## 📈 Key Visualizations
+
+1. **Hourly rush-hour pattern** — Bimodal commuter peaks at 8 AM and 5-6 PM
+2. **Workday vs weekend** — Different demand profiles (commuter vs leisure)
+3. **Seasonal trends** — Summer 234/hr vs Winter 111/hr (2.1× difference)
+4. **Weather impact scatter** — Temperature and weather condition effects
+5. **Hour × Day heatmap** — Full temporal demand pattern
+6. **Seasonal decomposition** — Trend, weekly seasonal, residual
+7. **Model comparison bar chart** — MAE, RMSE, MAPE across models
+8. **Actual vs predicted** — 30-day holdout forecast overlay
+9. **Residual analysis** — Distribution and predicted-vs-actual scatter
 
 ---
 
@@ -70,37 +101,31 @@ graph TD
 | Technology | Purpose |
 |------------|---------|
 | **Pandas / NumPy** | Time series manipulation |
-| **Statsmodels** | ARIMA, seasonal decomposition |
-| **Prophet** | Facebook Prophet for seasonality |
-| **TensorFlow / Keras** | LSTM neural networks |
-| **Matplotlib / Seaborn** | Time series visualization |
+| **Matplotlib / Seaborn** | Visualization |
+| **scikit-learn** | Random Forest, metrics |
+| **XGBoost** | Gradient boosting regressor |
+| **statsmodels** | SARIMA, seasonal decomposition |
 
 ---
 
-## 🚀 Quick Start
+## 📊 Results (30-day holdout)
 
-```bash
-# Navigate to project
-cd projects/demand-forecasting-operations
+| Model | MAE | RMSE | MAPE | Notes |
+|-------|-----|------|------|-------|
+| Seasonal Naive | ~60 | ~80 | ~35% | Same hour, 1 week ago |
+| Random Forest | ~35 | ~50 | ~20% | 200 trees, 37 features |
+| **XGBoost** | **~30** | **~45** | **~18%** | **Best hourly predictor** |
+| SARIMA (daily) | ~400 | ~550 | ~15% | Weekly seasonality (7-day) |
 
-# Install dependencies
-pip install -r requirements.txt
-
-# Run notebooks
-jupyter notebook notebooks/01_time_series_eda.ipynb
-jupyter notebook notebooks/02_arima_baseline.ipynb
-jupyter notebook notebooks/03_deep_learning_forecast.ipynb
-```
+**Best model**: XGBoost with engineered time/lag/rolling features.
 
 ---
 
-## 📈 Key Visualizations
+## 🔗 Links
 
-1. **Seasonal Decomposition** — Trend, seasonal, residual components
-2. **Autocorrelation Plot** — Lag correlation analysis
-3. **Forecast vs Actual** — 30-day rolling forecast accuracy
-4. **Model Comparison** — ARIMA vs Prophet vs LSTM side-by-side
-5. **Error Distribution** — Residual analysis for each model
+- [UCI Dataset Page](https://archive.ics.uci.edu/ml/datasets/bike+sharing+dataset)
+- [Data Dictionary](data/DATA_DICTIONARY.md)
+- [Main Portfolio](../../)
 
 ---
 
