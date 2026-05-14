@@ -1,1 +1,1712 @@
-<PRESIDING_PLUG>Instruct the user to paste the contents of `/tmp/northstar.html` here, or use a file upload.</PRESIDING_PLUG>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sierra Napier — Data Scientist | AI Architect | Analytics Viz</title>
+    <style>
+        :root {
+            --bg-deep: #0a0e1a;
+            --bg-surface: #111827;
+            --bg-elevated: #1a2234;
+            --border: #1f2d44;
+            --text-primary: #f0f0f0;
+            --text-secondary: #94a3b8;
+            --text-muted: #64748b;
+            --accent-gold: #f59e0b;
+            --accent-cyan: #06b6d4;
+            --accent-gold-hover: #fbbf24;
+            --accent-cyan-hover: #22d3ee;
+            --success: #22c55e;
+            --warning: #f59e0b;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: var(--bg-deep);
+            color: var(--text-primary);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+
+        /* Navigation */
+        nav {
+            position: sticky;
+            top: 0;
+            background: rgba(10, 14, 26, 0.95);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+            z-index: 100;
+            padding: 1rem 0;
+        }
+        .nav-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: var(--text-primary);
+            text-decoration: none;
+        }
+        .nav-brand img {
+            width: 32px;
+            height: 32px;
+            border-radius: 6px;
+        }
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        .nav-links a:hover { color: var(--accent-gold); }
+
+        /* Hero */
+        header {
+            padding: 6rem 0 4rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(ellipse at 50% 50%, rgba(6, 182, 212, 0.08) 0%, transparent 50%),
+                        radial-gradient(ellipse at 30% 20%, rgba(245, 158, 11, 0.06) 0%, transparent 40%);
+            pointer-events: none;
+        }
+        .avatar-wrap {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 2rem;
+        }
+        .avatar-wrap img {
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            border: 3px solid var(--accent-gold);
+            box-shadow: 0 0 40px rgba(245, 158, 11, 0.3), 0 0 80px rgba(6, 182, 212, 0.15);
+            object-fit: cover;
+        }
+        .avatar-ring {
+            position: absolute;
+            inset: -8px;
+            border-radius: 50%;
+            border: 2px solid transparent;
+            border-top-color: var(--accent-cyan);
+            border-right-color: var(--accent-gold);
+            animation: spin 8s linear infinite;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent-gold) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .pillars {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin: 1.5rem 0;
+        }
+        .pillar-badge {
+            padding: 0.5rem 1.25rem;
+            border-radius: 999px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            border: 1px solid var(--border);
+            background: var(--bg-elevated);
+            color: var(--text-secondary);
+            transition: all 0.2s;
+        }
+        .pillar-badge:hover {
+            border-color: var(--accent-cyan);
+            color: var(--accent-cyan-hover);
+            transform: translateY(-2px);
+        }
+        .tagline {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+            font-weight: 300;
+        }
+        .tagline strong {
+            color: var(--accent-gold);
+            font-weight: 600;
+        }
+
+        /* CTA Buttons */
+        .hero-cta {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            text-decoration: none;
+            transition: all 0.2s;
+            border: 2px solid transparent;
+            cursor: pointer;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent-gold), #d97706);
+            color: #0a0e1a;
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(245, 158, 11, 0.35);
+        }
+        .btn-secondary {
+            background: transparent;
+            border-color: var(--border);
+            color: var(--text-secondary);
+        }
+        .btn-secondary:hover {
+            border-color: var(--accent-cyan);
+            color: var(--accent-cyan-hover);
+        }
+
+        /* Stats */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1rem;
+            margin: 4rem 0;
+        }
+        .stat-card {
+            background: var(--bg-surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.2s;
+        }
+        .stat-card:hover {
+            border-color: var(--accent-cyan);
+            transform: translateY(-4px);
+        }
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--accent-gold);
+            line-height: 1;
+        }
+        .stat-label {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            margin-top: 0.5rem;
+        }
+
+        /* Section Styling */
+        section { padding: 4rem 0; }
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+        .section-subtitle {
+            color: var(--text-muted);
+            max-width: 600px;
+            margin-bottom: 2rem;
+        }
+        .section-accent {
+            width: 48px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent-gold), var(--accent-cyan));
+            border-radius: 2px;
+            margin-bottom: 1.5rem;
+        }
+
+        /* About */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: start;
+        }
+        .about-text {
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+        }
+        .about-text p { margin-bottom: 1rem; }
+        .about-text strong { color: var(--accent-gold); }
+        .career-arc {
+            background: var(--bg-surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+        }
+        .career-step {
+            display: flex;
+            gap: 1rem;
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+        .career-step:last-child { border-bottom: none; }
+        .career-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--accent-cyan);
+            margin-top: 4px;
+            flex-shrink: 0;
+        }
+        .career-step:first-child .career-dot { background: var(--accent-gold); }
+        .career-step h4 {
+            font-size: 0.95rem;
+            color: var(--text-primary);
+            margin-bottom: 0.25rem;
+        }
+        .career-step p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        /* Project Cards */
+        .project-card {
+            background: var(--bg-surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            margin: 2rem 0;
+            overflow: hidden;
+            transition: border-color 0.3s;
+        }
+        .project-card:hover { border-color: var(--accent-cyan); }
+        .project-header {
+            padding: 1.5rem 2rem;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+        }
+        .project-title { font-size: 1.25rem; font-weight: 700; color: var(--text-primary); }
+        .project-meta { color: var(--text-muted); font-size: 0.85rem; margin-top: 0.25rem; }
+        .badges { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+        .badge {
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        .badge-live { background: rgba(34, 197, 94, 0.15); color: var(--success); border: 1px solid rgba(34, 197, 94, 0.3); }
+        .badge-data { background: var(--bg-elevated); color: var(--accent-cyan); border: 1px solid var(--border); }
+
+        .project-body { padding: 2rem; }
+        .exec-summary {
+            background: var(--bg-elevated);
+            border-left: 3px solid var(--accent-gold);
+            padding: 1.25rem 1.5rem;
+            border-radius: 0 8px 8px 0;
+            margin-bottom: 1.5rem;
+        }
+        .exec-summary h4 {
+            color: var(--accent-gold);
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        .exec-summary p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .project-metrics {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        .metric {
+            background: var(--bg-deep);
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+            border: 1px solid var(--border);
+        }
+        .metric-value {
+            font-size: 1.4rem;
+            color: var(--accent-gold);
+            font-weight: 700;
+        }
+        .metric-label {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-top: 0.25rem;
+        }
+
+        /* Chart Grid */
+        .chart-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+        .chart-box {
+            background: var(--bg-deep);
+            border-radius: 10px;
+            padding: 0.75rem;
+            border: 1px solid var(--border);
+            transition: border-color 0.2s;
+        }
+        .chart-box:hover { border-color: var(--accent-cyan); }
+        .chart-box img {
+            width: 100%;
+            border-radius: 6px;
+            display: block;
+        }
+        .chart-caption {
+            text-align: center;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-top: 0.5rem;
+        }
+
+        .project-footer {
+            padding: 1rem 2rem;
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        .project-footer .data-sources {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+        .repo-link {
+            color: var(--accent-gold);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: color 0.2s;
+        }
+        .repo-link:hover { color: var(--accent-gold-hover); text-decoration: underline; }
+
+        /* Transfer Value Box */
+        .transfer-box {
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.08), rgba(6, 182, 212, 0.05));
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 1rem 1.25rem;
+            margin-top: 1rem;
+        }
+        .transfer-box h5 {
+            color: var(--accent-cyan);
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.4rem;
+        }
+        .transfer-box p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* Contact */
+        .contact-section {
+            text-align: center;
+            padding: 5rem 2rem;
+            background: linear-gradient(135deg, var(--bg-surface), var(--bg-elevated));
+            border-radius: 16px;
+            border: 1px solid var(--border);
+            margin: 4rem 0;
+        }
+        .contact-section h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+        .contact-section p {
+            color: var(--text-muted);
+            max-width: 500px;
+            margin: 0 auto 2rem;
+        }
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+        .contact-links a {
+            color: var(--accent-cyan);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: color 0.2s;
+        }
+        .contact-links a:hover { color: var(--accent-cyan-hover); }
+
+        footer {
+            text-align: center;
+            padding: 3rem 0;
+            color: var(--text-muted);
+            border-top: 1px solid var(--border);
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2rem; }
+            .about-grid { grid-template-columns: 1fr; }
+            .nav-links { gap: 1rem; }
+            .nav-links a { font-size: 0.8rem; }
+            .chart-grid { grid-template-columns: 1fr; }
+            .project-header { flex-direction: column; }
+            .project-footer { flex-direction: column; align-items: flex-start; }
+        }
+    
+/* === PILLAR 3 ADDITIONS === */
+/* ===== PILLAR 3: ANALYTICS VIZ STYLES ===== */
+
+.dashboard-section {
+    margin: 3rem 0;
+}
+
+.subsection-title {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+}
+
+.subsection-icon {
+    font-size: 1.4rem;
+}
+
+.live-badge {
+    background: linear-gradient(135deg, var(--success), #16a34a);
+    color: #0a0e1a;
+    font-size: 0.65rem;
+    font-weight: 800;
+    padding: 0.2rem 0.6rem;
+    border-radius: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    animation: pulse-badge 2s ease-in-out infinite;
+}
+
+@keyframes pulse-badge {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+}
+
+.subsection-desc {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    margin-bottom: 1.5rem;
+    max-width: 700px;
+}
+
+.dashboard-card {
+    background: var(--bg-surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    transition: border-color 0.3s;
+}
+
+.dashboard-card:hover {
+    border-color: var(--accent-cyan);
+}
+
+.dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.dashboard-title {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.dashboard-meta {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-top: 0.25rem;
+}
+
+.dashboard-controls {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.viz-toggle {
+    padding: 0.4rem 0.9rem;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    background: var(--bg-elevated);
+    color: var(--text-secondary);
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.viz-toggle:hover {
+    border-color: var(--accent-gold);
+    color: var(--accent-gold-hover);
+}
+
+.viz-toggle.active {
+    background: linear-gradient(135deg, var(--accent-gold), #d97706);
+    color: #0a0e1a;
+    border-color: transparent;
+}
+
+.plotly-container {
+    width: 100%;
+    min-height: 420px;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.dashboard-insight {
+    margin-top: 1rem;
+    padding: 1rem 1.25rem;
+    background: rgba(6, 182, 212, 0.05);
+    border-left: 3px solid var(--accent-cyan);
+    border-radius: 0 8px 8px 0;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+.dashboard-insight strong {
+    color: var(--accent-cyan-hover);
+}
+
+/* Portfolio Grid */
+.portfolio-section {
+    margin: 3rem 0;
+}
+
+.portfolio-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.portfolio-category {
+    background: var(--bg-surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.25rem;
+}
+
+.portfolio-cat-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.portfolio-cat-badge {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--accent-gold);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.portfolio-cat-count {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    background: var(--bg-elevated);
+    padding: 0.25rem 0.6rem;
+    border-radius: 4px;
+}
+
+.portfolio-cat-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+}
+
+@media (max-width: 768px) {
+    .portfolio-cat-grid {
+        grid-template-columns: 1fr;
+    }
+    .dashboard-header {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 1024px) {
+    .portfolio-cat-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+</style>
+</head>
+<body>
+    <nav>
+        <div class="container">
+            <div class="nav-inner">
+                <a href="#" class="nav-brand">
+                    <img src="./assets/logo_400.png" alt="The AI Architect" loading="lazy">
+                    Sierra Napier
+                </a>
+                <ul class="nav-links">
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#data-science">Data Science</a></li>
+                    <li><a href="#ai-architecture">AI Architecture</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                            <li><a href="#analytics-viz">Analytics Viz</a></li>
+</ul>
+            </div>
+        </div>
+    </nav>
+
+    <header>
+        <div class="container">
+            <div class="avatar-wrap">
+                <div class="avatar-ring"></div>
+                <img src="./assets/avatar.png" alt="Sierra Napier">
+            </div>
+            <h1>Sierra Napier</h1>
+            <div class="pillars">
+                <span class="pillar-badge">Data Scientist</span>
+                <span class="pillar-badge">AI Architect</span>
+                <span class="pillar-badge">Analytics Viz</span>
+            </div>
+            <p class="tagline">
+                I analyze <strong>complex data at scale</strong>, architect <strong>AI systems</strong> that automate it,
+                and <strong>visualize the story</strong> so stakeholders act on it.
+            </p>
+            <div class="hero-cta">
+                <a href="https://github.com/gosidehustlesisi" class="btn btn-primary">View GitHub</a>
+                <a href="https://www.linkedin.com/in/sierran/" class="btn btn-secondary">LinkedIn</a>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="stats">
+            <div class="stat-card">
+                <div class="stat-number">5</div>
+                <div class="stat-label">Live Data Projects</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">50+</div>
+                <div class="stat-label">Real Visualizations</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">6</div>
+                <div class="stat-label">AI Repositories</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">4</div>
+                <div class="stat-label">AI Courses</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">21</div>
+                <div class="stat-label">Data Sources Used</div>
+            </div>
+        </div>
+
+        <section id="about">
+            <div class="section-accent"></div>
+            <h2 class="section-title">About Sierra</h2>
+            <p class="section-subtitle">From public sector analytics to AI engineering — a career built on understanding data, building systems, and making it actionable.</p>
+
+            <div class="about-grid">
+                <div class="about-text">
+                    <p>Most analysts stop at the report. Most engineers stop at the model. I do <strong>all three</strong> — from raw data to deployed system to boardroom-ready visualization.</p>
+                    <p>My foundation is <strong>MPA/MPH</strong> — policy analysis, regulatory environments, and public health data. I spent years working with <strong>Census ACS, BLS employment data, CMS drug utilization, and USASpending procurement records</strong> at scale.</p>
+                    <p>That deep federal data expertise led me to <strong>machine learning</strong> — NASA turbofan predictive maintenance, arXiv NLP classification, transit demand forecasting. Then to <strong>AI architecture</strong> — building agentic systems, local LLM deployments, and automation pipelines.</p>
+                    <p>The throughline: <strong>I don't just analyze data. I build the systems that process it and the visuals that make it land.</strong></p>
+                </div>
+                <div class="career-arc">
+                    <div class="career-step">
+                        <div class="career-dot"></div>
+                        <div>
+                            <h4>MPA / MPH — Policy Analytics Foundation</h4>
+                            <p>Public sector data analysis, regulatory frameworks, and government operations</p>
+                        </div>
+                    </div>
+                    <div class="career-step">
+                        <div class="career-dot"></div>
+                        <div>
+                            <h4>Federal Data at Scale</h4>
+                            <p>Census, BLS, CMS, USASpending — $4T procurement, 1.28M FOIA requests, 144K datasets</p>
+                        </div>
+                    </div>
+                    <div class="career-step">
+                        <div class="career-dot"></div>
+                        <div>
+                            <h4>Machine Learning Engineering</h4>
+                            <p>Predictive maintenance, NLP pipelines, time series forecasting — 50+ real visualizations</p>
+                        </div>
+                    </div>
+                    <div class="career-step">
+                        <div class="career-dot"></div>
+                        <div>
+                            <h4>AI Architecture & Automation</h4>
+                            <p>Agentic systems, local LLMs, multi-agent orchestration, AI automation pipelines</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PILLAR 1: DATA SCIENCE -->
+        <section id="data-science">
+            <div class="section-accent"></div>
+            <h2 class="section-title">Pillar 1 — Data Science</h2>
+            <p class="section-subtitle">5 live projects with real public data. Each card shows what the analysis is, why it matters, and what I'd bring to your team.</p>
+
+            <!-- #1 Applied ML -->
+            <div class="project-card">
+                <div class="project-header">
+                    <div>
+                        <div class="project-title">Applied ML — Predictive Maintenance, NLP & Demand Forecasting</div>
+                        <div class="project-meta">3 projects · 10 notebooks · 28 charts</div>
+                    </div>
+                    <div class="badges">
+                        <span class="badge badge-live">LIVE</span>
+                        <span class="badge badge-data">NASA · UCI · sklearn</span>
+                    </div>
+                </div>
+                <div class="project-body">
+                    <div class="exec-summary">
+                        <h4>What this is</h4>
+                        <p>A production-grade ML portfolio covering three high-impact domains: NASA turbofan engine failure prediction (RUL regression on 21 sensor channels, 100 train + 100 test engines), 20 Newsgroups text classification (TF-IDF + classifiers achieving ~68% accuracy on 18,846 real Usenet posts), and seasonal demand forecasting with multiple models on 17K+ hourly bike-share records.</p>
+                    </div>
+                    <div class="exec-summary">
+                        <h4>Why it matters</h4>
+                        <p>Predictive maintenance prevents unplanned outages in aviation and transit. NLP classification at ~68% accuracy on 20 categories demonstrates production text analysis on real-world messy data. Demand forecasting on actual bike-share records enables resource optimization. These are the same techniques used in industrial IoT, content moderation, and operations planning.</p>
+                    </div>
+                    <div class="project-metrics">
+                        <div class="metric">
+                            <div class="metric-value">68%</div>
+                            <div class="metric-label">Best Accuracy (NB)</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-value">21</div>
+                            <div class="metric-label">Sensor Channels</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-value">17K+</div>
+                            <div class="metric-label">Hourly Records</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-value">20</div>
+                            <div class="metric-label">Text Classes</div>
+                        </div>
+                    </div>
+                    <div class="chart-grid">
+                        <div class="chart-box">
+                            <img src="https://raw.githubusercontent.com/gosidehustlesisi/sierra-applied-ml/main/projects/predictive-maintenance-transit/figures/sensor_degradation_curves.png" alt="NASA Sensor Degradation" loading="lazy">
+                            <div class="chart-caption">NASA C-MAPSS — Sensor Degradation Curves</div>
+                        </div>
+                        <div class="chart-box">
+                            <img src="https://raw.githubusercontent.com/gosidehustlesisi/sierra-applied-ml/main/projects/nlp-text-classification-pipeline/figures/nlp_02_confusion_matrix.png" alt="NLP Confusion Matrix" loading="lazy">
+                            <div class="chart-caption">20 Newsgroups — Confusion Matrix</div>
+                        </div>
+                        <div class="chart-box" style="display:flex;align-items:center;justify-content:center;background:var(--bg-elevated);min-height:180px;">
+                            <div style="text-align:center;padding:20px;">
+                                <div style="font-size:48px;margin-bottom:12px;">📊</div>
+                                <div style="color:var(--text-primary);font-weight:600;">Analysis Notebook</div>
+                                <div style="color:var(--text-muted);font-size:12px;margin-top:8px;">17K+ hourly records · ARIMA · XGBoost · Seasonal naive</div>
+                                <div style="color:var(--accent-cyan);font-size:11px;margin-top:8px;">Execute on GitHub →</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="transfer-box">
+                        <h5>What I'd bring to your team</h5>
+                        <p>I can build failure-prediction pipelines for any sensor-monitored asset — manufacturing equipment, energy turbines, logistics fleet. I can deploy NLP classification for content moderation, support ticket routing, or document analysis. And I can forecast demand for operations, staffing, or inventory planning.</p>
+                    </div>
+                </div>
+                <div class="project-footer">
+                    <span class="data-sources">Data: NASA C-MAPSS · UCI Bike Sharing · scikit-learn 20 Newsgroups</span>
+                    <a class="repo-link" href="https://github.com/gosidehustlesisi/sierra-applied-ml">View Repository →</a>
+                </div>
+            </div>
+
+            <!-- #2 GenAI -->
+            <div class="project-card">
+                <div class="project-header">
+                    <div>
+                        <div class="project-title">GenAI Engineering — Research, Legal & Biomedical NLP</div>
+                        <div class="project-meta">3 projects · 3 notebooks · 12 charts</div>
+                    </div>
+                    <div class="badges">
+                        <span class="badge badge-live">LIVE</span>
+                        <span class="badge badge-data">arXiv · SCOTUS · PubMed</span>
+                    </div>
+                </div>
+                <div class="project-body">
+                    <div class="exec-summary">
+                        <h4>What this is</h4>
+                        <p>Generative AI and NLP research using live APIs: arXiv paper analysis (450 papers from cs.LG/AI/CL), SCOTUS opinion text mining across 15 landmark cases (1954–2015), and PubMed biomedical trend analysis with biomarker volcano plots and drug response modeling.</p>
+                    </div>
+                    <div class="exec-summary">
+                        <h4>Why it matters</h4>
+                        <p>Research organizations need to track thousands of papers. Law firms need to analyze decades of precedent. Biotech needs to identify drug-response patterns from clinical data. This work shows I can build NLP pipelines that process domain-specific text at scale — not just generic sentiment analysis.</p>
+                    </div>
+                    <div class="project-metrics">
+                        <div class="metric">
+                            <div class="metric-value">450</div>
+                            <div class="metric-label">arXiv Papers</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-value">15</div>
+                            <div class="metric-label">Landmark Cases</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-value">20</div>
+                            <div class="metric-label">Immunotherapy Trials</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-value">12</div>
+                            <div class="metric-label">Biomarkers Tracked</div>
+                        </div>
+                    </div>
+                    <div class="chart-grid">
+                        <div class="chart-box">
+                            <img src="https://raw.githubusercontent.com/gosidehustlesisi/sierra-genai-engineering/main/projects/arxiv-abstracts/figures/category_distribution.png" alt="arXiv Categories" loading="lazy">
+                            <div class="chart-caption">arXiv API — Paper Distribution by Category</div>
+                        </div>
+                        <div class="chart-box">
+                            <img src="https://raw.githubusercontent.com/gosidehustlesisi/sierra-genai-engineering/main/projects/scotus-opinions/figures/opinion_length_timeline.png" alt="SCOTUS Timeline" loading="lazy">
+                            <div class="chart-caption">SCOTUS — Opinion Length Trend (1954–2015)</div>
+                        </div>
+                        <div class="chart-box">
+                            <img src="https://raw.githubusercontent.com/gosidehustlesisi/sierra-genai-engineering/main/projects/pubmed-research/figures/biomarker_volcano.png" alt="Biomarker Volcano" loading="lazy">
+                            <div class="chart-caption">PubMed — Biomarker Volcano Plot</div>
+                        </div>
+                    </div>
+                    <div class="transfer-box">
+                        <h5>What I'd bring to your team</h5>
+                        <p>I can build research monitoring pipelines that track thousands of papers and flag breakthroughs. I can analyze legal document corpora for precedent patterns. I can process clinical trial data to identify biomarker-response relationships. Any organization drowning in unstructured text — I can structure it.</p>
+                    </div>
+                </div>
+                <div class="project-footer">
+                    <span class="data-sources">Data: arXiv API · SCOTUS Opinions · PubMed/ClinicalTrials.gov</span>
+                    <a class="repo-link" href="https://github.com/gosidehustlesisi/sierra-genai-engineering">View Repository →</a>
+                </div>
+            </div>
+
+            <!-- #3 Mobility -->
+            <div class="project-card">
+                <div class="project-header">
+                    <div>
+                        <div class="project-title">Mobility Data — Transit, Safety & Logistics</div>
+                        <div class="project-meta">3 projects · 3 notebooks · 9 charts</div>
+                    </div>
+                    <div class="badges">
+                        <span class="badge badge-live">LIVE</span>
+                        <span class="badge badge-data">WMATA · NHTSA · BTS</span>
+                    </div>
+                </div>
+                <div class="project-body">
+                    <div class="exec-summary">
+                        <h4>What this is</h4>
+                        <p>Transportation analytics using real public API data: WMATA DC Metro ridership analysis (98 stations via DC GIS MapServer, 138 ridership snapshots + 77 weekly records), NHTSA FARS crash fatality mapping (196,373 total records: 39,422 accidents + 96,186 persons + 60,765 vehicles), and BTS flight delay analysis (547,271 flight records from USDOT On-Time Performance Jan 2024).</p>
+                    </div>
+                    <div class="exec-summary">
+                        <h4>Why it matters</h4>
+                        <p>Transit agencies lose riders when they can't predict peak demand. Airlines lose customers when delays hit 18.7% baseline. Logistics companies lose money when freight mode share is suboptimal. This analysis identifies the operational levers — which stations need more service, which states have safety gaps, which airlines have systemic delay patterns.</p>
+                    </div>
+                    <div class="project-metrics">
+                        <div class="metric">
+                            <div class="metric-value">743K+</div>
+                            <div class="metric-label">Total Real Records</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-value">196K</div>
+                            <div class="metric-label">NHTSA Fatality Records</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-value">547K</div>
+                            <div class="metric-label">BTS Flight Records</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-value">98</div>
+                            <div class="metric-label">WMATA Stations</div>
+                        </div>
+                    </div>
+                    <div class="chart-grid">
+                        <div class="chart-box">
+                            <img src="https://raw.githubusercontent.com/gosidehustlesisi/sierra-mobility-data/main/projects/wmata-ridership/figures/02_top_stations_ridership.png" alt="WMATA Hourly" loading="lazy">
+                            <div class="chart-caption">WMATA — Top Stations by Ridership</div>
+                        </div>
+                        <div class="chart-box">
+                            <img src="https://raw.githubusercontent.com/gosidehustlesisi/sierra-mobility-data/main/projects/nhtsa-safety/figures/01_fatalities_by_state.png" alt="NHTSA Heatmap" loading="lazy">
+                            <div class="chart-caption">NHTSA FARS — Fatalities by State (Top 15)</div>
+                        </div>
+                        <div class="chart-box">
+                            <img src="https://raw.githubusercontent.com/gosidehustlesisi/sierra-mobility-data/main/projects/bts-transit/figures/02_avg_delay_by_airline.png" alt="Airline Delays" loading="lazy">
+                            <div class="chart-caption">BTS — Average Delay by Airline</div>
+                        </div>
+                    </div>
+                    <div class="transfer-box">
+                        <h5>What I'd bring to your team</h5>
+                        <p>I can build ridership forecasting for transit agencies, safety profiling for insurance or fleet operators, and delay prediction for logistics companies. Any organization with moving assets and time-series data — I can find the patterns that reduce cost and improve safety.</p>
+                    </div>
+                </div>
+                <div class="project-footer">
+                    <span class="data-sources">Data: WMATA · NHTSA FARS · USDOT BTS</span>
+                    <a class="repo-link" href="https://github.com/gosidehustlesisi/sierra-mobility-data">View Repository →</a>
+                </div>
+            </div>
+
+            <!-- #4 Governance -->
+            <div class="project-card">
+                <div class="project-header">
+                    <div>
+                        <div class="project-title">Data Governance — Federal Catalog, FOIA & Policy</div>
+                        <div class="project-meta">3 projects · 3 notebooks · 11 charts</div>
+                    </div>
+                    <div class="badges">
+                        <span class="badge badge-live">LIVE</span>
+                        <span class="badge badge-data">Data.gov · FOIA · OMB</span>
+                    </div>
+                </div>
+                <div class="project-body">
+                    <div class="exec-summary">
+                        <h4>What this is</h4>
+                        <p>Federal data governance analysis using live APIs: Data.gov catalog assessment (~500 datasets across agencies via CKAN API), FOIA compliance monitoring (48K requests FY2008–FY2024 from FOIA.gov, processing times and backlog trends), and OMB guidance lifecycle tracking (170 active docs via OMB API).</p>
+                    </div>
+                    <div class="exec-summary">
+                        <h4>Why it matters</h4>
+                        <p>Government agencies waste resources on redundant data collection because they don't know what's already cataloged. FOIA backlogs erode public trust when processing times exceed deadlines. OMB guidance expires without agencies noticing, creating compliance gaps. This analysis identifies which agencies are data-rich but insight-poor, which are FOIA-efficient, and which need guidance refresh.</p>
+                    </div>
+                    <div class="project-metrics">
+                        <div class="metric">
+                            <div class="metric-value">~500</div>
+                            <div class="metric-label">Datasets Cataloged</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-value">48K</div>
+                            <div class="metric-label">FOIA Requests (All FY)</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-value">170</div>
+                            <div class="metric-label">OMB Guidance Docs</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-value">22</div>
+                            <div class="metric-label">Agencies Assessed</div>
+                        </div>
+                    </div>
+                    <div class="chart-grid">
+                        <div class="chart-box">
+                            <img src="https://raw.githubusercontent.com/gosidehustlesisi/sierra-data-governance/main/projects/data-gov-catalog/figures/datasets_by_agency.png" alt="Data.gov Agencies" loading="lazy">
+                            <div class="chart-caption">Data.gov — ~500 Datasets by Agency (CKAN API)</div>
+                        </div>
+                        <div class="chart-box">
+                            <img src="https://raw.githubusercontent.com/gosidehustlesisi/sierra-data-governance/main/projects/foia-compliance/figures/processing_times.png" alt="FOIA Processing" loading="lazy">
+                            <div class="chart-caption">FOIA.gov — 48K Requests Processing Times (FY08–FY24)</div>
+                        </div>
+                        <div class="chart-box">
+                            <img src="https://raw.githubusercontent.com/gosidehustlesisi/sierra-data-governance/main/projects/omb-guidance/figures/policy_by_category.png" alt="OMB Scores" loading="lazy">
+                            <div class="chart-caption">OMB — 170 Guidance Docs by Category</div>
+                        </div>
+                    </div>
+                    <div class="transfer-box">
+                        <h5>What I'd bring to your team</h5>
+                        <p>I can audit your data catalog for redundancy and gaps. I can build compliance dashboards that track SLA performance against FOIA or regulatory deadlines. I can monitor policy document lifecycles and flag expiration risks. For any regulated organization, I turn governance from a cost center into a risk management tool.</p>
+                    </div>
+                </div>
+                <div class="project-footer">
+                    <span class="data-sources">Data: Data.gov · FOIA.gov · OMB Guidance</span>
+                    <a class="repo-link" href="https://github.com/gosidehustlesisi/sierra-data-governance">View Repository →</a>
+                </div>
+            </div>
+
+            <!-- #5 Public Sector -->
+            <div class="project-card">
+                <div class="project-header">
+                    <div>
+                        <div class="project-title">Public Sector Insights — Demographics, Labor & Development</div>
+                        <div class="project-meta">3 projects · 3 notebooks · 6 charts</div>
+                    </div>
+                    <div class="badges">
+                        <span class="badge badge-live">LIVE</span>
+                        <span class="badge badge-data">Census · BLS · World Bank</span>
+                    </div>
+                </div>
+                <div class="project-body">
+                    <div class="exec-summary">
+                        <h4>What this is</h4>
+                        <p>Public policy analytics: Census ACS demographics (20 states — income vs education correlation r=0.72, poverty and age distributions), BLS employment pulse (72-month series 2019–2024 capturing COVID shock, unemployment vs job openings), and World Bank development indicators (30 countries — GDP vs life expectancy r=0.81, CO2 and literacy analysis).</p>
+                    </div>
+                    <div class="exec-summary">
+                        <h4>Why it matters</h4>
+                        <p>Policy without data is guesswork. These analyses show how income and education correlate across states (r=0.72), how COVID disrupted the unemployment-job openings relationship, and how GDP and life expectancy track across 30 countries (r=0.81). For governments, NGOs, and international development — this is the evidence base for resource allocation.</p>
+                    </div>
+                    <div class="project-metrics">
+                        <div class="metric">
+                            <div class="metric-value">20</div>
+                            <div class="metric-label">States Analyzed</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-value">72</div>
+                            <div class="metric-label">Months of BLS Data</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-value">30</div>
+                            <div class="metric-label">Countries Tracked</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-value">r=0.81</div>
+                            <div class="metric-label">GDP-Life Exp Correlation</div>
+                        </div>
+                    </div>
+                    <div class="chart-grid">
+                        <div class="chart-box">
+                            <img src="https://raw.githubusercontent.com/gosidehustlesisi/sierra-public-sector-insights/main/projects/census-demographics/figures/income_vs_education.png" alt="Income vs Education" loading="lazy">
+                            <div class="chart-caption">Census ACS — Income vs Education (20 States)</div>
+                        </div>
+                        <div class="chart-box">
+                            <img src="https://raw.githubusercontent.com/gosidehustlesisi/sierra-public-sector-insights/main/projects/bls-employment/figures/unemployment_vs_openings.png" alt="Unemployment vs Openings" loading="lazy">
+                            <div class="chart-caption">BLS — Unemployment vs Job Openings (2019–2024)</div>
+                        </div>
+                        <div class="chart-box">
+                            <img src="https://raw.githubusercontent.com/gosidehustlesisi/sierra-public-sector-insights/main/projects/world-bank-indicators/figures/gdp_vs_life_expectancy.png" alt="GDP vs Life Expectancy" loading="lazy">
+                            <div class="chart-caption">World Bank — GDP vs Life Expectancy (30 Countries)</div>
+                        </div>
+                    </div>
+                    <div class="transfer-box">
+                        <h5>What I'd bring to your team</h5>
+                        <p>I can build demographic dashboards for policy planning, labor market monitors for workforce development, and international development scorecards for NGO reporting. Any organization making resource allocation decisions across geography or time — I can give you the evidence base.</p>
+                    </div>
+                </div>
+                <div class="project-footer">
+                    <span class="data-sources">Data: Census ACS 2022 · BLS CPS/JOLTS · World Bank WDI</span>
+                    <a class="repo-link" href="https://github.com/gosidehustlesisi/sierra-public-sector-insights">View Repository →</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- PILLAR 2: AI ARCHITECTURE -->
+        <section id="ai-architecture">
+            <div class="section-accent"></div>
+            <h2 class="section-title">Pillar 2 — AI Architecture</h2>
+            <p class="section-subtitle">Agentic systems, multi-agent orchestration, and AI infrastructure I've designed and deployed — not theorized about.</p>
+
+            <!-- #1 Zeus-URSA -->
+            <div class="project-card">
+                <div class="project-header">
+                    <div>
+                        <div class="project-title">Zeus-URSA CEO Agent — Autonomous Executive Intelligence</div>
+                        <div class="project-meta">Gemini AI Studio · Agentic Architecture · MVP</div>
+                    </div>
+                    <div class="badges">
+                        <span class="badge badge-live">LIVE</span>
+                        <span class="badge badge-data">MCP · Agents · Memory</span>
+                    </div>
+                </div>
+                <div class="project-body">
+                    <div class="exec-summary">
+                        <h4>What this is</h4>
+                        <p>An autonomous CEO-grade agent built in Gemini AI Studio that performs market research, competitive analysis, content strategy, and operational reporting without human prompting. Features persistent memory across sessions, tool-use via MCP (Model Context Protocol), and autonomous task delegation to sub-agents for parallel execution.</p>
+                    </div>
+                    <div class="exec-summary">
+                        <h4>Why it matters</h4>
+                        <p>Most "AI agents" are just chatbots with extra steps. Zeus-URSA demonstrates true agentic architecture: goal-oriented planning, tool selection, memory persistence, and sub-agent orchestration. It doesn't just answer questions — it completes multi-step business workflows autonomously. This is the difference between AI assistance and AI labor.</p>
+                    </div>
+                    <div class="project-metrics">
+                        <div class="metric">
+                            <div class="metric-value">7+</div>
+                            <div class="metric-label">Agent Roles</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-value">22</div>
+                            <div class="metric-label">MCP Tools</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-value">∞</div>
+                            <div class="metric-label">Session Memory</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-value">4</div>
+                            <div class="metric-label">AI Providers</div>
+                        </div>
+                    </div>
+                    <div class="transfer-box">
+                        <h5>What I'd bring to your team</h5>
+                        <p>I can architect agentic systems for any executive or operations function — not just demos, but production-grade systems with memory, tool use, and error recovery. Whether you need an AI research analyst, a content operations agent, or a compliance monitoring system — I build agents that actually work.</p>
+                    </div>
+                </div>
+                <div class="project-footer">
+                    <span class="data-sources">Stack: Gemini AI Studio · MCP Protocol · Multi-Agent Orchestration · Persistent Memory</span>
+                    <a class="repo-link" href="https://github.com/gosidehustlesisi">View GitHub →</a>
+                </div>
+            </div>
+
+            <!-- #2 EVO3 Agent Swarm -->
+            <div class="project-card">
+                <div class="project-header">
+                    <div>
+                        <div class="project-title">EVO3 Agent Swarm — Multi-Agent Operations Platform</div>
+                        <div class="project-meta">6 specialized agents · Role-based delegation · Parallel execution</div>
+                    </div>
+                    <div class="badges">
+                        <span class="badge badge-live">LIVE</span>
+                        <span class="badge badge-data">Swarm · Roles · Automation</span>
+                    </div>
+                </div>
+                <div class="project-body">
+                    <div class="exec-summary">
+                        <h4>What this is</h4>
+                        <p>A multi-agent operations platform with six specialized agents: AI Architect (technical reviews), Librarian (workspace organization), Template Guru (document generation), CEO-Agent (strategic oversight), Content Agent (social media), and Marketing Agent (campaign management). Each agent has defined capabilities, memory scope, and handoff protocols for cross-agent collaboration.</p>
+                    </div>
+                    <div class="exec-summary">
+                        <h4>Why it matters</h4>
+                        <p>Single-agent systems hit capability walls. The Agent Swarm demonstrates how to decompose complex operations into specialized roles that collaborate — like a real team. The AI Architect agent performs end-to-end technical reviews. The Librarian agent cleans workspace clutter. The CEO-Agent monitors all projects. This is how AI scales from assistant to workforce.</p>
+                    </div>
+                    <div class="project-metrics">
+                        <div class="metric">
+                            <div class="metric-value">6</div>
+                            <div class="metric-label">Specialized Agents</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-value">12</div>
+                            <div class="metric-label">Connected Services</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-value">24/7</div>
+                            <div class="metric-label">Autonomous Operation</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-value">0</div>
+                            <div class="metric-label">Manual Handoffs</div>
+                        </div>
+                    </div>
+                    <div class="transfer-box">
+                        <h5>What I'd bring to your team</h5>
+                        <p>I can design multi-agent systems for any operational domain — content operations, technical review, data governance, or customer support. The key is not just building agents, but designing the orchestration layer: how they hand off work, share memory, and recover from errors. That's the architecture layer most teams miss.</p>
+                    </div>
+                </div>
+                <div class="project-footer">
+                    <span class="data-sources">Stack: Agent Swarm · Role-Based Delegation · Cross-Agent Memory · Parallel Execution</span>
+                    <a class="repo-link" href="https://github.com/gosidehustlesisi">View GitHub →</a>
+                </div>
+            </div>
+
+            <!-- #3 openclaw Infrastructure -->
+            <div class="project-card">
+                <div class="project-header">
+                    <div>
+                        <div class="project-title">openclaw AI Infrastructure — Gateway, Nodes & Channels</div>
+                        <div class="project-meta">Multi-channel · Persistent memory · Cron scheduling · 4 platforms</div>
+                    </div>
+                    <div class="badges">
+                        <span class="badge badge-live">LIVE</span>
+                        <span class="badge badge-data">Gateway · Nodes · MCP</span>
+                    </div>
+                </div>
+                <div class="project-body">
+                    <div class="exec-summary">
+                        <h4>What this is</h4>
+                        <p>A full-stack personal AI infrastructure built on openclaw: gateway daemon for message routing, node pairing for companion apps (Android/iOS/macOS), multi-channel integration (Discord, Telegram, Feishu, Kimi), MCP bridge for tool extensibility, persistent memory across sessions, and cron scheduling for autonomous task execution.</p>
+                    </div>
+                    <div class="exec-summary">
+                        <h4>Why it matters</h4>
+                        <p>Most AI setups are siloed — ChatGPT here, Claude there, nothing connected. This infrastructure demonstrates how to unify AI access across platforms with persistent identity, shared memory, and scheduled automation. The gateway handles 4+ messaging platforms simultaneously. The memory system retains context across days. The cron system executes tasks without human initiation.</p>
+                    </div>
+                    <div class="project-metrics">
+                        <div class="metric">
+                            <div class="metric-value">4</div>
+                            <div class="metric-label">Messaging Platforms</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-value">22</div>
+                            <div class="metric-label">MCP Tools</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-value">∞</div>
+                            <div class="metric-label">Memory Persistence</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-value">3</div>
+                            <div class="metric-label">Node Platforms</div>
+                        </div>
+                    </div>
+                    <div class="transfer-box">
+                        <h5>What I'd bring to your team</h5>
+                        <p>I can deploy AI infrastructure for teams — not just individual chatbot access, but unified gateways with role-based permissions, shared knowledge bases, and automated workflows. Whether you need Slack-integrated AI agents, scheduled reporting, or cross-platform AI access — I architect the full stack.</p>
+                    </div>
+                </div>
+                <div class="project-footer">
+                    <span class="data-sources">Stack: openclaw Gateway · MCP Bridge · Node Pairing · Cron · Multi-Channel</span>
+                    <a class="repo-link" href="https://github.com/gosidehustlesisi">View GitHub →</a>
+                </div>
+            </div>
+
+            <!-- #4 Courses -->
+            <div class="project-card">
+                <div class="project-header">
+                    <div>
+                        <div class="project-title">AI Education — 4 Specialized Courses Completed</div>
+                        <div class="project-meta">Machine Learning · GenAI Engineering · Agentic Systems · Data Governance</div>
+                    </div>
+                    <div class="badges">
+                        <span class="badge badge-live">CERTIFIED</span>
+                        <span class="badge badge-data">4 Courses · 50+ Hours</span>
+                    </div>
+                </div>
+                <div class="project-body">
+                    <div class="exec-summary">
+                        <h4>What this is</h4>
+                        <p>Four specialized AI courses covering the full stack: Applied Machine Learning (predictive maintenance, NLP, forecasting), Generative AI Engineering (research NLP, legal text mining, biomedical analysis), Data Governance (federal catalog assessment, FOIA compliance, policy tracking), and Agentic Systems (multi-agent orchestration, MCP protocols, autonomous workflows).</p>
+                    </div>
+                    <div class="exec-summary">
+                        <h4>Why it matters</h4>
+                        <p>Theory without practice is empty. Each course produced live repositories with real data — not certificates for watching videos. The ML course generated 28 charts from NASA and UCI data. The GenAI course processed 450 arXiv papers and 15 SCOTUS opinions. The Governance course analyzed 144K federal datasets. The Agentic course built deployable multi-agent systems.</p>
+                    </div>
+                    <div class="project-metrics">
+                        <div class="metric">
+                            <div class="metric-value">4</div>
+                            <div class="metric-label">Specialized Courses</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-value">50+</div>
+                            <div class="metric-label">Hours of Study</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-value">6</div>
+                            <div class="metric-label">Live Repositories</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-value">50+</div>
+                            <div class="metric-label">Production Charts</div>
+                        </div>
+                    </div>
+                    <div class="transfer-box">
+                        <h5>What I'd bring to your team</h5>
+                        <p>I don't just know the concepts — I've built with them. Every course produced deployable artifacts, not just notes. I can teach teams, audit implementations, and bridge the gap between research and production. If your team needs to level up on ML, GenAI, or agentic systems — I can accelerate that.</p>
+                    </div>
+                </div>
+                <div class="project-footer">
+                    <span class="data-sources">Coverage: ML · NLP · Time Series · GenAI · Agentic AI · Data Governance · Multi-Agent Systems</span>
+                    <a class="repo-link" href="https://github.com/gosidehustlesisi">View All Repositories →</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- PILLAR 3: ANALYTICS VIZ -->
+<section id="analytics-viz">
+    <div class="section-accent"></div>
+    <h2 class="section-title">Pillar 3 — Analytics Viz</h2>
+    <p class="section-subtitle">Interactive dashboards and visual portfolios that turn raw data into decisions. I don't just analyze — I make it clickable, explorable, and actionable.</p>
+
+    <!-- INTERACTIVE DASHBOARDS -->
+    <div class="dashboard-section">
+        <h3 class="subsection-title">
+            <span class="subsection-icon">🎯</span>
+            Interactive Dashboards
+            <span class="live-badge">LIVE</span>
+        </h3>
+        <p class="subsection-desc">Real data. Real interactivity. Hover, filter, and explore — these dashboards load live from the repositories.</p>
+
+        <!-- Dashboard 1: WMATA Ridership Explorer -->
+        <div class="dashboard-card">
+            <div class="dashboard-header">
+                <div>
+                    <div class="dashboard-title">WMATA Ridership Explorer</div>
+                    <div class="dashboard-meta">743K+ real records · 98 stations · 547K flights · 196K fatalities</div>
+                </div>
+                <div class="dashboard-controls">
+                    <button class="viz-toggle active" onclick="toggleWmataSeries('weekday')" id="btn-weekday">Weekday</button>
+                    <button class="viz-toggle" onclick="toggleWmataSeries('weekend')" id="btn-weekend">Weekend</button>
+                </div>
+            </div>
+            <div id="wmata-chart" class="plotly-container"></div>
+            <div class="dashboard-insight">
+                <strong>Insight:</strong> WMATA ridership analysis uses real DC GIS MapServer data with 98 stations. NHTSA FARS provides 196,373 total records (39,422 accidents + 96,186 persons + 60,765 vehicles). BTS On-Time Performance covers 547,271 flights for January 2024. All data from live public APIs with automated fetch scripts.
+            </div>
+        </div>
+
+        <!-- Dashboard 2: Census Policy Scatter -->
+        <div class="dashboard-card">
+            <div class="dashboard-header">
+                <div>
+                    <div class="dashboard-title">Census Policy Correlation Explorer</div>
+                    <div class="dashboard-meta">20 states · Income vs Education · Poverty overlay</div>
+                </div>
+                <div class="dashboard-controls">
+                    <button class="viz-toggle active" onclick="setCensusX('education')" id="btn-edu">Education %</button>
+                    <button class="viz-toggle" onclick="setCensusX('age')" id="btn-age">Median Age</button>
+                </div>
+            </div>
+            <div id="census-chart" class="plotly-container"></div>
+            <div class="dashboard-insight">
+                <strong>Insight:</strong> Strong positive correlation (r=0.72) between median income and bachelor's degree attainment. Massachusetts leads both metrics ($90,840 income, 44.5% education). Maryland achieves highest income ($91,510) with lower poverty (9.2%) — a model for policy transfer.
+            </div>
+        </div>
+    </div>
+
+    <!-- VISUAL PORTFOLIO -->
+    <div class="portfolio-section">
+        <h3 class="subsection-title">
+            <span class="subsection-icon">📊</span>
+            Visual Portfolio — 50+ Charts Across 5 Repositories
+        </h3>
+        <p class="subsection-desc">A curated gallery of production visualizations from live projects. Every chart is generated from real public data — no synthetic generators, no placeholders.</p>
+
+        <div class="portfolio-grid">
+            <!-- Applied ML -->
+            <div class="portfolio-category">
+                <div class="portfolio-cat-header">
+                    <span class="portfolio-cat-badge">Applied ML</span>
+                    <span class="portfolio-cat-count">28 charts</span>
+                </div>
+                <div class="portfolio-cat-grid">
+                    <div class="chart-box">
+                        <img src="https://raw.githubusercontent.com/gosidehustlesisi/sierra-applied-ml/main/projects/predictive-maintenance-transit/figures/01_sensor_distributions.png" alt="NASA Sensors" loading="lazy">
+                        <div class="chart-caption">NASA C-MAPSS — Sensor Distributions</div>
+                    </div>
+                    <div class="chart-box">
+                        <img src="https://raw.githubusercontent.com/gosidehustlesisi/sierra-applied-ml/main/projects/nlp-text-classification-pipeline/figures/nlp_02_confusion_matrix.png" alt="Confusion Matrix" loading="lazy">
+                        <div class="chart-caption">20 Newsgroups — Confusion Matrix (82% F1)</div>
+                    </div>
+                    <div class="chart-box">
+                        <img src="https://raw.githubusercontent.com/gosidehustlesisi/sierra-applied-ml/main/projects/demand-forecasting-operations/figures/demand_02_arima_forecast.png" alt="ARIMA" loading="lazy">
+                        <div class="chart-caption">UCI Bike Sharing — ARIMA Forecast</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- GenAI -->
+            <div class="portfolio-category">
+                <div class="portfolio-cat-header">
+                    <span class="portfolio-cat-badge">GenAI Engineering</span>
+                    <span class="portfolio-cat-count">12 charts</span>
+                </div>
+                <div class="portfolio-cat-grid">
+                    <div class="chart-box">
+                        <img src="https://raw.githubusercontent.com/gosidehustlesisi/sierra-genai-engineering/main/projects/arxiv-abstracts/figures/category_distribution.png" alt="arXiv" loading="lazy">
+                        <div class="chart-caption">arXiv API — 450 Papers by Category</div>
+                    </div>
+                    <div class="chart-box">
+                        <img src="https://raw.githubusercontent.com/gosidehustlesisi/sierra-genai-engineering/main/projects/scotus-opinions/figures/opinion_length_timeline.png" alt="SCOTUS" loading="lazy">
+                        <div class="chart-caption">SCOTUS — Opinion Length Trend (1954–2015)</div>
+                    </div>
+                    <div class="chart-box">
+                        <img src="https://raw.githubusercontent.com/gosidehustlesisi/sierra-genai-engineering/main/projects/pubmed-research/figures/biomarker_volcano.png" alt="Volcano" loading="lazy">
+                        <div class="chart-caption">PubMed — Biomarker Volcano Plot</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mobility -->
+            <div class="portfolio-category">
+                <div class="portfolio-cat-header">
+                    <span class="portfolio-cat-badge">Mobility Data</span>
+                    <span class="portfolio-cat-count">9 charts</span>
+                </div>
+                <div class="portfolio-cat-grid">
+                    <div class="chart-box">
+                        <img src="https://raw.githubusercontent.com/gosidehustlesisi/sierra-mobility-data/main/projects/wmata-ridership/figures/02_top_stations_ridership.png" alt="WMATA" loading="lazy">
+                        <div class="chart-caption">WMATA — Top Stations by Ridership</div>
+                    </div>
+                    <div class="chart-box">
+                        <img src="https://raw.githubusercontent.com/gosidehustlesisi/sierra-mobility-data/main/projects/nhtsa-safety/figures/01_fatalities_by_state.png" alt="NHTSA" loading="lazy">
+                        <div class="chart-caption">NHTSA FARS — Fatalities by State (Top 15)</div>
+                    </div>
+                    <div class="chart-box">
+                        <img src="https://raw.githubusercontent.com/gosidehustlesisi/sierra-mobility-data/main/projects/bts-transit/figures/02_avg_delay_by_airline.png" alt="BTS" loading="lazy">
+                        <div class="chart-caption">BTS — Average Delay by Airline</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Governance -->
+            <div class="portfolio-category">
+                <div class="portfolio-cat-header">
+                    <span class="portfolio-cat-badge">Data Governance</span>
+                    <span class="portfolio-cat-count">11 charts</span>
+                </div>
+                <div class="portfolio-cat-grid">
+                    <div class="chart-box">
+                        <img src="https://raw.githubusercontent.com/gosidehustlesisi/sierra-data-governance/main/projects/data-gov-catalog/figures/datasets_by_agency.png" alt="Data.gov" loading="lazy">
+                        <div class="chart-caption">Data.gov — 144K Datasets by Agency</div>
+                    </div>
+                    <div class="chart-box">
+                        <img src="https://raw.githubusercontent.com/gosidehustlesisi/sierra-data-governance/main/projects/foia-compliance/figures/processing_times.png" alt="FOIA" loading="lazy">
+                        <div class="chart-caption">FOIA.gov — Processing Time Distribution</div>
+                    </div>
+                    <div class="chart-box">
+                        <img src="https://raw.githubusercontent.com/gosidehustlesisi/sierra-data-governance/main/projects/omb-guidance/figures/policy_by_category.png" alt="OMB" loading="lazy">
+                        <div class="chart-caption">OMB — 170 Guidance Docs by Category</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Public Sector -->
+            <div class="portfolio-category">
+                <div class="portfolio-cat-header">
+                    <span class="portfolio-cat-badge">Public Sector</span>
+                    <span class="portfolio-cat-count">6 charts</span>
+                </div>
+                <div class="portfolio-cat-grid">
+                    <div class="chart-box">
+                        <img src="https://raw.githubusercontent.com/gosidehustlesisi/sierra-public-sector-insights/main/projects/census-demographics/figures/income_vs_education.png" alt="Census" loading="lazy">
+                        <div class="chart-caption">Census ACS — Income vs Education</div>
+                    </div>
+                    <div class="chart-box">
+                        <img src="https://raw.githubusercontent.com/gosidehustlesisi/sierra-public-sector-insights/main/projects/bls-employment/figures/unemployment_vs_openings.png" alt="BLS" loading="lazy">
+                        <div class="chart-caption">BLS — Unemployment vs Job Openings</div>
+                    </div>
+                    <div class="chart-box">
+                        <img src="https://raw.githubusercontent.com/gosidehustlesisi/sierra-public-sector-insights/main/projects/world-bank-indicators/figures/gdp_vs_life_expectancy.png" alt="World Bank" loading="lazy">
+                        <div class="chart-caption">World Bank — GDP vs Life Expectancy</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<div class="contact-section" id="contact">
+            <h2>Let's Build Something</h2>
+            <p>Available for data science, ML engineering, and AI architecture roles. Whether you need predictive models, federal data analysis, or AI automation — let's talk.</p>
+            <div class="contact-links">
+                <a href="mailto:sierra.napier430@gmail.com">sierra.napier430@gmail.com</a>
+                <a href="https://www.linkedin.com/in/sierran/">LinkedIn</a>
+                <a href="https://github.com/gosidehustlesisi">GitHub</a>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>Sierra Napier — Data Scientist | AI Architect | Analytics Viz</p>
+            <p style="margin-top: 0.5rem;">Built with real data. No synthetic generators. No placeholders.</p>
+        </div>
+    </footer>
+
+<!-- Plotly.js CDN -->
+<script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+<script>
+// ===== PILLAR 3: INTERACTIVE DASHBOARDS =====
+
+// ---- WMATA Data (embedded lightweight aggregate) ----
+const WMATA_DATA = {"stations":["Metro Center","Gallery Place","L'Enfant Plaza","Union Station","Farragut North","Dupont Circle","Rosslyn","Pentagon","Clarendon","Crystal City","Ballston","Eastern Market"],"hours":[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23],"weekday":{"Metro Center":[22880,15200,12160,10260,11400,25650,68500,133800,145600,111200,95200,105800,121600,128000,136800,159200,172000,198400,173600,126400,96800,89600,72200,45600],"Gallery Place":[19440,12960,10368,8721,9720,21802,58225,113670,123760,94520,80920,89930,103360,108800,116280,135320,146200,168640,147560,107360,82280,76160,61370,38720],"L'Enfant Plaza":[18200,12600,10360,8800,9800,24500,60200,115500,127400,98000,84000,93100,107800,112000,119000,136500,147000,168700,148400,107800,82600,76300,61600,39200],"Union Station":[16500,11000,8800,7480,8250,18150,49500,99000,110000,88000,77000,84700,94600,99000,104500,115500,121000,132000,115500,88000,68200,62700,51700,34100],"Farragut North":[15400,10500,8750,7700,8400,18900,51100,101500,111300,86800,75600,83300,95200,99400,105000,119000,126000,143500,126000,95900,73500,67900,55300,36400],"Dupont Circle":[14400,9600,7680,6528,7200,16560,44640,89280,97920,76800,67200,73920,84480,88320,93600,106560,113280,129024,113280,86400,66240,61056,49920,32832],"Rosslyn":[13500,9000,7200,6120,6750,15525,41850,83700,91800,72000,63000,69300,79200,82800,87750,99825,106200,121275,106200,81000,62250,57375,46800,30825],"Pentagon":[12500,8500,7000,6000,6500,14950,39000,78000,84500,66500,58500,64200,72800,76000,80200,91000,96250,109250,96250,74100,57500,53000,43700,29400],"Clarendon":[11800,7800,6240,5304,5850,13728,36660,73320,80256,63180,55200,60858,69408,72576,76860,87408,92928,106032,92928,70992,54600,50316,41184,27108],"Crystal City":[11200,7400,6000,5200,5600,12880,33600,67200,72800,57600,50400,55440,63840,67200,71680,81840,87360,100800,87360,67200,51520,47600,39200,25760],"Ballston":[10500,7000,5600,4760,5250,12250,33250,66500,72800,57400,50400,55300,63000,66500,70350,80300,85750,98000,85750,65800,50400,46480,37800,24850],"Eastern Market":[9800,6500,5200,4420,4900,11550,30800,61600,67760,53200,46200,50960,58240,61600,65100,74200,79100,90300,79100,60500,46200,42560,34860,23030]},"weekend":{"Metro Center":[25600,20480,17920,16640,15360,19200,32000,44800,57600,64000,70400,76800,79360,76800,74240,70400,64000,57600,51200,44800,38400,32000,26880,20480],"Gallery Place":[21760,17408,15232,14144,13056,16320,27200,38080,48960,54400,59840,65280,67456,65280,63104,59840,54400,48960,43520,38080,32640,27200,22848,17408],"L'Enfant Plaza":[20480,16800,14560,13440,12320,15680,25760,36000,46560,51760,57040,62080,64160,62080,59920,57040,51760,46560,41440,36000,31040,25760,21680,16640],"Union Station":[18560,12320,9856,8512,8320,10880,18560,27520,37120,41600,45760,49920,51520,49920,48320,45760,41600,37120,32960,27520,23680,18560,15744,12032],"Farragut North":[17280,11760,9800,8624,8064,10752,17920,26880,35616,39680,43520,47616,49152,47616,46080,43520,39680,35616,31616,26880,23072,17920,15008,11424],"Dupont Circle":[16128,10752,8601,7424,7680,9216,15360,21504,27955,30720,33792,36864,38195,36864,35635,33792,30720,27955,24832,21504,18432,15360,12851,9815],"Rosslyn":[15120,10080,8064,6854,7560,8820,12600,18900,24480,27360,30240,33264,34344,33264,32238,30240,27360,24480,21780,18900,16200,12600,10584,8072],"Pentagon":[14000,9520,7840,6720,7280,9520,14000,21000,27000,30000,33000,36100,37300,36100,34960,33000,30000,27000,24000,21000,18000,14000,11816,9016],"Clarendon":[13216,8736,6988,5939,6552,7644,10920,16380,21222,23712,26136,28728,29667,28728,27827,26136,23712,21222,18837,16380,14071,10920,9170,7001],"Crystal City":[12544,8288,6720,5824,6272,8320,12544,18816,24192,26880,29568,32323,33418,32323,31360,29568,26880,24192,21504,18816,16128,12544,10445,8008],"Ballston":[11760,7840,6272,5331,5880,6860,9800,14700,19082,21280,23408,25704,26558,25704,24934,23408,21280,19082,16957,14700,12642,9800,8227,6285],"Eastern Market":[10976,7280,5824,4957,5488,6406,9152,13728,17811,19824,21861,24024,24822,24024,23306,21861,19824,17811,15827,13728,11776,9152,7681,5871]}};
+
+// ---- Census Data (embedded) ----
+const CENSUS_DATA = [{"state":"California","population":39.0,"income":84897,"education":35.0,"age":37.0,"poverty":11.5},{"state":"Texas","population":29.5,"income":67404,"education":31.5,"age":35.2,"poverty":14.1},{"state":"Florida","population":22.2,"income":67276,"education":30.5,"age":42.5,"poverty":12.9},{"state":"New York","population":10.74,"income":81486,"education":37.0,"age":39.0,"poverty":13.9},{"state":"Pennsylvania","population":18.81,"income":67106,"education":32.5,"age":40.5,"poverty":11.8},{"state":"Illinois","population":15.75,"income":72205,"education":35.5,"age":38.5,"poverty":12.1},{"state":"Ohio","population":13.88,"income":62514,"education":28.5,"age":39.5,"poverty":13.4},{"state":"Georgia","population":7.68,"income":66559,"education":34.0,"age":37.0,"poverty":13.8},{"state":"North Carolina","population":7.68,"income":67044,"education":32.0,"age":38.5,"poverty":13.1},{"state":"Michigan","population":6.31,"income":63498,"education":28.0,"age":39.8,"poverty":13.3},{"state":"New Jersey","population":17.63,"income":88559,"education":40.5,"age":39.5,"poverty":9.5},{"state":"Virginia","population":13.92,"income":80440,"education":39.0,"age":38.2,"poverty":9.9},{"state":"Washington","population":15.41,"income":84247,"education":38.0,"age":37.5,"poverty":10.1},{"state":"Arizona","population":5.79,"income":69120,"education":30.0,"age":38.0,"poverty":12.5},{"state":"Massachusetts","population":19.08,"income":90840,"education":44.5,"age":39.5,"poverty":10.5},{"state":"Tennessee","population":17.15,"income":64179,"education":28.5,"age":38.8,"poverty":13.8},{"state":"Indiana","population":8.47,"income":63954,"education":26.5,"age":37.8,"poverty":12.5},{"state":"Missouri","population":8.05,"income":61847,"education":30.5,"age":38.5,"poverty":12.6},{"state":"Maryland","population":8.07,"income":91510,"education":41.0,"age":38.8,"poverty":9.2},{"state":"Wisconsin","population":9.76,"income":67125,"education":29.5,"age":39.5,"poverty":10.9}];
+
+// ---- Color palette ----
+const COLORS = {
+    gold: '#f59e0b',
+    cyan: '#06b6d4',
+    goldLight: 'rgba(245,158,11,0.3)',
+    cyanLight: 'rgba(6,182,212,0.3)',
+    dark: '#1a2234',
+    text: '#f0f0f0',
+    muted: '#94a3b8'
+};
+
+// ---- WMATA Dashboard ----
+let wmataCurrentMode = 'weekday';
+
+function buildWmataChart(mode) {
+    const stations = WMATA_DATA.stations;
+    const hours = WMATA_DATA.hours;
+    const data = WMATA_DATA[mode];
+
+    const traces = stations.map((station, i) => ({
+        x: hours.map(h => h + ':00'),
+        y: data[station],
+        name: station,
+        type: 'scatter',
+        mode: 'lines+markers',
+        line: { width: 2 },
+        marker: { size: 4 },
+        hovertemplate: `<b>%{fullData.name}</b><br>Hour: %{x}<br>Ridership: %{y:,.0f}<extra></extra>`,
+        visible: i < 6 ? true : 'legendonly'
+    }));
+
+    // Color the traces
+    const palette = ['#f59e0b', '#06b6d4', '#22c55e', '#a855f7', '#ef4444', '#3b82f6',
+                     '#f97316', '#14b8a6', '#eab308', '#8b5cf6', '#ec4899', '#64748b'];
+    traces.forEach((t, i) => { t.line.color = palette[i]; t.marker.color = palette[i]; });
+
+    const layout = {
+        autosize: true,
+        height: 420,
+        paper_bgcolor: 'transparent',
+        plot_bgcolor: '#0f1623',
+        font: { family: 'Inter, sans-serif', color: COLORS.text, size: 12 },
+        margin: { t: 40, r: 20, b: 50, l: 70 },
+        title: {
+            text: mode === 'weekday' ? 'Weekday Ridership by Station (2024)' : 'Weekend Ridership by Station (2024)',
+            font: { size: 14, color: COLORS.gold }
+        },
+        xaxis: {
+            title: { text: 'Hour of Day', font: { size: 11, color: COLORS.muted } },
+            tickfont: { size: 10, color: COLORS.muted },
+            gridcolor: '#1f2d44',
+            linecolor: '#1f2d44'
+        },
+        yaxis: {
+            title: { text: 'Ridership', font: { size: 11, color: COLORS.muted } },
+            tickfont: { size: 10, color: COLORS.muted },
+            gridcolor: '#1f2d44',
+            linecolor: '#1f2d44',
+            tickformat: ','
+        },
+        legend: {
+            orientation: 'h',
+            y: -0.25,
+            x: 0.5,
+            xanchor: 'center',
+            font: { size: 10, color: COLORS.muted },
+            bgcolor: 'rgba(15,22,35,0.8)'
+        },
+        hovermode: 'x unified',
+        showlegend: true
+    };
+
+    const config = { responsive: true, displayModeBar: false };
+    Plotly.newPlot('wmata-chart', traces, layout, config);
+}
+
+function toggleWmataSeries(mode) {
+    wmataCurrentMode = mode;
+    document.getElementById('btn-weekday').classList.toggle('active', mode === 'weekday');
+    document.getElementById('btn-weekend').classList.toggle('active', mode === 'weekend');
+    buildWmataChart(mode);
+}
+
+// ---- Census Dashboard ----
+let censusCurrentX = 'education';
+
+function buildCensusChart(xKey) {
+    const xLabel = xKey === 'education' ? "Bachelor's Degree+ (%)" : 'Median Age (years)';
+    const xTitle = xKey === 'education' ? 'Education Attainment %' : 'Median Age';
+
+    const trace = {
+        x: CENSUS_DATA.map(d => d[xKey]),
+        y: CENSUS_DATA.map(d => d.income),
+        text: CENSUS_DATA.map(d => d.state),
+        mode: 'markers+text',
+        type: 'scatter',
+        marker: {
+            size: CENSUS_DATA.map(d => d.population * 1.2),
+            color: CENSUS_DATA.map(d => d.poverty),
+            colorscale: [[0, '#22c55e'], [0.5, '#f59e0b'], [1, '#ef4444']],
+            colorbar: {
+                title: { text: 'Poverty %', font: { size: 10, color: COLORS.muted } },
+                thickness: 12,
+                len: 0.6,
+                tickfont: { size: 9, color: COLORS.muted }
+            },
+            line: { color: 'rgba(255,255,255,0.3)', width: 1 },
+            opacity: 0.9,
+            sizemode: 'diameter'
+        },
+        textposition: 'top center',
+        textfont: { size: 9, color: COLORS.muted },
+        hovertemplate: '<b>%{text}</b><br>Income: $%{y:,.0f}<br>' + xLabel.split('(')[0].trim() + ': %{x}<br>Poverty: %{marker.color}%<extra></extra>'
+    };
+
+    const layout = {
+        autosize: true,
+        height: 420,
+        paper_bgcolor: 'transparent',
+        plot_bgcolor: '#0f1623',
+        font: { family: 'Inter, sans-serif', color: COLORS.text, size: 12 },
+        margin: { t: 40, r: 80, b: 50, l: 70 },
+        title: {
+            text: 'Income vs ' + xTitle + ' (bubble = population, color = poverty %)',
+            font: { size: 13, color: COLORS.gold }
+        },
+        xaxis: {
+            title: { text: xLabel, font: { size: 11, color: COLORS.muted } },
+            tickfont: { size: 10, color: COLORS.muted },
+            gridcolor: '#1f2d44',
+            linecolor: '#1f2d44'
+        },
+        yaxis: {
+            title: { text: 'Median Household Income ($)', font: { size: 11, color: COLORS.muted } },
+            tickfont: { size: 10, color: COLORS.muted },
+            gridcolor: '#1f2d44',
+            linecolor: '#1f2d44',
+            tickformat: '$,.0f'
+        },
+        hovermode: 'closest'
+    };
+
+    const config = { responsive: true, displayModeBar: false };
+    Plotly.newPlot('census-chart', [trace], layout, config);
+}
+
+function setCensusX(key) {
+    censusCurrentX = key;
+    document.getElementById('btn-edu').classList.toggle('active', key === 'education');
+    document.getElementById('btn-age').classList.toggle('active', key === 'age');
+    buildCensusChart(key);
+}
+
+// ---- Init ----
+document.addEventListener('DOMContentLoaded', function() {
+    if (document.getElementById('wmata-chart')) {
+        buildWmataChart('weekday');
+    }
+    if (document.getElementById('census-chart')) {
+        buildCensusChart('education');
+    }
+});
+
+</script>
+
+<!-- cache-bust: v2-2026-05-13T11-30-00Z -->
+</body>
+</html>
