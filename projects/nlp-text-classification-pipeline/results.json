@@ -1,26 +1,10 @@
 {
-  "dataset": "sklearn.datasets.fetch_20newsgroups",
-  "source_note": "Derived from CMU 20 Newsgroups (Lang, 1995). ~18K Usenet posts across 20 topics.",
+  "accuracy": 0.6488316516197558,
   "train_samples": 11314,
   "test_samples": 7532,
-  "n_classes": 20,
-  "vocab_size": 15000,
-  "models": {
-    "Naive Bayes": {
-      "accuracy": 0.6787
-    },
-    "Logistic Regression": {
-      "accuracy": 0.6676
-    },
-    "Linear SVM": {
-      "accuracy": 0.6642
-    }
-  },
-  "best_model": "Naive Bayes",
-  "figures": [
-    "class_distribution.png",
-    "model_comparison.png",
-    "confusion_matrix.png",
-    "top_tfidf_features.png"
-  ]
+  "n_categories": 20,
+  "vectorizer": "TfidfVectorizer",
+  "classifier": "MultinomialNB",
+  "max_features": 5000,
+  "ngram_range": "(1, 2)"
 }
