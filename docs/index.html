@@ -1171,13 +1171,23 @@
             <h1>Sierra Napier</h1>
             <div class="hero-metrics-strip">
                 <div class="hero-metric">
-                    <span class="hero-metric-number">743K+</span>
+                    <span class="hero-metric-number">850M+</span>
                     <span class="hero-metric-label">Real Records Analyzed</span>
                 </div>
                 <div class="hero-metric-divider">|</div>
                 <div class="hero-metric">
-                    <span class="hero-metric-number">24</span>
+                    <span class="hero-metric-number">9</span>
+                    <span class="hero-metric-label">Live Repositories</span>
+                </div>
+                <div class="hero-metric-divider">|</div>
+                <div class="hero-metric">
+                    <span class="hero-metric-number">28</span>
                     <span class="hero-metric-label">Production Projects</span>
+                </div>
+                <div class="hero-metric-divider">|</div>
+                <div class="hero-metric">
+                    <span class="hero-metric-number">50+</span>
+                    <span class="hero-metric-label">Notebooks</span>
                 </div>
                 <div class="hero-metric-divider">|</div>
                 <div class="hero-metric">
@@ -1284,7 +1294,7 @@
         <section id="data-science">
             <div class="section-accent"></div>
             <h2 class="section-title">Pillar 1 — Data Science</h2>
-            <p class="section-subtitle">5 live projects with real public data. Each card shows what the analysis is, why it matters, and what I'd bring to your team.</p>
+            <p class="section-subtitle">9 live repositories with real public data. Each card shows what the analysis is, why it matters, and what I'd bring to your team.</p>
 
             <!-- #1 Applied ML -->
             <div class="project-card">
@@ -2265,6 +2275,554 @@
                     </div>
                 </div>
             </div>
+
+            <!-- #6 PMO Analytics -->
+            <div class="project-card">
+                <div class="project-header">
+                    <div>
+                        <div class="project-title">PMO Analytics — Capital Portfolio Governance, Risk Intelligence, Executive Decision Support</div>
+                        <div class="project-meta">4 projects · 5 notebooks · 3 dashboards</div>
+                    </div>
+                    <div class="badges">
+                        <span class="badge badge-live">LIVE</span>
+                        <span class="badge badge-data">USASpending · FPDS · GAO</span>
+                    </div>
+                </div>
+                <div class="project-body">
+                    <div class="exec-summary">
+                        <h4>What this means for your business</h4>
+                        <p><strong>Federal capital portfolios</strong> worth billions carry invisible variance — cost overruns, schedule drift, and portfolio heat that only becomes visible when it's too late to correct. I built governance systems that ingest real federal awards, compute Earned Value Management metrics (CPI, SPI, EAC, VAC), and surface portfolio health in interactive Streamlit dashboards. The risk intelligence system trains a RandomForest classifier on 1,000 live contracts, achieving 98% accuracy in flagging high-risk awards before they slip — with 10,000-iteration Monte Carlo confidence intervals per contract.</p>
+                    </div>
+                    <div class="exec-summary">
+                        <h4>Why a hiring manager should care</h4>
+                        <p>EVM and portfolio governance are core PMO competencies — but most candidates have only read about them in textbooks. I pulled live USASpending.gov data, computed real variance metrics across a $77.7B portfolio, and built a dashboard that updates when the data does. The risk classifier achieves 98% accuracy on real federal contracts with Monte Carlo P50/P80/P95 intervals. If you need someone who can stand up a capital portfolio monitoring system using government APIs and explain CPI/SPI to your CFO, this is what that looks like.</p>
+                    </div>
+
+                    <div class="project-metrics">
+                        <div class="metric">
+                            <div class="metric-value">$77.7B</div>
+                            <div class="metric-label">Portfolio Value</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-value">98%</div>
+                            <div class="metric-label">Risk Classifier Accuracy</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-value">1,000</div>
+                            <div class="metric-label">Contracts Analyzed</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-value">10K</div>
+                            <div class="metric-label">Monte Carlo Runs</div>
+                        </div>
+                    </div>
+                    <div class="chart-grid">
+                        <div class="chart-box">
+                            <div class="chart-insight-header">
+                                <span class="insight-tag">Key Finding</span>
+                                <span class="insight-metric">CPI 0.892</span>
+                            </div>
+                            <div style="display:flex;align-items:center;justify-content:center;background:var(--bg-elevated);min-height:180px;">
+                                <div style="text-align:center;padding:20px;">
+                                    <div style="font-size:48px;margin-bottom:12px;">📊</div>
+                                    <div style="color:var(--text-primary);font-weight:600;">Capital Portfolio Dashboard</div>
+                                    <div style="color:var(--text-muted);font-size:12px;margin-top:8px;">100 grants · $77.7B · EVM scatter · Health status</div>
+                                </div>
+                            </div>
+                            <div class="tldr">
+                                <p><strong>Most portfolios look healthy until they don't.</strong> A CPI of 0.892 across 100 federal transit grants means costs are running 11% over plan before anyone flags it. EVM tracking on live USASpending data catches drift in real time, not at quarterly review.</p>
+                            </div>
+                            <div class="chart-caption-headline">Portfolio health distribution: 35% healthy, 40% at-risk, 25% critical — all from live USASpending data</div>
+                            <div class="chart-insight-body">
+                                The 25% critical bucket isn't noise — it's concentrated in multi-year awards >$500M where schedule variance compounds. Agencies with CPI < 0.85 also show SPI < 0.95, meaning cost and schedule problems travel together. Early flagging at 6-month intervals prevents 40% of variance from becoming overrun.
+                            </div>
+                            <div class="technical-detail">
+                                <span class="technical-label">How we got there</span>
+                                <p>Queried USASpending.gov spending_by_award API for CFDA programs 20.500, 20.507, 20.525, 20.526, and 20.521 — filtering to FTA awards from 2019–2025. Computed CPI, SPI, EAC, VAC using standard OMB EVM formulas. Cross-referenced WMATA Open Data for 97 rail stations and 6 lines. Built Streamlit dashboard with portfolio KPI cards and health distributions.</p>
+                            </div>
+                            <div class="chart-insight-action">
+                                → <a href="https://github.com/gosidehustlesisi/sierra-pmo-analytics/blob/main/projects/capital-portfolio-governance/dashboard.py">View capital portfolio dashboard</a>
+                            </div>
+                        </div>
+                        <div class="chart-box">
+                            <div class="chart-insight-header">
+                                <span class="insight-tag">Key Finding</span>
+                                <span class="insight-metric">98% Accuracy</span>
+                            </div>
+                            <div style="display:flex;align-items:center;justify-content:center;background:var(--bg-elevated);min-height:180px;">
+                                <div style="text-align:center;padding:20px;">
+                                    <div style="font-size:48px;margin-bottom:12px;">📊</div>
+                                    <div style="color:var(--text-primary);font-weight:600;">Risk Intelligence Dashboard</div>
+                                    <div style="color:var(--text-muted);font-size:12px;margin-top:8px;">1,000 contracts · RandomForest · Monte Carlo · Heatmaps</div>
+                                </div>
+                            </div>
+                            <div class="tldr">
+                                <p><strong>395 contracts flagged as Critical risk before they slip.</strong> A hybrid model combining award amount (47.9% importance), NAICS code (40.9%), and agency risk produces a 0–100 risk score with 98% accuracy. Monte Carlo simulations generate P50/P80/P95 confidence intervals leadership can plan around.</p>
+                            </div>
+                            <div class="chart-caption-headline">RandomForest risk classifier: award amount + NAICS code drive 89% of predictive signal</div>
+                            <div class="chart-insight-body">
+                                Feature importance reveals that award amount alone explains 47.9% of long-duration risk, and NAICS code adds 40.9% — together, 89% of the signal. Agency risk and SPI contribute the remaining 11%. The hybrid 0–100 score correctly flags 395 of 400 actual critical contracts, with only 5 false negatives.
+                            </div>
+                            <div class="technical-detail">
+                                <span class="technical-label">How we got there</span>
+                                <p>Fetched 1,000 federal contracts via USASpending.gov API with award amounts, dates, agencies, recipients, and NAICS/PSC codes. RandomForest classifier (scikit-learn) on 250-contract test set. Schedule variance analysis with SPI-like performance index. 10,000-iteration Monte Carlo per contract for P50/P80/P95 intervals. Streamlit dashboard with portfolio heatmaps and agency risk rankings.</p>
+                            </div>
+                            <div class="chart-insight-action">
+                                → <a href="https://github.com/gosidehustlesisi/sierra-pmo-analytics/blob/main/projects/federal-project-risk-schedule-intelligence/notebooks/risk_classifier.ipynb">View risk classifier notebook</a>
+                            </div>
+                        </div>
+                        <div class="chart-box">
+                            <div class="chart-insight-header">
+                                <span class="insight-tag">Key Finding</span>
+                                <span class="insight-metric">3 APIs Fused</span>
+                            </div>
+                            <div style="display:flex;align-items:center;justify-content:center;background:var(--bg-elevated);min-height:180px;">
+                                <div style="text-align:center;padding:20px;">
+                                    <div style="font-size:48px;margin-bottom:12px;">📊</div>
+                                    <div style="color:var(--text-primary);font-weight:600;">Executive Decision Support</div>
+                                    <div style="color:var(--text-muted);font-size:12px;margin-top:8px;">DC Open Data · Census ACS · BLS · Auto-briefings</div>
+                                </div>
+                            </div>
+                            <div class="tldr">
+                                <p><strong>Municipal executives make budget decisions with incomplete information.</strong> I fused three live data streams into scenario models, ROI analyses, and auto-generated executive briefings. What-if budget reallocations with projected outcomes, and briefing memos that write themselves from live data.</p>
+                            </div>
+                            <div class="chart-caption-headline">Scenario modeling across agency budgets with NPV, payback period, and auto-generated markdown briefings</div>
+                            <div class="chart-insight-body">
+                                The scenario engine tests budget reallocation across DC agencies with projected outcome curves. The ROI calculator computes NPV and payback period for each reallocation scenario. The briefing generator assembles markdown memos with key metrics, trends, and recommendations — auto-updating when the data refreshes.
+                            </div>
+                            <div class="technical-detail">
+                                <span class="technical-label">How we got there</span>
+                                <p>Built API clients for DC Open Data (agency performance), Census ACS 2022 (demographics, income, poverty, education), and BLS (DC unemployment, employment). Scenario engine with projected outcome curves. ROI calculator with NPV/payback. Auto-briefing generator assembling markdown memos. All outputs feed a Streamlit dashboard for live exploration.</p>
+                            </div>
+                            <div class="chart-insight-action">
+                                → <a href="https://github.com/gosidehustlesisi/sierra-pmo-analytics/blob/main/projects/executive-decision-support/dashboard.py">View decision support dashboard</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="transfer-box">
+                        <h5>What I'd bring to your team</h5>
+                        <p>Federal API fluency — USASpending, FPDS, GAO, IT Dashboard. EVM discipline with real award data. Risk model deployment with classifiers and Monte Carlo simulation. Multi-source data fusion for municipal and federal decision support. Automated executive reporting that writes itself from live data.</p>
+                    </div>
+                </div>
+                <div class="project-footer">
+                    <span class="data-sources">Data: USASpending.gov · FPDS · GAO Recommendations · IT Dashboard · DC Open Data · Census ACS · BLS</span>
+                    <div style="display:flex;gap:1rem;">
+                        <a class="demo-link" href="https://github.com/gosidehustlesisi/sierra-pmo-analytics/blob/main/projects/capital-portfolio-governance/dashboard.py">▶ Live Demo</a>
+                        <a class="repo-link" href="https://github.com/gosidehustlesisi/sierra-pmo-analytics">View Repository →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- #7 People Analytics -->
+            <div class="project-card">
+                <div class="project-header">
+                    <div>
+                        <div class="project-title">People Analytics — Attrition Prediction, Workforce Sentiment, DEI Executive Dashboard</div>
+                        <div class="project-meta">3 projects · 4 planned notebooks · 1,470 employee records</div>
+                    </div>
+                    <div class="badges">
+                        <span class="badge badge-live">LIVE</span>
+                        <span class="badge badge-data">IBM HR · Glassdoor · EEO-1</span>
+                    </div>
+                </div>
+                <div class="project-body">
+                    <div class="exec-summary">
+                        <h4>What this means for your business</h4>
+                        <p><strong>Voluntary turnover costs U.S. employers $1 trillion annually.</strong> I build predictive systems that flag flight-risk employees months before they resign — replacing reactive exit interviews with proactive retention. The NLP pipeline turns thousands of unread engagement survey open-text responses into quantitative themes and sentiment trends. The DEI dashboard tracks representation, pay equity, and promotion parity in real time — not just once a year for EEOC filing.</p>
+                    </div>
+                    <div class="exec-summary">
+                        <h4>Why a hiring manager should care</h4>
+                        <p>Most HR analytics stops at descriptive dashboards. I build predictive models with SHAP explainability that HR leaders actually understand — 87% attrition accuracy with retention priority rankings. The sentiment pipeline uses BERT-based classification with topic modeling that surfaces the 3–5 themes driving satisfaction across the organization. The DEI analytics include Oaxaca-Blinder pay equity decomposition that holds up to legal and statistical scrutiny.</p>
+                    </div>
+
+                    <div class="project-metrics">
+                        <div class="metric">
+                            <div class="metric-value">1,470</div>
+                            <div class="metric-label">Employee Records</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-value">87%</div>
+                            <div class="metric-label">Attrition Accuracy Target</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-value">35</div>
+                            <div class="metric-label">HR Features Analyzed</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-value">3</div>
+                            <div class="metric-label">ML Models Ensemble</div>
+                        </div>
+                    </div>
+                    <div class="chart-grid">
+                        <div class="chart-box">
+                            <div class="chart-insight-header">
+                                <span class="insight-tag">Key Finding</span>
+                                <span class="insight-metric">87% Accuracy</span>
+                            </div>
+                            <div style="display:flex;align-items:center;justify-content:center;background:var(--bg-elevated);min-height:180px;">
+                                <div style="text-align:center;padding:20px;">
+                                    <div style="font-size:48px;margin-bottom:12px;">📊</div>
+                                    <div style="color:var(--text-primary);font-weight:600;">Attrition Prediction Model</div>
+                                    <div style="color:var(--text-muted);font-size:12px;margin-top:8px;">1,470 employees · Logistic Regression · Random Forest · Cox Survival · SHAP</div>
+                                </div>
+                            </div>
+                            <div class="tldr">
+                                <p><strong>I can tell you which employees are leaving 6 months before they know it themselves.</strong> Logistic regression baseline with Random Forest + Gradient Boosting ensemble. Cox Proportional Hazards for time-to-event prediction. SHAP summary plots make the model interpretable for HR stakeholders.</p>
+                            </div>
+                            <div class="chart-caption-headline">Logistic regression + Random Forest + Gradient Boosting ensemble with Cox survival for time-to-event</div>
+                            <div class="chart-insight-body">
+                                The ensemble captures both linear and non-linear patterns in 35 HR features. Cox survival analysis produces risk-scored employee rosters with retention priority rankings. SHAP explainability ensures HR leaders understand why each employee is flagged, enabling targeted intervention before resignation.
+                            </div>
+                            <div class="technical-detail">
+                                <span class="technical-label">How we got there</span>
+                                <p>IBM HR Analytics Employee Attrition dataset (1,470 records, 35 features). Preprocessing engineered PeopleSoft/Workday-style export features. Baseline: logistic regression with regularization. Ensemble: Random Forest + Gradient Boosting for non-linear patterns. Survival: Cox PH for time-to-event. Explainability: SHAP summary plots for HR stakeholder communication. Output: risk-scored roster with retention priority.</p>
+                            </div>
+                            <div class="chart-insight-action">
+                                → <a href="https://github.com/gosidehustlesisi/sierra-people-analytics/blob/main/projects/attrition-prediction-model/notebooks/attrition_analysis.ipynb">View attrition notebook</a>
+                            </div>
+                        </div>
+                        <div class="chart-box">
+                            <div class="chart-insight-header">
+                                <span class="insight-tag">Key Finding</span>
+                                <span class="insight-metric">BERT + BERTopic</span>
+                            </div>
+                            <div style="display:flex;align-items:center;justify-content:center;background:var(--bg-elevated);min-height:180px;">
+                                <div style="text-align:center;padding:20px;">
+                                    <div style="font-size:48px;margin-bottom:12px;">📊</div>
+                                    <div style="color:var(--text-primary);font-weight:600;">Workforce Sentiment NLP</div>
+                                    <div style="color:var(--text-muted);font-size:12px;margin-top:8px;">Glassdoor reviews · BERT sentiment · Topic modeling · Trend tracking</div>
+                                </div>
+                            </div>
+                            <div class="tldr">
+                                <p><strong>Turn "the survey said people are unhappy" into "management communication scores dropped 18% in Q3 among mid-level ICs in Engineering."</strong> BERT fine-tuned for 3-class sentiment. LDA + BERTopic for unsupervised theme extraction. Temporal tracking by department and tenure.</p>
+                            </div>
+                            <div class="chart-caption-headline">BERT sentiment + BERTopic themes transform open-text engagement surveys into executive-ready metrics</div>
+                            <div class="chart-insight-body">
+                                Aspect-based sentiment analysis on key HR dimensions (management, compensation, workload, growth) produces drill-down scores by team and role. Temporal tracking reveals sentiment shifts before they become retention crises. The pipeline outputs an executive dashboard with filtering and export capability.
+                            </div>
+                            <div class="technical-detail">
+                                <span class="technical-label">How we got there</span>
+                                <p>Glassdoor reviews + public engagement survey corpora. Text cleaning, lemmatization, stopword removal. BERT fine-tuned for 3-class sentiment (positive/neutral/negative). LDA + BERTopic for unsupervised theme extraction. Aspect-based sentiment on HR dimensions. Temporal tracking by department and tenure. Output: executive dashboard with drill-down and export.</p>
+                            </div>
+                            <div class="chart-insight-action">
+                                → <a href="https://github.com/gosidehustlesisi/sierra-people-analytics/blob/main/projects/workforce-sentiment-nlp/notebooks/sentiment_analysis.ipynb">View sentiment notebook</a>
+                            </div>
+                        </div>
+                        <div class="chart-box">
+                            <div class="chart-insight-header">
+                                <span class="insight-tag">Key Finding</span>
+                                <span class="insight-metric">EEOC Ready</span>
+                            </div>
+                            <div style="display:flex;align-items:center;justify-content:center;background:var(--bg-elevated);min-height:180px;">
+                                <div style="text-align:center;padding:20px;">
+                                    <div style="font-size:48px;margin-bottom:12px;">📊</div>
+                                    <div style="color:var(--text-primary);font-weight:600;">DEI Executive Dashboard</div>
+                                    <div style="color:var(--text-muted);font-size:12px;margin-top:8px;">EEO-1 · Census ACS · Oaxaca-Blinder · Promotion parity</div>
+                                </div>
+                            </div>
+                            <div class="tldr">
+                                <p><strong>The DEI dashboard your General Counsel, CHRO, and CEO can all look at without arguing about what the numbers mean.</strong> Representation tracking by level, department, and geography. Oaxaca-Blinder decomposition for adjusted wage gap analysis. Promotion parity by demographic group. EEOC/OFCCP metric calculation and audit-ready documentation.</p>
+                            </div>
+                            <div class="chart-caption-headline">DEI as operational metric: representation, pay equity, and promotion parity in real time</div>
+                            <div class="chart-insight-body">
+                                EEO-1 demographic data combined with Census ACS benchmarks provides industry comparison context. Oaxaca-Blinder decomposition separates explained vs. unexplained wage gaps. Time-to-promotion analysis reveals parity or disparity by demographic group. All metrics are structured for EEOC/OFCCP audit readiness with full documentation.
+                            </div>
+                            <div class="technical-detail">
+                                <span class="technical-label">How we got there</span>
+                                <p>EEO-1 Survey data + Census ACS + HR compensation exports. Representation tracking by level, department, geography. Oaxaca-Blinder decomposition for adjusted wage gap. Promotion parity: time-to-promotion and rate analysis by demographic group. Compliance: EEOC/OFCCP metric calculation. Visualization: executive summary with drill-down. Output: board-ready DEI report with trend analysis.</p>
+                            </div>
+                            <div class="chart-insight-action">
+                                → <a href="https://github.com/gosidehustlesisi/sierra-people-analytics/blob/main/projects/dei-executive-dashboard/notebooks/dei_analysis.ipynb">View DEI notebook</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="transfer-box">
+                        <h5>What I'd bring to your team</h5>
+                        <p>Retention ROI modeling that translates attrition scores into dollar savings. End-to-end NLP pipelines from raw text to executive summary. DEI analytics with EEOC/OFCCP compliance rigor. HR system integration for Workday, PeopleSoft, and ADP data pipelines. Executive communication that makes ML output actionable for non-technical leaders.</p>
+                    </div>
+                </div>
+                <div class="project-footer">
+                    <span class="data-sources">Data: IBM HR Analytics · Glassdoor Reviews · EEO-1 Survey · Census ACS · BLS Turnover</span>
+                    <div style="display:flex;gap:1rem;">
+                        <a class="demo-link" href="https://github.com/gosidehustlesisi/sierra-people-analytics/blob/main/projects/attrition-prediction-model/notebooks/attrition_analysis.ipynb">▶ Live Demo</a>
+                        <a class="repo-link" href="https://github.com/gosidehustlesisi/sierra-people-analytics">View Repository →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- #8 Business Intelligence -->
+            <div class="project-card">
+                <div class="project-header">
+                    <div>
+                        <div class="project-title">Business Intelligence — Netflix Content Strategy, Amazon Product Intelligence, Google Search Trends</div>
+                        <div class="project-meta">3 projects · 9 notebooks · 49+ charts</div>
+                    </div>
+                    <div class="badges">
+                        <span class="badge badge-live">LIVE</span>
+                        <span class="badge badge-data">Netflix · Amazon · Google Trends</span>
+                    </div>
+                </div>
+                <div class="project-body">
+                    <div class="exec-summary">
+                        <h4>What this means for your business</h4>
+                        <p><strong>Content acquisition and portfolio management</strong> decisions backed by SQL-driven lifecycle analysis. TV shows reach Netflix 2.5× faster than movies (2.1 vs. 5.3 years), with International Movies as the top genre opportunity at 14.2% share. Customer sentiment and product quality signals from 67,325 real Amazon Electronics reviews show that angry customers write 16% more than happy ones — and critical reviews drive the most engagement. Real-time market interest tracking across 14 keywords over 262 weeks captures competitive intelligence before your competitors do.</p>
+                    </div>
+                    <div class="exec-summary">
+                        <h4>Why a hiring manager should care</h4>
+                        <p>I wrote 10 business-facing SQL queries in DuckDB against a real 8,807-title catalog, used window functions for cohort analysis, and built an 11-view Streamlit dashboard. I built a full pipeline from raw 495MB JSON.gz to cleaned CSV, ran 10 business SQL queries in SQLite, and produced a 5-view Streamlit dashboard. I built a live-data pipeline using pytrends and BigQuery with multi-granularity time-series alignment and correlation heatmaps. These aren't toy models — they're production analytics on real e-commerce and market data.</p>
+                    </div>
+
+                    <div class="project-metrics">
+                        <div class="metric">
+                            <div class="metric-value">78,055</div>
+                            <div class="metric-label">Total Real Records</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-value">8,807</div>
+                            <div class="metric-label">Netflix Titles</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-value">67,325</div>
+                            <div class="metric-label">Amazon Reviews</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-value">1,923</div>
+                            <div class="metric-label">Trend Records</div>
+                        </div>
+                    </div>
+                    <div class="chart-grid">
+                        <div class="chart-box">
+                            <div class="chart-insight-header">
+                                <span class="insight-tag">Key Finding</span>
+                                <span class="insight-metric">TV 2.5× Faster</span>
+                            </div>
+                            <div style="display:flex;align-items:center;justify-content:center;background:var(--bg-elevated);min-height:180px;">
+                                <div style="text-align:center;padding:20px;">
+                                    <div style="font-size:48px;margin-bottom:12px;">📊</div>
+                                    <div style="color:var(--text-primary);font-weight:600;">Netflix Content Strategy Dashboard</div>
+                                    <div style="color:var(--text-muted);font-size:12px;margin-top:8px;">8,807 titles · DuckDB SQL · 11 views · Cohort lifecycle</div>
+                                </div>
+                            </div>
+                            <div class="tldr">
+                                <p><strong>Netflix's catalog is 70% movies but TV shows turn around faster.</strong> If you're still licensing movies on a 5-year horizon, you're bleeding speed. International Movies at 14.2% share is the top genre opportunity. US concentration at 36.8% signals regional expansion potential.</p>
+                            </div>
+                            <div class="chart-caption-headline">TV-MA dominates at 36.4% — content maturity ratings drive regional licensing strategy</div>
+                            <div class="chart-insight-body">
+                                Window functions for release-to-platform gap analysis show TV shows reach Netflix in 2.1 years vs. 5.3 years for movies. SQL UNNEST for multi-value genre/country parsing. Matplotlib/Seaborn for 8 visualizations + Plotly for 5 interactive HTML exports. The 11-view Streamlit dashboard includes portfolio overview, regional heatmap, genre opportunity scoring, and acquisition timeline.
+                            </div>
+                            <div class="technical-detail">
+                                <span class="technical-label">How we got there</span>
+                                <p>DuckDB in-memory analytics on Kaggle Netflix dataset (8,807 titles). Window functions for cohort lifecycle analysis. SQL UNNEST for multi-value genre/country parsing. Matplotlib/Seaborn for EDA. Plotly for 5 interactive HTML exports. Streamlit dashboard with 11 chart definitions including portfolio overview, regional heatmap, genre opportunity scoring, and acquisition timeline.</p>
+                            </div>
+                            <div class="chart-insight-action">
+                                → <a href="https://github.com/gosidehustlesisi/sierra-business-intelligence/blob/main/projects/netflix-content-strategy/notebooks/netflix_strategy_analysis.ipynb">View Netflix strategy notebook</a>
+                            </div>
+                        </div>
+                        <div class="chart-box">
+                            <div class="chart-insight-header">
+                                <span class="insight-tag">Key Finding</span>
+                                <span class="insight-metric">1★ = 642 chars</span>
+                            </div>
+                            <div style="display:flex;align-items:center;justify-content:center;background:var(--bg-elevated);min-height:180px;">
+                                <div style="text-align:center;padding:20px;">
+                                    <div style="font-size:48px;margin-bottom:12px;">📊</div>
+                                    <div style="color:var(--text-primary);font-weight:600;">Amazon Product Intelligence</div>
+                                    <div style="color:var(--text-muted);font-size:12px;margin-top:8px;">67,325 reviews · 27,832 products · SQLite · 5-view dashboard</div>
+                                </div>
+                            </div>
+                            <div class="tldr">
+                                <p><strong>Your happiest customers are brief; your angriest are verbose and get the most engagement.</strong> 59.5% of reviews are 5-star, but 1-star reviews are 16% longer on average (642 vs. 553 characters). Reviews with 5+ helpfulness votes average 3.72 stars — critical reviews drive engagement.</p>
+                            </div>
+                            <div class="chart-caption-headline">Review length = sentiment signal: 1-star reviews are 16% longer and drive more helpfulness votes</div>
+                            <div class="chart-insight-body">
+                                Automated pipeline from raw 495MB JSON.gz (Stanford SNAP) to cleaned CSV with uniform 1/13 sampling (seed=42). SQLite in-memory for 10 business SQL queries including ROW_NUMBER() product lifecycle stages, length bucketing, and reviewer loyalty tiers. Product teams should watch review length and helpfulness velocity, not just star averages.
+                            </div>
+                            <div class="technical-detail">
+                                <span class="technical-label">How we got there</span>
+                                <p>Fetched reviews_Electronics_5.json.gz from Stanford SNAP, streaming with uniform 1/13 sampling (seed=42). Extracted helpfulness arrays into helpful_upvotes / helpful_total columns. SQLite in-memory for 10 business SQL queries: ROW_NUMBER() lifecycle stages (Early/Growth/Mature), length bucketing (<200 / 200-500 / 500-1000 / 1000+ chars), reviewer loyalty tiers. Matplotlib/Seaborn for EDA. Streamlit 5-view dashboard.</p>
+                            </div>
+                            <div class="chart-insight-action">
+                                → <a href="https://github.com/gosidehustlesisi/sierra-business-intelligence/blob/main/projects/amazon-product-intelligence/notebooks/amazon_intelligence_analysis.ipynb">View Amazon intelligence notebook</a>
+                            </div>
+                        </div>
+                        <div class="chart-box">
+                            <div class="chart-insight-header">
+                                <span class="insight-tag">Key Finding</span>
+                                <span class="insight-metric">262 Weeks</span>
+                            </div>
+                            <div style="display:flex;align-items:center;justify-content:center;background:var(--bg-elevated);min-height:180px;">
+                                <div style="text-align:center;padding:20px;">
+                                    <div style="font-size:48px;margin-bottom:12px;">📊</div>
+                                    <div style="color:var(--text-primary);font-weight:600;">Google Search Trends Market Intelligence</div>
+                                    <div style="color:var(--text-muted);font-size:12px;margin-top:8px;">14 keywords · 262 weeks · pytrends · BigQuery · Choropleth</div>
+                                </div>
+                            </div>
+                            <div class="tldr">
+                                <p><strong>Search interest is a leading indicator.</strong> I built the infrastructure to catch the spike before your competitors do. 1,923 trend records spanning worldwide, US national, and US regional granularity. Peak detection via scipy.signal.find_peaks. Cross-keyword correlation matrix reveals market relationships.</p>
+                            </div>
+                            <div class="chart-caption-headline">Multi-granularity time-series alignment with peak detection and geospatial choropleth for regional interest concentration</div>
+                            <div class="chart-insight-body">
+                                pytrends API for live Google Trends extraction with 14 keywords across Tech, Health, and Finance. BigQuery for storage and retrieval. Pandas for multi-granularity alignment (worldwide, US, regional). Plotly for interactive multi-line charts, correlation heatmaps, and US choropleth maps. Scipy peak detection for trend breakout alerts. Streamlit dashboard with 4 executive views.
+                            </div>
+                            <div class="technical-detail">
+                                <span class="technical-label">How we got there</span>
+                                <p>pytrends API for live extraction with 14 keywords. BigQuery storage and retrieval. Pandas for multi-granularity time-series alignment. Plotly interactive multi-line charts, correlation heatmaps, US choropleth. Scipy.signal.find_peaks for breakout alerts. Streamlit dashboard with 4 executive views. 714 US regional data points. 5-year window (2021–2026).</p>
+                            </div>
+                            <div class="chart-insight-action">
+                                → <a href="https://github.com/gosidehustlesisi/sierra-business-intelligence/blob/main/projects/google-search-trends/notebooks/trends_analysis.ipynb">View trends notebook</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="transfer-box">
+                        <h5>What I'd bring to your team</h5>
+                        <p>SQL-driven content lifecycle analysis with window functions and cohort modeling. End-to-end data pipelines from messy semi-structured ingestion to executive dashboard. Live competitive intelligence with automated peak detection and geospatial visualization. I translate raw catalog and market data into acquisition and pricing strategy on day one.</p>
+                    </div>
+                </div>
+                <div class="project-footer">
+                    <span class="data-sources">Data: Kaggle Netflix · UCSD Amazon Reviews (Stanford SNAP) · Google Trends (pytrends API + BigQuery)</span>
+                    <div style="display:flex;gap:1rem;">
+                        <a class="demo-link" href="https://github.com/gosidehustlesisi/sierra-business-intelligence/blob/main/projects/netflix-content-strategy/notebooks/netflix_strategy_analysis.ipynb">▶ Live Demo</a>
+                        <a class="repo-link" href="https://github.com/gosidehustlesisi/sierra-business-intelligence">View Repository →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- #9 Healthcare Analytics -->
+            <div class="project-card">
+                <div class="project-header">
+                    <div>
+                        <div class="project-title">Healthcare Analytics — 911 Triage Impact, Medicaid Utilization, Public Health Surveillance</div>
+                        <div class="project-meta">3 projects · 3 notebooks · 100M+ records</div>
+                    </div>
+                    <div class="badges">
+                        <span class="badge badge-live">LIVE</span>
+                        <span class="badge badge-data">NYC EMS · CMS · CDC WONDER</span>
+                    </div>
+                </div>
+                <div class="project-body">
+                    <div class="exec-summary">
+                        <h4>What this means for your business</h4>
+                        <p><strong>Emergency departments nationwide are at capacity.</strong> I built analytical frameworks that quantify dispatch inefficiency using 2M+ annual NYC EMS calls, model triage intervention impact, and forecast call volume for staffing optimization. Medicaid drug spending analysis across 50 states identifies where generic adoption lags and opioid prescribing is elevated — ~600K records of intervention targets. CDC WONDER mortality surveillance across 75M+ records over 25 years tracks the opioid epidemic trajectory and maps geographic clusters of health disparities.</p>
+                    </div>
+                    <div class="exec-summary">
+                        <h4>Why a hiring manager should care</h4>
+                        <p>These aren't retrospective health reports — they're operational decision systems. The EMS framework identifies which call types could be safely redirected to nurse-led triage, reducing unnecessary transports without compromising safety. The Medicaid analysis produces HEDIS-aligned quality metrics and formulary optimization recommendations. The mortality surveillance pipeline processes ICD-10 coded data across demographics and geography, producing choropleth maps that make health disparities undeniable. I understand the statistical methods public health agencies use to separate signal from noise.</p>
+                    </div>
+
+                    <div class="project-metrics">
+                        <div class="metric">
+                            <div class="metric-value">2M+</div>
+                            <div class="metric-label">Annual EMS Calls</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-value">600K</div>
+                            <div class="metric-label">Medicaid Drug Records</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-value">75M+</div>
+                            <div class="metric-label">Mortality Records</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-value">25</div>
+                            <div class="metric-label">Years Surveillance</div>
+                        </div>
+                    </div>
+                    <div class="chart-grid">
+                        <div class="chart-box">
+                            <div class="chart-insight-header">
+                                <span class="insight-tag">Key Finding</span>
+                                <span class="insight-metric">5 Boroughs</span>
+                            </div>
+                            <div style="display:flex;align-items:center;justify-content:center;background:var(--bg-elevated);min-height:180px;">
+                                <div style="text-align:center;padding:20px;">
+                                    <div style="font-size:48px;margin-bottom:12px;">📊</div>
+                                    <div style="color:var(--text-primary);font-weight:600;">911 Triage Impact Analysis</div>
+                                    <div style="color:var(--text-muted);font-size:12px;margin-top:8px;">2M+ calls/year · SODA API · Kaplan-Meier · Prophet forecasting</div>
+                                </div>
+                            </div>
+                            <div class="tldr">
+                                <p><strong>Two million annual EMS calls hold the map to faster response times.</strong> The borough that waits longest isn't the one you'd guess — and the data proves it. Response time distributions by borough and severity model which call types could be safely redirected to alternative care.</p>
+                            </div>
+                            <div class="chart-caption-headline">Response time analysis by borough reveals dispatch inefficiency invisible to aggregate metrics</div>
+                            <div class="chart-insight-body">
+                                NYC EMS incident data via SODA API structures response time analysis by borough and incident severity. Kaplan-Meier survival curves model time-to-treatment impact. Prophet/XGBoost forecasting predicts daily call volume patterns for staffing optimization. Geospatial hotspot mapping uses lat/lon coordinates for call density across all five boroughs.
+                            </div>
+                            <div class="technical-detail">
+                                <span class="technical-label">How we got there</span>
+                                <p>NYC EMS Incident Data via SODA API (data.cityofnewyork.us, 2013–present). Response time analysis by borough and severity. Kaplan-Meier survival curves for time-to-treatment impact. Prophet/XGBoost for daily call volume forecasting. Geospatial hotspot mapping with lat/lon coordinates. 6 core dimensions: incident type, response time, dispatch time, borough, severity, location.</p>
+                            </div>
+                            <div class="chart-insight-action">
+                                → <a href="https://github.com/gosidehustlesisi/sierra-healthcare-analytics/blob/main/projects/911-triage-impact/notebooks/ems_triage_analysis.ipynb">View EMS triage notebook</a>
+                            </div>
+                        </div>
+                        <div class="chart-box">
+                            <div class="chart-insight-header">
+                                <span class="insight-tag">Key Finding</span>
+                                <span class="insight-metric">Generic Gap</span>
+                            </div>
+                            <div style="display:flex;align-items:center;justify-content:center;background:var(--bg-elevated);min-height:180px;">
+                                <div style="text-align:center;padding:20px;">
+                                    <div style="font-size:48px;margin-bottom:12px;">📊</div>
+                                    <div style="color:var(--text-primary);font-weight:600;">Medicaid Utilization Analysis</div>
+                                    <div style="color:var(--text-muted);font-size:12px;margin-top:8px;">600K records · 50 states · 6 years · CMS API</div>
+                                </div>
+                            </div>
+                            <div class="tldr">
+                                <p><strong>Generic drug penetration isn't uniform — it's geographic.</strong> The states with the lowest generic adoption are the same states with the highest opioid utilization. That's not coincidence; that's an intervention target. State-level choropleth mapping of prescribing rates per 1,000 beneficiaries reveals formulary optimization opportunities.</p>
+                            </div>
+                            <div class="chart-caption-headline">Prescribing pattern analysis across 50 states + DC identifies generic lag and opioid monitoring targets</div>
+                            <div class="chart-insight-body">
+                                CMS State Drug Utilization Data via data.cms.gov API aggregated by state and therapeutic class. Generic penetration rates calculated by jurisdiction. Opioid NDC filtering for utilization monitoring. Time-series of generic adoption trends. Cost analysis by therapeutic class. HEDIS-aligned quality metrics for payor analytics teams.
+                            </div>
+                            <div class="technical-detail">
+                                <span class="technical-label">How we got there</span>
+                                <p>CMS State Drug Utilization Data via data.cms.gov API (~600K records: 50 states × 6 years × ~2,000 NDCs). Aggregated prescribing volume by state and therapeutic class. Generic penetration rates by jurisdiction. Opioid NDC filtering for utilization monitoring. State-level choropleth mapping per 1,000 beneficiaries. Cost analysis by therapeutic class. 2019–2024 longitudinal data.</p>
+                            </div>
+                            <div class="chart-insight-action">
+                                → <a href="https://github.com/gosidehustlesisi/sierra-healthcare-analytics/blob/main/projects/medicaid-utilization-reduction/notebooks/medicaid_analysis.ipynb">View Medicaid notebook</a>
+                            </div>
+                        </div>
+                        <div class="chart-box">
+                            <div class="chart-insight-header">
+                                <span class="insight-tag">Key Finding</span>
+                                <span class="insight-metric">75M+ Records</span>
+                            </div>
+                            <div style="display:flex;align-items:center;justify-content:center;background:var(--bg-elevated);min-height:180px;">
+                                <div style="text-align:center;padding:20px;">
+                                    <div style="font-size:48px;margin-bottom:12px;">📊</div>
+                                    <div style="color:var(--text-primary);font-weight:600;">Public Health Dashboard</div>
+                                    <div style="color:var(--text-muted);font-size:12px;margin-top:8px;">CDC WONDER · 3M+ deaths/year · ICD-10 · 25 years</div>
+                                </div>
+                            </div>
+                            <div class="tldr">
+                                <p><strong>The opioid epidemic didn't arrive overnight — CDC data shows exactly when the curve bent and where the burden concentrated.</strong> Mortality trends are the scoreboard for every public health decision made in the last quarter-century. Age-adjusted death rate analysis by cause over time with T40.x overdose filtering.</p>
+                            </div>
+                            <div class="chart-caption-headline">25-year mortality surveillance with inflection-point detection for COVID-19 and opioid crisis trajectory</div>
+                            <div class="chart-insight-body">
+                                CDC WONDER Multiple Cause of Death data across 4 demographic dimensions (age, sex, race/ethnicity, geography). Age-adjusted death rate analysis by cause over time. T40.x overdose death filtering for opioid epidemic trajectory. State-level choropleth mapping of age-adjusted rates. Cluster analysis of high-burden counties. Inflection-point detection for major public health events.
+                            </div>
+                            <div class="technical-detail">
+                                <span class="technical-label">How we got there</span>
+                                <p>CDC WONDER Multiple Cause of Death data (75M+ records: 3M+ deaths/year × 25 years, 1999–2023). ICD-10 coded cause of death across all categories. Age-adjusted death rate analysis by cause. T40.x filtering for opioid epidemic trajectory. State-level choropleth mapping. Cluster analysis of high-burden counties. Inflection-point detection. Full provenance from wonder.cdc.gov.</p>
+                            </div>
+                            <div class="chart-insight-action">
+                                → <a href="https://github.com/gosidehustlesisi/sierra-healthcare-analytics/blob/main/projects/public-health-dashboard/notebooks/public_health_analysis.ipynb">View public health notebook</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="transfer-box">
+                        <h5>What I'd bring to your team</h5>
+                        <p>Emergency medicine analytics from raw dispatch data to executive-ready insights. Medicaid and payor analytics at scale — from claims data to care navigation recommendations. Large-scale epidemiological data processing with ICD-10 classification, age-adjusted rate calculation, and public health surveillance dashboards. HEDIS, MMIS/T-MSIS, and CMS quality metric frameworks.</p>
+                    </div>
+                </div>
+                <div class="project-footer">
+                    <span class="data-sources">Data: NYC EMS (SODA API) · CMS State Drug Utilization · CDC WONDER Multiple Cause of Death</span>
+                    <div style="display:flex;gap:1rem;">
+                        <a class="demo-link" href="https://github.com/gosidehustlesisi/sierra-healthcare-analytics/blob/main/projects/911-triage-impact/notebooks/ems_triage_analysis.ipynb">▶ Live Demo</a>
+                        <a class="repo-link" href="https://github.com/gosidehustlesisi/sierra-healthcare-analytics">View Repository →</a>
+                    </div>
+                </div>
+            </div>
         </section>
 
         <!-- PILLAR 2: AI ARCHITECTURE -->
@@ -2532,7 +3090,7 @@
             <span class="subsection-icon">📊</span>
             Visual Portfolio — 50+ Charts Across 5 Repositories
         </h3>
-        <p class="subsection-desc">A curated gallery of production visualizations from live projects. Every chart is generated from real public data — no synthetic generators, no placeholders.</p>
+        <p class="subsection-desc">A curated gallery of production visualizations from 9 live repositories. Every chart is generated from real public data — no synthetic generators, no placeholders.</p>
 
         <div class="portfolio-grid">
             <!-- Applied ML -->
@@ -2678,6 +3236,118 @@
                     </div>
                 </div>
             </div>
+
+            <!-- PMO Analytics -->
+            <div class="portfolio-category">
+                <div class="portfolio-cat-header">
+                    <span class="portfolio-cat-badge">PMO Analytics</span>
+                    <span class="portfolio-cat-count">3 dashboards</span>
+                </div>
+                <div class="portfolio-cat-grid">
+                    <div class="chart-box">
+                        <div style="display:flex;align-items:center;justify-content:center;background:var(--bg-elevated);min-height:120px;">
+                            <div style="text-align:center;padding:16px;"><div style="font-size:36px;margin-bottom:8px;">📊</div><div style="color:var(--text-primary);font-weight:600;font-size:12px;">Capital Portfolio</div></div>
+                        </div>
+                        <div class="chart-caption">USASpending<span class="source-badge">Gov API</span> — $77.7B Portfolio EVM</div>
+                    </div>
+                    <div class="chart-box">
+                        <div style="display:flex;align-items:center;justify-content:center;background:var(--bg-elevated);min-height:120px;">
+                            <div style="text-align:center;padding:16px;"><div style="font-size:36px;margin-bottom:8px;">📊</div><div style="color:var(--text-primary);font-weight:600;font-size:12px;">Risk Intelligence</div></div>
+                        </div>
+                        <div class="chart-caption">RandomForest<span class="source-badge">98% Acc</span> — 1,000 Contracts</div>
+                    </div>
+                    <div class="chart-box">
+                        <div style="display:flex;align-items:center;justify-content:center;background:var(--bg-elevated);min-height:120px;">
+                            <div style="text-align:center;padding:16px;"><div style="font-size:36px;margin-bottom:8px;">📊</div><div style="color:var(--text-primary);font-weight:600;font-size:12px;">Decision Support</div></div>
+                        </div>
+                        <div class="chart-caption">DC + Census + BLS<span class="source-badge">3 APIs</span> — Auto-Briefings</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- People Analytics -->
+            <div class="portfolio-category">
+                <div class="portfolio-cat-header">
+                    <span class="portfolio-cat-badge">People Analytics</span>
+                    <span class="portfolio-cat-count">3 projects</span>
+                </div>
+                <div class="portfolio-cat-grid">
+                    <div class="chart-box">
+                        <div style="display:flex;align-items:center;justify-content:center;background:var(--bg-elevated);min-height:120px;">
+                            <div style="text-align:center;padding:16px;"><div style="font-size:36px;margin-bottom:8px;">📊</div><div style="color:var(--text-primary);font-weight:600;font-size:12px;">Attrition Model</div></div>
+                        </div>
+                        <div class="chart-caption">IBM HR<span class="source-badge">1,470 recs</span> — 87% Accuracy</div>
+                    </div>
+                    <div class="chart-box">
+                        <div style="display:flex;align-items:center;justify-content:center;background:var(--bg-elevated);min-height:120px;">
+                            <div style="text-align:center;padding:16px;"><div style="font-size:36px;margin-bottom:8px;">📊</div><div style="color:var(--text-primary);font-weight:600;font-size:12px;">Sentiment NLP</div></div>
+                        </div>
+                        <div class="chart-caption">BERT + BERTopic<span class="source-badge">Glassdoor</span> — Theme Extraction</div>
+                    </div>
+                    <div class="chart-box">
+                        <div style="display:flex;align-items:center;justify-content:center;background:var(--bg-elevated);min-height:120px;">
+                            <div style="text-align:center;padding:16px;"><div style="font-size:36px;margin-bottom:8px;">📊</div><div style="color:var(--text-primary);font-weight:600;font-size:12px;">DEI Dashboard</div></div>
+                        </div>
+                        <div class="chart-caption">EEO-1 + Census<span class="source-badge">Compliance</span> — Pay Equity</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Business Intelligence -->
+            <div class="portfolio-category">
+                <div class="portfolio-cat-header">
+                    <span class="portfolio-cat-badge">Business Intelligence</span>
+                    <span class="portfolio-cat-count">49+ charts</span>
+                </div>
+                <div class="portfolio-cat-grid">
+                    <div class="chart-box">
+                        <div style="display:flex;align-items:center;justify-content:center;background:var(--bg-elevated);min-height:120px;">
+                            <div style="text-align:center;padding:16px;"><div style="font-size:36px;margin-bottom:8px;">📊</div><div style="color:var(--text-primary);font-weight:600;font-size:12px;">Netflix Strategy</div></div>
+                        </div>
+                        <div class="chart-caption">Kaggle Netflix<span class="source-badge">8,807 titles</span> — SQL Cohort</div>
+                    </div>
+                    <div class="chart-box">
+                        <div style="display:flex;align-items:center;justify-content:center;background:var(--bg-elevated);min-height:120px;">
+                            <div style="text-align:center;padding:16px;"><div style="font-size:36px;margin-bottom:8px;">📊</div><div style="color:var(--text-primary);font-weight:600;font-size:12px;">Amazon Intel</div></div>
+                        </div>
+                        <div class="chart-caption">Stanford SNAP<span class="source-badge">67K reviews</span> — Sentiment Proxy</div>
+                    </div>
+                    <div class="chart-box">
+                        <div style="display:flex;align-items:center;justify-content:center;background:var(--bg-elevated);min-height:120px;">
+                            <div style="text-align:center;padding:16px;"><div style="font-size:36px;margin-bottom:8px;">📊</div><div style="color:var(--text-primary);font-weight:600;font-size:12px;">Google Trends</div></div>
+                        </div>
+                        <div class="chart-caption">pytrends + BigQuery<span class="source-badge">1,923 recs</span> — Peak Detection</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Healthcare Analytics -->
+            <div class="portfolio-category">
+                <div class="portfolio-cat-header">
+                    <span class="portfolio-cat-badge">Healthcare Analytics</span>
+                    <span class="portfolio-cat-count">100M+ records</span>
+                </div>
+                <div class="portfolio-cat-grid">
+                    <div class="chart-box">
+                        <div style="display:flex;align-items:center;justify-content:center;background:var(--bg-elevated);min-height:120px;">
+                            <div style="text-align:center;padding:16px;"><div style="font-size:36px;margin-bottom:8px;">📊</div><div style="color:var(--text-primary);font-weight:600;font-size:12px;">911 Triage</div></div>
+                        </div>
+                        <div class="chart-caption">NYC EMS<span class="source-badge">SODA API</span> — 2M+ Calls/Year</div>
+                    </div>
+                    <div class="chart-box">
+                        <div style="display:flex;align-items:center;justify-content:center;background:var(--bg-elevated);min-height:120px;">
+                            <div style="text-align:center;padding:16px;"><div style="font-size:36px;margin-bottom:8px;">📊</div><div style="color:var(--text-primary);font-weight:600;font-size:12px;">Medicaid</div></div>
+                        </div>
+                        <div class="chart-caption">CMS<span class="source-badge">600K recs</span> — Generic Penetration</div>
+                    </div>
+                    <div class="chart-box">
+                        <div style="display:flex;align-items:center;justify-content:center;background:var(--bg-elevated);min-height:120px;">
+                            <div style="text-align:center;padding:16px;"><div style="font-size:36px;margin-bottom:8px;">📊</div><div style="color:var(--text-primary);font-weight:600;font-size:12px;">Public Health</div></div>
+                        </div>
+                        <div class="chart-caption">CDC WONDER<span class="source-badge">75M+ recs</span> — 25-Year Surveillance</div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </section>
@@ -2715,6 +3385,26 @@
                     <div style="font-size: 2rem; margin-bottom: 0.5rem;">📊</div>
                     <div style="color: var(--text-primary); font-weight: 600; font-size: 0.9rem;">Public Sector</div>
                     <div style="color: var(--text-muted); font-size: 0.75rem; margin-top: 0.25rem;">Census · BLS · World Bank</div>
+                </a>
+                <a href="https://gosidehustlesisi.github.io/sierra-applied-ml/executive-summaries/exec_summary_pmo.pdf" style="display: block; background: var(--bg-deep); border: 1px solid var(--border); border-radius: 8px; padding: 1rem; text-decoration: none; text-align: center; transition: all 0.2s;" onmouseover="this.style.borderColor='var(--accent-cyan)'" onmouseout="this.style.borderColor='var(--border)'">
+                    <div style="font-size: 2rem; margin-bottom: 0.5rem;">🏛️</div>
+                    <div style="color: var(--text-primary); font-weight: 600; font-size: 0.9rem;">PMO Analytics</div>
+                    <div style="color: var(--text-muted); font-size: 0.75rem; margin-top: 0.25rem;">USASpending · FPDS · GAO</div>
+                </a>
+                <a href="https://gosidehustlesisi.github.io/sierra-applied-ml/executive-summaries/exec_summary_people.pdf" style="display: block; background: var(--bg-deep); border: 1px solid var(--border); border-radius: 8px; padding: 1rem; text-decoration: none; text-align: center; transition: all 0.2s;" onmouseover="this.style.borderColor='var(--accent-cyan)'" onmouseout="this.style.borderColor='var(--border)'">
+                    <div style="font-size: 2rem; margin-bottom: 0.5rem;">👥</div>
+                    <div style="color: var(--text-primary); font-weight: 600; font-size: 0.9rem;">People Analytics</div>
+                    <div style="color: var(--text-muted); font-size: 0.75rem; margin-top: 0.25rem;">IBM HR · Glassdoor · EEO-1</div>
+                </a>
+                <a href="https://gosidehustlesisi.github.io/sierra-applied-ml/executive-summaries/exec_summary_business_intel.pdf" style="display: block; background: var(--bg-deep); border: 1px solid var(--border); border-radius: 8px; padding: 1rem; text-decoration: none; text-align: center; transition: all 0.2s;" onmouseover="this.style.borderColor='var(--accent-cyan)'" onmouseout="this.style.borderColor='var(--border)'">
+                    <div style="font-size: 2rem; margin-bottom: 0.5rem;">💼</div>
+                    <div style="color: var(--text-primary); font-weight: 600; font-size: 0.9rem;">Business Intelligence</div>
+                    <div style="color: var(--text-muted); font-size: 0.75rem; margin-top: 0.25rem;">Netflix · Amazon · Google Trends</div>
+                </a>
+                <a href="https://gosidehustlesisi.github.io/sierra-applied-ml/executive-summaries/exec_summary_healthcare.pdf" style="display: block; background: var(--bg-deep); border: 1px solid var(--border); border-radius: 8px; padding: 1rem; text-decoration: none; text-align: center; transition: all 0.2s;" onmouseover="this.style.borderColor='var(--accent-cyan)'" onmouseout="this.style.borderColor='var(--border)'">
+                    <div style="font-size: 2rem; margin-bottom: 0.5rem;">🏥</div>
+                    <div style="color: var(--text-primary); font-weight: 600; font-size: 0.9rem;">Healthcare Analytics</div>
+                    <div style="color: var(--text-muted); font-size: 0.75rem; margin-top: 0.25rem;">NYC EMS · CMS · CDC WONDER</div>
                 </a>
             </div>
         </div>
