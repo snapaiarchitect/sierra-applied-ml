@@ -1,0 +1,21 @@
+{
+  "timestamp": "2026-05-19T17:11:34.416480+00:00",
+  "psi_scores": {
+    "hour": 0.0009,
+    "temp_c": 0.3654,
+    "humidity": 0.4833,
+    "wind_speed": 0.0,
+    "day_of_week": 0.0,
+    "month": 0.0,
+    "is_holiday": 0.0,
+    "nearby_avg_utilization": 0.9268
+  },
+  "drift_detected": true,
+  "features_drifted": [
+    "temp_c",
+    "humidity",
+    "nearby_avg_utilization"
+  ],
+  "features_moderate": [],
+  "retrain_recommended": true
+}
