@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Predictive Analytics & ML Engineering — 3 projects, 56,856+ real records from NASA C-MAPSS, UCI Bike Sharing, and 20 Newsgroups. Zero synthetic data.">
+    <meta name="description" content="Sierra Napier — Predictive Analytics & ML Engineering. 3 projects, 56,856+ real records from NASA C-MAPSS, UCI Bike Sharing, and 20 Newsgroups. Zero synthetic data.">
     
     <!-- Open Graph -->
     <meta property="og:title" content="Sierra Napier — Predictive Analytics & ML Engineering">
@@ -22,22 +22,21 @@
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 
     <style>
         :root {
-            --bg-deep: #0f1115;
-            --bg-surface: #161922;
-            --bg-elevated: #1c1f2a;
-            --border: #2a2f3c;
+            --charcoal: #0D0D0D;
+            --charcoal-light: #1A1A1A;
+            --charcoal-lighter: #262626;
+            --amber: #FFB800;
+            --amber-dark: #E6A600;
+            --teal: #00D4AA;
+            --teal-dark: #00B894;
             --text-primary: #f0f0f0;
             --text-secondary: #a0a8b8;
             --text-muted: #6b7280;
-            --accent-gold: #f59e0b;
-            --accent-cyan: #06b6d4;
-            --accent-gold-hover: #fbbf24;
-            --accent-cyan-hover: #22d3ee;
-            --success: #22c55e;
+            --border: #2a2f3c;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -45,30 +44,45 @@
         
         body {
             font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
-            background: var(--bg-deep);
+            background: var(--charcoal);
             color: var(--text-primary);
             line-height: 1.6;
             -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
         }
 
-        .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+        /* ===== PARTICLE CANVAS ===== */
+        #particle-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
 
         /* ===== NAVIGATION ===== */
         nav {
-            position: sticky;
+            position: fixed;
             top: 0;
-            background: rgba(15, 17, 21, 0.95);
-            backdrop-filter: blur(12px);
-            border-bottom: 1px solid var(--border);
+            left: 0;
+            right: 0;
             z-index: 100;
+            transition: all 0.3s ease;
             padding: 1rem 0;
         }
+        nav.scrolled {
+            background: rgba(13, 13, 13, 0.9);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
         .nav-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            flex-wrap: wrap;
-            gap: 1rem;
         }
         .nav-brand {
             display: flex;
@@ -80,10 +94,20 @@
             text-decoration: none;
         }
         .nav-brand img {
-            width: 36px;
-            height: 36px;
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
-            border: 2px solid var(--accent-gold);
+            border: 2px solid var(--amber);
+            transition: transform 0.3s ease;
+        }
+        .nav-brand:hover img {
+            transform: scale(1.1);
+        }
+        .nav-brand span {
+            background: linear-gradient(135deg, var(--amber) 0%, var(--teal) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
         .nav-links {
             display: flex;
@@ -97,33 +121,76 @@
             font-weight: 500;
             transition: color 0.2s;
         }
-        .nav-links a:hover { color: var(--accent-gold); }
+        .nav-links a:hover { color: var(--amber); }
 
         /* ===== HERO ===== */
         header {
-            padding: 6rem 0 4rem;
-            text-align: center;
             position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
             overflow: hidden;
         }
-        header::before {
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            max-width: 800px;
+            padding: 0 2rem;
+        }
+        .hero-avatar {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 2rem;
+        }
+        .hero-avatar::before {
             content: '';
             position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(ellipse at 50% 50%, rgba(245, 158, 11, 0.08) 0%, transparent 50%),
-                        radial-gradient(ellipse at 30% 70%, rgba(6, 182, 212, 0.06) 0%, transparent 40%);
-            pointer-events: none;
+            inset: -10px;
+            background: radial-gradient(circle, rgba(255, 184, 0, 0.3) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: pulse-glow 3s ease-in-out infinite;
+        }
+        @keyframes pulse-glow {
+            0%, 100% { transform: scale(1); opacity: 0.6; }
+            50% { transform: scale(1.1); opacity: 0.3; }
+        }
+        .hero-avatar img {
+            position: relative;
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 3px solid var(--amber);
+            object-fit: cover;
+        }
+        h1 {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
+        }
+        .gradient-text {
+            background: linear-gradient(135deg, var(--amber) 0%, var(--teal) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .hero-subtitle {
+            font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            font-weight: 400;
         }
         .hero-badge {
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
-            background: rgba(245, 158, 11, 0.1);
-            border: 1px solid rgba(245, 158, 11, 0.3);
-            color: var(--accent-gold);
+            background: rgba(255, 184, 0, 0.1);
+            border: 1px solid rgba(255, 184, 0, 0.3);
+            color: var(--amber);
             padding: 0.4rem 1rem;
             border-radius: 50px;
             font-size: 0.85rem;
@@ -135,7 +202,7 @@
             content: '';
             width: 8px;
             height: 8px;
-            background: var(--accent-gold);
+            background: var(--amber);
             border-radius: 50%;
             animation: pulse 2s ease-in-out infinite;
         }
@@ -143,28 +210,47 @@
             0%, 100% { opacity: 1; transform: scale(1); }
             50% { opacity: 0.5; transform: scale(0.8); }
         }
-        h1 {
-            font-size: clamp(2.5rem, 6vw, 4.5rem);
-            font-weight: 800;
-            line-height: 1.1;
-            margin-bottom: 1rem;
-            letter-spacing: -0.02em;
+        .hero-cta {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 2rem;
         }
-        h1 .gold { color: var(--accent-gold); }
-        h1 .cyan { color: var(--accent-cyan); }
-        .hero-subtitle {
-            font-size: clamp(1.1rem, 2.5vw, 1.4rem);
-            color: var(--text-secondary);
-            max-width: 700px;
-            margin: 0 auto 2rem;
-            font-weight: 400;
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.875rem 2rem;
+            border-radius: 10px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            font-size: 1rem;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, var(--amber), var(--amber-dark));
+            color: var(--charcoal);
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(255, 184, 0, 0.3);
+        }
+        .btn-outline {
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--text-primary);
+        }
+        .btn-outline:hover {
+            border-color: var(--teal);
+            color: var(--teal);
         }
         .hero-stats {
             display: flex;
             justify-content: center;
             gap: 3rem;
             flex-wrap: wrap;
-            margin-top: 2rem;
+            margin-top: 3rem;
         }
         .stat-item {
             text-align: center;
@@ -172,7 +258,7 @@
         .stat-value {
             font-size: 2.5rem;
             font-weight: 800;
-            color: var(--accent-gold);
+            color: var(--amber);
             font-family: 'JetBrains Mono', monospace;
         }
         .stat-label {
@@ -182,11 +268,38 @@
             letter-spacing: 0.05em;
             margin-top: 0.25rem;
         }
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+        }
+        .scroll-indicator-inner {
+            width: 24px;
+            height: 40px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            display: flex;
+            justify-content: center;
+            padding-top: 8px;
+        }
+        .scroll-indicator-inner::after {
+            content: '';
+            width: 4px;
+            height: 8px;
+            background: var(--amber);
+            border-radius: 2px;
+            animation: scroll-bounce 2s ease infinite;
+        }
+        @keyframes scroll-bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(8px); }
+        }
 
         /* ===== SECTIONS ===== */
         section { padding: 5rem 0; }
-        section:nth-child(even) { background: var(--bg-surface); }
-        
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
         .section-header {
             text-align: center;
             margin-bottom: 3rem;
@@ -196,7 +309,6 @@
             font-weight: 700;
             margin-bottom: 0.75rem;
         }
-        .section-header h2 .gold { color: var(--accent-gold); }
         .section-header p {
             color: var(--text-secondary);
             max-width: 600px;
@@ -205,7 +317,7 @@
         .section-line {
             width: 60px;
             height: 3px;
-            background: linear-gradient(90deg, var(--accent-gold), var(--accent-cyan));
+            background: linear-gradient(90deg, var(--amber), var(--teal));
             margin: 1rem auto 0;
             border-radius: 2px;
         }
@@ -217,7 +329,7 @@
             gap: 2rem;
         }
         .project-card {
-            background: var(--bg-elevated);
+            background: var(--charcoal-light);
             border: 1px solid var(--border);
             border-radius: 16px;
             padding: 2rem;
@@ -232,17 +344,16 @@
             left: 0;
             right: 0;
             height: 3px;
-            background: linear-gradient(90deg, var(--accent-gold), var(--accent-cyan));
+            background: linear-gradient(90deg, var(--amber), var(--teal));
             opacity: 0;
             transition: opacity 0.3s;
         }
         .project-card:hover {
             transform: translateY(-4px);
-            border-color: rgba(245, 158, 11, 0.3);
+            border-color: rgba(255, 184, 0, 0.3);
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
         }
         .project-card:hover::before { opacity: 1; }
-        
         .project-icon {
             width: 48px;
             height: 48px;
@@ -252,18 +363,17 @@
             justify-content: center;
             font-size: 1.5rem;
             margin-bottom: 1rem;
-            background: rgba(245, 158, 11, 0.1);
-            border: 1px solid rgba(245, 158, 11, 0.2);
+            background: rgba(255, 184, 0, 0.1);
+            border: 1px solid rgba(255, 184, 0, 0.2);
         }
         .project-card:nth-child(2) .project-icon {
-            background: rgba(6, 182, 212, 0.1);
-            border-color: rgba(6, 182, 212, 0.2);
+            background: rgba(0, 212, 170, 0.1);
+            border-color: rgba(0, 212, 170, 0.2);
         }
         .project-card:nth-child(3) .project-icon {
             background: rgba(34, 197, 94, 0.1);
             border-color: rgba(34, 197, 94, 0.2);
         }
-        
         .project-card h3 {
             font-size: 1.25rem;
             font-weight: 700;
@@ -272,7 +382,7 @@
         .project-card .subtitle {
             font-family: 'JetBrains Mono', monospace;
             font-size: 0.8rem;
-            color: var(--accent-gold);
+            color: var(--amber);
             margin-bottom: 1rem;
         }
         .project-card p {
@@ -304,9 +414,9 @@
         }
         .project-tag {
             display: inline-block;
-            background: rgba(245, 158, 11, 0.1);
-            border: 1px solid rgba(245, 158, 11, 0.2);
-            color: var(--accent-gold);
+            background: rgba(255, 184, 0, 0.1);
+            border: 1px solid rgba(255, 184, 0, 0.2);
+            color: var(--amber);
             padding: 0.25rem 0.6rem;
             border-radius: 4px;
             font-size: 0.75rem;
@@ -321,7 +431,7 @@
             gap: 1.5rem;
         }
         .gallery-item {
-            background: var(--bg-elevated);
+            background: var(--charcoal-light);
             border: 1px solid var(--border);
             border-radius: 12px;
             overflow: hidden;
@@ -330,7 +440,7 @@
         }
         .gallery-item:hover {
             transform: scale(1.02);
-            border-color: rgba(6, 182, 212, 0.3);
+            border-color: rgba(0, 212, 170, 0.3);
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
         }
         .gallery-item img {
@@ -338,7 +448,7 @@
             height: 220px;
             object-fit: cover;
             display: block;
-            background: var(--bg-deep);
+            background: var(--charcoal);
         }
         .gallery-caption {
             padding: 1rem;
@@ -398,7 +508,7 @@
             border-bottom: 1px solid var(--border);
         }
         .sources-table th {
-            color: var(--accent-gold);
+            color: var(--amber);
             font-weight: 600;
             font-size: 0.85rem;
             text-transform: uppercase;
@@ -411,10 +521,10 @@
         }
         .sources-table tr:hover td {
             color: var(--text-primary);
-            background: rgba(245, 158, 11, 0.03);
+            background: rgba(255, 184, 0, 0.03);
         }
         .sources-table a {
-            color: var(--accent-cyan);
+            color: var(--teal);
             text-decoration: none;
         }
         .sources-table a:hover { text-decoration: underline; }
@@ -437,7 +547,7 @@
             gap: 1rem;
         }
         .tech-item {
-            background: var(--bg-elevated);
+            background: var(--charcoal-light);
             border: 1px solid var(--border);
             border-radius: 10px;
             padding: 1.25rem;
@@ -445,7 +555,7 @@
             transition: all 0.2s ease;
         }
         .tech-item:hover {
-            border-color: rgba(6, 182, 212, 0.3);
+            border-color: rgba(0, 212, 170, 0.3);
             transform: translateY(-2px);
         }
         .tech-item .icon {
@@ -465,7 +575,7 @@
 
         /* ===== FOOTER ===== */
         footer {
-            background: var(--bg-deep);
+            background: var(--charcoal);
             border-top: 1px solid var(--border);
             padding: 4rem 0 2rem;
             text-align: center;
@@ -481,23 +591,6 @@
             color: var(--text-secondary);
             margin-bottom: 1.5rem;
         }
-        .cta-button {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            background: linear-gradient(135deg, var(--accent-gold), #d97706);
-            color: #0f1115;
-            font-weight: 700;
-            padding: 0.875rem 2rem;
-            border-radius: 10px;
-            text-decoration: none;
-            transition: all 0.2s ease;
-            font-size: 1rem;
-        }
-        .cta-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(245, 158, 11, 0.3);
-        }
         .footer-links {
             display: flex;
             justify-content: center;
@@ -511,7 +604,7 @@
             font-size: 0.9rem;
             transition: color 0.2s;
         }
-        .footer-links a:hover { color: var(--accent-cyan); }
+        .footer-links a:hover { color: var(--teal); }
         .footer-bottom {
             color: var(--text-muted);
             font-size: 0.85rem;
@@ -531,33 +624,9 @@
             transform: translateY(0);
         }
 
-        /* ===== FLOATING CTA ===== */
-        .floating-cta {
-            position: fixed;
-            bottom: 2rem;
-            right: 2rem;
-            z-index: 99;
-            background: linear-gradient(135deg, var(--accent-gold), #d97706);
-            color: #0f1115;
-            font-weight: 700;
-            padding: 0.75rem 1.25rem;
-            border-radius: 50px;
-            text-decoration: none;
-            font-size: 0.9rem;
-            box-shadow: 0 4px 20px rgba(245, 158, 11, 0.4);
-            transition: all 0.2s ease;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-        .floating-cta:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 30px rgba(245, 158, 11, 0.5);
-        }
-
         /* ===== RESPONSIVE ===== */
         @media (max-width: 768px) {
-            .nav-links { gap: 1rem; }
+            .nav-links { display: none; }
             .hero-stats { gap: 1.5rem; }
             .stat-value { font-size: 1.8rem; }
             .projects-grid { grid-template-columns: 1fr; }
@@ -571,38 +640,45 @@
 <body>
 
     <!-- Navigation -->
-    <nav>
-        <div class="container">
-            <div class="nav-inner">
-                <a href="#" class="nav-brand">
-                    <img src="https://avatars.githubusercontent.com/u/267403929?v=4" alt="Sierra Napier">
-                    <span>Sierra<span style="color: var(--accent-gold);">.</span>ML</span>
-                </a>
-                <ul class="nav-links">
-                    <li><a href="#projects">Projects</a></li>
-                    <li><a href="#gallery">Gallery</a></li>
-                    <li><a href="#sources">Data</a></li>
-                    <li><a href="#stack">Stack</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-            </div>
+    <nav id="navbar">
+        <div class="nav-inner">
+            <a href="#" class="nav-brand">
+                <img src="https://avatars.githubusercontent.com/u/267403929?v=4" alt="Sierra Napier">
+                <span>Sierra<span style="color: var(--amber);">.ML</span></span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#gallery">Gallery</a></li>
+                <li><a href="#sources">Data</a></li>
+                <li><a href="#stack">Stack</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
         </div>
     </nav>
 
     <!-- Hero -->
     <header>
-        <div class="container">
+        <canvas id="particle-canvas"></canvas>
+        <div class="hero-content">
+            <div class="hero-avatar">
+                <img src="https://avatars.githubusercontent.com/u/267403929?v=4" alt="Sierra Napier">
+            </div>
             <div class="hero-badge">LIVE PORTFOLIO — REAL DATA ONLY</div>
-            <h1 class="reveal">
-                Predictive Analytics<br>
-                <span class="gold">&</span> <span class="cyan">ML Engineering</span>
+            <h1>
+                <span class="gradient-text">Real Data.</span><br>
+                Real Pipelines.<br>
+                <span class="gradient-text">Real Results.</span>
             </h1>
-            <p class="hero-subtitle reveal">
-                End-to-end machine learning pipelines on real public data — 
+            <p class="hero-subtitle">
+                End-to-end machine learning on verified public datasets — 
                 NASA turbofan telemetry, UCI bike-sharing demand, and 20 Newsgroups text classification.
                 Zero synthetic records. Zero mock data.
             </p>
-            <div class="hero-stats reveal">
+            <div class="hero-cta">
+                <a href="#projects" class="btn btn-primary">Explore Projects →</a>
+                <a href="https://github.com/gosidehustlesisi/sierra-applied-ml" target="_blank" class="btn btn-outline">View on GitHub</a>
+            </div>
+            <div class="hero-stats">
                 <div class="stat-item">
                     <div class="stat-value">3</div>
                     <div class="stat-label">Projects</div>
@@ -621,13 +697,16 @@
                 </div>
             </div>
         </div>
+        <div class="scroll-indicator">
+            <div class="scroll-indicator-inner"></div>
+        </div>
     </header>
 
     <!-- Projects Section -->
     <section id="projects">
         <div class="container">
             <div class="section-header reveal">
-                <h2>Featured <span class="gold">Projects</span></h2>
+                <h2>Featured <span class="gradient-text">Projects</span></h2>
                 <p>Production-grade ML pipelines with documented methodology, evaluation metrics, and business interpretation.</p>
                 <div class="section-line"></div>
             </div>
@@ -639,8 +718,8 @@
                     <h3>Predictive Maintenance</h3>
                     <div class="subtitle">NASA C-MAPSS · Time-Series Regression</div>
                     <p>
-                        Predicts Remaining Useful Life (RUL) for turbofan engines using sensor telemetry. 
-                        Rolling-window feature engineering identifies degradation patterns 15+ cycles before failure.
+                        Predicts Remaining Useful Life (RUL) for turbofan engines using NASA sensor telemetry. 
+                        Rolling-window feature engineering identifies degradation patterns ~15 cycles before failure.
                     </p>
                     <div class="project-stats">
                         <div class="project-stat">
@@ -718,7 +797,7 @@
     <section id="gallery">
         <div class="container">
             <div class="section-header reveal">
-                <h2>Figure <span class="gold">Gallery</span></h2>
+                <h2>Figure <span class="gradient-text">Gallery</span></h2>
                 <p>Key visualizations from each project — click any image to view full size.</p>
                 <div class="section-line"></div>
             </div>
@@ -827,8 +906,8 @@
     <section id="sources">
         <div class="container">
             <div class="section-header reveal">
-                <h2>Verified <span class="gold">Data Sources</span></h2>
-                <p>Every record in this portfolio was fetched from a public source. No synthetic data. No mock CSVs.</p>
+                <h2>Verified <span class="gradient-text">Data Sources</span></h2>
+                <p>Every record fetched from a public source. No synthetic data. No mock CSVs.</p>
                 <div class="section-line"></div>
             </div>
             
@@ -846,7 +925,7 @@
                     <tr>
                         <td><span class="source-badge badge-nasa">NASA</span></td>
                         <td>C-MAPSS Turbofan FD001</td>
-                        <td>20,631 cycles / 100 engines</td>
+                        <td>100 engines · 20,631 cycles</td>
                         <td>Predictive Maintenance</td>
                         <td><a href="https://ti.arc.nasa.gov/tech/dash/groups/pcoe/prognostic-data-repository/" target="_blank" rel="noopener">ti.arc.nasa.gov →</a></td>
                     </tr>
@@ -873,7 +952,7 @@
     <section id="stack">
         <div class="container">
             <div class="section-header reveal">
-                <h2>Tech <span class="gold">Stack</span></h2>
+                <h2>Tech <span class="gradient-text">Stack</span></h2>
                 <p>Tools and libraries used across all projects.</p>
                 <div class="section-line"></div>
             </div>
@@ -947,9 +1026,9 @@
     <footer id="contact">
         <div class="container">
             <div class="footer-cta reveal">
-                <h3>Let's Build Something <span class="gold">Real</span></h3>
+                <h3>Let's Build Something <span class="gradient-text">Real</span></h3>
                 <p>Hiring for applied ML, forecasting, or NLP roles? I ship pipelines, not notebooks.</p>
-                <a href="mailto:sierra@e3-ai.com" class="cta-button">
+                <a href="mailto:sierra@e3-ai.com" class="btn btn-primary">
                     <span>📧</span> Get In Touch
                 </a>
             </div>
@@ -963,14 +1042,11 @@
             </div>
             
             <div class="footer-bottom reveal">
-                <p>Built by <strong>Sierra Napier</strong> — Data Scientist · AI Architect · Founder @ <a href="https://e3-ai.com" style="color: var(--accent-cyan); text-decoration: none;">e3-ai.com</a></p>
+                <p>Built by <strong>Sierra Napier</strong> — Data Scientist · AI Architect · Founder @ <a href="https://e3-ai.com" style="color: var(--teal); text-decoration: none;">e3-ai.com</a></p>
                 <p style="margin-top: 0.5rem; font-size: 0.8rem;">All data from public sources. No synthetic records. No placeholders.</p>
             </div>
         </div>
     </footer>
-
-    <!-- Floating CTA -->
-    <a href="mailto:sierra@e3-ai.com" class="floating-cta">📧 Contact</a>
 
     <!-- Lightbox -->
     <div class="lightbox" id="lightbox" onclick="closeLightbox()">
@@ -979,6 +1055,81 @@
     </div>
 
     <script>
+        // Particle Canvas Animation
+        const canvas = document.getElementById('particle-canvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+        const colors = ['#FFB800', '#00D4AA', '#FFB800', '#00D4AA', '#FFFFFF'];
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+
+        for (let i = 0; i < 60; i++) {
+            particles.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                vx: (Math.random() - 0.5) * 0.5,
+                vy: (Math.random() - 0.5) * 0.5,
+                size: Math.random() * 2 + 0.5,
+                opacity: Math.random() * 0.5 + 0.1,
+                color: colors[Math.floor(Math.random() * colors.length)],
+            });
+        }
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            particles.forEach((p) => {
+                p.x += p.vx;
+                p.y += p.vy;
+                if (p.x < 0) p.x = canvas.width;
+                if (p.x > canvas.width) p.x = 0;
+                if (p.y < 0) p.y = canvas.height;
+                if (p.y > canvas.height) p.y = 0;
+
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                ctx.fillStyle = p.color;
+                ctx.globalAlpha = p.opacity;
+                ctx.fill();
+            });
+
+            // Draw connections
+            ctx.globalAlpha = 0.05;
+            ctx.strokeStyle = '#FFB800';
+            ctx.lineWidth = 0.5;
+            for (let i = 0; i < particles.length; i++) {
+                for (let j = i + 1; j < particles.length; j++) {
+                    const dx = particles[i].x - particles[j].x;
+                    const dy = particles[i].y - particles[j].y;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+                    if (dist < 150) {
+                        ctx.beginPath();
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+
+            requestAnimationFrame(animateParticles);
+        }
+        animateParticles();
+
+        // Nav scroll behavior
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
         // Scroll-triggered reveal animations
         const observerOptions = {
             threshold: 0.1,
