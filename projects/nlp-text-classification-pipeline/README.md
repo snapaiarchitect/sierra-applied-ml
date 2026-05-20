@@ -123,6 +123,46 @@ All from real 20 Newsgroups data:
 }
 ```
 
+
+## 📈 Figure Gallery
+
+**Category Distribution**
+![Category Distribution](./figures/01_category_distribution.png)
+
+**Class Distribution**
+![Class Distribution](./figures/01_class_distribution.png)
+
+**Model Comparison**
+![Model Comparison](./figures/02_model_comparison.png)
+
+**Confusion Matrix**
+![Confusion Matrix](./figures/03_confusion_matrix.png)
+
+**Top Features Per Class**
+![Top Features Per Class](./figures/04_top_features_per_class.png)
+
+**Class Distribution**
+![Class Distribution](./figures/class_distribution.png)
+
+**Confusion Matrix**
+![Confusion Matrix](./figures/confusion_matrix.png)
+
+**Model Comparison**
+![Model Comparison](./figures/model_comparison.png)
+
+**Nlp 01 Overview**
+![Nlp 01 Overview](./figures/nlp_01_overview.png)
+
+**Nlp 01 Vocabulary**
+![Nlp 01 Vocabulary](./figures/nlp_01_vocabulary.png)
+
+**Nlp 02 Confusion Matrix**
+![Nlp 02 Confusion Matrix](./figures/nlp_02_confusion_matrix.png)
+
+**Nlp 02 Feature Importance**
+![Nlp 02 Feature Importance](./figures/nlp_02_feature_importance.png)
+
+
 ---
 
 **Next**: [Demand Forecasting for Operations](../demand-forecasting-operations/) →

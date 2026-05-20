@@ -139,6 +139,31 @@ predictive-maintenance-transit/
 - **Model comparison**: Random Forest vs XGBoost on real benchmark data
 - **Interpretability**: Feature importance and sensor correlation analysis
 
+
+## 📈 Figure Gallery
+
+**Feature Importance**
+![Feature Importance](./figures/feature_importance.png)
+
+**Predicted Vs Actual Rul**
+![Predicted Vs Actual Rul](./figures/predicted_vs_actual_rul.png)
+
+**Rul Degradation Trajectories**
+![Rul Degradation Trajectories](./figures/rul_degradation_trajectories.png)
+
+**Rul Distributions**
+![Rul Distributions](./figures/rul_distributions.png)
+
+**Rul Residuals**
+![Rul Residuals](./figures/rul_residuals.png)
+
+**Sensor Degradation Curves**
+![Sensor Degradation Curves](./figures/sensor_degradation_curves.png)
+
+**Sensor Rul Correlation**
+![Sensor Rul Correlation](./figures/sensor_rul_correlation.png)
+
+
 ---
 
 **Next**: [NLP Text Classification Pipeline](../nlp-text-classification-pipeline/) →

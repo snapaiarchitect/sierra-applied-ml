@@ -131,6 +131,37 @@ jupyter notebook notebooks/demand_forecasting_analysis.ipynb
 
 **Back to**: [Portfolio Home](../../)
 
+
+## 📈 Figure Gallery
+
+**Heatmaps**
+![Heatmaps](./figures/02_heatmaps.png)
+
+**Hourly Pattern Real**
+![Hourly Pattern Real](./figures/02_hourly_pattern_real.png)
+
+**Seasonal Trends**
+![Seasonal Trends](./figures/02_seasonal_trends.png)
+
+**Weather Impact**
+![Weather Impact](./figures/02_weather_impact.png)
+
+**Workday Weekend**
+![Workday Weekend](./figures/02_workday_weekend.png)
+
+**Actual Vs Predicted**
+![Actual Vs Predicted](./figures/03_actual_vs_predicted.png)
+
+**Model Comparison**
+![Model Comparison](./figures/03_model_comparison.png)
+
+**Residual Analysis**
+![Residual Analysis](./figures/03_residual_analysis.png)
+
+**Seasonal Decomposition**
+![Seasonal Decomposition](./figures/03_seasonal_decomposition.png)
+
+
 ---
 
 *Part of [Sierra Napier's Applied ML Portfolio](../../)*
