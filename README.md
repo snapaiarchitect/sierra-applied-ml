@@ -2,7 +2,7 @@
   <img src="https://avatars.githubusercontent.com/u/267403929?v=4" width="120" style="border-radius: 50%;" alt="Sierra Napier">
   <h1>SIERRA-APPLIED-ML</h1>
   <p><strong>Real NASA sensor data, real Usenet posts, real bike-sharing records — zero synthetic records.</strong></p>
-  <p>56,856+ real records · 3 projects · 11 notebooks · 21 charts</p>
+  <p>56,856+ real records · 3 projects · 11 notebooks · 32 charts</p>
 </div>
 
 ---
