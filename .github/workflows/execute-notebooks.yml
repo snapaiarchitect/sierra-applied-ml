@@ -110,9 +110,14 @@ jobs:
           echo "notebooks_passed=$PASSED" >> $GITHUB_OUTPUT
           echo "notebooks_failed=$FAILED" >> $GITHUB_OUTPUT
           echo "failed_list=$FAILED_LIST" >> $GITHUB_OUTPUT
+          
+          # Save values to environment file for later steps
+          echo "PASSED=$PASSED" >> $GITHUB_ENV
+          echo "FAILED=$FAILED" >> $GITHUB_ENV
+          echo "TOTAL=$TOTAL" >> $GITHUB_ENV
 
       - name: Upload executed notebooks as artifacts
-        if: always() && steps.execute.outputs.notebooks_found > 0
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: executed-notebooks-${{ github.run_id }}
@@ -120,7 +125,7 @@ jobs:
           retention-days: 7
 
       - name: Commit executed notebooks back to repo
-        if: always() && steps.execute.outputs.notebooks_passed > 0
+        if: always()
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
@@ -140,7 +145,10 @@ jobs:
             exit 0
           fi
           
-          git commit -m "ci: Auto-execute notebooks [${{ steps.execute.outputs.notebooks_passed }}/$TOTAL passed]"
+          PASSED=${{ env.PASSED }}
+          TOTAL=${{ env.TOTAL }}
+          
+          git commit -m "ci: Auto-execute notebooks [$PASSED/$TOTAL passed]"
           
           # Pull latest to avoid conflicts
           git pull --rebase origin main || true
@@ -151,23 +159,25 @@ jobs:
       - name: Report status
         if: always()
         run: |
+          PASSED=${{ env.PASSED }}
+          FAILED=${{ env.FAILED }}
+          TOTAL=${{ env.TOTAL }}
+          
           echo "## Notebook Execution Report" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "| Metric | Value |" >> $GITHUB_STEP_SUMMARY
           echo "|---|---|" >> $GITHUB_STEP_SUMMARY
-          echo "| Notebooks Found | ${{ steps.execute.outputs.notebooks_found }} |" >> $GITHUB_STEP_SUMMARY
-          echo "| Passed | ${{ steps.execute.outputs.notebooks_passed }} |" >> $GITHUB_STEP_SUMMARY
-          echo "| Failed | ${{ steps.execute.outputs.notebooks_failed }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Notebooks Found | $TOTAL |" >> $GITHUB_STEP_SUMMARY
+          echo "| Passed | $PASSED |" >> $GITHUB_STEP_SUMMARY
+          echo "| Failed | $FAILED |" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           
-          if [ "${{ steps.execute.outputs.notebooks_failed }}" -gt 0 ]; then
+          if [ "$FAILED" -gt 0 ]; then
             echo "### ⚠️ Some notebooks failed" >> $GITHUB_STEP_SUMMARY
-            echo "${{ steps.execute.outputs.failed_list }}" >> $GITHUB_STEP_SUMMARY
-            echo "" >> $GITHUB_STEP_SUMMARY
             echo "Failed notebooks did not block commit of successful ones." >> $GITHUB_STEP_SUMMARY
           fi
           
-          if [ "${{ steps.execute.outputs.notebooks_passed }}" -gt 0 ]; then
+          if [ "$PASSED" -gt 0 ]; then
             echo "" >> $GITHUB_STEP_SUMMARY
-            echo "### ✅ ${{ steps.execute.outputs.notebooks_passed }} notebooks executed and committed" >> $GITHUB_STEP_SUMMARY
+            echo "### ✅ $PASSED notebooks executed and committed" >> $GITHUB_STEP_SUMMARY
           fi
