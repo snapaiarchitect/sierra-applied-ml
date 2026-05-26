@@ -36,7 +36,8 @@ jobs:
             pandas numpy matplotlib seaborn plotly \
             scikit-learn xgboost lightgbm statsmodels \
             prophet nltk textblob vaderSentiment \
-            requests beautifulsoup4 lxml wordcloud
+            requests beautifulsoup4 lxml wordcloud \
+            duckdb
 
       - name: Install repo-specific dependencies
         run: |
@@ -49,11 +50,21 @@ jobs:
             pip install -e . || pip install . || echo "pyproject.toml install failed, continuing"
           fi
 
-      - name: Execute all notebooks
-        id: execute
+      - name: Run data fetcher scripts if present
         env:
           TMDB_API_KEY: ${{ secrets.TMDB_API_KEY }}
           CENSUS_API_KEY: ${{ secrets.CENSUS_API_KEY }}
+        run: |
+          for script in scripts/fetch_*.py; do
+            if [ -f "$script" ]; then
+              echo "Running $script..."
+              python3 "$script"
+            fi
+          done
+          echo "Data fetcher step complete."
+
+      - name: Execute all notebooks
+        id: execute
         run: |
           NOTEBOOKS=$(find . -name "*.ipynb" -not -path "*/.git/*" -not -path "*/site-packages/*" -not -path "*/venv/*" | sort)
           
@@ -80,14 +91,24 @@ jobs:
             OUTPUT_DIR=$(dirname "$notebook")
             mkdir -p "$OUTPUT_DIR"
             
-            # Execute with error capture but DON'T fail the whole workflow
+            # Change to notebook directory so relative paths (../data) work
+            NB_DIR=$(dirname "$notebook")
+            NB_NAME=$(basename "$notebook")
+            
+            cd "$NB_DIR"
+            echo "CWD: $(pwd)"
+            echo "Notebook: $NB_NAME"
+            echo "Looking for data at: $(realpath ../data 2>/dev/null || echo '../data (not found)')"
+            ls -la ../data/ 2>/dev/null || echo "No ../data directory"
+            
             if papermill \
+              --kernel python3 \
               --log-output \
               --no-progress-bar \
               --stdout-file /dev/null \
               --stderr-file /dev/null \
-              "$notebook" \
-              "$notebook" \
+              "$NB_NAME" \
+              "$NB_NAME" \
               2>&1; then
               echo "✅ PASSED: $notebook"
               PASSED=$((PASSED + 1))
@@ -95,8 +116,10 @@ jobs:
               echo "❌ FAILED: $notebook"
               FAILED=$((FAILED + 1))
               FAILED_LIST="$FAILED_LIST\n- $notebook"
-              # Continue executing other notebooks
             fi
+            
+            # Return to repo root for next notebook
+            cd - > /dev/null
           done
           
           echo ""
@@ -111,7 +134,6 @@ jobs:
           echo "notebooks_failed=$FAILED" >> $GITHUB_OUTPUT
           echo "failed_list=$FAILED_LIST" >> $GITHUB_OUTPUT
           
-          # Save values to environment file for later steps
           echo "PASSED=$PASSED" >> $GITHUB_ENV
           echo "FAILED=$FAILED" >> $GITHUB_ENV
           echo "TOTAL=$TOTAL" >> $GITHUB_ENV
@@ -125,21 +147,19 @@ jobs:
           retention-days: 7
 
       - name: Commit executed notebooks back to repo
-        if: always()
+        if: env.PASSED > 0
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           
-          # Check if there are changes
           if git diff --quiet; then
             echo "No changes to commit"
             exit 0
           fi
           
-          # Stage only notebook files (not other changes)
           git add "**/*.ipynb"
+          git add "**/*.csv" || true
           
-          # Check if there are staged changes
           if git diff --cached --quiet; then
             echo "No notebook changes to commit"
             exit 0
@@ -149,11 +169,7 @@ jobs:
           TOTAL=${{ env.TOTAL }}
           
           git commit -m "ci: Auto-execute notebooks [$PASSED/$TOTAL passed]"
-          
-          # Pull latest to avoid conflicts
           git pull --rebase origin main || true
-          
-          # Push back
           git push origin main
 
       - name: Report status
@@ -174,10 +190,14 @@ jobs:
           
           if [ "$FAILED" -gt 0 ]; then
             echo "### ⚠️ Some notebooks failed" >> $GITHUB_STEP_SUMMARY
-            echo "Failed notebooks did not block commit of successful ones." >> $GITHUB_STEP_SUMMARY
+            echo "Failed notebooks were not committed." >> $GITHUB_STEP_SUMMARY
           fi
           
           if [ "$PASSED" -gt 0 ]; then
             echo "" >> $GITHUB_STEP_SUMMARY
             echo "### ✅ $PASSED notebooks executed and committed" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "### ❌ No notebooks passed — nothing committed" >> $GITHUB_STEP_SUMMARY
+            echo "Check the logs for execution errors." >> $GITHUB_STEP_SUMMARY
           fi
