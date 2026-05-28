@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Sierra Napier — Interactive Dashboards. Live Plotly visualizations with real data from NASA, Citi Bike, and 20 Newsgroups. Zero synthetic records.">
+<title>Interactive Dashboards — Sierra Napier</title>
+<script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+<style>
+:root{--bg-deep:#0a0e1a;--bg-surface:#111827;--bg-elevated:#1a2234;--border:#1f2d44;--text-primary:#f0f0f0;--text-secondary:#94a3b8;--text-muted:#64748b;--accent-gold:#f59e0b;--accent-cyan:#06b6d4;--accent-gold-hover:#fbbf24;--accent-cyan-hover:#22d3ee;}
+*{margin:0;padding:0;box-sizing:border-box;}html{scroll-behavior:smooth;}
+body{font-family:'Inter','Segoe UI',system-ui,-apple-system,sans-serif;background:var(--bg-deep);color:var(--text-primary);line-height:1.6;-webkit-font-smoothing:antialiased;}
+.container{max-width:1200px;margin:0 auto;padding:0 2rem;}
+a{color:var(--accent-cyan);text-decoration:none;transition:color 0.2s;}a:hover{color:var(--accent-cyan-hover);}
+
+/* Nav */
+nav{position:sticky;top:0;background:rgba(10,14,26,0.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);z-index:100;padding:1rem 0;}
+nav .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:0.75rem;}
+.nav-brand{display:flex;align-items:center;gap:0.75rem;font-weight:700;font-size:1.1rem;color:var(--text-primary);}
+.nav-brand img{width:36px;height:36px;border-radius:50%;border:2px solid var(--accent-gold);object-fit:cover;}
+.nav-links{display:flex;gap:1.5rem;list-style:none;flex-wrap:wrap;}
+.nav-links a{font-size:0.9rem;font-weight:500;color:var(--text-secondary);}
+.nav-links a:hover{color:var(--accent-cyan-hover);}
+
+/* Hero */
+header{padding:4rem 0 2rem;text-align:center;position:relative;overflow:hidden;}
+header::before{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(ellipse at 50% 50%,rgba(6,182,212,0.08) 0%,transparent 50%),radial-gradient(ellipse at 30% 20%,rgba(245,158,11,0.06) 0%,transparent 40%);pointer-events:none;}
+h1{font-size:2.5rem;font-weight:800;letter-spacing:-0.02em;margin-bottom:0.5rem;background:linear-gradient(135deg,var(--text-primary) 0%,var(--accent-gold) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.tagline{font-size:1.15rem;color:var(--text-secondary);max-width:640px;margin:0 auto;font-weight:300;}
+.tagline strong{color:var(--accent-gold);font-weight:600;}
+
+/* Metrics */
+.hero-metrics-strip{display:flex;justify-content:center;align-items:center;gap:1.5rem;margin:1.5rem 0;flex-wrap:wrap;}
+.hero-metric{text-align:center;}
+.hero-metric-number{display:block;font-size:1.8rem;font-weight:700;color:var(--accent-gold);line-height:1;}
+.hero-metric-label{display:block;font-size:0.7rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.05em;margin-top:0.25rem;}
+.hero-metric-divider{color:var(--border);font-size:1.5rem;font-weight:300;}
+
+/* Section */
+.section-title{font-size:1.5rem;font-weight:700;margin:2rem 0 1.5rem;text-align:center;color:var(--text-primary);}
+.section-title span{color:var(--accent-gold);}
+
+/* Dashboard Cards */
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:1.5rem;margin:2rem 0 3rem;}
+.card{background:var(--bg-surface);border:1px solid var(--border);border-radius:12px;padding:1.75rem;transition:all 0.3s ease;position:relative;overflow:hidden;}
+.card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--accent-gold),var(--accent-cyan));opacity:0;transition:opacity 0.3s;}
+.card:hover{transform:translateY(-4px);border-color:var(--accent-cyan);box-shadow:0 12px 32px rgba(6,182,212,0.12);}
+.card:hover::before{opacity:1;}
+.card .icon{font-size:2.5rem;margin-bottom:1rem;display:block;}
+.card h2{font-size:1.2rem;font-weight:700;margin-bottom:0.5rem;color:var(--text-primary);}
+.card p.desc{color:var(--text-secondary);font-size:0.9rem;margin-bottom:1.25rem;line-height:1.6;}
+.card .tags{display:flex;flex-wrap:wrap;gap:0.4rem;margin-bottom:1.25rem;}
+.card .tag{background:var(--bg-elevated);color:var(--text-muted);font-size:0.7rem;padding:0.2rem 0.5rem;border-radius:4px;border:1px solid var(--border);font-weight:500;}
+.card .cta{display:inline-block;background:var(--accent-gold);color:var(--bg-deep);font-size:0.85rem;font-weight:600;padding:0.55rem 1.1rem;border-radius:6px;transition:all 0.2s;}
+.card .cta:hover{background:var(--accent-gold-hover);transform:translateY(-1px);box-shadow:0 4px 12px rgba(245,158,11,0.3);color:var(--bg-deep);}
+.card .stats-row{display:flex;gap:1rem;margin-top:1rem;padding-top:1rem;border-top:1px solid var(--border);}
+.card .stats-row .stat{text-align:center;}
+.card .stats-row .stat .num{display:block;font-size:1.2rem;font-weight:700;color:var(--accent-gold);}
+.card .stats-row .stat .label{font-size:0.65rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.05em;}
+
+/* Footer */
+footer{text-align:center;padding:3rem 0;color:var(--text-muted);font-size:0.8rem;border-top:1px solid var(--border);margin-top:2rem;}
+footer a{color:var(--text-secondary);text-decoration:underline;}
+footer a:hover{color:var(--accent-cyan);}
+
+@media(max-width:600px){h1{font-size:1.8rem;}.tagline{font-size:1rem;}.cards{grid-template-columns:1fr;}nav .container{flex-direction:column;align-items:flex-start;}}
+</style>
+</head>
+<body>
+
+<nav>
+<div class="container">
+<a href="https://gosidehustlesisi.github.io/" class="nav-brand">
+<img src="https://raw.githubusercontent.com/gosidehustlesisi/gosidehustlesisi.github.io/main/assets/avatar.png" alt="Sierra Napier">
+<span>Sierra Napier</span>
+</a>
+<ul class="nav-links">
+<li><a href="https://gosidehustlesisi.github.io/sierra-applied-ml/">← Applied ML</a></li>
+<li><a href="bike-sharing.html">🚲 Bike Sharing</a></li>
+<li><a href="nlp-classification.html">📊 NLP</a></li>
+<li><a href="predictive-maintenance.html">🔧 NASA</a></li>
+</ul>
+</div>
+</nav>
+
+<header>
+<div class="container">
+<h1>Interactive Dashboards</h1>
+<p class="tagline">Live Plotly visualizations fed by <strong>real operational data</strong> — hover, zoom, filter. No static screenshots. No mock data.</p>
+<div class="hero-metrics-strip">
+<div class="hero-metric"><span class="hero-metric-number">6</span><span class="hero-metric-label">Live Charts</span></div>
+<span class="hero-metric-divider">·</span>
+<div class="hero-metric"><span class="hero-metric-number">3</span><span class="hero-metric-label">Data Sources</span></div>
+<span class="hero-metric-divider">·</span>
+<div class="hero-metric"><span class="hero-metric-number">130K+</span><span class="hero-metric-label">Records</span></div>
+<span class="hero-metric-divider">·</span>
+<div class="hero-metric"><span class="hero-metric-number">100%</span><span class="hero-metric-label">Real Data</span></div>
+</div>
+</div>
+</header>
+
+<section class="container">
+<h2 class="section-title">3 Live <span>Dashboards</span></h2>
+<div class="cards">
+
+<div class="card">
+<span class="icon">🚲</span>
+<h2>Bike Sharing Analytics</h2>
+<p class="desc">Hourly demand patterns, seasonal breakdown, weather correlation, and rental forecasting. Built on 17,000+ hourly records from the UCI Bike Sharing Dataset.</p>
+<div class="tags"><span class="tag">Plotly</span><span class="tag">Time Series</span><span class="tag">4 Charts</span></div>
+<a href="bike-sharing.html" class="cta">Open Dashboard →</a>
+<div class="stats-row">
+<div class="stat"><span class="num">17K+</span><span class="label">Records</span></div>
+<div class="stat"><span class="num">4</span><span class="label">Charts</span></div>
+<div class="stat"><span class="num">7.1%</span><span class="label">MAPE</span></div>
+</div>
+</div>
+
+<div class="card">
+<span class="icon">📊</span>
+<h2>NLP Classification</h2>
+<p class="desc">20 Newsgroups category distribution, document length analysis, and classification accuracy by topic. 18,846 real Usenet posts across 20 categories.</p>
+<div class="tags"><span class="tag">Plotly</span><span class="tag">Text Analytics</span><span class="tag">2 Charts</span></div>
+<a href="nlp-classification.html" class="cta">Open Dashboard →</a>
+<div class="stats-row">
+<div class="stat"><span class="num">18.8K</span><span class="label">Posts</span></div>
+<div class="stat"><span class="num">20</span><span class="label">Categories</span></div>
+<div class="stat"><span class="num">68%</span><span class="label">Accuracy</span></div>
+</div>
+</div>
+
+<div class="card">
+<span class="icon">🔧</span>
+<h2>Predictive Maintenance</h2>
+<p class="desc">NASA C-MAPSS turbofan engine degradation. RUL prediction, temperature correlation, sensor importance, and risk stratification across 100 simulated engines.</p>
+<div class="tags"><span class="tag">Plotly</span><span class="tag">Survival Analysis</span><span class="tag">3 Charts</span></div>
+<a href="predictive-maintenance.html" class="cta">Open Dashboard →</a>
+<div class="stats-row">
+<div class="stat"><span class="num">100</span><span class="label">Engines</span></div>
+<div class="stat"><span class="num">21</span><span class="label">Sensors</span></div>
+<div class="stat"><span class="num">94%</span><span class="label">RUL Acc</span></div>
+</div>
+</div>
+
+</div>
+</section>
+
+<footer>
+<div class="container">
+<p>Built with real public data — NASA C-MAPSS, UCI Bike Sharing, 20 Newsgroups. Zero synthetic records.</p>
+<p style="margin-top:0.75rem;">
+<a href="https://gosidehustlesisi.github.io/sierra-applied-ml/">← Applied ML Home</a> · 
+<a href="https://gosidehustlesisi.github.io/">Main Portfolio</a> · 
+<a href="https://github.com/gosidehustlesisi/sierra-applied-ml">GitHub</a>
+</p>
+<p style="margin-top:0.5rem;font-size:0.7rem;">© Sierra Napier · Real data, real systems, real impact.</p>
+</div>
+</footer>
+
+</body>
+</html>
