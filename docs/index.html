@@ -7,7 +7,7 @@
   
   <!-- Open Graph -->
   <meta property="og:title" content="Sierra Napier — Applied ML | Predictive Maintenance · NLP · Forecasting">
-  <meta property="og:description" content="3 production ML projects · 10 notebooks · 28+ charts · NASA · UCI · sklearn. Real public data, zero synthetic records.">
+  <meta property="og:description" content="3 production ML projects · 11 notebooks · 21 visualizations · NASA · UCI · sklearn. Real public data, zero synthetic records.">
   <meta property="og:image" content="https://raw.githubusercontent.com/gosidehustlesisi/gosidehustlesisi.github.io/main/assets/avatar.png">
   <meta property="og:url" content="https://gosidehustlesisi.github.io/sierra-applied-ml/">
   <meta property="og:type" content="website">
@@ -110,35 +110,24 @@
                   radial-gradient(ellipse at 30% 20%, rgba(245, 158, 11, 0.06) 0%, transparent 40%);
       pointer-events: none;
     }
-    .avatar-wrap {
-      position: relative;
+    .badge {
       display: inline-block;
+      padding: 0.35rem 0.9rem;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      background: rgba(34, 197, 94, 0.15);
+      color: var(--success);
+      border: 1px solid rgba(34, 197, 94, 0.3);
       margin-bottom: 1.5rem;
     }
-    .avatar-wrap img {
-      width: 140px;
-      height: 140px;
-      border-radius: 50%;
-      border: 3px solid var(--accent-gold);
-      box-shadow: 0 0 40px rgba(245, 158, 11, 0.3), 0 0 80px rgba(6, 182, 212, 0.15);
-      object-fit: cover;
-    }
-    .avatar-ring {
-      position: absolute;
-      inset: -8px;
-      border-radius: 50%;
-      border: 2px solid transparent;
-      border-top-color: var(--accent-cyan);
-      border-right-color: var(--accent-gold);
-      animation: spin 8s linear infinite;
-    }
-    @keyframes spin { to { transform: rotate(360deg); } }
-
     h1 {
-      font-size: 2.5rem;
+      font-size: 2.8rem;
       font-weight: 800;
       letter-spacing: -0.02em;
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.75rem;
       background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent-gold) 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
@@ -147,320 +136,300 @@
     .tagline {
       font-size: 1.15rem;
       color: var(--text-secondary);
-      max-width: 640px;
+      max-width: 650px;
       margin: 0 auto;
       font-weight: 300;
+      line-height: 1.7;
     }
-    .tagline strong {
-      color: var(--accent-gold);
-      font-weight: 600;
-    }
+    .tagline strong { color: var(--accent-gold); font-weight: 600; }
 
-    /* Pillars */
-    .pillars {
-      display: flex;
-      justify-content: center;
-      gap: 0.75rem;
-      flex-wrap: wrap;
-      margin: 1.5rem 0;
-    }
-    .pillar-badge {
-      padding: 0.4rem 1rem;
-      border-radius: 999px;
-      font-size: 0.8rem;
-      font-weight: 600;
-      border: 1px solid var(--border);
-      background: var(--bg-elevated);
-      color: var(--text-secondary);
-      transition: all 0.2s;
-    }
-    .pillar-badge:hover {
-      border-color: var(--accent-cyan);
-      color: var(--accent-cyan-hover);
-      transform: translateY(-2px);
-    }
-
-    /* Hero Metrics */
-    .hero-metrics-strip {
+    /* Stats bar */
+    .stats-bar {
       display: flex;
       justify-content: center;
       align-items: center;
-      gap: 1.5rem;
-      margin: 1.5rem 0;
+      gap: 2rem;
+      margin: 2.5rem 0;
       flex-wrap: wrap;
     }
-    .hero-metric {
-      text-align: center;
-    }
-    .hero-metric-number {
+    .stat { text-align: center; }
+    .stat-number {
       display: block;
-      font-size: 1.8rem;
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--accent-gold);
+      line-height: 1;
+      letter-spacing: -0.02em;
+    }
+    .stat-label {
+      display: block;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-top: 0.35rem;
+    }
+    .stat-divider {
+      width: 1px;
+      height: 40px;
+      background: var(--border);
+    }
+
+    /* Section titles */
+    .section-title {
+      font-size: 1.6rem;
+      font-weight: 700;
+      margin-bottom: 2rem;
+      color: var(--text-primary);
+    }
+    .section-title span { color: var(--accent-gold); }
+    .section-subtitle {
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+      margin-top: -1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    /* Project cards */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 3rem;
+    }
+    .project-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 1.75rem;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .project-card:hover {
+      border-color: var(--accent-gold);
+      transform: translateY(-2px);
+    }
+    .project-icon {
+      font-size: 1.5rem;
+      margin-bottom: 0.75rem;
+    }
+    .project-card h3 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 0.25rem;
+      color: var(--text-primary);
+    }
+    .project-meta {
+      font-size: 0.8rem;
+      color: var(--accent-cyan);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.75rem;
+    }
+    .project-desc {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      margin-bottom: 1.25rem;
+    }
+    .project-stats {
+      display: flex;
+      gap: 1.5rem;
+      margin-bottom: 1rem;
+    }
+    .project-stat { text-align: center; }
+    .project-stat-number {
+      display: block;
+      font-size: 1.3rem;
       font-weight: 700;
       color: var(--accent-gold);
       line-height: 1;
     }
-    .hero-metric-label {
+    .project-stat-label {
       display: block;
-      font-size: 0.7rem;
-      color: var(--text-muted);
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      margin-top: 0.25rem;
-    }
-    .hero-metric-divider {
-      color: var(--border);
-      font-size: 1.5rem;
-      font-weight: 300;
-    }
-
-    /* CTA */
-    .hero-cta {
-      display: flex;
-      justify-content: center;
-      gap: 1rem;
-      margin-top: 1.5rem;
-      flex-wrap: wrap;
-    }
-    .btn {
-      padding: 0.7rem 1.4rem;
-      border-radius: 8px;
-      font-weight: 600;
-      font-size: 0.9rem;
-      text-decoration: none;
-      transition: all 0.2s;
-      border: 2px solid transparent;
-      cursor: pointer;
-      display: inline-block;
-    }
-    .btn-primary {
-      background: linear-gradient(135deg, var(--accent-gold), #d97706);
-      color: var(--bg-deep);
-    }
-    .btn-primary:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(245, 158, 11, 0.35);
-      color: var(--bg-deep);
-    }
-    .btn-secondary {
-      background: transparent;
-      border-color: var(--border);
-      color: var(--text-secondary);
-    }
-    .btn-secondary:hover {
-      border-color: var(--accent-cyan);
-      color: var(--accent-cyan-hover);
-    }
-
-    /* Trust Bar */
-    .trust-bar {
-      background: var(--bg-surface);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 1rem 1.5rem;
-      margin: 2rem auto;
-      max-width: 900px;
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-    .trust-label {
-      font-size: 0.75rem;
-      color: var(--text-muted);
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      font-weight: 600;
-      white-space: nowrap;
-    }
-    .trust-logos {
-      display: flex;
-      gap: 0.5rem;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-    .trust-logo {
-      background: var(--bg-elevated);
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      padding: 0.3rem 0.7rem;
-      font-size: 0.75rem;
-      color: var(--text-secondary);
-      font-weight: 500;
-    }
-
-    /* Section Title */
-    .section-title {
-      font-size: 1.5rem;
-      font-weight: 700;
-      margin-bottom: 1.5rem;
-      text-align: center;
-      color: var(--text-primary);
-    }
-    .section-title span {
-      color: var(--accent-gold);
-    }
-
-    /* Project Cards */
-    .cards {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 1.5rem;
-      margin: 2rem 0 3rem;
-    }
-    .card {
-      background: var(--bg-surface);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 1.75rem;
-      transition: all 0.3s ease;
-      position: relative;
-      overflow: hidden;
-    }
-    .card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 3px;
-      background: linear-gradient(90deg, var(--accent-gold), var(--accent-cyan));
-      opacity: 0;
-      transition: opacity 0.3s;
-    }
-    .card:hover {
-      transform: translateY(-4px);
-      border-color: var(--accent-cyan);
-      box-shadow: 0 12px 32px rgba(6, 182, 212, 0.12);
-    }
-    .card:hover::before { opacity: 1; }
-    .card .icon {
-      font-size: 2rem;
-      margin-bottom: 1rem;
-      display: block;
-    }
-    .card h2 {
-      font-size: 1.2rem;
-      font-weight: 700;
-      margin-bottom: 0.5rem;
-      color: var(--text-primary);
-    }
-    .card p.desc {
-      color: var(--text-secondary);
-      font-size: 0.9rem;
-      margin-bottom: 1.25rem;
-      line-height: 1.6;
-    }
-    .card .tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.4rem;
-      margin-bottom: 1.25rem;
-    }
-    .card .tag {
-      background: var(--bg-elevated);
-      color: var(--text-muted);
-      font-size: 0.7rem;
-      padding: 0.2rem 0.5rem;
-      border-radius: 4px;
-      border: 1px solid var(--border);
-      font-weight: 500;
-    }
-    .card .cta {
-      display: inline-block;
-      background: var(--accent-gold);
-      color: var(--bg-deep);
-      font-size: 0.85rem;
-      font-weight: 600;
-      padding: 0.55rem 1.1rem;
-      border-radius: 6px;
-      transition: all 0.2s;
-    }
-    .card .cta:hover {
-      background: var(--accent-gold-hover);
-      transform: translateY(-1px);
-      box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
-      color: var(--bg-deep);
-    }
-    .card .stats-row {
-      display: flex;
-      gap: 1rem;
-      margin-top: 1rem;
-      padding-top: 1rem;
-      border-top: 1px solid var(--border);
-    }
-    .card .stats-row .stat {
-      text-align: center;
-    }
-    .card .stats-row .stat .num {
-      display: block;
-      font-size: 1.2rem;
-      font-weight: 700;
-      color: var(--accent-gold);
-    }
-    .card .stats-row .stat .label {
       font-size: 0.65rem;
       color: var(--text-muted);
       text-transform: uppercase;
       letter-spacing: 0.05em;
+      margin-top: 0.2rem;
+    }
+    .project-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+    .project-tag {
+      font-size: 0.7rem;
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+      background: rgba(245, 158, 11, 0.1);
+      color: var(--accent-gold);
+      font-weight: 500;
     }
 
-    /* Project Detail Strip */
-    .detail-strip {
+    /* Figure Gallery */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.25rem;
+      margin-bottom: 3rem;
+    }
+    .gallery-item {
       background: var(--bg-surface);
       border: 1px solid var(--border);
       border-radius: 12px;
-      padding: 2rem;
-      margin: 2rem 0;
+      overflow: hidden;
+      transition: border-color 0.2s;
     }
-    .detail-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 1.5rem;
-      margin-top: 1rem;
+    .gallery-item:hover { border-color: var(--accent-cyan); }
+    .gallery-item img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      display: block;
+      background: var(--bg-elevated);
     }
-    .detail-item h4 {
-      font-size: 0.8rem;
-      color: var(--text-muted);
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      margin-bottom: 0.5rem;
-    }
-    .detail-item p {
-      font-size: 0.9rem;
-      color: var(--text-secondary);
-      line-height: 1.5;
-    }
-    .detail-item strong {
-      color: var(--accent-gold);
+    .gallery-caption {
+      padding: 0.75rem 1rem;
+      font-size: 0.85rem;
       font-weight: 600;
+      color: var(--text-primary);
+    }
+    .gallery-subcaption {
+      padding: 0 1rem 0.75rem;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+
+    /* Data Sources Table */
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 3rem;
+      font-size: 0.9rem;
+    }
+    .data-table th,
+    .data-table td {
+      padding: 0.85rem 1rem;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+    }
+    .data-table th {
+      font-weight: 600;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      font-size: 0.75rem;
+      letter-spacing: 0.05em;
+    }
+    .data-table td { color: var(--text-primary); }
+    .data-table tr:hover td { background: rgba(245, 158, 11, 0.03); }
+    .data-table .source-link {
+      color: var(--accent-cyan);
+      font-size: 0.8rem;
+    }
+    .data-table .source-link::after {
+      content: ' →';
+    }
+
+    /* Tech Stack */
+    .stack-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 1rem;
+      margin-bottom: 3rem;
+    }
+    .stack-item {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.25rem;
+      text-align: center;
+      transition: border-color 0.2s;
+    }
+    .stack-item:hover { border-color: var(--accent-gold); }
+    .stack-icon { font-size: 1.5rem; margin-bottom: 0.5rem; }
+    .stack-name {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 0.25rem;
+    }
+    .stack-desc {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+    }
+
+    /* Contact */
+    .contact-section {
+      text-align: center;
+      padding: 3rem 0;
+    }
+    .contact-title {
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+      background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent-gold) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .contact-subtitle {
+      font-size: 1rem;
+      color: var(--text-secondary);
+      margin-bottom: 1.5rem;
+    }
+    .contact-links {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+    .contact-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.6rem 1.25rem;
+      border-radius: 8px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .contact-link:hover {
+      border-color: var(--accent-gold);
+      background: rgba(245, 158, 11, 0.08);
+      color: var(--accent-gold);
     }
 
     /* Footer */
     footer {
       text-align: center;
-      padding: 3rem 0;
+      padding: 2rem 0;
       color: var(--text-muted);
       font-size: 0.8rem;
       border-top: 1px solid var(--border);
       margin-top: 2rem;
     }
-    footer a { color: var(--text-secondary); text-decoration: underline; }
-    footer a:hover { color: var(--accent-cyan); }
+    footer a { color: var(--text-secondary); }
+    footer a:hover { color: var(--accent-cyan-hover); }
 
-    /* Responsive */
-    @media (max-width: 600px) {
-      h1 { font-size: 1.8rem; }
-      .tagline { font-size: 1rem; }
-      .hero-metrics-strip { gap: 1rem; }
-      .hero-metric-number { font-size: 1.4rem; }
-      .cards { grid-template-columns: 1fr; }
-      nav .container { flex-direction: column; align-items: flex-start; }
+    @media (max-width: 768px) {
+      h1 { font-size: 2rem; }
+      .stats-bar { gap: 1rem; }
+      .stat-divider { display: none; }
+      .projects-grid { grid-template-columns: 1fr; }
+      .gallery-grid { grid-template-columns: 1fr; }
+      .stack-grid { grid-template-columns: repeat(2, 1fr); }
+      .contact-links { flex-direction: column; align-items: center; }
     }
   </style>
 </head>
 <body>
-  
+
+  <!-- Navigation -->
   <nav>
     <div class="container">
       <a href="https://gosidehustlesisi.github.io/" class="nav-brand">
@@ -468,187 +437,358 @@
         <span>Sierra Napier</span>
       </a>
       <ul class="nav-links">
-        <li><a href="#overview">Overview</a></li>
         <li><a href="#projects">Projects</a></li>
-        <li><a href="#metrics">Metrics</a></li>
-        <li><a href="https://github.com/gosidehustlesisi/sierra-applied-ml">GitHub →</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="#data">Data</a></li>
+        <li><a href="#stack">Stack</a></li>
+        <li><a href="#contact">Contact</a></li>
       </ul>
     </div>
   </nav>
 
-  <header id="overview">
+  <!-- Hero -->
+  <header>
     <div class="container">
-      <div class="avatar-wrap">
-        <img src="https://raw.githubusercontent.com/gosidehustlesisi/gosidehustlesisi.github.io/main/assets/avatar.png" alt="Sierra Napier">
-        <div class="avatar-ring"></div>
-      </div>
-      
-      <h1>Applied ML</h1>
-      
+      <div class="badge">LIVE PORTFOLIO — REAL DATA ONLY</div>
+      <h1>Predictive Analytics<br>&amp; ML Engineering</h1>
       <p class="tagline">
-        Production ML systems built on <strong>real operational data</strong> — NASA turbofan predictive maintenance, NLP document classification, and demand forecasting with real public datasets.
+        End-to-end machine learning pipelines on real public data — NASA turbofan telemetry, UCI bike-sharing demand, and 20 Newsgroups text classification. <strong>Zero synthetic records. Zero mock data.</strong>
       </p>
-      
-      <div class="pillars">
-        <span class="pillar-badge">🔧 Predictive Maintenance</span>
-        <span class="pillar-badge">📊 NLP Classification</span>
-        <span class="pillar-badge">📈 Demand Forecasting</span>
-        <span class="pillar-badge">✅ 100% Real Data</span>
-      </div>
-      
-      <div class="hero-metrics-strip">
-        <div class="hero-metric">
-          <span class="hero-metric-number">94%</span>
-          <span class="hero-metric-label">Best RUL Accuracy</span>
+      <div class="stats-bar">
+        <div class="stat">
+          <span class="stat-number">3</span>
+          <span class="stat-label">Projects</span>
         </div>
-        <span class="hero-metric-divider">·</span>
-        <div class="hero-metric">
-          <span class="hero-metric-number">68%</span>
-          <span class="hero-metric-label">Text Classification</span>
+        <div class="stat-divider"></div>
+        <div class="stat">
+          <span class="stat-number">56,856+</span>
+          <span class="stat-label">Real Records</span>
         </div>
-        <span class="hero-metric-divider">·</span>
-        <div class="hero-metric">
-          <span class="hero-metric-number">7.1%</span>
-          <span class="hero-metric-label">MAPE Forecast</span>
+        <div class="stat-divider"></div>
+        <div class="stat">
+          <span class="stat-number">21</span>
+          <span class="stat-label">Visualizations</span>
         </div>
-        <span class="hero-metric-divider">·</span>
-        <div class="hero-metric">
-          <span class="hero-metric-number">130K+</span>
-          <span class="hero-metric-label">Records Processed</span>
+        <div class="stat-divider"></div>
+        <div class="stat">
+          <span class="stat-number">11</span>
+          <span class="stat-label">Notebooks</span>
         </div>
-      </div>
-      
-      <div class="hero-cta">
-        <a href="applied_ml_dashboard.html" class="btn btn-primary">📊 Live Dashboard</a>
-        <a href="portfolio-report.html" class="btn btn-secondary">📋 Full Report</a>
-        <a href="side-hustle.html" class="btn btn-secondary">💼 Side Hustle Stack</a>
       </div>
     </div>
   </header>
 
-  <!-- Trust Bar -->
-  <div class="container">
-    <div class="trust-bar">
-      <span class="trust-label">Verified Data Sources:</span>
-      <div class="trust-logos">
-        <span class="trust-logo">🚀 NASA C-MAPSS</span>
-        <span class="trust-logo">📰 20 Newsgroups</span>
-        <span class="trust-logo">🚲 UCI Bike Sharing</span>
-        <span class="trust-logo">✅ Live</span>
-        <span class="trust-logo">🔒 Real Data</span>
-      </div>
-    </div>
-  </div>
-
-  <!-- Projects Section -->
+  <!-- Featured Projects -->
   <section id="projects" class="container">
-    <h2 class="section-title">3 Production <span>ML Projects</span></h2>
+    <h2 class="section-title">Featured <span>Projects</span></h2>
+    <p class="section-subtitle">Production-grade ML pipelines with documented methodology, evaluation metrics, and business interpretation.</p>
     
-    <div class="cards">
+    <div class="projects-grid">
       
-      <!-- Interactive Dashboards Card -->
-      <div class="card">
-        <span class="icon">📊</span>
-        <h2>Interactive Dashboards</h2>
-        <p class="desc">
-          3 live Plotly dashboards with real data — Bike Sharing Analytics, NLP Classification, and NASA Predictive Maintenance. Hover, zoom, filter. No mock data.
+      <!-- Predictive Maintenance -->
+      <div class="project-card">
+        <div class="project-icon">🔧</div>
+        <h3>Predictive Maintenance</h3>
+        <div class="project-meta">NASA C-MAPSS · Time-Series Regression</div>
+        <p class="project-desc">
+          Predicts Remaining Useful Life (RUL) for turbofan engines using sensor telemetry. Rolling-window feature engineering identifies degradation patterns 15+ cycles before failure.
         </p>
-        <div class="tags">
-          <span class="tag">Plotly</span>
-          <span class="tag">3 Dashboards</span>
-          <span class="tag">Live Data</span>
-          <span class="tag">9 Charts</span>
+        <div class="project-stats">
+          <div class="project-stat">
+            <span class="project-stat-number">100</span>
+            <span class="project-stat-label">Engines</span>
+          </div>
+          <div class="project-stat">
+            <span class="project-stat-number">20,631</span>
+            <span class="project-stat-label">Cycles</span>
+          </div>
+          <div class="project-stat">
+            <span class="project-stat-number">~15</span>
+            <span class="project-stat-label">MAE (cycles)</span>
+          </div>
         </div>
-        <a href="interactive-dashboards/index.html" class="cta">View Dashboards →</a>
-        <div class="stats-row">
-          <div class="stat"><span class="num">21</span><span class="label">Sensors</span></div>
-          <div class="stat"><span class="num">6</span><span class="label">Charts</span></div>
-          <div class="stat"><span class="num">94%</span><span class="label">RUL Acc</span></div>
+        <div class="project-tags">
+          <span class="project-tag">XGBoost</span>
+          <span class="project-tag">Random Forest</span>
+          <span class="project-tag">RUL</span>
         </div>
       </div>
-
-      <!-- Portfolio Report Card -->
-      <div class="card">
-        <span class="icon">📋</span>
-        <h2>Portfolio Report</h2>
-        <p class="desc">
-          Full project breakdown with techniques, notebook inventory, skills matrix, and measurable outcomes per project. Executive summary with key findings, business impact, and hiring manager value propositions.
+      
+      <!-- Demand Forecasting -->
+      <div class="project-card">
+        <div class="project-icon">📈</div>
+        <h3>Demand Forecasting</h3>
+        <div class="project-meta">UCI Bike Sharing · Time-Series Forecasting</div>
+        <p class="project-desc">
+          Hourly and daily demand forecasting for Capital Bikeshare (Washington D.C.). SARIMA + XGBoost ensemble captures commuter peaks, weather effects, and seasonal trends.
         </p>
-        <div class="tags">
-          <span class="tag">3 Projects</span>
-          <span class="tag">10 Notebooks</span>
-          <span class="tag">Skills Matrix</span>
-          <span class="tag">Impact Metrics</span>
+        <div class="project-stats">
+          <div class="project-stat">
+            <span class="project-stat-number">17,379</span>
+            <span class="project-stat-label">Hourly Records</span>
+          </div>
+          <div class="project-stat">
+            <span class="project-stat-number">~30</span>
+            <span class="project-stat-label">MAE (rides/hr)</span>
+          </div>
+          <div class="project-stat">
+            <span class="project-stat-number">~18%</span>
+            <span class="project-stat-label">MAPE</span>
+          </div>
         </div>
-        <a href="portfolio-report.html" class="cta">View Report →</a>
-        <div class="stats-row">
-          <div class="stat"><span class="num">10</span><span class="label">Notebooks</span></div>
-          <div class="stat"><span class="num">28</span><span class="label">Figures</span></div>
-          <div class="stat"><span class="num">3</span><span class="label">Data Sources</span></div>
+        <div class="project-tags">
+          <span class="project-tag">SARIMA</span>
+          <span class="project-tag">XGBoost</span>
+          <span class="project-tag">Cyclical Features</span>
         </div>
       </div>
-
-      <!-- Side Hustle Card -->
-      <div class="card">
-        <span class="icon">💼</span>
-        <h2>Side Hustle Stack</h2>
-        <p class="desc">
-          Additional projects, experiments, and parallel business validation work built alongside the core ML portfolio. Consulting frameworks, automation scripts, and cross-domain analytics.
+      
+      <!-- NLP Text Classification -->
+      <div class="project-card">
+        <div class="project-icon">📝</div>
+        <h3>NLP Text Classification</h3>
+        <div class="project-meta">20 Newsgroups · Multi-Class NLP</div>
+        <p class="project-desc">
+          Automatic categorization of 18,846 real Usenet posts across 20 topics. TF-IDF vectorization with Naive Bayes, Logistic Regression, and Linear SVM comparison.
         </p>
-        <div class="tags">
-          <span class="tag">Experiments</span>
-          <span class="tag">Business Validation</span>
-          <span class="tag">Consulting</span>
-          <span class="tag">Automation</span>
+        <div class="project-stats">
+          <div class="project-stat">
+            <span class="project-stat-number">18,846</span>
+            <span class="project-stat-label">Documents</span>
+          </div>
+          <div class="project-stat">
+            <span class="project-stat-number">20</span>
+            <span class="project-stat-label">Classes</span>
+          </div>
+          <div class="project-stat">
+            <span class="project-stat-number">67.9%</span>
+            <span class="project-stat-label">Accuracy</span>
+          </div>
         </div>
-        <a href="side-hustle.html" class="cta">Explore →</a>
-        <div class="stats-row">
-          <div class="stat"><span class="num">5+</span><span class="label">Projects</span></div>
-          <div class="stat"><span class="num">12+</span><span class="label">Tools</span></div>
-          <div class="stat"><span class="num">∞</span><span class="label">Ideas</span></div>
+        <div class="project-tags">
+          <span class="project-tag">TF-IDF</span>
+          <span class="project-tag">Naive Bayes</span>
+          <span class="project-tag">scikit-learn</span>
         </div>
       </div>
-
+      
     </div>
   </section>
 
-  <!-- Key Findings Strip -->
-  <section id="metrics" class="container">
-    <div class="detail-strip">
-      <h3 class="section-title">Key <span>Findings</span></h3>
-      <div class="detail-grid">
-        <div class="detail-item">
-          <h4>🔧 Predictive Maintenance</h4>
-          <p>XGBoost achieved <strong>94% RUL accuracy</strong>. Only 5 sensors (EGT, fan speed, core speed, LPC temp, HPC temp) capture 90% of predictive signal — verified via recursive feature elimination.</p>
-        </div>
-        <div class="detail-item">
-          <h4>📊 NLP Classification</h4>
-          <p>TF-IDF + Naive Bayes scores <strong>68% on 20 categories</strong> and runs 400× faster than BERT. Tested on 18,846 real Usenet posts. Primary error: sci.electronics vs sci.crypt overlap.</p>
-        </div>
-        <div class="detail-item">
-          <h4>📈 Demand Forecasting</h4>
-          <p>Ensemble (ARIMA + XGBoost) outperformed either alone by <strong>18% MAE</strong>. Calendar patterns drive 73% of rental variance. Reduces overstocking by 22% on low-demand windows.</p>
-        </div>
-        <div class="detail-item">
-          <h4>💡 Business Impact</h4>
-          <p>5-sensor subset cuts IoT infrastructure by <strong>75%</strong>. CPU text classification eliminates GPU dependency. Predictable demand patterns enable 22% inventory reduction while maintaining 98% peak availability.</p>
-        </div>
+  <!-- Figure Gallery -->
+  <section id="gallery" class="container">
+    <h2 class="section-title">Figure <span>Gallery</span></h2>
+    <p class="section-subtitle">Key visualizations from each project — click any image to view full size.</p>
+    
+    <div class="gallery-grid">
+      
+      <div class="gallery-item">
+        <img src="https://raw.githubusercontent.com/gosidehustlesisi/sierra-applied-ml/main/projects/predictive-maintenance-transit/figures/sensor_degradation_curves.png" alt="Sensor Degradation Curves" loading="lazy">
+        <div class="gallery-caption">Sensor Degradation Curves</div>
+        <div class="gallery-subcaption">NASA C-MAPSS — HPC and LPC outlet temperatures diverge well before failure</div>
+      </div>
+      
+      <div class="gallery-item">
+        <img src="https://raw.githubusercontent.com/gosidehustlesisi/sierra-applied-ml/main/projects/predictive-maintenance-transit/figures/predicted_vs_actual_rul.png" alt="Predicted vs Actual RUL" loading="lazy">
+        <div class="gallery-caption">Predicted vs Actual RUL</div>
+        <div class="gallery-subcaption">XGBoost clusters tightly around perfect prediction for mid-range values</div>
+      </div>
+      
+      <div class="gallery-item">
+        <img src="https://raw.githubusercontent.com/gosidehustlesisi/sierra-applied-ml/main/projects/predictive-maintenance-transit/figures/feature_importance.png" alt="Feature Importance" loading="lazy">
+        <div class="gallery-caption">Feature Importance</div>
+        <div class="gallery-subcaption">Rolling-mean and rate-of-change features dominate raw sensor readings</div>
+      </div>
+      
+      <div class="gallery-item">
+        <img src="https://raw.githubusercontent.com/gosidehustlesisi/sierra-applied-ml/main/projects/predictive-maintenance-transit/figures/rul_distributions.png" alt="RUL Distributions" loading="lazy">
+        <div class="gallery-caption">RUL Distributions</div>
+        <div class="gallery-subcaption">Distribution of remaining useful life across the engine fleet</div>
+      </div>
+      
+      <div class="gallery-item">
+        <img src="https://raw.githubusercontent.com/gosidehustlesisi/sierra-applied-ml/main/projects/predictive-maintenance-transit/figures/sensor_rul_correlation.png" alt="Sensor-RUL Correlation" loading="lazy">
+        <div class="gallery-caption">Sensor-RUL Correlation</div>
+        <div class="gallery-subcaption">Heatmap of sensor correlation with remaining useful life</div>
+      </div>
+      
+      <div class="gallery-item">
+        <img src="https://raw.githubusercontent.com/gosidehustlesisi/sierra-applied-ml/main/projects/nlp-text-classification-pipeline/figures/confusion_matrix.png" alt="Confusion Matrix" loading="lazy">
+        <div class="gallery-caption">Confusion Matrix</div>
+        <div class="gallery-subcaption">Misclassifications cluster within super-categories (comp.*, sci.*)</div>
+      </div>
+      
+      <div class="gallery-item">
+        <img src="https://raw.githubusercontent.com/gosidehustlesisi/sierra-applied-ml/main/projects/nlp-text-classification-pipeline/figures/model_comparison.png" alt="Model Comparison" loading="lazy">
+        <div class="gallery-caption">Model Comparison</div>
+        <div class="gallery-subcaption">Naive Bayes with TF-IDF outperforms more complex alternatives</div>
+      </div>
+      
+      <div class="gallery-item">
+        <img src="https://raw.githubusercontent.com/gosidehustlesisi/sierra-applied-ml/main/projects/nlp-text-classification-pipeline/figures/top_tfidf_features.png" alt="Top TF-IDF Features" loading="lazy">
+        <div class="gallery-caption">Top TF-IDF Features</div>
+        <div class="gallery-subcaption">Domain-specific words drive classification ("space", "graphics")</div>
+      </div>
+      
+      <div class="gallery-item">
+        <img src="https://raw.githubusercontent.com/gosidehustlesisi/sierra-applied-ml/main/projects/nlp-text-classification-pipeline/figures/nlp_01_overview.png" alt="NLP Pipeline Overview" loading="lazy">
+        <div class="gallery-caption">NLP Pipeline Overview</div>
+        <div class="gallery-subcaption">Full text preprocessing → vectorization → classification flow</div>
+      </div>
+      
+      <div class="gallery-item">
+        <img src="https://raw.githubusercontent.com/gosidehustlesisi/sierra-applied-ml/main/projects/demand-forecasting-operations/figures/03_actual_vs_predicted.png" alt="Actual vs Predicted" loading="lazy">
+        <div class="gallery-caption">Actual vs Predicted</div>
+        <div class="gallery-subcaption">XGBoost ensemble tracks hourly demand with ~18% MAPE</div>
+      </div>
+      
+      <div class="gallery-item">
+        <img src="https://raw.githubusercontent.com/gosidehustlesisi/sierra-applied-ml/main/projects/demand-forecasting-operations/figures/03_model_comparison.png" alt="Forecast Model Comparison" loading="lazy">
+        <div class="gallery-caption">Forecast Model Comparison</div>
+        <div class="gallery-subcaption">XGBoost vs Random Forest vs Seasonal Naive baseline</div>
+      </div>
+      
+      <div class="gallery-item">
+        <img src="https://raw.githubusercontent.com/gosidehustlesisi/sierra-applied-ml/main/projects/demand-forecasting-operations/figures/03_seasonal_decomposition.png" alt="Seasonal Decomposition" loading="lazy">
+        <div class="gallery-caption">Seasonal Decomposition</div>
+        <div class="gallery-subcaption">Trend, weekly seasonality, and residual extraction</div>
+      </div>
+      
+    </div>
+  </section>
+
+  <!-- Verified Data Sources -->
+  <section id="data" class="container">
+    <h2 class="section-title">Verified <span>Data Sources</span></h2>
+    <p class="section-subtitle">Every record in this portfolio was fetched from a public source. No synthetic data. No mock CSVs.</p>
+    
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Source</th>
+          <th>Dataset</th>
+          <th>Records</th>
+          <th>Project</th>
+          <th>Link</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>🚀 NASA C-MAPSS</td>
+          <td>Turbofan FD001</td>
+          <td>20,631 cycles / 100 engines</td>
+          <td>Predictive Maintenance</td>
+          <td><a href="https://ti.arc.nasa.gov/tech/dash/groups/pcoe/prognostic-data-repository/" class="source-link" target="_blank" rel="noopener">ti.arc.nasa.gov</a></td>
+        </tr>
+        <tr>
+          <td>🚲 UCI Bike Sharing</td>
+          <td>Capital Bikeshare</td>
+          <td>17,379 hourly / 731 daily</td>
+          <td>Demand Forecasting</td>
+          <td><a href="https://archive.ics.uci.edu/ml/datasets/Bike+Sharing+Dataset" class="source-link" target="_blank" rel="noopener">archive.ics.uci.edu</a></td>
+        </tr>
+        <tr>
+          <td>📰 CMU 20 Newsgroups</td>
+          <td>Usenet Posts</td>
+          <td>18,846 documents</td>
+          <td>NLP Classification</td>
+          <td><a href="https://scikit-learn.org/0.19/datasets/twenty_newsgroups.html" class="source-link" target="_blank" rel="noopener">scikit-learn</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- Tech Stack -->
+  <section id="stack" class="container">
+    <h2 class="section-title">Tech <span>Stack</span></h2>
+    <p class="section-subtitle">Tools and libraries used across all projects.</p>
+    
+    <div class="stack-grid">
+      <div class="stack-item">
+        <div class="stack-icon">🐍</div>
+        <div class="stack-name">Python 3.10+</div>
+        <div class="stack-desc">Core Language</div>
+      </div>
+      <div class="stack-item">
+        <div class="stack-icon">🔬</div>
+        <div class="stack-name">scikit-learn</div>
+        <div class="stack-desc">ML &amp; NLP</div>
+      </div>
+      <div class="stack-item">
+        <div class="stack-icon">🚀</div>
+        <div class="stack-name">XGBoost</div>
+        <div class="stack-desc">Gradient Boosting</div>
+      </div>
+      <div class="stack-item">
+        <div class="stack-icon">🌳</div>
+        <div class="stack-name">Random Forest</div>
+        <div class="stack-desc">Ensemble</div>
+      </div>
+      <div class="stack-item">
+        <div class="stack-icon">📊</div>
+        <div class="stack-name">statsmodels</div>
+        <div class="stack-desc">SARIMA / Time-Series</div>
+      </div>
+      <div class="stack-item">
+        <div class="stack-icon">🐼</div>
+        <div class="stack-name">pandas</div>
+        <div class="stack-desc">Data Wrangling</div>
+      </div>
+      <div class="stack-item">
+        <div class="stack-icon">🔢</div>
+        <div class="stack-name">NumPy</div>
+        <div class="stack-desc">Numerical Computing</div>
+      </div>
+      <div class="stack-item">
+        <div class="stack-icon">📈</div>
+        <div class="stack-name">Matplotlib</div>
+        <div class="stack-desc">Visualization</div>
+      </div>
+      <div class="stack-item">
+        <div class="stack-icon">🎨</div>
+        <div class="stack-name">Seaborn</div>
+        <div class="stack-desc">Statistical Viz</div>
+      </div>
+      <div class="stack-item">
+        <div class="stack-icon">🗺️</div>
+        <div class="stack-name">Plotly</div>
+        <div class="stack-desc">Interactive Charts</div>
+      </div>
+      <div class="stack-item">
+        <div class="stack-icon">📓</div>
+        <div class="stack-name">Jupyter</div>
+        <div class="stack-desc">Notebooks</div>
+      </div>
+      <div class="stack-item">
+        <div class="stack-icon">🔄</div>
+        <div class="stack-name">GitHub Actions</div>
+        <div class="stack-desc">CI / Pages</div>
       </div>
     </div>
   </section>
 
+  <!-- Contact -->
+  <section id="contact" class="container contact-section">
+    <h2 class="contact-title">Let's Build Something Real</h2>
+    <p class="contact-subtitle">Hiring for applied ML, forecasting, or NLP roles? I ship pipelines, not notebooks.</p>
+    <div class="contact-links">
+      <a href="mailto:sierra.napier@e3-ai.com" class="contact-link">📧 Get In Touch</a>
+      <a href="https://github.com/gosidehustlesisi/sierra-applied-ml" class="contact-link" target="_blank" rel="noopener">GitHub Repo</a>
+      <a href="https://github.com/gosidehustlesisi" class="contact-link" target="_blank" rel="noopener">GitHub Profile</a>
+      <a href="https://gosidehustlesisi.github.io/" class="contact-link" target="_blank" rel="noopener">Full Portfolio</a>
+    </div>
+  </section>
+
+  <!-- Footer -->
   <footer>
     <div class="container">
-      <p>Built with real public data — NASA C-MAPSS, Citi Bike, 20 Newsgroups. Zero synthetic records.</p>
-      <p style="margin-top:0.75rem;">
+      <p>Built by Sierra Napier · Applied ML Portfolio · Zero synthetic records</p>
+      <p style="margin-top: 0.5rem;">
         <a href="https://gosidehustlesisi.github.io/">← Main Portfolio</a> · 
-        <a href="https://github.com/gosidehustlesisi/sierra-applied-ml">GitHub Repo</a> · 
-        <a href="https://www.linkedin.com/in/sierran/">LinkedIn</a>
+        <a href="interactive-dashboards/">Interactive Dashboards →</a>
       </p>
-      <p style="margin-top:0.5rem; font-size:0.7rem;">© Sierra Napier · Real data, real systems, real impact.</p>
     </div>
   </footer>
 
 </body>
 </html>
-
