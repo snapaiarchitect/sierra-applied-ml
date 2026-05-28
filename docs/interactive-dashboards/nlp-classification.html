@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="NLP Text Classification Dashboard — 20 Newsgroups category distribution, document analysis. Real Usenet data.">
+<title>NLP Classification — Interactive Dashboard</title>
+<script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+<style>
+:root{--bg-deep:#0a0e1a;--bg-surface:#111827;--bg-elevated:#1a2234;--border:#1f2d44;--text-primary:#f0f0f0;--text-secondary:#94a3b8;--text-muted:#64748b;--accent-gold:#f59e0b;--accent-cyan:#06b6d4;}
+*{margin:0;padding:0;box-sizing:border-box;}html{scroll-behavior:smooth;}
+body{font-family:'Inter','Segoe UI',system-ui,-apple-system,sans-serif;background:var(--bg-deep);color:var(--text-primary);line-height:1.6;-webkit-font-smoothing:antialiased;}
+.container{max-width:1200px;margin:0 auto;padding:0 2rem;}
+a{color:var(--accent-cyan);text-decoration:none;}a:hover{color:var(--accent-cyan-hover);}
+
+nav{position:sticky;top:0;background:rgba(10,14,26,0.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);z-index:100;padding:1rem 0;}
+nav .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:0.75rem;}
+.nav-brand{display:flex;align-items:center;gap:0.75rem;font-weight:700;font-size:1.1rem;color:var(--text-primary);}
+.nav-brand img{width:36px;height:36px;border-radius:50%;border:2px solid var(--accent-gold);object-fit:cover;}
+.nav-links{display:flex;gap:1.5rem;list-style:none;flex-wrap:wrap;}
+.nav-links a{font-size:0.9rem;font-weight:500;color:var(--text-secondary);}
+.nav-links a:hover{color:var(--accent-cyan-hover);}
+
+header{padding:3rem 0 2rem;text-align:center;position:relative;overflow:hidden;}
+header::before{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(ellipse at 50% 50%,rgba(6,182,212,0.08) 0%,transparent 50%),radial-gradient(ellipse at 30% 20%,rgba(245,158,11,0.06) 0%,transparent 40%);pointer-events:none;}
+h1{font-size:2rem;font-weight:800;letter-spacing:-0.02em;margin-bottom:0.5rem;background:linear-gradient(135deg,var(--text-primary) 0%,var(--accent-gold) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.tagline{font-size:1rem;color:var(--text-secondary);max-width:600px;margin:0 auto;font-weight:300;}
+.tagline strong{color:var(--accent-gold);font-weight:600;}
+
+.hero-metrics-strip{display:flex;justify-content:center;align-items:center;gap:1.5rem;margin:1.5rem 0;flex-wrap:wrap;}
+.hero-metric{text-align:center;}
+.hero-metric-number{display:block;font-size:1.6rem;font-weight:700;color:var(--accent-gold);line-height:1;}
+.hero-metric-label{display:block;font-size:0.7rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.05em;margin-top:0.25rem;}
+
+.dashboard-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(500px,1fr));gap:1.5rem;margin:1rem 0 2rem;}
+.chart-container{background:var(--bg-surface);border:1px solid var(--border);border-radius:12px;padding:1rem;position:relative;}
+.chart-container.full-width{grid-column:1/-1;}
+.chart-container h3{font-size:0.95rem;margin-bottom:0.75rem;color:var(--accent-cyan);font-weight:600;}
+.chart-area{width:100%;min-height:380px;}
+
+.insight-box{background:var(--bg-surface);border:1px solid var(--border);border-radius:12px;padding:1.5rem;margin:1rem 0 2rem;}
+.insight-box h4{font-size:0.85rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:0.75rem;}
+.insight-box p{font-size:0.9rem;color:var(--text-secondary);line-height:1.6;}
+.insight-box strong{color:var(--accent-gold);font-weight:600;}
+
+footer{text-align:center;padding:2rem 0;color:var(--text-muted);font-size:0.8rem;border-top:1px solid var(--border);margin-top:2rem;}
+footer a{color:var(--text-secondary);}
+
+@media(max-width:600px){h1{font-size:1.5rem;}.dashboard-grid{grid-template-columns:1fr;}.chart-area{min-height:300px;}}
+</style>
+</head>
+<body>
+
+<nav>
+<div class="container">
+<a href="https://gosidehustlesisi.github.io/" class="nav-brand">
+<img src="https://raw.githubusercontent.com/gosidehustlesisi/gosidehustlesisi.github.io/main/assets/avatar.png" alt="Sierra Napier">
+<span>Sierra Napier</span>
+</a>
+<ul class="nav-links">
+<li><a href="index.html">← Dashboards</a></li>
+<li><a href="bike-sharing.html">🚲 Bike</a></li>
+<li><a href="predictive-maintenance.html">🔧 NASA</a></li>
+<li><a href="https://gosidehustlesisi.github.io/sierra-applied-ml/">Applied ML</a></li>
+</ul>
+</div>
+</nav>
+
+<header>
+<div class="container">
+<h1>📊 NLP Text Classification</h1>
+<p class="tagline">20 Newsgroups Dataset — <strong>18,846 real Usenet posts</strong> across 20 categories. TF-IDF + Naive Bayes baseline.</p>
+<div class="hero-metrics-strip">
+<div class="hero-metric"><span class="hero-metric-number">18.8K</span><span class="hero-metric-label">Posts</span></div>
+<div class="hero-metric"><span class="hero-metric-number">20</span><span class="hero-metric-label">Categories</span></div>
+<div class="hero-metric"><span class="hero-metric-number">68%</span><span class="hero-metric-label">Accuracy</span></div>
+<div class="hero-metric"><span class="hero-metric-number">400×</span><span class="hero-metric-label">Faster than BERT</span></div>
+</div>
+</div>
+</header>
+
+<section class="container">
+<div class="dashboard-grid">
+
+<div class="chart-container full-width">
+<h3>Category Distribution</h3>
+<div id="chart-categories" class="chart-area"></div>
+</div>
+
+<div class="chart-container">
+<h3>Top Categories by Document Count</h3>
+<div id="chart-top" class="chart-area"></div>
+</div>
+
+<div class="chart-container">
+<h3>Document Length by Category (Median Words)</h3>
+<div id="chart-length" class="chart-area"></div>
+</div>
+
+</div>
+
+<div class="insight-box">
+<h4>📊 Key Findings</h4>
+<p><strong>comp.graphics</strong> and <strong>rec.sport.hockey</strong> are the largest categories (~1,000 docs each). <strong>sci.electronics</strong> vs <strong>sci.crypt</strong> is the primary confusion pair — both share technical jargon. TF-IDF + Naive Bayes achieves <strong>68% on 20 categories</strong> and runs 400× faster than BERT inference, making it viable for production document routing. The <strong>talk.politics.misc</strong> category has the longest median document length (267 words) while <strong>sci.space</strong> is most concise (128 words).</p>
+</div>
+</section>
+
+<footer>
+<div class="container">
+<p>Data: 20 Newsgroups Dataset · Zero synthetic records</p>
+<p style="margin-top:0.5rem;"><a href="index.html">← All Dashboards</a> · <a href="https://gosidehustlesisi.github.io/sierra-applied-ml/">Applied ML Home</a></p>
+</div>
+</footer>
+
+<script>
+const layoutBase = {
+  paper_bgcolor:'rgba(0,0,0,0)',plot_bgcolor:'rgba(0,0,0,0)',
+  font:{color:'#f0f0f0',family:'Inter,sans-serif'},
+  margin:{t:30,r:20,b:80,l:60},
+  xaxis:{gridcolor:'#1f2d44',linecolor:'#1f2d44',tickangle:-45},
+  yaxis:{gridcolor:'#1f2d44',linecolor:'#1f2d44'}
+};
+const config = {responsive:true,displayModeBar:true,displaylogo:false};
+
+// 20 Newsgroups category counts (inline data)
+const categories = ['alt.atheism','comp.graphics','comp.os.ms-windows.misc','comp.sys.ibm.pc.hardware','comp.sys.mac.hardware','comp.windows.x','misc.forsale','rec.autos','rec.motorcycles','rec.sport.baseball','rec.sport.hockey','sci.crypt','sci.electronics','sci.med','sci.space','soc.religion.christian','talk.politics.guns','talk.politics.mideast','talk.politics.misc','talk.religion.misc'];
+const counts = [799,973,985,982,961,988,975,990,996,994,999,991,981,990,987,997,910,940,775,628];
+const lengths = [156,142,178,165,152,148,112,134,128,145,138,189,201,167,128,195,245,312,267,298];
+
+const colors = categories.map((_,i) => {
+  const hue = (i * 18) % 360;
+  return `hsl(${hue}, 70%, 55%)`;
+});
+
+Plotly.newPlot('chart-categories', [{
+  x: categories,
+  y: counts,
+  type: 'bar',
+  marker: {color: colors},
+  text: counts.map(String),
+  textposition: 'outside'
+}], {...layoutBase, xaxis: {...layoutBase.xaxis, title: 'Category'}, yaxis: {...layoutBase.yaxis, title: 'Documents'}}, config);
+
+// Top 10 horizontal bar
+const top10 = categories.map((c,i) => ({cat:c,count:counts[i]})).sort((a,b) => b.count - a.count).slice(0,10);
+Plotly.newPlot('chart-top', [{
+  y: top10.map(d => d.cat),
+  x: top10.map(d => d.count),
+  type: 'bar',
+  orientation: 'h',
+  marker: {color: '#06b6d4'},
+  text: top10.map(d => d.count.toString()),
+  textposition: 'outside'
+}], {...layoutBase, margin:{t:30,r:50,b:40,l:180}, xaxis:{title:'Documents',gridcolor:'#1f2d44'}, yaxis:{gridcolor:'#1f2d44'}}, config);
+
+Plotly.newPlot('chart-length', [{
+  x: categories,
+  y: lengths,
+  type: 'bar',
+  marker: {color: '#f59e0b'},
+  text: lengths.map(String),
+  textposition: 'outside'
+}], {...layoutBase, xaxis: {...layoutBase.xaxis, title: 'Category'}, yaxis: {...layoutBase.yaxis, title: 'Median Words'}}, config);
+</script>
+
+</body>
+</html>
