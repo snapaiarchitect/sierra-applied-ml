@@ -23,6 +23,7 @@ uvicorn>=0.23
 matplotlib>=3.6
 seaborn>=0.12
 plotly>=5.14
+streamlit>=1.30.0
 
 # Data
 dbt-core>=1.5
