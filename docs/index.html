@@ -1,0 +1,69 @@
+<![CDATA[
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Sierra Napier — Applied ML Portfolio. Predictive maintenance, NLP classification, and demand forecasting with real public data.">
+<title>Sierra Napier — Applied ML</title>
+<style>
+:root{--bg:#0f1115;--surface:#1a2234;--elevated:#111827;--border:#1f2d44;--text:#f0f0f0;--muted:#94a3b8;--accent:#8b5cf6;--accent-hover:#a78bfa;}
+*{margin:0;padding:0;box-sizing:border-box;}html{scroll-behavior:smooth;}
+body{font-family:"Inter",system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;-webkit-font-smoothing:antialiased;}
+a{color:var(--accent);text-decoration:none;transition:color .2s;}a:hover{color:var(--accent-hover);}
+.container{max-width:1000px;margin:0 auto;padding:0 1.5rem;}
+header{padding:4rem 0 2rem;text-align:center;}
+header h1{font-size:2.2rem;font-weight:700;margin-bottom:.5rem;}
+header p.subtitle{color:var(--muted);font-size:1.1rem;max-width:600px;margin:0 auto 1.5rem;}
+header .meta{display:flex;justify-content:center;gap:2rem;flex-wrap:wrap;margin-top:1.5rem;}
+header .meta span{color:var(--muted);font-size:.9rem;}
+header .meta strong{color:var(--text);font-weight:600;}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.5rem;margin:2rem 0 4rem;}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.75rem;transition:transform .2s,border-color .2s,box-shadow .2s;}
+.card:hover{transform:translateY(-3px);border-color:var(--accent);box-shadow:0 8px 24px rgba(139,92,246,.12);}
+.card .icon{font-size:2rem;margin-bottom:1rem;}
+.card h2{font-size:1.25rem;font-weight:600;margin-bottom:.5rem;}
+.card p.desc{color:var(--muted);font-size:.95rem;margin-bottom:1.25rem;min-height:2.8em;}
+.card .tags{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1.25rem;}
+.card .tag{background:var(--elevated);color:var(--muted);font-size:.75rem;padding:.25rem .6rem;border-radius:4px;border:1px solid var(--border);}
+.card .cta{display:inline-block;background:var(--accent);color:#fff;font-size:.9rem;font-weight:500;padding:.6rem 1.25rem;border-radius:6px;transition:background .2s;}
+.card .cta:hover{background:var(--accent-hover);color:#fff;}
+.stats-bar{background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:2rem 0;margin:2rem 0;}
+.stats-bar .container{display:flex;justify-content:center;gap:3rem;flex-wrap:wrap;}
+.stats-bar .stat{text-align:center;}
+.stats-bar .stat .num{display:block;font-size:2rem;font-weight:700;color:var(--accent);}
+.stats-bar .stat .label{color:var(--muted);font-size:.85rem;text-transform:uppercase;letter-spacing:.05em;}
+footer{text-align:center;padding:3rem 0;color:var(--muted);font-size:.85rem;border-top:1px solid var(--border);margin-top:2rem;}
+footer a{color:var(--muted);text-decoration:underline;}
+footer a:hover{color:var(--accent);}
+@media(max-width:600px){header h1{font-size:1.6rem;}header .meta{gap:1rem;}.cards{grid-template-columns:1fr;}.stats-bar .container{gap:1.5rem;}}
+</style>
+</head>
+<body>
+<header><div class="container">
+<h1>🔧 Sierra Napier</h1>
+<p class="subtitle">Applied ML — Production systems that survive contact with real operational data. NASA turbofan predictive maintenance, NLP document classification, and demand forecasting.</p>
+<div class="meta">
+<span><strong>3</strong> Production Projects</span>
+<span><strong>10</strong> Executed Notebooks</span>
+<span><strong>130K+</strong> Records Processed</span>
+</div>
+</div></header>
+<section class="stats-bar"><div class="container">
+<div class="stat"><span class="num">94%</span><span class="label">Best Accuracy</span></div>
+<div class="stat"><span class="num">0.72</span><span class="label">C-index</span></div>
+<div class="stat"><span class="num">7.1%</span><span class="label">MAPE</span></div>
+<div class="stat"><span class="num">$1M+</span><span class="label">Business Impact</span></div>
+</div></section>
+<main class="container"><div class="cards">
+<div class="card"><div class="icon">📊</div><h2>Interactive Dashboard</h2><p class="desc">Live Plotly charts fed by real CSV data. Bike demand patterns, NASA RUL predictions, newsgroup distributions — no mock data.</p><div class="tags"><span class="tag">Plotly</span><span class="tag">PapaParse</span><span class="tag">Live Data</span><span class="tag">6 Charts</span></div><a href="applied_ml_dashboard.html" class="cta">Open Dashboard →</a></div>
+<div class="card"><div class="icon">📋</div><h2>Portfolio Report</h2><p class="desc">Full project breakdown with techniques, notebook inventory, skills matrix, and measurable outcomes per project.</p><div class="tags"><span class="tag">3 Projects</span><span class="tag">10 Notebooks</span><span class="tag">Skills Matrix</span></div><a href="portfolio-report.html" class="cta">View Report →</a></div>
+<div class="card"><div class="icon">💼</div><h2>Side Hustle Stack</h2><p class="desc">Additional projects, experiments, and parallel business validation work built alongside the core ML portfolio.</p><div class="tags"><span class="tag">Experiments</span><span class="tag">Business Validation</span><span class="tag">Parallel Builds</span></div><a href="side-hustle.html" class="cta">Explore →</a></div>
+</div></main>
+<footer><div class="container">
+<p>Built with real public data — NASA C-MAPSS, Citi Bike, 20 Newsgroups. No synthetic data, no placeholders.</p>
+<p style="margin-top:.5rem;"><a href="https://gosidehustlesisi.github.io/">← Main Portfolio</a> · <a href="https://github.com/gosidehustlesisi/sierra-applied-ml">GitHub Repo</a></p>
+</div></footer>
+</body>
+</html>
+]]>
