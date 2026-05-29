@@ -4,20 +4,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Sierra Napier — Applied ML Portfolio. NASA C-MAPSS predictive maintenance, 20 Newsgroups NLP classification, UCI Bike Sharing demand forecasting. Real public data. Zero synthetic records.">
-  
-  <!-- Open Graph -->
   <meta property="og:title" content="Sierra Napier — Applied ML | Predictive Maintenance · NLP · Forecasting">
   <meta property="og:description" content="3 production ML projects · 11 notebooks · 21 visualizations · NASA · UCI · sklearn. Real public data, zero synthetic records.">
   <meta property="og:image" content="https://raw.githubusercontent.com/gosidehustlesisi/gosidehustlesisi.github.io/main/assets/avatar.png">
   <meta property="og:url" content="https://gosidehustlesisi.github.io/sierra-applied-ml/">
   <meta property="og:type" content="website">
-  
-  <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:image" content="https://raw.githubusercontent.com/gosidehustlesisi/gosidehustlesisi.github.io/main/assets/avatar.png">
-  
   <title>Sierra Napier — Applied ML</title>
-  
   <style>
     :root {
       --bg-deep: #0a0e1a;
@@ -300,6 +294,32 @@
       font-weight: 500;
     }
 
+    /* Interactive Chart Containers */
+    .chart-embed {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .chart-embed:hover {
+      border-color: var(--accent-gold);
+      transform: translateY(-2px);
+    }
+    .chart-embed-header {
+      padding: 1.25rem 1.75rem 0;
+    }
+    .chart-embed iframe {
+      width: 100%;
+      height: 500px;
+      border: none;
+      border-top: 1px solid var(--border);
+      display: block;
+    }
+    .chart-embed-footer {
+      padding: 0.75rem 1.75rem 1.25rem;
+    }
+
     /* Figure Gallery */
     .gallery-grid {
       display: grid;
@@ -457,6 +477,7 @@
       .gallery-grid { grid-template-columns: 1fr; }
       .stack-grid { grid-template-columns: repeat(2, 1fr); }
       .contact-links { flex-direction: column; align-items: center; }
+      .chart-embed iframe { height: 400px; }
     }
   </style>
 </head>
@@ -471,6 +492,7 @@
       </a>
       <ul class="nav-links">
         <li><a href="#projects">Projects</a></li>
+        <li><a href="#interactive">Interactive</a></li>
         <li><a href="#gallery">Gallery</a></li>
         <li><a href="#data">Data</a></li>
         <li><a href="#stack">Stack</a></li>
@@ -641,6 +663,76 @@
           <span class="project-tag">TF-IDF</span>
           <span class="project-tag">Naive Bayes</span>
           <span class="project-tag">CPU-First</span>
+        </div>
+      </div>
+      
+    </div>
+  </section>
+
+  <!-- Interactive Charts — Embedded -->
+  <section id="interactive" class="container">
+    <h2 class="section-title">Interactive <span>Charts</span></h2>
+    <p class="section-subtitle">Click any chart to explore — toggle models, filter data, zoom, and export. These are live Plotly visualizations with real data, not static images.</p>
+    
+    <div class="projects-grid">
+      
+      <!-- Ensemble Forecast Embed -->
+      <div class="chart-embed">
+        <div class="chart-embed-header">
+          <div class="project-icon">📈</div>
+          <h3>Ensemble Forecast — Actual vs. Predicted</h3>
+          <div class="project-meta">UCI Bike Sharing · Model Toggle · 30-Day Holdout</div>
+        </div>
+        <iframe src="projects/demand-forecasting.html" loading="lazy" title="Demand Forecasting Interactive Chart"
+          sandbox="allow-scripts allow-same-origin allow-popups"
+          style="width:100%; height:500px; border:none; border-top: 1px solid var(--border); display:block;">
+        </iframe>
+        <div class="chart-embed-footer">
+          <div class="project-tags">
+            <span class="project-tag">Toggle Models</span>
+            <span class="project-tag">30-Day Holdout</span>
+            <span class="project-tag">Live Data</span>
+          </div>
+        </div>
+      </div>
+      
+      <!-- NLP Classification Embed -->
+      <div class="chart-embed">
+        <div class="chart-embed-header">
+          <div class="project-icon">📝</div>
+          <h3>NLP Text Classification</h3>
+          <div class="project-meta">20 Newsgroups · TF-IDF Heatmap · Confusion Matrix</div>
+        </div>
+        <iframe src="projects/nlp-text-classification.html" loading="lazy" title="NLP Classification Interactive Chart"
+          sandbox="allow-scripts allow-same-origin allow-popups"
+          style="width:100%; height:500px; border:none; border-top: 1px solid var(--border); display:block;">
+        </iframe>
+        <div class="chart-embed-footer">
+          <div class="project-tags">
+            <span class="project-tag">Train/Test Filter</span>
+            <span class="project-tag">Radar Chart</span>
+            <span class="project-tag">Live Data</span>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Predictive Maintenance Embed -->
+      <div class="chart-embed">
+        <div class="chart-embed-header">
+          <div class="project-icon">🔧</div>
+          <h3>Predictive Maintenance — NASA C-MAPSS</h3>
+          <div class="project-meta">RUL Prediction · Sensor Trajectories · Feature Importance</div>
+        </div>
+        <iframe src="projects/predictive-maintenance.html" loading="lazy" title="Predictive Maintenance Interactive Chart"
+          sandbox="allow-scripts allow-same-origin allow-popups"
+          style="width:100%; height:500px; border:none; border-top: 1px solid var(--border); display:block;">
+        </iframe>
+        <div class="chart-embed-footer">
+          <div class="project-tags">
+            <span class="project-tag">RUL Filter</span>
+            <span class="project-tag">Sensor Trajectories</span>
+            <span class="project-tag">Live Data</span>
+          </div>
         </div>
       </div>
       
@@ -864,4 +956,3 @@
 
 </body>
 </html>
-
