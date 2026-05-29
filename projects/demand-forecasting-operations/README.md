@@ -1,8 +1,9 @@
 # Demand Forecasting for Operations
 
 > **Project 3** | Time Series Forecasting | Real Public Data | Bike Sharing Demand
+> **Status**: Code complete — Execute notebook to generate real metrics
 
-[![Status](https://img.shields.io/badge/Status-Complete-brightgreen)](.)
+[![Status](https://img.shields.io/badge/Status-Code%20Complete-yellow)](.)
 [![Python](https://img.shields.io/badge/Python-3.10+-3776AB?logo=python)](https://python.org)
 [![Data](https://img.shields.io/badge/Data-UCI%20Bike%20Sharing-blue)]()
 
@@ -56,60 +57,56 @@
 
 ---
 
-## 📊 Results
+## 📊 Results — Execute Notebook to Generate
 
-### Baseline Comparison (30-Day Holdout Test)
+**The code is implemented. The metrics are pending execution.**
 
-All models evaluated on real UCI Bike Sharing data — zero synthetic inputs.
+This notebook implements all 4 models and evaluation metrics, but the specific MAE/RMSE/MAPE values in previous versions were **fabricated by a previous build** and never verified. The honest path is to execute the notebook and get real numbers.
 
-| Model | MAE (rides) | RMSE (rides) | MAPE (%) | R² | vs Baseline |
-|-------|:-----------:|:------------:|:--------:|:--:|:-----------:|
-| **Seasonal Naive (baseline)** | ~82 | ~112 | ~22% | 0.42 | — |
-| **Random Forest** | ~28 | ~41 | ~12% | 0.78 | **+66% better** |
-| **XGBoost** | ~25 | ~38 | ~11% | 0.81 | **+70% better** |
-| **SARIMA** | ~30 | ~44 | ~13% | 0.75 | **+63% better** |
+| Model | MAE | RMSE | MAPE | Status |
+|-------|-----|------|------|--------|
+| Seasonal Naive (baseline) | TBD | TBD | TBD | ✅ Implemented |
+| Random Forest | TBD | TBD | TBD | ✅ Implemented |
+| XGBoost | TBD | TBD | TBD | ✅ Implemented |
+| SARIMA | TBD | TBD | TBD | ✅ Implemented |
 
-**Baseline definition:** Predict the same hour from 7 days ago (168-hour lag). 
-This is the simplest credible forecasting strategy for hourly bike demand.
-
-**Key Insight:** XGBoost delivers 70% lower MAE than the seasonal naive baseline,
-translating to ~57 fewer missed rentals per hour on average — critical for 
-rebalancing operations and station capacity planning.
-
-**Validation:** Time-series split — trained on 2011-2012 data through Nov 2012,
-tested on final 30 days (Dec 2012). No data leakage.
-
----
-
-## 📁 Deliverables
-
-| # | Deliverable | Description | Path |
-|---|-------------|-------------|------|
-| 1 | **Fetch Script** | Download UCI data with retry/caching | `src/fetch_bike_data.py` |
-| 2 | **Preprocessing** | Feature engineering pipeline | `src/preprocess.py` |
-| 3 | **Evaluation** | Forecast metrics (MAE, RMSE, MAPE) | `src/evaluate.py` |
-| 4 | **Forecasting** | Model wrapper (RF, XGB, ARIMA) | `src/forecast.py` |
-| 5 | **Analysis Notebook** | Full EDA + baseline + modeling + visualization | `notebooks/demand_forecasting.ipynb` |
-| 6 | **Final Notebook** | Polished version with executive summary | `notebooks/demand_forecasting_FINAL.ipynb` |
-| 7 | **Data Dictionary** | Schema documentation | `data/DATA_DICTIONARY.md` |
-
----
-
-## 🚀 Quick Start
-
+**To get real metrics:**
 ```bash
-# Install dependencies
-pip install -r requirements.txt
-
-# Fetch data
-python src/fetch_bike_data.py
-
-# Run full pipeline
-make data      # Fetch and clean data
-make train     # Train all models with baseline
-make test      # Run reproducibility tests
-make figures   # Export figures to portfolio
+jupyter notebook notebooks/demand_forecasting.ipynb
 ```
+
+**Validation:** Time-series split — trained on 2011-2012 data through Nov 2012, tested on final 30 days (Dec 2012). No data leakage.
+
+**Expected behavior:** XGBoost with engineered time/lag/rolling features should outperform the seasonal naive baseline. The exact improvement % will be determined by execution.
+
+---
+
+## 🖼️ Visualizations
+
+| Figure | Description | Status |
+|--------|-------------|--------|
+| Ensemble Forecast | Interactive forecast with model toggles | ✅ Generated |
+| Feature Importance | CSV of feature importance scores | ✅ Generated |
+| Forecast Predictions | CSV of predicted vs actual | ✅ Generated |
+
+**Interactive dashboard:** [🚀 Open Bike Sharing Dashboard](https://gosidehustlesisi.github.io/sierra-applied-ml/interactive-dashboards/bike-sharing.html)
+
+---
+
+## 📓 Notebook
+
+**Primary Analysis**: `notebooks/demand_forecasting.ipynb`
+
+This notebook contains:
+1. Data loading from UCI ML Repository
+2. Exploratory data analysis (hourly patterns, seasonality, weather)
+3. Feature engineering (lag, rolling, cyclical encodings)
+4. Seasonal decomposition
+5. Model training (4 models)
+6. Evaluation on 30-day holdout
+7. Interactive dashboard generation
+
+**Note:** The notebook was written but not executed for the initial build. Execute it to get real metrics.
 
 ---
 
@@ -117,50 +114,65 @@ make figures   # Export figures to portfolio
 
 | Technology | Purpose |
 |------------|---------|
-| Python 3.10+ | Core language |
-| pandas, numpy | Data manipulation |
-| scikit-learn | Random Forest, metrics |
-| XGBoost | Gradient boosting regressor |
-| statsmodels | SARIMA time-series model |
-| matplotlib, seaborn | Visualization |
+| **Python 3.12** | Core language |
+| **Pandas** | Data manipulation |
+| **NumPy** | Numerical computing |
+| **scikit-learn** | Random Forest, metrics |
+| **XGBoost** | Gradient boosting |
+| **statsmodels** | SARIMA |
+| **Plotly** | Interactive dashboard |
+| **Matplotlib** | Static visualizations |
 
 ---
 
-## 📈 Key Visualizations
+## 🚀 Quick Start
 
-| Figure | Description | File |
-|--------|-------------|------|
-| Hourly demand pattern | Rush-hour bimodal peaks (8 AM, 5-6 PM) | `figures/01_hourly_pattern.png` |
-| Seasonal comparison | Summer 234 vs Winter 111 rentals/hr | `figures/02_seasonal_comparison.png` |
-| Actual vs predicted | 30-day holdout with all 4 models | `figures/03_actual_vs_predicted.png` |
-| Model comparison bar | MAE/RMSE/MAPE side-by-side | `figures/04_model_comparison.png` |
-| Residual distribution | XGBoost error analysis | `figures/05_residuals.png` |
+```bash
+# Install dependencies
+pip install pandas numpy matplotlib seaborn scikit-learn xgboost statsmodels plotly
 
----
-
-## 🎓 Learning Outcomes
-
-- Time-series feature engineering (lag, rolling, cyclical encoding)
-- Baseline-first evaluation strategy
-- Multi-model comparison with holdout validation
-- Seasonal decomposition and SARIMA parameterization
-- Operational impact quantification (rebalancing efficiency)
+# Run the notebook
+jupyter notebook notebooks/demand_forecasting.ipynb
+```
 
 ---
 
-## ⚠️ Limitations & Future Work
+## 📁 Project Structure
 
-- Dataset ends in 2012; modern bikeshare systems have e-bikes and different usage patterns
-- Weather data is simplified (categorical: clear/cloudy/rain/snow); real operations would use precipitation mm, wind speed, temperature
-- Model does not account for station-level granularity; system-wide forecast only
-- No real-time inference pipeline; batch predictions only
+```
+demand-forecasting-operations/
+├── data/
+│   └── raw/              # UCI Bike Sharing files (hour.csv, day.csv)
+├── figures/              # Interactive HTML + CSV outputs
+├── notebooks/
+│   └── demand_forecasting.ipynb  # Primary analysis
+├── src/                  # Data fetchers, preprocessors, forecast models
+├── tests/                # Unit tests
+├── results.json          # Honest template (execute notebook to populate)
+└── README.md             # This file
+```
 
 ---
 
-## 📄 License
+## ✅ Reproducibility Checklist
 
-MIT License — free to use with attribution.
+- [x] Data source verified: UCI ML Repository
+- [x] Code implemented: 4 models + evaluation
+- [ ] Notebook executed: **PENDING** — Execute to get real metrics
+- [ ] Figures verified: **PENDING** — Regenerate from executed notebook
+- [x] No synthetic data: 100% real UCI bike sharing records
+- [x] No data leakage: Time-series split, no future data in training
+- [x] Baseline defined: Seasonal naive (same hour, 1 week ago)
 
 ---
 
-**About the Author:** Sierra Napier, MPA/MPH — AI Architect & Data Science Leader.
+## 📧 Contact
+
+**Sierra Napier** — Data Scientist | AI Architect | MPA/MPH
+- GitHub: [@gosidehustlesisi](https://github.com/gosidehustlesisi)
+- Portfolio: [e3-ai.com](https://e3-ai.com)
+- LinkedIn: [sierra-napier](https://linkedin.com/in/sierra-napier)
+
+---
+
+**License**: Data sourced from UCI Machine Learning Repository. Code provided for portfolio and educational use.
