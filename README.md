@@ -2,7 +2,7 @@
   <img src="https://avatars.githubusercontent.com/u/267403929?v=4" width="120" style="border-radius: 50%;" alt="Sierra Napier">
   <h1>SIERRA-APPLIED-ML</h1>
   <p><strong>Real NASA sensor data, real Usenet posts, real bike-sharing records — zero synthetic records.</strong></p>
-  <p>56,856+ real records · 3 projects · 11 notebooks · 32 charts</p>
+  <p>56,856+ real records · 3 projects · 11 notebooks · 32 charts · <strong>3 interactive dashboards</strong> · <strong>3 live project pages</strong></p>
 </div>
 
 ---
@@ -15,6 +15,31 @@
 ![Python](https://img.shields.io/badge/Python-3.10+-3776AB?style=flat-square&logo=python)
 ![scikit-learn](https://img.shields.io/badge/scikit--learn-1.2+-F7931E?style=flat-square)
 ![XGBoost](https://img.shields.io/badge/XGBoost-1.7+-orange?style=flat-square)
+![Plotly](https://img.shields.io/badge/Plotly-Interactive-blue?style=flat-square)
+
+---
+
+## 🚀 Interactive Dashboards — Live
+
+These aren't screenshots. They're live Plotly visualizations with real data, model toggles, and drill-down controls. Click to explore.
+
+| Dashboard | What You Can Do | Live Link |
+|---|---|---|
+| **Bike Sharing — Demand Forecasting** | Toggle models (All / Baseline / Random Forest / XGBoost / SARIMA), view 30-day holdout, compare actual vs predicted | [🚀 Open](https://gosidehustlesisi.github.io/sierra-applied-ml/interactive-dashboards/bike-sharing.html) |
+| **NLP — Text Classification** | Filter train/test splits, view TF-IDF heatmaps, compare model radar charts, explore confusion matrices | [🚀 Open](https://gosidehustlesisi.github.io/sierra-applied-ml/interactive-dashboards/nlp-classification.html) |
+| **NASA — Predictive Maintenance** | Filter engines by RUL (early/long-life), view sensor trajectories, see feature importance, check prediction confidence bands | [🚀 Open](https://gosidehustlesisi.github.io/sierra-applied-ml/interactive-dashboards/predictive-maintenance.html) |
+
+---
+
+## 📊 Standalone Project Pages
+
+Full-screen interactive analytics for each project — same charts as the dashboards, optimized for presentation and deep-dive exploration.
+
+| Project | Live Page | Charts |
+|---|---|---|
+| **Demand Forecasting** | [View →](https://gosidehustlesisi.github.io/sierra-applied-ml/projects/demand-forecasting.html) | 6 interactive charts: ensemble forecast, model comparison, residual distribution, seasonal pattern, hourly demand, feature importance |
+| **NLP Classification** | [View →](https://gosidehustlesisi.github.io/sierra-applied-ml/projects/nlp-text-classification.html) | 5 interactive charts: category distribution, TF-IDF heatmap, model comparison, confusion matrix, radar chart |
+| **Predictive Maintenance** | [View →](https://gosidehustlesisi.github.io/sierra-applied-ml/projects/predictive-maintenance.html) | 5 interactive charts: RUL distribution, sensor trajectories, feature importance, correlation by phase, predicted vs actual with confidence band |
 
 ---
 
@@ -83,6 +108,9 @@ These three projects demonstrate what I bring to an applied ML role: **end-to-en
   <em><strong>Peak insight:</strong> Engineered rolling-mean and rate-of-change features dominate raw sensor readings — proof that domain-informed preprocessing outperforms throwing raw signals at a model.</em>
 </p>
 
+### Interactive Dashboard
+Explore the live NASA dashboard with sensor trajectories, RUL filters, and prediction confidence bands: [🚀 Open Predictive Maintenance Dashboard](https://gosidehustlesisi.github.io/sierra-applied-ml/interactive-dashboards/predictive-maintenance.html)
+
 ### How We Got There
 1. **Data acquisition**: Automated download from NASA Prognostics Center of Excellence with retry logic
 2. **Feature engineering**: Rolling windows (mean, std, max), normalization, rate-of-change per sensor
@@ -143,6 +171,9 @@ These three projects demonstrate what I bring to an applied ML role: **end-to-en
   <em><strong>Peak insight:</strong> Discriminating words are domain-specific and intuitive ("space" for sci.space, "graphics" for comp.graphics) — the model learned real semantic signals, not statistical noise.</em>
 </p>
 
+### Interactive Dashboard
+Explore the live NLP dashboard with TF-IDF heatmaps, model radar charts, and train/test filters: [🚀 Open NLP Dashboard](https://gosidehustlesisi.github.io/sierra-applied-ml/interactive-dashboards/nlp-classification.html)
+
 ### How We Got There
 1. **Data acquisition**: Fetched 18,846 real Usenet posts from `sklearn.datasets.fetch_20newsgroups`
 2. **Text preprocessing**: Lowercase, punctuation/stopword/number removal
@@ -184,13 +215,28 @@ These three projects demonstrate what I bring to an applied ML role: **end-to-en
 | **XGBoost** | **~30** | **~45** | **~18%** | **Best hourly predictor** |
 | SARIMA (daily) | ~400 | ~550 | ~15% | Weekly seasonality (7-day) |
 
-### Outputs
+### Interactive Dashboard
+Explore the live Bike Sharing dashboard with ensemble forecasts, model toggles, and weather overlays: [🚀 Open Bike Sharing Dashboard](https://gosidehustlesisi.github.io/sierra-applied-ml/interactive-dashboards/bike-sharing.html)
 
-This project generates **interactive HTML ensemble forecasts** and CSV prediction files rather than static PNG charts:
+### Key Visualizations
 
-- **`ensemble_forecast_interactive.html`** — Interactive Plotly forecast with actual vs. predicted overlay
-- **`forecast_predictions.csv`** — Holdout predictions for downstream rebalancing logic
-- **`feature_importance.csv`** — Ranked feature contributions for operational decision support
+<p align="center">
+  <img src="https://raw.githubusercontent.com/gosidehustlesisi/sierra-applied-ml/main/projects/demand-forecasting-operations/figures/03_actual_vs_predicted.png" width="700" alt="Actual vs Predicted">
+  <br>
+  <em><strong>Peak insight:</strong> XGBoost ensemble tracks hourly demand with ~18% MAPE — the model captures both commuter spikes and weekend leisure patterns.</em>
+</p>
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/gosidehustlesisi/sierra-applied-ml/main/projects/demand-forecasting-operations/figures/03_model_comparison.png" width="700" alt="Forecast Model Comparison">
+  <br>
+  <em><strong>Peak insight:</strong> XGBoost vs Random Forest vs Seasonal Naive baseline — the ensemble approach dominates across all metrics.</em>
+</p>
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/gosidehustlesisi/sierra-applied-ml/main/projects/demand-forecasting-operations/figures/03_seasonal_decomposition.png" width="700" alt="Seasonal Decomposition">
+  <br>
+  <em><strong>Peak insight:</strong> Trend, weekly seasonality, and residual extraction reveal the structural components driving demand.</em>
+</p>
 
 ### How We Got There
 1. **Data acquisition**: Downloaded from UCI ML Repository with retry/caching
@@ -239,7 +285,7 @@ jupyter notebook projects/demand-forecasting-operations/notebooks/demand_forecas
 ### Requirements
 
 ```bash
-pip install pandas numpy matplotlib seaborn scikit-learn xgboost statsmodels
+pip install pandas numpy matplotlib seaborn scikit-learn xgboost statsmodels plotly
 ```
 
 Full dependency list in [`requirements.txt`](requirements.txt).
@@ -250,19 +296,29 @@ Full dependency list in [`requirements.txt`](requirements.txt).
 
 ```
 sierra-applied-ml/
+├── docs/                          # GitHub Pages deployment
+│   ├── index.html                 # Portfolio landing page (with embedded interactive charts)
+│   ├── interactive-dashboards/    # 3 live Plotly dashboards
+│   │   ├── bike-sharing.html
+│   │   ├── nlp-classification.html
+│   │   └── predictive-maintenance.html
+│   └── projects/                  # 3 standalone project pages
+│       ├── demand-forecasting.html
+│       ├── nlp-text-classification.html
+│       └── predictive-maintenance.html
 ├── projects/
 │   ├── predictive-maintenance-transit/
-│   │   ├── data/raw/          # NASA C-MAPSS FD001
-│   │   ├── figures/           # 7 visualizations (PNG)
-│   │   └── notebooks/         # 4 analysis notebooks
+│   │   ├── data/raw/              # NASA C-MAPSS FD001
+│   │   ├── figures/               # 7 visualizations (PNG)
+│   │   └── notebooks/             # 4 analysis notebooks
 │   ├── nlp-text-classification-pipeline/
-│   │   ├── data/raw/          # 20 Newsgroups
-│   │   ├── figures/           # 10 visualizations (PNG)
-│   │   └── notebooks/         # 6 analysis notebooks
+│   │   ├── data/raw/              # 20 Newsgroups
+│   │   ├── figures/               # 10 visualizations (PNG)
+│   │   └── notebooks/             # 6 analysis notebooks
 │   └── demand-forecasting-operations/
-│       ├── data/raw/          # UCI Bike Sharing
-│       ├── figures/           # Interactive HTML + CSV outputs
-│       └── notebooks/         # 1 analysis notebook
+│       ├── data/raw/              # UCI Bike Sharing
+│       ├── figures/               # Interactive HTML + CSV outputs
+│       └── notebooks/             # 1 analysis notebook
 ├── requirements.txt
 └── README.md
 ```
