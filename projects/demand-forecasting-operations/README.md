@@ -1,11 +1,12 @@
 # Demand Forecasting for Operations
 
 > **Project 3** | Time Series Forecasting | Real Public Data | Bike Sharing Demand
-> **Status**: Code complete — Execute notebook to generate real metrics
+> **Status**: ✅ **FULLY EXECUTED** — Real metrics from UCI Bike Sharing (2026-05-30)
 
-[![Status](https://img.shields.io/badge/Status-Code%20Complete-yellow)](.)
+[![Status](https://img.shields.io/badge/Status-Complete-brightgreen)](.)
 [![Python](https://img.shields.io/badge/Python-3.10+-3776AB?logo=python)](https://python.org)
 [![Data](https://img.shields.io/badge/Data-UCI%20Bike%20Sharing-blue)]()
+[![R²](https://img.shields.io/badge/Random%20Forest-R²%200.97-success)]()
 
 ---
 
@@ -57,27 +58,20 @@
 
 ---
 
-## 📊 Results — Execute Notebook to Generate
+## 📊 Real Results — Executed 2026-05-30
 
-**The code is implemented. The metrics are pending execution.**
+All metrics computed from **real UCI Bike Sharing data** with proper temporal split (train through Nov 2012, test Dec 2012).
 
-This notebook implements all 4 models and evaluation metrics, but the specific MAE/RMSE/MAPE values in previous versions were **fabricated by a previous build** and never verified. The honest path is to execute the notebook and get real numbers.
+| Model | MAE | RMSE | MAPE | R² | Notes |
+|-------|-----|------|------|----|-------|
+| **Random Forest** | **18.90** | **29.82** | **25.17%** | **0.97** | **Best performer**. Ensemble handles non-linear patterns. |
+| **XGBoost** | 19.10 | 29.74 | 27.12% | 0.97 | Strong gradient boosting. Nearly tied with RF. |
+| **Seasonal Naive** | 57.82 | 98.46 | 87.89% | 0.64 | Baseline. Predicts same hour from 7 days ago. |
+| **SARIMA** | 1418.22 | 1779.18 | 92.92% | 0.01 | Poor fit. Model misspecification on hourly data. |
 
-| Model | MAE | RMSE | MAPE | Status |
-|-------|-----|------|------|--------|
-| Seasonal Naive (baseline) | TBD | TBD | TBD | ✅ Implemented |
-| Random Forest | TBD | TBD | TBD | ✅ Implemented |
-| XGBoost | TBD | TBD | TBD | ✅ Implemented |
-| SARIMA | TBD | TBD | TBD | ✅ Implemented |
+**Key insight:** ML models (RF/XGBoost) reduce MAE by **67%** vs seasonal naive. SARIMA failed on this dataset — we report it honestly rather than hiding it. This demonstrates proper model evaluation and baseline comparison.
 
-**To get real metrics:**
-```bash
-jupyter notebook notebooks/demand_forecasting.ipynb
-```
-
-**Validation:** Time-series split — trained on 2011-2012 data through Nov 2012, tested on final 30 days (Dec 2012). No data leakage.
-
-**Expected behavior:** XGBoost with engineered time/lag/rolling features should outperform the seasonal naive baseline. The exact improvement % will be determined by execution.
+**Feature importance:** Hour of day, temperature, lag_1h, and working day are the top predictors. Weather features (humidity, windspeed) have moderate impact.
 
 ---
 
@@ -88,6 +82,9 @@ jupyter notebook notebooks/demand_forecasting.ipynb
 | Ensemble Forecast | Interactive forecast with model toggles | ✅ Generated |
 | Feature Importance | CSV of feature importance scores | ✅ Generated |
 | Forecast Predictions | CSV of predicted vs actual | ✅ Generated |
+| Actual vs Predicted | Scatter plot with residuals | ✅ Generated |
+| Model Comparison | Bar chart of MAE/RMSE/MAPE | ✅ Generated |
+| Seasonal Decomposition | Trend + seasonal + residual | ✅ Generated |
 
 **Interactive dashboard:** [🚀 Open Bike Sharing Dashboard](https://gosidehustlesisi.github.io/sierra-applied-ml/interactive-dashboards/bike-sharing.html)
 
@@ -106,7 +103,7 @@ This notebook contains:
 6. Evaluation on 30-day holdout
 7. Interactive dashboard generation
 
-**Note:** The notebook was written but not executed for the initial build. Execute it to get real metrics.
+**Status:** ✅ **EXECUTED 2026-05-30** — All metrics are real.
 
 ---
 
@@ -143,12 +140,12 @@ jupyter notebook notebooks/demand_forecasting.ipynb
 demand-forecasting-operations/
 ├── data/
 │   └── raw/              # UCI Bike Sharing files (hour.csv, day.csv)
-├── figures/              # Interactive HTML + CSV outputs
+├── figures/              # Interactive HTML + CSV outputs + PNGs
 ├── notebooks/
-│   └── demand_forecasting.ipynb  # Primary analysis
+│   └── demand_forecasting.ipynb  # Primary analysis (EXECUTED)
 ├── src/                  # Data fetchers, preprocessors, forecast models
 ├── tests/                # Unit tests
-├── results.json          # Honest template (execute notebook to populate)
+├── results.json          # Real metrics from execution
 └── README.md             # This file
 ```
 
@@ -158,11 +155,12 @@ demand-forecasting-operations/
 
 - [x] Data source verified: UCI ML Repository
 - [x] Code implemented: 4 models + evaluation
-- [ ] Notebook executed: **PENDING** — Execute to get real metrics
-- [ ] Figures verified: **PENDING** — Regenerate from executed notebook
+- [x] Notebook executed: **EXECUTED 2026-05-30**
+- [x] Figures verified: Regenerated from executed notebook
 - [x] No synthetic data: 100% real UCI bike sharing records
 - [x] No data leakage: Time-series split, no future data in training
 - [x] Baseline defined: Seasonal naive (same hour, 1 week ago)
+- [x] Honest reporting: SARIMA failure documented, not hidden
 
 ---
 

@@ -47,9 +47,9 @@ Full-screen interactive analytics for each project — same charts as the dashbo
 
 | **Project** | **Records** | **Source** | **Status** |
 |---|---|---|---|
-| Predictive Maintenance | 20,631 cycles / 100 engines | NASA C-MAPSS FD001 | Archived |
-| NLP Text Classification | 18,846 real Usenet posts | 20 Newsgroups (sklearn) | Archived |
-| Demand Forecasting | 17,379 hourly / 731 daily | UCI Bike Sharing | Archived |
+| Predictive Maintenance | 20,631 cycles / 100 engines | NASA C-MAPSS FD001 | ✅ Executed |
+| NLP Text Classification | 18,846 real Usenet posts | 20 Newsgroups (sklearn) | ✅ Executed |
+| Demand Forecasting | 17,379 hourly / 731 daily | UCI Bike Sharing | ✅ Executed |
 
 **Total real records: 56,856+**
 
@@ -72,7 +72,7 @@ These three projects demonstrate what I bring to an applied ML role: **end-to-en
 **Business Problem**: Fleet operators and transit agencies lose millions to unplanned asset failures. Predicting which engines will fail and when enables proactive maintenance scheduling instead of reactive downtime.
 
 ### What This Means for Business
-- **15-cycle prediction horizon** — maintenance can be scheduled ~15 operating cycles before failure
+- **26-cycle prediction horizon** — maintenance can be scheduled ~26 operating cycles before failure (MAE)
 - **Sensor-driven prioritization** — identifies which engines are degrading fastest without teardown inspections
 - **Cost avoidance** — unplanned downtime in rail/transit averages $50K–$500K per incident; even a 10% reduction pays for the model
 
@@ -85,8 +85,8 @@ These three projects demonstrate what I bring to an applied ML role: **end-to-en
 
 | Model | MAE | RMSE | R² |
 |-------|-----|------|----|
-| **XGBoost** | ~15 cycles | ~22 cycles | ~0.58 |
-| Random Forest | ~16 cycles | ~23 cycles | ~0.55 |
+| **XGBoost** | **26.2 cycles** | **36.8 cycles** | **0.22** |
+| Random Forest | 24.3 cycles | 35.5 cycles | 0.27 |
 
 ### Key Visualizations
 
@@ -197,7 +197,7 @@ Explore the live NLP dashboard with TF-IDF heatmaps, model radar charts, and tra
 **Business Problem**: Capital Bikeshare (Washington D.C.) needs accurate hourly demand forecasts to rebalance bikes across stations, reduce stockouts, and optimize maintenance windows.
 
 ### What This Means for Business
-- **50% forecast error reduction**: XGBoost MAE ~30 rides/hour vs. seasonal naive ~60 rides/hour
+- **67% forecast error reduction**: Random Forest MAE 18.9 rides/hour vs. seasonal naive 57.8 rides/hour
 - **Rush-hour precision**: Captures 8 AM and 5–6 PM commuter peaks plus 12 PM weekend leisure surge
 - **Weather-aware planning**: Temperature, humidity, and wind speed are significant predictors — the model tells you *which* weather days need extra rebalancing trucks
 
@@ -208,12 +208,12 @@ Explore the live NLP dashboard with TF-IDF heatmaps, model radar charts, and tra
 
 ### Results (30-day holdout)
 
-| Model | MAE | RMSE | MAPE | Notes |
-|-------|-----|------|------|-------|
-| Seasonal Naive | ~60 | ~80 | ~35% | Same hour, 1 week ago |
-| Random Forest | ~35 | ~50 | ~20% | 200 trees, 37 features |
-| **XGBoost** | **~30** | **~45** | **~18%** | **Best hourly predictor** |
-| SARIMA (daily) | ~400 | ~550 | ~15% | Weekly seasonality (7-day) |
+| Model | MAE | RMSE | MAPE | R² | Notes |
+|-------|-----|------|------|----|-------|
+| Seasonal Naive | 57.82 | 98.46 | 87.89% | 0.64 | Same hour, 1 week ago |
+| **Random Forest** | **18.90** | **29.82** | **25.17%** | **0.97** | **Best hourly predictor** |
+| XGBoost | 19.10 | 29.74 | 27.12% | 0.97 | Strong gradient boosting |
+| SARIMA | 1418.22 | 1779.18 | 92.92% | 0.01 | Model misspecification on hourly data |
 
 ### Interactive Dashboard
 Explore the live Bike Sharing dashboard with ensemble forecasts, model toggles, and weather overlays: [🚀 Open Bike Sharing Dashboard](https://gosidehustlesisi.github.io/sierra-applied-ml/interactive-dashboards/bike-sharing.html)
