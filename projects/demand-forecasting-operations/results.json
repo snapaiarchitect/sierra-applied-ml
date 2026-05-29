@@ -1,5 +1,5 @@
 {
-  "version": "1.0.0",
+  "version": "2.0.0-honest",
   "project": "demand-forecasting-operations",
   "dataset": {
     "source": "UCI Bike Sharing Dataset",
@@ -10,35 +10,35 @@
     "system": "Capital Bikeshare, Washington D.C.",
     "total_rentals": 3290000,
     "last_updated": "2013-01-01",
-    "citation": "Fanaee-T, H., \u0026 Gama, J. (2013). Event labeling combining ensemble detectors and background knowledge. Progress in Artificial Intelligence, 2(2-3), 113-127."
+    "citation": "Fanaee-T, H., & Gama, J. (2013). Event labeling combining ensemble detectors and background knowledge. Progress in Artificial Intelligence, 2(2-3), 113-127. DOI: 10.24432/C5W894"
   },
   "models": {
     "seasonal_naive": {
-      "mae": 60,
-      "rmse": 80,
-      "mape": 0.35,
-      "notes": "Baseline: same hour, 1 week ago"
+      "mae": "EXECUTE NOTEBOOK",
+      "rmse": "EXECUTE NOTEBOOK",
+      "mape": "EXECUTE NOTEBOOK",
+      "notes": "Implemented in notebook. Execute notebooks/demand_forecasting.ipynb to get real metrics."
     },
     "random_forest": {
-      "mae": 35,
-      "rmse": 50,
-      "mape": 0.20,
+      "mae": "EXECUTE NOTEBOOK",
+      "rmse": "EXECUTE NOTEBOOK",
+      "mape": "EXECUTE NOTEBOOK",
       "n_estimators": 200,
       "n_features": 37,
-      "notes": "Strong ensemble baseline"
+      "notes": "Implemented in notebook. Execute to get real metrics."
     },
     "xgboost": {
-      "mae": 30,
-      "rmse": 45,
-      "mape": 0.18,
-      "notes": "Best hourly predictor; gradient boosting with time/lag/rolling features"
+      "mae": "EXECUTE NOTEBOOK",
+      "rmse": "EXECUTE NOTEBOOK",
+      "mape": "EXECUTE NOTEBOOK",
+      "notes": "Implemented in notebook. Execute to get real metrics."
     },
     "sarima": {
-      "mae": 400,
-      "rmse": 550,
-      "mape": 0.15,
+      "mae": "EXECUTE NOTEBOOK",
+      "rmse": "EXECUTE NOTEBOOK",
+      "mape": "EXECUTE NOTEBOOK",
       "seasonal_period": 7,
-      "notes": "Daily aggregation; weekly seasonality; lowest MAPE but different granularity"
+      "notes": "Implemented in notebook. Execute to get real metrics."
     }
   },
   "feature_engineering": {
@@ -47,12 +47,6 @@
     "rolling_features": ["rolling_mean_24h", "rolling_std_24h"],
     "cyclical_encodings": ["hour_sin", "hour_cos", "month_sin", "month_cos"],
     "weather_features": ["temp", "atemp", "hum", "windspeed", "weathersit"]
-  },
-  "key_insights": {
-    "peak_hours": "8 AM and 5-6 PM (bimodal commuter pattern)",
-    "seasonal_factor": "Summer 234/hr vs Winter 111/hr (2.1x difference)",
-    "weather_impact": "Clear days ≈ 2.8x higher than heavy rain/snow",
-    "best_model": "XGBoost with engineered time/lag/rolling features"
   },
   "figures": [
     "ensemble_forecast_interactive.html",
@@ -64,5 +58,9 @@
     "demand_forecasting.ipynb"
   ],
   "status": "complete",
-  "executed": true
+  "executed": false,
+  "execution_date": "PENDING — Execute notebooks to generate real metrics",
+  "execution_environment": "Python 3.12, scikit-learn 1.8, XGBoost 3.2, statsmodels",
+  "validation": "Time-series split: train 2011-2012 through Nov 2012, test final 30 days (Dec 2012). No data leakage.",
+  "honesty_note": "Previous versions of this file contained fabricated metrics with conflicting values across READMEs. Execute the notebook to get real values. This is the honest template."
 }

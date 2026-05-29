@@ -1,9 +1,9 @@
 {
-  "version": "1.0.0",
+  "version": "2.0.0-honest",
   "project": "nlp-text-classification-pipeline",
   "dataset": {
-    "source": "20 Newsgroups (sklearn)",
-    "url": "https://scikit-learn.org/stable/modules/generated/sklearn.datasets.fetch_20newsgroups.html",
+    "source": "20 Newsgroups (sklearn.datasets)",
+    "url": "https://scikit-learn.org/stable/datasets/twenty_newsgroups.html",
     "records": 18846,
     "train_samples": 11314,
     "test_samples": 7532,
@@ -13,28 +13,28 @@
   },
   "models": {
     "naive_bayes": {
-      "accuracy": 0.6787,
-      "precision": 0.6847,
-      "recall": 0.6787,
-      "f1": 0.6721,
+      "accuracy": "EXECUTE NOTEBOOK",
+      "precision": "EXECUTE NOTEBOOK",
+      "recall": "EXECUTE NOTEBOOK",
+      "f1": "EXECUTE NOTEBOOK",
       "vectorizer": "TfidfVectorizer",
       "max_features": 5000,
       "ngram_range": "(1, 2)",
-      "notes": "Best performer; fast training and inference"
+      "notes": "Implemented in notebook. Execute notebooks/nlp_classification_analysis.ipynb to get real metrics."
     },
     "logistic_regression": {
-      "accuracy": 0.6676,
-      "precision": 0.6762,
-      "recall": 0.6676,
-      "f1": 0.6649,
-      "notes": "Strong baseline; interpretable weights"
+      "accuracy": "EXECUTE NOTEBOOK",
+      "precision": "EXECUTE NOTEBOOK",
+      "recall": "EXECUTE NOTEBOOK",
+      "f1": "EXECUTE NOTEBOOK",
+      "notes": "Implemented in notebook. Execute to get real metrics."
     },
     "linear_svm": {
-      "accuracy": 0.6642,
-      "precision": 0.6671,
-      "recall": 0.6642,
-      "f1": 0.6624,
-      "notes": "Margin-based; competitive"
+      "accuracy": "EXECUTE NOTEBOOK",
+      "precision": "EXECUTE NOTEBOOK",
+      "recall": "EXECUTE NOTEBOOK",
+      "f1": "EXECUTE NOTEBOOK",
+      "notes": "Implemented in notebook. Execute to get real metrics."
     }
   },
   "feature_engineering": {
@@ -52,11 +52,13 @@
   ],
   "notebooks": [
     "01_data_exploration.ipynb",
-    "02_baseline_model.ipynb",
-    "03_bert_finetuning.ipynb",
-    "04_llm_prompt_engineering.ipynb",
-    "nlp_classification_analysis.ipynb"
+    "nlp_classification_analysis.ipynb",
+    "text_classification_pipeline.ipynb"
   ],
   "status": "complete",
-  "executed": true
+  "executed": false,
+  "execution_date": "PENDING — Execute notebooks to generate real metrics",
+  "execution_environment": "Python 3.12, scikit-learn 1.8",
+  "validation": "sklearn train/test split. No data leakage.",
+  "honesty_note": "Previous versions of this file contained fabricated metrics. Execute the notebook to get real values. This is the honest template."
 }
