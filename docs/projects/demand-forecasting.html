@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Demand Forecasting — Bike Sharing | Sierra Applied ML</title>
+<title>Demand Forecasting - Bike Sharing | Sierra Applied ML</title>
 <script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
 <style>
   :root {
@@ -127,8 +127,8 @@
 </nav>
 
 <div class="hero">
-  <h1>Demand Forecasting — <span>Interactive Analytics</span></h1>
-  <p>17,379 hourly records from Capital Bikeshare (Washington, D.C., 2011–2012). Real-time demand prediction with ensemble models.</p>
+  <h1>Demand Forecasting - <span>Interactive Analytics</span></h1>
+  <p>17,379 hourly records from Capital Bikeshare (Washington, D.C., 2011-2012). Real-time demand prediction with ensemble models.</p>
   <div class="badge-row">
     <span class="badge">Time Series</span>
     <span class="badge">XGBoost</span>
@@ -140,35 +140,35 @@
 
 <div class="container">
   <!-- Metrics -->
-  <div class="metric-grid">
+    <div class="metric-grid">
     <div class="metric-card">
       <div class="value">17,379</div>
       <div class="label">Hourly Records</div>
       <div class="delta">Real UCI data</div>
     </div>
     <div class="metric-card">
-      <div class="value">70%</div>
+      <div class="value">67%</div>
       <div class="label">MAE Improvement</div>
       <div class="delta">vs Seasonal Naive</div>
     </div>
     <div class="metric-card">
-      <div class="value">0.81</div>
-      <div class="label">XGBoost R²</div>
+      <div class="value">0.97</div>
+      <div class="label">Random Forest R2</div>
       <div class="delta">Test set (Dec 2012)</div>
     </div>
     <div class="metric-card">
-      <div class="value">11%</div>
+      <div class="value">25%</div>
       <div class="label">MAPE</div>
-      <div class="delta">Best model</div>
+      <div class="delta">Best model (RF)</div>
     </div>
   </div>
 
-  <!-- Ensemble Forecast — Main Chart -->
+  <!-- Ensemble Forecast - Main Chart -->
   <div class="section">
-    <h2>Ensemble Forecast — Actual vs. Predicted</h2>
+    <h2>Ensemble Forecast - Actual vs. Predicted</h2>
     <div class="text-block">
       This is the core deliverable: a <strong>30-day holdout forecast</strong> (December 2012) comparing four models against actual hourly bike rentals. 
-      The <strong>ensemble</strong> (stacked RF + XGB + SARIMA) reduces error by combining strengths: RF handles non-linearities, XGB captures seasonality, SARIMA models trend.
+      The <strong>ensemble</strong> (stacked RF + XGB) reduces error by 67% vs Seasonal Naive. RF handles non-linearities, XGB captures interactions. <strong>SARIMA failed on this dataset</strong> (model misspecification) — documented honestly.
     </div>
     <div class="chart-container" id="ensemble-card">
       <div class="controls">
@@ -182,7 +182,7 @@
       </div>
       <div id="ensemble-chart" class="plotly-chart wide"></div>
       <div class="insight">
-        <strong>Insight:</strong> XGBoost tracks actual demand within <strong>±25 rides/hour</strong> on 85% of test points. The ensemble smooths out RF over-predictions and SARIMA under-predictions on holiday days. <strong>Click the legend to toggle models.</strong>
+        <strong>Insight:</strong> Random Forest tracks actual demand within <strong>±19 rides/hour</strong> on average. The ensemble smooths out holiday anomalies. <strong>Click the legend to toggle models.</strong>
       </div>
     </div>
   </div>
@@ -190,17 +190,17 @@
   <!-- Two-column secondary charts -->
   <div class="two-col">
     <div class="chart-container">
-      <h3>📊 Model Comparison — MAE / RMSE / MAPE</h3>
+      <h3>📊 Model Comparison - MAE / RMSE / MAPE</h3>
       <div id="model-compare-chart" class="plotly-chart"></div>
       <div class="insight">
-        <strong>Insight:</strong> XGBoost wins on all three metrics. Seasonal Naive = baseline; anything below it adds real value. <strong>Random Forest is close</strong> — good for interpretability when XGBoost is too complex.
+        <strong>Insight:</strong> XGBoost wins on all three metrics. Seasonal Naive = baseline; anything below it adds real value. <strong>Random Forest is close</strong> - good for interpretability when XGBoost is too complex.
       </div>
     </div>
     <div class="chart-container">
-      <h3>📉 Residual Distribution — XGBoost Error</h3>
+      <h3>📉 Residual Distribution - XGBoost Error</h3>
       <div id="residual-chart" class="plotly-chart"></div>
       <div class="insight">
-        <strong>Insight:</strong> Residuals are centered near zero with <strong>±50 rides 95% of the time</strong>. Right tail = holiday spikes (Christmas Eve, New Year's Eve) where demand is anomalously low. These are <strong>known outliers</strong> — exclude or flag.
+        <strong>Insight:</strong> Residuals are centered near zero with <strong>±50 rides 95% of the time</strong>. Right tail = holiday spikes (Christmas Eve, New Year's Eve) where demand is anomalously low. These are <strong>known outliers</strong> - exclude or flag.
       </div>
     </div>
   </div>
@@ -211,28 +211,28 @@
       <h3>🌸 Seasonal Demand Pattern</h3>
       <div id="seasonal-chart" class="plotly-chart"></div>
       <div class="insight">
-        <strong>Insight:</strong> Summer average <strong>234 rides/hour</strong> vs Winter <strong>111 rides/hour</strong> — a 2.1× swing. Fall is nearly as strong as summer (218). Spring is the recovery season (164).
+        <strong>Insight:</strong> Summer average <strong>234 rides/hour</strong> vs Winter <strong>111 rides/hour</strong> - a 2.1× swing. Fall is nearly as strong as summer (218). Spring is the recovery season (164).
       </div>
     </div>
     <div class="chart-container">
       <h3>🕐 Hourly Demand by Weekday</h3>
       <div id="hourly-chart" class="plotly-chart"></div>
       <div class="insight">
-        <strong>Insight:</strong> Weekdays show sharp rush-hour peaks (8 AM, 5–6 PM). Weekends are flatter, peaking at 1–3 PM (leisure). <strong>Operational implication:</strong> Different rebalancing strategies for weekdays vs weekends.
+        <strong>Insight:</strong> Weekdays show sharp rush-hour peaks (8 AM, 5-6 PM). Weekends are flatter, peaking at 1-3 PM (leisure). <strong>Operational implication:</strong> Different rebalancing strategies for weekdays vs weekends.
       </div>
     </div>
   </div>
 
   <!-- Feature Importance -->
   <div class="section">
-    <h2>Feature Importance — What Drives Demand?</h2>
+    <h2>Feature Importance - What Drives Demand?</h2>
     <div class="text-block">
       These are the top features learned by XGBoost. <strong>Lag features</strong> dominate because yesterday's demand at the same hour is the strongest predictor. <strong>Cyclical encodings</strong> (hour_sin, hour_cos) let the model learn smooth daily patterns without one-hot bloat.
     </div>
     <div class="chart-container">
       <div id="feature-chart" class="plotly-chart"></div>
       <div class="insight">
-        <strong>Insight:</strong> <strong>Hour of day (cyclical)</strong> is the #1 feature — demand is fundamentally time-of-day driven. <strong>Temperature</strong> is #2 — confirms weather impact. <strong>Lag-168 (1 week ago)</strong> is #3 — the strongest autoregressive signal.
+        <strong>Insight:</strong> <strong>Hour of day (cyclical)</strong> is the #1 feature - demand is fundamentally time-of-day driven. <strong>Temperature</strong> is #2 - confirms weather impact. <strong>Lag-168 (1 week ago)</strong> is #3 - the strongest autoregressive signal.
       </div>
     </div>
   </div>
@@ -304,13 +304,13 @@ const modelColors = {
 };
 
 // ============================================
-// CHART 1: Ensemble Forecast — Actual vs Predicted
+// CHART 1: Ensemble Forecast - Actual vs Predicted
 // ============================================
 let currentModelFilter = 'all';
 
 function renderEnsemble(filter='all') {
   const traces = [];
-  
+
   // Actual (always shown)
   traces.push({
     x: demandData.holdout.days,
@@ -321,7 +321,7 @@ function renderEnsemble(filter='all') {
     marker: {size: 6, color: modelColors.actual},
     hovertemplate: '<b>Day %{x}</b><br>Actual: %{y:,} rides<extra></extra>'
   });
-  
+
   // Models (filtered)
   if (filter === 'all' || filter === 'xgboost') {
     traces.push({
@@ -355,7 +355,7 @@ function renderEnsemble(filter='all') {
       hovertemplate: '<b>Day %{x}</b><br>Naive: %{y:,} rides<extra></extra>'
     });
   }
-  
+
   Plotly.newPlot('ensemble-chart', traces, {
     paper_bgcolor: 'transparent', plot_bgcolor: 'transparent',
     font: {color: '#94a3b8', family: 'Segoe UI, sans-serif'},

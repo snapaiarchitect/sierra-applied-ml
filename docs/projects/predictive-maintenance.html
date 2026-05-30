@@ -146,12 +146,12 @@
       <div class="delta">100 engines</div>
     </div>
     <div class="metric-card">
-      <div class="value">15</div>
+      <div class="value">26.2</div>
       <div class="label">MAE (cycles)</div>
       <div class="delta">XGBoost</div>
     </div>
     <div class="metric-card">
-      <div class="value">0.58</div>
+      <div class="value">0.22</div>
       <div class="label">R²</div>
       <div class="delta">Test engines</div>
     </div>
@@ -178,7 +178,7 @@
       </div>
       <div id="rul-chart" class="plotly-chart wide"></div>
       <div class="insight">
-        <strong>Insight:</strong> <strong>12 engines</strong> fail before 150 cycles (early-warning targets). <strong>8 engines</strong> exceed 300 cycles (robust baseline). The 15-cycle MAE means we can predict failure within <strong>2 operating days</strong> (assuming 8-hour shifts).
+        <strong>Insight:</strong> <strong>12 engines</strong> fail before 150 cycles (early-warning targets). <strong>8 engines</strong> exceed 300 cycles (robust baseline). The 26.2-cycle MAE means we can predict failure within <strong>3–4 operating days</strong> (assuming 8-hour shifts).
       </div>
     </div>
   </div>
@@ -224,7 +224,7 @@
     <div class="chart-container">
       <div id="pred-chart" class="plotly-chart wide"></div>
       <div class="insight">
-        <strong>Insight:</strong> <strong>Conservative bias is intentional</strong> — under-predicting RUL means maintenance is scheduled earlier than necessary, which is safer than missing a failure. The 15-cycle MAE translates to <strong>$50K–$500K cost avoidance per incident</strong> in transit operations.
+        <strong>Insight:</strong> <strong>Conservative bias is intentional</strong> — under-predicting RUL means maintenance is scheduled earlier than necessary, which is safer than missing a failure. The 26.2-cycle MAE translates to <strong>$50K–$500K cost avoidance per incident</strong> in transit operations.
       </div>
     </div>
   </div>
