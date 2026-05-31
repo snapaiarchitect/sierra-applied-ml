@@ -1,0 +1,599 @@
+[1mdiff --git a/patch_nb.py b/patch_nb.py[m
+[1mindex 1ef57b7..98b41ef 100644[m
+[1m--- a/patch_nb.py[m
+[1m+++ b/patch_nb.py[m
+[36m@@ -1,42 +1,61 @@[m
+ import json[m
+[32m+[m[32mimport os[m
+ from pathlib import Path[m
+[31m-path = Path('projects/predictive-maintenance-transit/notebooks/predictive_maintenance_analysis.ipynb')[m
+[31m-nb = json.loads(path.read_text())[m
+ [m
+[31m-cell_18 = [[m
+[31m-    'def evaluate_model(name, y_true, y_pred):\n',[m
+[31m-    '    mae = mean_absolute_error(y_true, y_pred)\n',[m
+[31m-    '    rmse = np.sqrt(mean_squared_error(y_true, y_pred))\n',[m
+[31m-    '    r2 = r2_score(y_true, y_pred)\n',[m
+[31m-    '\n',[m
+[31m-    '    print(f"\\n=== {name} ===")\n',[m
+[31m-    '    print(f"  MAE:  {mae:.2f} cycles")\n',[m
+[31m-    '    print(f"  RMSE: {rmse:.2f} cycles")\n',[m
+[31m-    '    print(f"  R2:   {r2:.3f}\")\n',[m
+[31m-    '\n',[m
+[31m-    '    return {\'MAE\': mae, \'RMSE\': rmse, \'R2\': r2}\n',[m
+[31m-    '\n',[m
+[31m-    '# Baseline: predict mean RUL of training set for all test engines\n',[m
+[31m-    'mean_rul_train = y_train.mean()\n',[m
+[31m-    'y_baseline = np.full_like(y_test, fill_value=mean_rul_train, dtype=float)\n',[m
+[31m-    '\n',[m
+[31m-    'baseline_metrics = evaluate_model(\'Mean RUL Baseline\', y_test, y_baseline)\n',[m
+[31m-    'print(f"Baseline: predict mean RUL = {mean_rul_train:.1f} cycles for every engine")\n',[m
+[32m+[m[32mMAIN_NB = Path('projects/predictive-maintenance-transit/notebooks/predictive_maintenance_analysis.ipynb')[m
+[32m+[m[32mUNTITLED_NB = Path('projects/predictive-maintenance-transit/notebooks/Untitled-2.ipynb')[m
+[32m+[m
+[32m+[m[32mdef load_nb(path):[m
+[32m+[m[32m    with open(path, 'r') as f:[m
+[32m+[m[32m        return json.load(f)[m
+[32m+[m
+[32m+[m[32mdef save_nb(nb, path):[m
+[32m+[m[32m    with open(path, 'w') as f:[m
+[32m+[m[32m        json.dump(nb, f, indent=1)[m
+[32m+[m
+[32m+[m[32meval_def = [[m
+[32m+[m[32m    "def evaluate_model(name, true, pred):\n",[m
+[32m+[m[32m    "    from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score\n",[m
+[32m+[m[32m    "    import numpy as np\n",[m
+[32m+[m[32m    "    mae = mean_absolute_error(true, pred)\n",[m
+[32m+[m[32m    "    rmse = np.sqrt(mean_squared_error(true, pred))\n",[m
+[32m+[m[32m    "    r2 = r2_score(true, pred)\n",[m
+[32m+[m[32m    "    print(f\"{name} Results:\")\n",[m
+[32m+[m[32m    "    print(f\"  MAE: {mae:.2f}\")\n",[m
+[32m+[m[32m    "    print(f\"  RMSE: {rmse:.2f}\")\n",[m
+[32m+[m[32m    "    print(f\"  R2:   {r2:.3f}\")\n",[m
+[32m+[m[32m    "    return {'MAE': mae, 'RMSE': rmse, 'R2': r2}\n"[m
+ ][m
+[31m-cell_20 = [[m
+[32m+[m
+[32m+[m[32msummary_cell = [[m
+     "rf_metrics = evaluate_model('Random Forest', true_rul, rf_pred)\n",[m
+     "xgb_metrics = evaluate_model('XGBoost', true_rul, xgb_pred)\n",[m
+[31m-    '\n',[m
+[31m-    '# Summary table\n',[m
+[31m-    'metrics_df = pd.DataFrame([\n',[m
+[32m+[m[32m    "\n",[m
+[32m+[m[32m    "import pandas as pd\n",[m
+[32m+[m[32m    "metrics_df = pd.DataFrame([\n",[m
+     "    {'Model': 'Random Forest', **rf_metrics},\n",[m
+     "    {'Model': 'XGBoost', **xgb_metrics}\n",[m
+[31m-    '])\n',[m
+[31m-    'print(\\'\\n=== Comparison ===\\')\n',[m
+[31m-    'print(metrics_df.round(2).to_string(index=False))\n',[m
+[32m+[m[32m    "])\n",[m
+[32m+[m[32m    "print('\\n--- Comparison ===')\n",[m
+[32m+[m[32m    "print(metrics_df.round(2).to_string(index=False))\n"[m
+ ][m
+ [m
+[31m-nb['cells'][17]['source'] = cell_18[m
+[31m-nb['cells'][19]['source'] = cell_20[m
+[31m-path.write_text(json.dumps(nb, indent=1))[m
+[31m-print('patch applied')[m
+[32m+[m[32mdef patch(path):[m
+[32m+[m[32m    if not path.exists():[m
+[32m+[m[32m        print(f"Skipping {path}, not found.")[m
+[32m+[m[32m        return[m
+[32m+[m[32m    nb = load_nb(path)[m
+[32m+[m[32m    # Insert eval def after imports (usually cell 1 or 2)[m
+[32m+[m[32m    nb['cells'].insert(2, {"cell_type": "code", "execution_count": None, "metadata": {}, "outputs": [], "source": eval_def})[m
+[32m+[m[41m    [m
+[32m+[m[32m    # Update summary cell[m
+[32m+[m[32m    for cell in nb['cells']:[m
+[32m+[m[32m        if cell['cell_type'] == 'code' and any('rf_metrics =' in line for line in cell['source']):[m
+[32m+[m[32m            cell['source'] = summary_cell[m
+[32m+[m[41m            [m
+[32m+[m[32m    save_nb(nb, path)[m
+[32m+[m[32m    print(f"Successfully patched {path}")[m
+[32m+[m
+[32m+[m[32mif __name__ == '__main__':[m
+[32m+[m[32m    patch(MAIN_NB)[m
+[32m+[m[32m    patch(UNTITLED_NB)[m
+[1mdiff --git a/projects/predictive-maintenance-transit/notebooks/Untitled-2.ipynb b/projects/predictive-maintenance-transit/notebooks/Untitled-2.ipynb[m
+[1mindex 1d78a9e..73e0bf2 100644[m
+[1m--- a/projects/predictive-maintenance-transit/notebooks/Untitled-2.ipynb[m
+[1m+++ b/projects/predictive-maintenance-transit/notebooks/Untitled-2.ipynb[m
+[36m@@ -74,6 +74,45 @@[m
+     "print('Libraries loaded successfully')"[m
+    ][m
+   },[m
+[32m+[m[32m  {[m
+[32m+[m[32m   "cell_type": "code",[m
+[32m+[m[32m   "execution_count": null,[m
+[32m+[m[32m   "metadata": {},[m
+[32m+[m[32m   "outputs": [],[m
+[32m+[m[32m   "source": [[m
+[32m+[m[32m    "def evaluate_model(name, true, pred):\n",[m
+[32m+[m[32m    "    from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score\n",[m
+[32m+[m[32m    "    import numpy as np\n",[m
+[32m+[m[32m    "    mae = mean_absolute_error(true, pred)\n",[m
+[32m+[m[32m    "    rmse = np.sqrt(mean_squared_error(true, pred))\n",[m
+[32m+[m[32m    "    r2 = r2_score(true, pred)\n",[m
+[32m+[m[32m    "    print(f\"{name} Results:\")\n",[m
+[32m+[m[32m    "    print(f\"  MAE: {mae:.2f}\")\n",[m
+[32m+[m[32m    "    print(f\"  RMSE: {rmse:.2f}\")\n",[m
+[32m+[m[32m    "    print(f\"  R2:   {r2:.3f}\")\n",[m
+[32m+[m[32m    "    return {'MAE': mae, 'RMSE': rmse, 'R2': r2}\n"[m
+[32m+[m[32m   ][m
+[32m+[m[32m  },[m
+[32m+[m[32m  {[m
+[32m+[m[32m   "cell_type": "code",[m
+[32m+[m[32m   "execution_count": null,[m
+[32m+[m[32m   "id": "71df51e2",[m
+[32m+[m[32m   "metadata": {},[m
+[32m+[m[32m   "outputs": [],[m
+[32m+[m[32m   "source": [[m
+[32m+[m[32m    "def evaluate_model(name, true, pred):\n",[m
+[32m+[m[32m    "    from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score\n",[m
+[32m+[m[32m    "    import numpy as np\n",[m
+[32m+[m[32m    "    mae = mean_absolute_error(true, pred)\n",[m
+[32m+[m[32m    "    rmse = np.sqrt(mean_squared_error(true, pred))\n",[m
+[32m+[m[32m    "    r2 = r2_score(true, pred)\n",[m
+[32m+[m[32m    "    print(f\"{name} Results:\")\n",[m
+[32m+[m[32m    "    print(f\"  MAE: {mae:.2f}\")\n",[m
+[32m+[m[32m    "    print(f\"  RMSE: {rmse:.2f}\")\n",[m
+[32m+[m[32m    "    print(f\"  R2:   {r2:.3f}\")\n",[m
+[32m+[m[32m    "    return {'MAE': mae, 'RMSE': rmse, 'R2': r2}\n"[m
+[32m+[m[32m   ][m
+[32m+[m[32m  },[m
+   {[m
+    "cell_type": "markdown",[m
+    "id": "d0501a3e",[m
+[36m@@ -96,7 +135,7 @@[m
+     "- **26 columns**: unit ID, cycle, 3 operating settings, 21 sensor measurements\n",[m
+     "- **RUL_FD001.txt**: true Remaining Useful Life for test engines\n",[m
+     "\n",[m
+[31m-    "All data is **real NASA simulation data** — no synthetic generation."[m
+[32m+[m[32m    "All data is **real NASA simulation data** \u2014 no synthetic generation."[m
+    ][m
+   },[m
+   {[m
+[36m@@ -606,7 +645,7 @@[m
+     "### 5.3 Baseline: Mean RUL Predictor\n",[m
+     "\n",[m
+     "The simplest possible baseline: predict the mean RUL of the training set for every test engine.\n",[m
+[31m-    "This establishes a floor — any ML model must beat this to be useful."[m
+[32m+[m[32m    "This establishes a floor \u2014 any ML model must beat this to be useful."[m
+    ][m
+   },[m
+   {[m
+[36m@@ -682,29 +721,16 @@[m
+    },[m
+    "outputs": [],[m
+    "source": [[m
+[31m-    "def evaluate_model(name, y_true, y_pred):\n",[m
+[31m-    "    mae = mean_absolute_error(y_true, y_pred)\n",[m
+[31m-    "    rmse = np.sqrt(mean_squared_error(y_true, y_pred))\n",[m
+[31m-    "    r2 = r2_score(y_true, y_pred)\n",[m
+[31m-    "    \n",[m
+[31m-    "    print(f\"\\n=== {name} ===\")\n",[m
+[31m-    "    print(f\"  MAE:  {mae:.2f} cycles\")\n",[m
+[31m-    "    print(f\"  RMSE: {rmse:.2f} cycles\")\n",[m
+[31m-    "    print(f\"  R2:   {r2:.3f}\")\n",[m
+[31m-    "    \n",[m
+[31m-    "    return {'MAE': mae, 'RMSE': rmse, 'R2': r2}\n",[m
+[31m-    "\n",[m
+[31m-    "baseline_metrics = evaluate_model('Mean RUL Baseline', true_rul, y_baseline)\n",[m
+     "rf_metrics = evaluate_model('Random Forest', true_rul, rf_pred)\n",[m
+     "xgb_metrics = evaluate_model('XGBoost', true_rul, xgb_pred)\n",[m
+     "\n",[m
+[31m-    "# Summary table\n",[m
+[32m+[m[32m    "import pandas as pd\n",[m
+     "metrics_df = pd.DataFrame([\n",[m
+     "    {'Model': 'Random Forest', **rf_metrics},\n",[m
+     "    {'Model': 'XGBoost', **xgb_metrics}\n",[m
+     "])\n",[m
+[31m-    "print('\\n=== Comparison ===')\n",[m
+[31m-    "print(metrics_df.round(2).to_string(index=False))"[m
+[32m+[m[32m    "print('\\n--- Comparison ===')\n",[m
+[32m+[m[32m    "print(metrics_df.round(2).to_string(index=False))\n"[m
+    ][m
+   },[m
+   {[m
+[36m@@ -746,7 +772,7 @@[m
+     "    ax.legend()\n",[m
+     "    ax.grid(True, alpha=0.3)\n",[m
+     "\n",[m
+[31m-    "plt.suptitle('Predicted vs Actual RUL — NASA CMAPSS FD001', fontsize=13)\n",[m
+[32m+[m[32m    "plt.suptitle('Predicted vs Actual RUL \u2014 NASA CMAPSS FD001', fontsize=13)\n",[m
+     "plt.tight_layout()\n",[m
+     "plt.savefig('../figures/predicted_vs_actual_rul.png', dpi=150, bbox_inches='tight')\n",[m
+     "plt.show()\n",[m
+[36m@@ -871,7 +897,7 @@[m
+     "ax.set_yticks(range(len(top_features)))\n",[m
+     "ax.set_yticklabels(top_features['feature'], fontsize=9)\n",[m
+     "ax.set_xlabel('Feature Importance (XGBoost)')\n",[m
+[31m-    "ax.set_title(f'Top {top_n} Features for RUL Prediction — NASA CMAPSS FD001')\n",[m
+[32m+[m[32m    "ax.set_title(f'Top {top_n} Features for RUL Prediction \u2014 NASA CMAPSS FD001')\n",[m
+     "\n",[m
+     "plt.tight_layout()\n",[m
+     "plt.savefig('../figures/feature_importance.png', dpi=150, bbox_inches='tight')\n",[m
+[36m@@ -954,7 +980,7 @@[m
+     "    ax.legend(fontsize=9)\n",[m
+     "    ax.grid(True, alpha=0.3)\n",[m
+     "\n",[m
+[31m-    "plt.suptitle('RUL Degradation Trajectories — XGBoost Predictions', fontsize=13)\n",[m
+[32m+[m[32m    "plt.suptitle('RUL Degradation Trajectories \u2014 XGBoost Predictions', fontsize=13)\n",[m
+     "plt.tight_layout()\n",[m
+     "plt.savefig('../figures/rul_degradation_trajectories.png', dpi=150, bbox_inches='tight')\n",[m
+     "plt.show()\n",[m
+[36m@@ -1036,7 +1062,7 @@[m
+    "source": [[m
+     "## 10. Results Summary\n",[m
+     "\n",[m
+[31m-    "All metrics computed on **real NASA CMAPSS FD001 data** — zero synthetic inputs."[m
+[32m+[m[32m    "All metrics computed on **real NASA CMAPSS FD001 data** \u2014 zero synthetic inputs."[m
+    ][m
+   },[m
+   {[m
+[36m@@ -1087,9 +1113,9 @@[m
+     "  print(f\"  Engineering: rolling mean(10), rolling std(10), diff, cycle_norm\")\n",[m
+     "\n",[m
+     "  print(f\"\\nModel Performance:\")\n",[m
+[31m-    "  print(f\"  Mean RUL Baseline — MAE: {baseline_metrics['MAE']:.2f}, RMSE: {baseline_metrics['RMSE']:.2f}, R2: {baseline_metrics['R2']:.3f}\")\n",[m
+[31m-    "  print(f\"  Random Forest — MAE: {rf_metrics['MAE']:.2f}, RMSE: {rf_metrics['RMSE']:.2f}, R2: {rf_metrics['R2']:.3f}\")\n",[m
+[31m-    "  print(f\"  XGBoost      — MAE: {xgb_metrics['MAE']:.2f}, RMSE: {xgb_metrics['RMSE']:.2f}, R2: {xgb_metrics['R2']:.3f}\")\n",[m
+[32m+[m[32m    "  print(f\"  Mean RUL Baseline \u2014 MAE: {baseline_metrics['MAE']:.2f}, RMSE: {baseline_metrics['RMSE']:.2f}, R2: {baseline_metrics['R2']:.3f}\")\n",[m
+[32m+[m[32m    "  print(f\"  Random Forest \u2014 MAE: {rf_metrics['MAE']:.2f}, RMSE: {rf_metrics['RMSE']:.2f}, R2: {rf_metrics['R2']:.3f}\")\n",[m
+[32m+[m[32m    "  print(f\"  XGBoost      \u2014 MAE: {xgb_metrics['MAE']:.2f}, RMSE: {xgb_metrics['RMSE']:.2f}, R2: {xgb_metrics['R2']:.3f}\")\n",[m
+     "\n",[m
+     "  print(f\"\\nVisualizations generated:\")\n",[m
+     "  print(f\"  1. figures/rul_distributions.png\")\n",[m
+[36m@@ -1100,7 +1126,7 @@[m
+     "  print(f\"  6. figures/rul_degradation_trajectories.png\")\n",[m
+     "  print(f\"  7. figures/sensor_rul_correlation.png\")\n",[m
+     "\n",[m
+[31m-    "  print('\\n✓ Analysis complete using real NASA CMAPSS data.')\n",[m
+[32m+[m[32m    "  print('\\n\u2713 Analysis complete using real NASA CMAPSS data.')\n",[m
+     "  print(f\"\\nDataset:\")\n",[m
+     "  print(f\"  Training engines: {train_df['unit_number'].nunique()}\")\n",[m
+     "  print(f\"  Training cycles: {len(train_df):,}\")\n",[m
+[36m@@ -1113,9 +1139,9 @@[m
+     "  print(f\"  Engineering: rolling mean(10), rolling std(10), diff, cycle_norm\")\n",[m
+     "\n",[m
+     "  print(f\"\\nModel Performance:\")\n",[m
+[31m-    "  print(f\"  Mean RUL Baseline — MAE: {baseline_metrics['MAE']:.2f}, RMSE: {baseline_metrics['RMSE']:.2f}, R2: {baseline_metrics['R2']:.3f}\")\n",[m
+[31m-    "  print(f\"  Random Forest — MAE: {rf_metrics['MAE']:.2f}, RMSE: {rf_metrics['RMSE']:.2f}, R2: {rf_metrics['R2']:.3f}\")\n",[m
+[31m-    "  print(f\"  XGBoost      — MAE: {xgb_metrics['MAE']:.2f}, RMSE: {xgb_metrics['RMSE']:.2f}, R2: {xgb_metrics['R2']:.3f}\")\n",[m
+[32m+[m[32m    "  print(f\"  Mean RUL Baseline \u2014 MAE: {baseline_metrics['MAE']:.2f}, RMSE: {baseline_metrics['RMSE']:.2f}, R2: {baseline_metrics['R2']:.3f}\")\n",[m
+[32m+[m[32m    "  print(f\"  Random Forest \u2014 MAE: {rf_metrics['MAE']:.2f}, RMSE: {rf_metrics['RMSE']:.2f}, R2: {rf_metrics['R2']:.3f}\")\n",[m
+[32m+[m[32m    "  print(f\"  XGBoost      \u2014 MAE: {xgb_metrics['MAE']:.2f}, RMSE: {xgb_metrics['RMSE']:.2f}, R2: {xgb_metrics['R2']:.3f}\")\n",[m
+     "\n",[m
+     "  print(f\"\\nVisualizations generated:\")\n",[m
+     "  print(f\"  1. figures/rul_distributions.png\")\n",[m
+[36m@@ -1126,7 +1152,7 @@[m
+     "  print(f\"  6. figures/rul_degradation_trajectories.png\")\n",[m
+     "  print(f\"  7. figures/sensor_rul_correlation.png\")\n",[m
+     "\n",[m
+[31m-    "  print('\\n✓ Analysis complete using real NASA CMAPSS data.')\n",[m
+[32m+[m[32m    "  print('\\n\u2713 Analysis complete using real NASA CMAPSS data.')\n",[m
+     "  print(f\"\\nDataset:\")\n",[m
+     "  print(f\"  Training engines: {train_df['unit_number'].nunique()}\")\n",[m
+     "  print(f\"  Training cycles: {len(train_df):,}\")\n",[m
+[36m@@ -1139,9 +1165,9 @@[m
+     "  print(f\"  Engineering: rolling mean(10), rolling std(10), diff, cycle_norm\")\n",[m
+     "\n",[m
+     "  print(f\"\\nModel Performance:\")\n",[m
+[31m-    "  print(f\"  Mean RUL Baseline — MAE: {baseline_metrics['MAE']:.2f}, RMSE: {baseline_metrics['RMSE']:.2f}, R2: {baseline_metrics['R2']:.3f}\")\n",[m
+[31m-    "  print(f\"  Random Forest — MAE: {rf_metrics['MAE']:.2f}, RMSE: {rf_metrics['RMSE']:.2f}, R2: {rf_metrics['R2']:.3f}\")\n",[m
+[31m-    "  print(f\"  XGBoost      — MAE: {xgb_metrics['MAE']:.2f}, RMSE: {xgb_metrics['RMSE']:.2f}, R2: {xgb_metrics['R2']:.3f}\")\n",[m
+[32m+[m[32m    "  print(f\"  Mean RUL Baseline \u2014 MAE: {baseline_metrics['MAE']:.2f}, RMSE: {baseline_metrics['RMSE']:.2f}, R2: {baseline_metrics['R2']:.3f}\")\n",[m
+[32m+[m[32m    "  print(f\"  Random Forest \u2014 MAE: {rf_metrics['MAE']:.2f}, RMSE: {rf_metrics['RMSE']:.2f}, R2: {rf_metrics['R2']:.3f}\")\n",[m
+[32m+[m[32m    "  print(f\"  XGBoost      \u2014 MAE: {xgb_metrics['MAE']:.2f}, RMSE: {xgb_metrics['RMSE']:.2f}, R2: {xgb_metrics['R2']:.3f}\")\n",[m
+     "\n",[m
+     "  print(f\"\\nVisualizations generated:\")\n",[m
+     "  print(f\"  1. figures/rul_distributions.png\")\n",[m
+[36m@@ -1152,9 +1178,9 @@[m
+     "  print(f\"  6. figures/rul_degradation_trajectories.png\")\n",[m
+     "  print(f\"  7. figures/sensor_rul_correlation.png\")\n",[m
+     "\n",[m
+[31m-    "  print('\\n✓ Analysis complete using real NASA CMAPSS data.')\n",[m
+[31m-    "  print(f\"  Random Forest — MAE: {rf_metrics['MAE']:.2f}, RMSE: {rf_metrics['RMSE']:.2f}, R2: {rf_metrics['R2']:.3f}\")\n",[m
+[31m-    "  print(f\"  XGBoost      — MAE: {xgb_metrics['MAE']:.2f}, RMSE: {xgb_metrics['RMSE']:.2f}, R2: {xgb_metrics['R2']:.3f}\")\n",[m
+[32m+[m[32m    "  print('\\n\u2713 Analysis complete using real NASA CMAPSS data.')\n",[m
+[32m+[m[32m    "  print(f\"  Random Forest \u2014 MAE: {rf_metrics['MAE']:.2f}, RMSE: {rf_metrics['RMSE']:.2f}, R2: {rf_metrics['R2']:.3f}\")\n",[m
+[32m+[m[32m    "  print(f\"  XGBoost      \u2014 MAE: {xgb_metrics['MAE']:.2f}, RMSE: {xgb_metrics['RMSE']:.2f}, R2: {xgb_metrics['R2']:.3f}\")\n",[m
+     "\n",[m
+     "  print(f\"\\nVisualizations generated:\")\n",[m
+     "  print(f\"  1. figures/rul_distributions.png\")\n",[m
+[36m@@ -1165,7 +1191,7 @@[m
+     "  print(f\"  6. figures/rul_degradation_trajectories.png\")\n",[m
+     "  print(f\"  7. figures/sensor_rul_correlation.png\")\n",[m
+     "\n",[m
+[31m-    "  print('\\n✓ Analysis complete using real NASA CMAPSS data.')\n",[m
+[32m+[m[32m    "  print('\\n\u2713 Analysis complete using real NASA CMAPSS data.')\n",[m
+     "  print(f\"\\nDataset:\")\n",[m
+     "  print(f\"  Training engines: {train_df['unit_number'].nunique()}\")\n",[m
+     "  print(f\"  Training cycles: {len(train_df):,}\")\n",[m
+[36m@@ -1178,9 +1204,9 @@[m
+     "  print(f\"  Engineering: rolling mean(10), rolling std(10), diff, cycle_norm\")\n",[m
+     "\n",[m
+     "  print(f\"\\nModel Performance:\")\n",[m
+[31m-    "  print(f\"  Mean RUL Baseline — MAE: {baseline_metrics['MAE']:.2f}, RMSE: {baseline_metrics['RMSE']:.2f}, R2: {baseline_metrics['R2']:.3f}\")\n",[m
+[31m-    "  print(f\"  Random Forest — MAE: {rf_metrics['MAE']:.2f}, RMSE: {rf_metrics['RMSE']:.2f}, R2: {rf_metrics['R2']:.3f}\")\n",[m
+[31m-    "  print(f\"  XGBoost      — MAE: {xgb_metrics['MAE']:.2f}, RMSE: {xgb_metrics['RMSE']:.2f}, R2: {xgb_metrics['R2']:.3f}\")\n",[m
+[32m+[m[32m    "  print(f\"  Mean RUL Baseline \u2014 MAE: {baseline_metrics['MAE']:.2f}, RMSE: {baseline_metrics['RMSE']:.2f}, R2: {baseline_metrics['R2']:.3f}\")\n",[m
+[32m+[m[32m    "  print(f\"  Random Forest \u2014 MAE: {rf_metrics['MAE']:.2f}, RMSE: {rf_metrics['RMSE']:.2f}, R2: {rf_metrics['R2']:.3f}\")\n",[m
+[32m+[m[32m    "  print(f\"  XGBoost      \u2014 MAE: {xgb_metrics['MAE']:.2f}, RMSE: {xgb_metrics['RMSE']:.2f}, R2: {xgb_metrics['R2']:.3f}\")\n",[m
+     "\n",[m
+     "  print(f\"\\nVisualizations generated:\")\n",[m
+     "  print(f\"  1. figures/rul_distributions.png\")\n",[m
+[36m@@ -1191,7 +1217,7 @@[m
+     "  print(f\"  6. figures/rul_degradation_trajectories.png\")\n",[m
+     "  print(f\"  7. figures/sensor_rul_correlation.png\")\n",[m
+     "\n",[m
+[31m-    "  print('\\n✓ Analysis complete using real NASA CMAPSS data.')\n",[m
+[32m+[m[32m    "  print('\\n\u2713 Analysis complete using real NASA CMAPSS data.')\n",[m
+     "print('=== FINAL RESULTS: NASA CMAPSS FD001 RUL PREDICTION ===')\n",[m
+     "print(f\"\\nDataset:\")\n",[m
+     "print(f\"  Training engines: {train_df['unit_number'].nunique()}\")\n",[m
+[36m@@ -1205,9 +1231,9 @@[m
+     "print(f\"  Engineering: rolling mean(10), rolling std(10), diff, cycle_norm\")\n",[m
+     "\n",[m
+     "print(f\"\\nModel Performance:\")\n",[m
+[31m-    "print(f\"  Mean RUL Baseline — MAE: {baseline_metrics['MAE']:.2f}, RMSE: {baseline_metrics['RMSE']:.2f}, R2: {baseline_metrics['R2']:.3f}\")\n",[m
+[31m-    "print(f\"  Random Forest — MAE: {rf_metrics['MAE']:.2f}, RMSE: {rf_metrics['RMSE']:.2f}, R2: {rf_metrics['R2']:.3f}\")\n",[m
+[31m-    "print(f\"  XGBoost      — MAE: {xgb_metrics['MAE']:.2f}, RMSE: {xgb_metrics['RMSE']:.2f}, R2: {xgb_metrics['R2']:.3f}\")\n",[m
+[32m+[m[32m    "print(f\"  Mean RUL Baseline \u2014 MAE: {baseline_metrics['MAE']:.2f}, RMSE: {baseline_metrics['RMSE']:.2f}, R2: {baseline_metrics['R2']:.3f}\")\n",[m
+[32m+[m[32m    "print(f\"  Random Forest \u2014 MAE: {rf_metrics['MAE']:.2f}, RMSE: {rf_metrics['RMSE']:.2f}, R2: {rf_metrics['R2']:.3f}\")\n",[m
+[32m+[m[32m    "print(f\"  XGBoost      \u2014 MAE: {xgb_metrics['MAE']:.2f}, RMSE: {xgb_metrics['RMSE']:.2f}, R2: {xgb_metrics['R2']:.3f}\")\n",[m
+     "\n",[m
+     "print(f\"\\nVisualizations generated:\")\n",[m
+     "print(f\"  1. figures/rul_distributions.png\")\n",[m
+[36m@@ -1218,7 +1244,7 @@[m
+     "print(f\"  6. figures/rul_degradation_trajectories.png\")\n",[m
+     "print(f\"  7. figures/sensor_rul_correlation.png\")\n",[m
+     "\n",[m
+[31m-    "print('\\n✓ Analysis complete using real NASA CMAPSS data.')\n",[m
+[32m+[m[32m    "print('\\n\u2713 Analysis complete using real NASA CMAPSS data.')\n",[m
+     "print(f\"\\nDataset:\")\n",[m
+     "print(f\"  Training engines: {train_df['unit_number'].nunique()}\")\n",[m
+     "print(f\"  Training cycles: {len(train_df):,}\")\n",[m
+[36m@@ -1231,9 +1257,9 @@[m
+     "print(f\"  Engineering: rolling mean(10), rolling std(10), diff, cycle_norm\")\n",[m
+     "\n",[m
+     "print(f\"\\nModel Performance:\")\n",[m
+[31m-    "print(f\"  Mean RUL Baseline — MAE: {baseline_metrics['MAE']:.2f}, RMSE: {baseline_metrics['RMSE']:.2f}, R2: {baseline_metrics['R2']:.3f}\")\n",[m
+[31m-    "print(f\"  Random Forest — MAE: {rf_metrics['MAE']:.2f}, RMSE: {rf_metrics['RMSE']:.2f}, R2: {rf_metrics['R2']:.3f}\")\n",[m
+[31m-    "print(f\"  XGBoost      — MAE: {xgb_metrics['MAE']:.2f}, RMSE: {xgb_metrics['RMSE']:.2f}, R2: {xgb_metrics['R2']:.3f}\")\n",[m
+[32m+[m[32m    "print(f\"  Mean RUL Baseline \u2014 MAE: {baseline_metrics['MAE']:.2f}, RMSE: {baseline_metrics['RMSE']:.2f}, R2: {baseline_metrics['R2']:.3f}\")\n",[m
+[32m+[m[32m    "print(f\"  Random Forest \u2014 MAE: {rf_metrics['MAE']:.2f}, RMSE: {rf_metrics['RMSE']:.2f}, R2: {rf_metrics['R2']:.3f}\")\n",[m
+[32m+[m[32m    "print(f\"  XGBoost      \u2014 MAE: {xgb_metrics['MAE']:.2f}, RMSE: {xgb_metrics['RMSE']:.2f}, R2: {xgb_metrics['R2']:.3f}\")\n",[m
+     "\n",[m
+     "print(f\"\\nVisualizations generated:\")\n",[m
+     "print(f\"  1. figures/rul_distributions.png\")\n",[m
+[36m@@ -1244,7 +1270,7 @@[m
+     "print(f\"  6. figures/rul_degradation_trajectories.png\")\n",[m
+     "print(f\"  7. figures/sensor_rul_correlation.png\")\n",[m
+     "\n",[m
+[31m-    "print('\\n✓ Analysis complete using real NASA CMAPSS data.')\n",[m
+[32m+[m[32m    "print('\\n\u2713 Analysis complete using real NASA CMAPSS data.')\n",[m
+     "print(f\"\\nDataset:\")\n",[m
+     "print(f\"  Training engines: {train_df['unit_number'].nunique()}\")\n",[m
+     "print(f\"  Training cycles: {len(train_df):,}\")\n",[m
+[36m@@ -1257,9 +1283,9 @@[m
+     "print(f\"  Engineering: rolling mean(10), rolling std(10), diff, cycle_norm\")\n",[m
+     "\n",[m
+     "print(f\"\\nModel Performance:\")\n",[m
+[31m-    "print(f\"  Mean RUL Baseline — MAE: {baseline_metrics['MAE']:.2f}, RMSE: {baseline_metrics['RMSE']:.2f}, R2: {baseline_metrics['R2']:.3f}\")\n",[m
+[31m-    "print(f\"  Random Forest — MAE: {rf_metrics['MAE']:.2f}, RMSE: {rf_metrics['RMSE']:.2f}, R2: {rf_metrics['R2']:.3f}\")\n",[m
+[31m-    "print(f\"  XGBoost      — MAE: {xgb_metrics['MAE']:.2f}, RMSE: {xgb_metrics['RMSE']:.2f}, R2: {xgb_metrics['R2']:.3f}\")\n",[m
+[32m+[m[32m    "print(f\"  Mean RUL Baseline \u2014 MAE: {baseline_metrics['MAE']:.2f}, RMSE: {baseline_metrics['RMSE']:.2f}, R2: {baseline_metrics['R2']:.3f}\")\n",[m
+[32m+[m[32m    "print(f\"  Random Forest \u2014 MAE: {rf_metrics['MAE']:.2f}, RMSE: {rf_metrics['RMSE']:.2f}, R2: {rf_metrics['R2']:.3f}\")\n",[m
+[32m+[m[32m    "print(f\"  XGBoost      \u2014 MAE: {xgb_metrics['MAE']:.2f}, RMSE: {xgb_metrics['RMSE']:.2f}, R2: {xgb_metrics['R2']:.3f}\")\n",[m
+     "\n",[m
+     "print(f\"\\nVisualizations generated:\")\n",[m
+     "print(f\"  1. figures/rul_distributions.png\")\n",[m
+[36m@@ -1270,8 +1296,8 @@[m
+     "print(f\"  6. figures/rul_degradation_trajectories.png\")\n",[m
+     "print(f\"  7. figures/sensor_rul_correlation.png\")\n",[m
+     "\n",[m
+[31m-    "print('\\n✓ Analysis complete using real NASA CMAPSS data.')\n",[m
+[31m-    "print(f\"  XGBoost      — MAE: {xgb_metrics['MAE']:.2f}, RMSE: {xgb_metrics['RMSE']:.2f}, R2: {xgb_metrics['R2']:.3f}\")\n",[m
+[32m+[m[32m    "print('\\n\u2713 Analysis complete using real NASA CMAPSS data.')\n",[m
+[32m+[m[32m    "print(f\"  XGBoost      \u2014 MAE: {xgb_metrics['MAE']:.2f}, RMSE: {xgb_metrics['RMSE']:.2f}, R2: {xgb_metrics['R2']:.3f}\")\n",[m
+     "\n",[m
+     "print(f\"\\nVisualizations generated:\")\n",[m
+     "print(f\"  1. figures/rul_distributions.png\")\n",[m
+[36m@@ -1282,7 +1308,7 @@[m
+     "print(f\"  6. figures/rul_degradation_trajectories.png\")\n",[m
+     "print(f\"  7. figures/sensor_rul_correlation.png\")\n",[m
+     "\n",[m
+[31m-    "print('\\n✓ Analysis complete using real NASA CMAPSS data.')"[m
+[32m+[m[32m    "print('\\n\u2713 Analysis complete using real NASA CMAPSS data.')"[m
+    ][m
+   }[m
+  ],[m
+[36m@@ -1307,4 +1333,4 @@[m
+  },[m
+  "nbformat": 4,[m
+  "nbformat_minor": 5[m
+[31m-}[m
+[32m+[m[32m}[m
+\ No newline at end of file[m
+[1mdiff --git a/projects/predictive-maintenance-transit/notebooks/predictive_maintenance_analysis.ipynb b/projects/predictive-maintenance-transit/notebooks/predictive_maintenance_analysis.ipynb[m
+[1mindex 90b52da..43d2dc2 100644[m
+[1m--- a/projects/predictive-maintenance-transit/notebooks/predictive_maintenance_analysis.ipynb[m
+[1m+++ b/projects/predictive-maintenance-transit/notebooks/predictive_maintenance_analysis.ipynb[m
+[36m@@ -82,6 +82,45 @@[m
+     "print('Libraries loaded successfully')"[m
+    ][m
+   },[m
+[32m+[m[32m  {[m
+[32m+[m[32m   "cell_type": "code",[m
+[32m+[m[32m   "execution_count": null,[m
+[32m+[m[32m   "metadata": {},[m
+[32m+[m[32m   "outputs": [],[m
+[32m+[m[32m   "source": [[m
+[32m+[m[32m    "def evaluate_model(name, true, pred):\n",[m
+[32m+[m[32m    "    from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score\n",[m
+[32m+[m[32m    "    import numpy as np\n",[m
+[32m+[m[32m    "    mae = mean_absolute_error(true, pred)\n",[m
+[32m+[m[32m    "    rmse = np.sqrt(mean_squared_error(true, pred))\n",[m
+[32m+[m[32m    "    r2 = r2_score(true, pred)\n",[m
+[32m+[m[32m    "    print(f\"{name} Results:\")\n",[m
+[32m+[m[32m    "    print(f\"  MAE: {mae:.2f}\")\n",[m
+[32m+[m[32m    "    print(f\"  RMSE: {rmse:.2f}\")\n",[m
+[32m+[m[32m    "    print(f\"  R2:   {r2:.3f}\")\n",[m
+[32m+[m[32m    "    return {'MAE': mae, 'RMSE': rmse, 'R2': r2}\n"[m
+[32m+[m[32m   ][m
+[32m+[m[32m  },[m
+[32m+[m[32m  {[m
+[32m+[m[32m   "cell_type": "code",[m
+[32m+[m[32m   "execution_count": null,[m
+[32m+[m[32m   "id": "e47fc368",[m
+[32m+[m[32m   "metadata": {},[m
+[32m+[m[32m   "outputs": [],[m
+[32m+[m[32m   "source": [[m
+[32m+[m[32m    "def evaluate_model(name, true, pred):\n",[m
+[32m+[m[32m    "    from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score\n",[m
+[32m+[m[32m    "    import numpy as np\n",[m
+[32m+[m[32m    "    mae = mean_absolute_error(true, pred)\n",[m
+[32m+[m[32m    "    rmse = np.sqrt(mean_squared_error(true, pred))\n",[m
+[32m+[m[32m    "    r2 = r2_score(true, pred)\n",[m
+[32m+[m[32m    "    print(f\"{name} Results:\")\n",[m
+[32m+[m[32m    "    print(f\"  MAE: {mae:.2f}\")\n",[m
+[32m+[m[32m    "    print(f\"  RMSE: {rmse:.2f}\")\n",[m
+[32m+[m[32m    "    print(f\"  R2:   {r2:.3f}\")\n",[m
+[32m+[m[32m    "    return {'MAE': mae, 'RMSE': rmse, 'R2': r2}\n"[m
+[32m+[m[32m   ][m
+[32m+[m[32m  },[m
+   {[m
+    "cell_type": "code",[m
+    "execution_count": 2,[m
+[36m@@ -133,7 +172,7 @@[m
+     "- **26 columns**: unit ID, cycle, 3 operating settings, 21 sensor measurements\n",[m
+     "- **RUL_FD001.txt**: true Remaining Useful Life for test engines\n",[m
+     "\n",[m
+[31m-    "All data is **real NASA simulation data** — no synthetic generation."[m
+[32m+[m[32m    "All data is **real NASA simulation data** \u2014 no synthetic generation."[m
+    ][m
+   },[m
+   {[m
+[36m@@ -350,7 +389,7 @@[m
+        "    </tr>\n",[m
+        "  </tbody>\n",[m
+        "</table>\n",[m
+[31m-       "<p>5 rows × 26 columns</p>\n",[m
+[32m+[m[32m       "<p>5 rows \u00d7 26 columns</p>\n",[m
+        "</div>"[m
+       ],[m
+       "text/plain": [[m
+[36m@@ -1140,7 +1179,7 @@[m
+     "### 5.3 Baseline: Mean RUL Predictor\n",[m
+     "\n",[m
+     "The simplest possible baseline: predict the mean RUL of the training set for every test engine.\n",[m
+[31m-    "This establishes a floor — any ML model must beat this to be useful."[m
+[32m+[m[32m    "This establishes a floor \u2014 any ML model must beat this to be useful."[m
+    ][m
+   },[m
+   {[m
+[36m@@ -1256,12 +1295,12 @@[m
+     "rf_metrics = evaluate_model('Random Forest', true_rul, rf_pred)\n",[m
+     "xgb_metrics = evaluate_model('XGBoost', true_rul, xgb_pred)\n",[m
+     "\n",[m
+[31m-    "# Summary table\n",[m
+[32m+[m[32m    "import pandas as pd\n",[m
+     "metrics_df = pd.DataFrame([\n",[m
+     "    {'Model': 'Random Forest', **rf_metrics},\n",[m
+     "    {'Model': 'XGBoost', **xgb_metrics}\n",[m
+     "])\n",[m
+[31m-    "print('\\n=== Comparison ===')\n",[m
+[32m+[m[32m    "print('\\n--- Comparison ===')\n",[m
+     "print(metrics_df.round(2).to_string(index=False))\n"[m
+    ][m
+   },[m
+[36m@@ -1322,7 +1361,7 @@[m
+     "    ax.legend()\n",[m
+     "    ax.grid(True, alpha=0.3)\n",[m
+     "\n",[m
+[31m-    "plt.suptitle('Predicted vs Actual RUL — NASA CMAPSS FD001', fontsize=13)\n",[m
+[32m+[m[32m    "plt.suptitle('Predicted vs Actual RUL \u2014 NASA CMAPSS FD001', fontsize=13)\n",[m
+     "plt.tight_layout()\n",[m
+     "plt.savefig('../figures/predicted_vs_actual_rul.png', dpi=150, bbox_inches='tight')\n",[m
+     "plt.show()\n",[m
+[36m@@ -1501,7 +1540,7 @@[m
+     "ax.set_yticks(range(len(top_features)))\n",[m
+     "ax.set_yticklabels(top_features['feature'], fontsize=9)\n",[m
+     "ax.set_xlabel('Feature Importance (XGBoost)')\n",[m
+[31m-    "ax.set_title(f'Top {top_n} Features for RUL Prediction — NASA CMAPSS FD001')\n",[m
+[32m+[m[32m    "ax.set_title(f'Top {top_n} Features for RUL Prediction \u2014 NASA CMAPSS FD001')\n",[m
+     "\n",[m
+     "plt.tight_layout()\n",[m
+     "plt.savefig('../figures/feature_importance.png', dpi=150, bbox_inches='tight')\n",[m
+[36m@@ -1602,7 +1641,7 @@[m
+     "    ax.legend(fontsize=9)\n",[m
+     "    ax.grid(True, alpha=0.3)\n",[m
+     "\n",[m
+[31m-    "plt.suptitle('RUL Degradation Trajectories — XGBoost Predictions', fontsize=13)\n",[m
+[32m+[m[32m    "plt.suptitle('RUL Degradation Trajectories \u2014 XGBoost Predictions', fontsize=13)\n",[m
+     "plt.tight_layout()\n",[m
+     "plt.savefig('../figures/rul_degradation_trajectories.png', dpi=150, bbox_inches='tight')\n",[m
+     "plt.show()\n",[m
+[36m@@ -1702,7 +1741,7 @@[m
+    "source": [[m
+     "## 10. Results Summary\n",[m
+     "\n",[m
+[31m-    "All metrics computed on **real NASA CMAPSS FD001 data** — zero synthetic inputs."[m
+[32m+[m[32m    "All metrics computed on **real NASA CMAPSS FD001 data** \u2014 zero synthetic inputs."[m
+    ][m
+   },[m
+   {[m
+[36m@@ -1744,9 +1783,9 @@[m
+       "  Engineering: rolling mean(10), rolling std(10), diff, cycle_norm\n",[m
+       "\n",[m
+       "Model Performance:\n",[m
+[31m-      "  Mean RUL Baseline — MAE: 40.88, RMSE: 52.62, R2: -0.604\n",[m
+[31m-      "  Random Forest — MAE: 75.52, RMSE: 86.20, R2: -3.303\n",[m
+[31m-      "  XGBoost      — MAE: 46.41, RMSE: 55.01, R2: -0.753\n",[m
+[32m+[m[32m      "  Mean RUL Baseline \u2014 MAE: 40.88, RMSE: 52.62, R2: -0.604\n",[m
+[32m+[m[32m      "  Random Forest \u2014 MAE: 75.52, RMSE: 86.20, R2: -3.303\n",[m
+[32m+[m[32m      "  XGBoost      \u2014 MAE: 46.41, RMSE: 55.01, R2: -0.753\n",[m
+       "\n",[m
+       "Visualizations generated:\n",[m
+       "  1. figures/rul_distributions.png\n",[m
+[36m@@ -1757,7 +1796,7 @@[m
+       "  6. figures/rul_degradation_trajectories.png\n",[m
+       "  7. figures/sensor_rul_correlation.png\n",[m
+       "\n",[m
+[31m-      "✓ Analysis complete using real NASA CMAPSS data.\n"[m
+[32m+[m[32m      "\u2713 Analysis complete using real NASA CMAPSS data.\n"[m
+      ][m
+     }[m
+    ],[m
+[36m@@ -1775,9 +1814,9 @@[m
+     "print(f\"  Engineering: rolling mean(10), rolling std(10), diff, cycle_norm\")\n",[m
+     "\n",[m
+     "print(f\"\\nModel Performance:\")\n",[m
+[31m-    "print(f\"  Mean RUL Baseline — MAE: {baseline_metrics['MAE']:.2f}, RMSE: {baseline_metrics['RMSE']:.2f}, R2: {baseline_metrics['R2']:.3f}\")\n",[m
+[31m-    "print(f\"  Random Forest — MAE: {rf_metrics['MAE']:.2f}, RMSE: {rf_metrics['RMSE']:.2f}, R2: {rf_metrics['R2']:.3f}\")\n",[m
+[31m-    "print(f\"  XGBoost      — MAE: {xgb_metrics['MAE']:.2f}, RMSE: {xgb_metrics['RMSE']:.2f}, R2: {xgb_metrics['R2']:.3f}\")\n",[m
+[32m+[m[32m    "print(f\"  Mean RUL Baseline \u2014 MAE: {baseline_metrics['MAE']:.2f}, RMSE: {baseline_metrics['RMSE']:.2f}, R2: {baseline_metrics['R2']:.3f}\")\n",[m
+[32m+[m[32m    "print(f\"  Random Forest \u2014 MAE: {rf_metrics['MAE']:.2f}, RMSE: {rf_metrics['RMSE']:.2f}, R2: {rf_metrics['R2']:.3f}\")\n",[m
+[32m+[m[32m    "print(f\"  XGBoost      \u2014 MAE: {xgb_metrics['MAE']:.2f}, RMSE: {xgb_metrics['RMSE']:.2f}, R2: {xgb_metrics['R2']:.3f}\")\n",[m
+     "\n",[m
+     "print(f\"\\nVisualizations generated:\")\n",[m
+     "print(f\"  1. figures/rul_distributions.png\")\n",[m
+[36m@@ -1788,7 +1827,7 @@[m
+     "print(f\"  6. figures/rul_degradation_trajectories.png\")\n",[m
+     "print(f\"  7. figures/sensor_rul_correlation.png\")\n",[m
+     "\n",[m
+[31m-    "print('\\n✓ Analysis complete using real NASA CMAPSS data.')"[m
+[32m+[m[32m    "print('\\n\u2713 Analysis complete using real NASA CMAPSS data.')"[m
+    ][m
+   }[m
+  ],[m
+[36m@@ -1813,4 +1852,4 @@[m
+  },[m
+  "nbformat": 4,[m
+  "nbformat_minor": 5[m
+[31m-}[m
+[32m+[m[32m}[m
+\ No newline at end of file[m

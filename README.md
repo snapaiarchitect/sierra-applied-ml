@@ -72,11 +72,13 @@ These three projects demonstrate what I bring to an applied ML role: **end-to-en
 **Business Problem**: Fleet operators and transit agencies lose millions to unplanned asset failures. Predicting which engines will fail and when enables proactive maintenance scheduling instead of reactive downtime.
 
 ### What This Means for Business
+
 - **26-cycle prediction horizon** — maintenance can be scheduled ~26 operating cycles before failure (MAE)
 - **Sensor-driven prioritization** — identifies which engines are degrading fastest without teardown inspections
 - **Cost avoidance** — unplanned downtime in rail/transit averages $50K–$500K per incident; even a 10% reduction pays for the model
 
 ### Why This Matters to Hiring Managers
+
 - Demonstrates **time-series degradation modeling** on real telemetry (not synthetic drift)
 - Shows **feature engineering at the signal level**: rolling windows, normalization, rate-of-change
 - Pairs **interpretability with performance**: feature importance + sensor correlation analysis, not a black-box score
@@ -109,9 +111,11 @@ These three projects demonstrate what I bring to an applied ML role: **end-to-en
 </p>
 
 ### Interactive Dashboard
+
 Explore the live NASA dashboard with sensor trajectories, RUL filters, and prediction confidence bands: [🚀 Open Predictive Maintenance Dashboard](https://gosidehustlesisi.github.io/sierra-applied-ml/interactive-dashboards/predictive-maintenance.html)
 
 ### How We Got There
+
 1. **Data acquisition**: Automated download from NASA Prognostics Center of Excellence with retry logic
 2. **Feature engineering**: Rolling windows (mean, std, max), normalization, rate-of-change per sensor
 3. **Modeling**: Random Forest + XGBoost regression for Remaining Useful Life (RUL)
@@ -119,6 +123,7 @@ Explore the live NASA dashboard with sensor trajectories, RUL filters, and predi
 5. **Visualization**: Degradation trajectories, residual analysis, sensor-RUL correlation heatmap
 
 ### What I'd Bring
+
 - A reusable **C-MAPSS fetcher + preprocessing pipeline** that drops into any turbofan-equivalent telemetry system
 - **Feature importance methodology** that connects model outputs to maintenance checklists
 - Experience with **run-to-failure time-series** — the hardest shape in predictive maintenance
@@ -134,11 +139,13 @@ Explore the live NASA dashboard with sensor trajectories, RUL filters, and predi
 **Business Problem**: Organizations need to automatically categorize large volumes of unstructured text — support tickets, emails, forum posts, news articles. Manual classification is slow, inconsistent, and doesn't scale.
 
 ### What This Means for Business
+
 - **~68% accuracy on 20 classes** with sub-second training — fast enough for real-time routing
 - **Interpretable TF-IDF features** — you can explain *why* a ticket was routed to "comp.graphics" vs "sci.space"
 - **No GPU required** — runs on a laptop, making it deployable anywhere
 
 ### Why This Matters to Hiring Managers
+
 - Demonstrates **full NLP pipeline**: preprocessing → vectorization → multi-class classification → evaluation
 - Compares **3 baselines** (Naive Bayes, Logistic Regression, Linear SVM) with clear trade-offs
 - Shows **text-specific feature analysis**: top predictive words per class, not just aggregate accuracy
@@ -172,9 +179,11 @@ Explore the live NASA dashboard with sensor trajectories, RUL filters, and predi
 </p>
 
 ### Interactive Dashboard
+
 Explore the live NLP dashboard with TF-IDF heatmaps, model radar charts, and train/test filters: [🚀 Open NLP Dashboard](https://gosidehustlesisi.github.io/sierra-applied-ml/interactive-dashboards/nlp-classification.html)
 
 ### How We Got There
+
 1. **Data acquisition**: Fetched 18,846 real Usenet posts from `sklearn.datasets.fetch_20newsgroups`
 2. **Text preprocessing**: Lowercase, punctuation/stopword/number removal
 3. **Vectorization**: TF-IDF with 15K features, sublinear TF scaling
@@ -182,6 +191,7 @@ Explore the live NLP dashboard with TF-IDF heatmaps, model radar charts, and tra
 5. **Evaluation**: Accuracy, precision, recall, F1, confusion matrix, per-class feature analysis
 
 ### What I'd Bring
+
 - A **production-grade text classification template** that swaps datasets by changing one line
 - **Per-class feature analysis** that turns model outputs into actionable routing rules
 - Understanding that **TF-IDF + Naive Bayes is not a toy baseline** — it's often the right answer
@@ -197,11 +207,13 @@ Explore the live NLP dashboard with TF-IDF heatmaps, model radar charts, and tra
 **Business Problem**: Capital Bikeshare (Washington D.C.) needs accurate hourly demand forecasts to rebalance bikes across stations, reduce stockouts, and optimize maintenance windows.
 
 ### What This Means for Business
+
 - **67% forecast error reduction**: Random Forest MAE 18.9 rides/hour vs. seasonal naive 57.8 rides/hour
 - **Rush-hour precision**: Captures 8 AM and 5–6 PM commuter peaks plus 12 PM weekend leisure surge
 - **Weather-aware planning**: Temperature, humidity, and wind speed are significant predictors — the model tells you *which* weather days need extra rebalancing trucks
 
 ### Why This Matters to Hiring Managers
+
 - Demonstrates **time-series forecasting at two granularities**: hourly (17,379 records) and daily (731 records)
 - Compares **4 models** (seasonal naive, Random Forest, XGBoost, SARIMA) with clear hierarchy
 - Shows **feature engineering for temporal patterns**: lag features, rolling statistics, cyclical hour/day encodings
@@ -216,6 +228,7 @@ Explore the live NLP dashboard with TF-IDF heatmaps, model radar charts, and tra
 | SARIMA | 1418.22 | 1779.18 | 92.92% | 0.01 | Model misspecification on hourly data |
 
 ### Interactive Dashboard
+
 Explore the live Bike Sharing dashboard with ensemble forecasts, model toggles, and weather overlays: [🚀 Open Bike Sharing Dashboard](https://gosidehustlesisi.github.io/sierra-applied-ml/interactive-dashboards/bike-sharing.html)
 
 ### Key Visualizations
@@ -239,6 +252,7 @@ Explore the live Bike Sharing dashboard with ensemble forecasts, model toggles, 
 </p>
 
 ### How We Got There
+
 1. **Data acquisition**: Downloaded from UCI ML Repository with retry/caching
 2. **Feature engineering**: Lag features, rolling statistics, cyclical encodings (hour, day-of-week, month)
 3. **Seasonal decomposition**: Trend, weekly seasonal, residual extraction
@@ -246,6 +260,7 @@ Explore the live Bike Sharing dashboard with ensemble forecasts, model toggles, 
 5. **Evaluation**: MAE, RMSE, MAPE on 30-day holdout; residual analysis for bias detection
 
 ### What I'd Bring
+
 - A **reusable forecasting scaffold** that plugs into any operational time-series (fleet, inventory, staffing)
 - **Interactive output pipeline** — static reports are for auditors; live forecasts are for operators
 - Experience with **multi-horizon evaluation** — hourly tactical + daily strategic in one model suite
@@ -258,9 +273,9 @@ Explore the live Bike Sharing dashboard with ensemble forecasts, model toggles, 
 
 | Dataset | Source | URL | Citation |
 |---------|--------|-----|----------|
-| **NASA C-MAPSS FD001** | NASA Prognostics Center of Excellence | https://ti.arc.nasa.gov/tech/dash/groups/pcoe/prognostic-data-repository/ | A. Saxena et al., "Damage Propagation Modeling for Aircraft Engine Run-to-Failure Simulation", PHM08, 2008 |
-| **20 Newsgroups** | CMU / sklearn.datasets | https://scikit-learn.org/stable/datasets/twenty_newsgroups.html | K. Lang, "Newsweeder: Learning to filter netnews", ICML 1995 |
-| **UCI Bike Sharing** | UCI Machine Learning Repository | https://archive.ics.uci.edu/ml/datasets/bike+sharing+dataset | Fanaee-T & Gama, "Event labeling combining ensemble detectors and background knowledge", Prog. AI, 2013. DOI: 10.24432/C5W894 |
+| **NASA C-MAPSS FD001** | NASA Prognostics Center of Excellence | <https://ti.arc.nasa.gov/tech/dash/groups/pcoe/prognostic-data-repository/> | A. Saxena et al., "Damage Propagation Modeling for Aircraft Engine Run-to-Failure Simulation", PHM08, 2008 |
+| **20 Newsgroups** | CMU / sklearn.datasets | <https://scikit-learn.org/stable/datasets/twenty_newsgroups.html> | K. Lang, "Newsweeder: Learning to filter netnews", ICML 1995 |
+| **UCI Bike Sharing** | UCI Machine Learning Repository | <https://archive.ics.uci.edu/ml/datasets/bike+sharing+dataset> | Fanaee-T & Gama, "Event labeling combining ensemble detectors and background knowledge", Prog. AI, 2013. DOI: 10.24432/C5W894 |
 
 **Zero synthetic data. Zero simulated records. Every number in this README came from a real public dataset.**
 
@@ -281,6 +296,20 @@ jupyter notebook projects/predictive-maintenance-transit/notebooks/predictive_ma
 jupyter notebook projects/nlp-text-classification-pipeline/notebooks/nlp_classification_analysis.ipynb
 jupyter notebook projects/demand-forecasting-operations/notebooks/demand_forecasting.ipynb
 ```
+
+## Docker
+
+This repository also includes a `Dockerfile` and `docker-compose.yml` for local development.
+
+```bash
+# Build and start the container
+docker compose up --build
+
+# Access Jupyter
+http://localhost:8888
+```
+
+The container mounts the project directory into `/app`, so generated plots and notebooks are saved back to the host.
 
 ### Requirements
 
@@ -328,6 +357,7 @@ sierra-applied-ml/
 ## Contact
 
 **Sierra Napier**
+
 - 🔗 GitHub: [@gosidehustlesisi](https://github.com/gosidehustlesisi)
 - 🌐 Portfolio: [e3-ai.com](https://e3-ai.com)
 - 💼 LinkedIn: [sierra-napier](https://linkedin.com/in/sierra-napier)
