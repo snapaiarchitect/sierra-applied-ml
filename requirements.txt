@@ -10,6 +10,9 @@ xgboost>=1.7,<3.0
 # NLP
 nltk>=3.8
 
+# Survival analysis
+lifelines>=0.27
+
 # Time Series
 statsmodels>=0.14
 
