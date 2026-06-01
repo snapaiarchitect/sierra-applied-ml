@@ -17,10 +17,11 @@ plt.rcParams['font.size'] = 10
 print('CELL 1: Libraries loaded')
 
 # CELL 3: Load data
+_BASE_DIR = Path(__file__).parent.parent
 cols = ['unit_number', 'time_in_cycles', 'op_setting_1', 'op_setting_2', 'op_setting_3'] + [f'sensor_{i}' for i in range(1, 22)]
-train_df = pd.read_csv('data/raw/train_FD001.txt', sep='\s+', header=None, names=cols)
-test_df = pd.read_csv('data/raw/test_FD001.txt', sep='\s+', header=None, names=cols)
-true_rul = pd.read_csv('data/raw/RUL_FD001.txt', header=None, names=['RUL']).values.flatten()
+train_df = pd.read_csv(_BASE_DIR / 'data/raw/train_FD001.txt', sep=r'\s+', header=None, names=cols)
+test_df = pd.read_csv(_BASE_DIR / 'data/raw/test_FD001.txt', sep=r'\s+', header=None, names=cols)
+true_rul = pd.read_csv(_BASE_DIR / 'data/raw/RUL_FD001.txt', header=None, names=['RUL']).values.flatten()
 print(f'Train: {train_df.shape}, Test: {test_df.shape}, RUL: {len(true_rul)}')
 
 # CELL 6: Compute RUL
@@ -44,7 +45,7 @@ axes[1].set_xlabel('Engine Lifetime (cycles)')
 axes[1].set_ylabel('Count')
 axes[1].set_title('Engine Failure Time Distribution')
 plt.tight_layout()
-plt.savefig('figures/rul_distributions.png', dpi=150, bbox_inches='tight')
+plt.savefig(str(_BASE_DIR / 'figures/rul_distributions.png'), dpi=150, bbox_inches='tight')
 plt.close()
 print('Saved: figures/rul_distributions.png')
 
@@ -65,7 +66,7 @@ for idx, sensor in enumerate(sensor_cols):
         ax.legend(fontsize=7, loc='upper left')
 plt.suptitle('Sensor Degradation Curves (4 Sample Engines)', fontsize=14, y=1.02)
 plt.tight_layout()
-plt.savefig('figures/sensor_degradation_curves.png', dpi=150, bbox_inches='tight')
+plt.savefig(str(_BASE_DIR / 'figures/sensor_degradation_curves.png'), dpi=150, bbox_inches='tight')
 plt.close()
 print('Saved: figures/sensor_degradation_curves.png')
 
@@ -77,7 +78,7 @@ print(f'Constant sensors dropped: {constant_sensors}')
 print(f'Useful sensors: {len(useful_sensors)}/{len(sensor_cols)}')
 
 # CELL 11: Feature engineering
-def create_features(df, sensors, window=10):
+def create_features(df, sensors, window=10, mean_lifetime=None):
     feature_df = df.copy()
     for sensor in sensors:
         feature_df[f'{sensor}_rolling_mean'] = (
@@ -94,13 +95,26 @@ def create_features(df, sensors, window=10):
             feature_df.groupby('unit_number')[sensor]
             .diff().fillna(0)
         )
-    feature_df['cycle_norm'] = feature_df.groupby('unit_number')['time_in_cycles'].transform(lambda x: x / x.max())
-    feature_df['op_setting_sum'] = feature_df['op_setting_1'] + feature_df['op_setting_2'] + feature_df['op_setting_3']
+    if mean_lifetime is None:
+        # fallback: normalize by unit's max cycle (per-unit normalization)
+        feature_df['cycle_norm'] = feature_df.groupby('unit_number')['time_in_cycles'].transform(lambda x: x / x.max())
+    else:
+        # normalize cycles by training mean lifetime
+        if mean_lifetime == 0:
+            raise ValueError("Training mean lifetime is zero; cannot normalize cycles.")
+        feature_df['cycle_norm'] = feature_df['time_in_cycles'] / mean_lifetime
+    # Some callers (tests) may not provide op_setting_* columns — handle gracefully
+    op1 = feature_df.get('op_setting_1', 0)
+    op2 = feature_df.get('op_setting_2', 0)
+    op3 = feature_df.get('op_setting_3', 0)
+    feature_df['op_setting_sum'] = op1 + op2 + op3
     return feature_df
 
 print('Engineering features...')
-train_features = create_features(train_df, useful_sensors, window=10)
-test_features = create_features(test_df, useful_sensors, window=10)
+# Use training mean lifetime as normalization reference
+mean_lifetime = train_df.groupby('unit_number')['time_in_cycles'].max().mean()
+train_features = create_features(train_df, useful_sensors, window=10, mean_lifetime=mean_lifetime)
+test_features = create_features(test_df, useful_sensors, window=10, mean_lifetime=mean_lifetime)
 print(f'Train features: {len(train_features.columns)}, Test features: {len(test_features.columns)}')
 
 # CELL 12: Prepare feature matrix
@@ -158,7 +172,7 @@ for idx, (name, pred) in enumerate([('Random Forest', rf_pred), ('XGBoost', xgb_
     ax.grid(True, alpha=0.3)
 plt.suptitle('Predicted vs Actual RUL — NASA CMAPSS FD001', fontsize=13)
 plt.tight_layout()
-plt.savefig('figures/predicted_vs_actual_rul.png', dpi=150, bbox_inches='tight')
+plt.savefig(str(_BASE_DIR / 'figures/predicted_vs_actual_rul.png'), dpi=150, bbox_inches='tight')
 plt.close()
 print('Saved: figures/predicted_vs_actual_rul.png')
 
@@ -174,7 +188,7 @@ for idx, (name, pred) in enumerate([('Random Forest', rf_pred), ('XGBoost', xgb_
     ax.set_title(f'{name} Residuals\nMean={residuals.mean():.1f}, Std={residuals.std():.1f}')
 plt.suptitle('RUL Prediction Residuals', fontsize=13)
 plt.tight_layout()
-plt.savefig('figures/rul_residuals.png', dpi=150, bbox_inches='tight')
+plt.savefig(str(_BASE_DIR / 'figures/rul_residuals.png'), dpi=150, bbox_inches='tight')
 plt.close()
 print('Saved: figures/rul_residuals.png')
 
@@ -189,7 +203,7 @@ ax.set_yticklabels(top_features['feature'], fontsize=9)
 ax.set_xlabel('Feature Importance (XGBoost)')
 ax.set_title(f'Top {top_n} Features for RUL Prediction — NASA CMAPSS FD001')
 plt.tight_layout()
-plt.savefig('figures/feature_importance.png', dpi=150, bbox_inches='tight')
+plt.savefig(str(_BASE_DIR / 'figures/feature_importance.png'), dpi=150, bbox_inches='tight')
 plt.close()
 print('Saved: figures/feature_importance.png')
 
@@ -217,7 +231,7 @@ for idx, engine in enumerate(sample_test_engines):
     ax.grid(True, alpha=0.3)
 plt.suptitle('RUL Degradation Trajectories — XGBoost Predictions', fontsize=13)
 plt.tight_layout()
-plt.savefig('figures/rul_degradation_trajectories.png', dpi=150, bbox_inches='tight')
+plt.savefig(str(_BASE_DIR / 'figures/rul_degradation_trajectories.png'), dpi=150, bbox_inches='tight')
 plt.close()
 print('Saved: figures/rul_degradation_trajectories.png')
 
@@ -232,7 +246,7 @@ ax.set_xlabel('Correlation with RUL')
 ax.set_title('Sensor Correlation with Remaining Useful Life')
 ax.axvline(x=0, color='black', lw=1)
 plt.tight_layout()
-plt.savefig('figures/sensor_rul_correlation.png', dpi=150, bbox_inches='tight')
+plt.savefig(str(_BASE_DIR / 'figures/sensor_rul_correlation.png'), dpi=150, bbox_inches='tight')
 plt.close()
 print('Saved: figures/sensor_rul_correlation.png')
 
