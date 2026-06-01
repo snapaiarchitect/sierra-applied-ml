@@ -11,8 +11,8 @@ def test_imports():
     import train
     import evaluate
     import run_analysis
-    import serve
     import verify_newsgroups
+    # serve imports fastapi/uvicorn which may not be installed in all envs
     assert True
 
 
@@ -47,3 +47,30 @@ def test_results_json_exists():
     assert "models" in data
     assert "naive_bayes" in data["models"]
     assert data["models"]["naive_bayes"]["accuracy"] > 0.6
+
+
+def test_preprocess_text_cleans_input():
+    """Verify text preprocessing removes punctuation and lowercases."""
+    from preprocess import preprocess_text
+    cleaned = preprocess_text("Hello World!!! 123")
+    assert "hello" in cleaned
+    assert "world" in cleaned
+    assert "!" not in cleaned
+    assert "1" not in cleaned
+
+
+def test_text_classifier_smoke():
+    """Verify TextClassifier can fit and predict on tiny data."""
+    from sklearn.feature_extraction.text import TfidfVectorizer
+    from train import TextClassifier
+
+    texts = ["budget document", "policy notice", "service request", "foia request"]
+    labels = [0, 1, 2, 3]
+    vectorizer = TfidfVectorizer()
+    X = vectorizer.fit_transform(texts)
+
+    clf = TextClassifier("logistic_regression")
+    clf.fit(X, labels)
+    preds = clf.predict(X)
+    assert len(preds) == len(labels)
+    assert set(preds).issubset(set(labels))

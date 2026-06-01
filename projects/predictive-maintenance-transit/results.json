@@ -22,13 +22,13 @@
       "mae_cycles": 24.3,
       "rmse_cycles": 35.5,
       "r2": 0.27,
-      "notes": "Ensemble model; strong baseline performance"
+      "notes": "Best performer; ensemble model with strong baseline performance"
     },
     "xgboost": {
       "mae_cycles": 26.2,
       "rmse_cycles": 36.8,
       "r2": 0.22,
-      "notes": "Best performer; gradient boosting with engineered features"
+      "notes": "Gradient boosting with engineered features; slightly behind Random Forest on this dataset"
     }
   },
   "feature_engineering": {

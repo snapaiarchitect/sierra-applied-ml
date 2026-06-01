@@ -1,34 +1,48 @@
-pytest>=7.0
-black>=22.0
-flake8>=5.0
-mypy>=0.990
+# Core data science
+pandas>=1.5,<2.3
+numpy>=1.23,<2.2
+scipy>=1.10
 
-pandas>=1.5
-numpy>=1.23
-scikit-learn>=1.2
-xgboost>=1.7
-prophet>=1.1
+# Machine Learning
+scikit-learn>=1.2,<1.7
+xgboost>=1.7,<3.0
 
 # NLP
-transformers>=4.30
-torch>=2.0
-tokenizers>=0.13
-spacy>=3.5
+nltk>=3.8
+
+# Time Series
+statsmodels>=0.14
 
 # Serving
 fastapi>=0.100
 uvicorn>=0.23
 
-# Viz
+# Visualization
 matplotlib>=3.6
 seaborn>=0.12
 plotly>=5.14
-streamlit>=1.30.0
 
-# Data
-dbt-core>=1.5
-polars>=0.18
+# Dashboards
+streamlit>=1.30
 
-# MLOps
-mlflow>=2.5
-docker>=6.0
+# Notebooks
+jupyter>=1.0
+ipykernel>=6.0
+
+# Data fetching
+requests>=2.31
+
+# Development / Testing
+pytest>=7.0
+black>=22.0
+flake8>=5.0
+mypy>=0.990
+isort>=5.0
+
+# Optional / heavyweight (install only if needed)
+# prophet>=1.1
+# transformers>=4.30
+# torch>=2.0
+# spacy>=3.5
+# polars>=0.18
+# mlflow>=2.5

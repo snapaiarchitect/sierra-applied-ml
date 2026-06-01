@@ -99,99 +99,19 @@ class TextClassifier:
         print(f"Loaded model from: {path}")
 
 
-def train_bert_classifier(train_texts: List[str], train_labels: List[int],
-                          val_texts: Optional[List[str]] = None,
-                          val_labels: Optional[List[int]] = None,
-                          model_name: str = 'bert-base-uncased',
-                          num_epochs: int = 3) -> Dict:
-    """Fine-tune BERT for text classification."""
-    try:
-        from transformers import BertTokenizer, BertForSequenceClassification, TrainingArguments, Trainer
-        import torch
-        
-        # Tokenize
-        tokenizer = BertTokenizer.from_pretrained(model_name)
-        
-        def tokenize(texts):
-            return tokenizer(texts, padding=True, truncation=True, max_length=128, return_tensors='pt')
-        
-        train_encodings = tokenize(train_texts)
-        
-        # Dataset
-        class DocumentDataset(torch.utils.data.Dataset):
-            def __init__(self, encodings, labels):
-                self.encodings = encodings
-                self.labels = labels
-            
-            def __getitem__(self, idx):
-                item = {key: val[idx] for key, val in self.encodings.items()}
-                item['labels'] = torch.tensor(self.labels[idx])
-                return item
-            
-            def __len__(self):
-                return len(self.labels)
-        
-        train_dataset = DocumentDataset(train_encodings, train_labels)
-        
-        # Model
-        num_labels = len(set(train_labels))
-        model = BertForSequenceClassification.from_pretrained(model_name, num_labels=num_labels)
-        
-        # Training args
-        training_args = TrainingArguments(
-            output_dir='./bert_results',
-            num_train_epochs=num_epochs,
-            per_device_train_batch_size=16,
-            warmup_steps=50,
-            weight_decay=0.01,
-            logging_dir='./bert_logs',
-            logging_steps=50,
-        )
-        
-        trainer = Trainer(
-            model=model,
-            args=training_args,
-            train_dataset=train_dataset,
-        )
-        
-        trainer.train()
-        
-        return {
-            'model': model,
-            'tokenizer': tokenizer,
-            'trainer': trainer
-        }
-        
-    except ImportError:
-        print("transformers library not installed. Install with: pip install transformers")
-        return None
-
-
-def create_zero_shot_prompt(text: str, categories: List[str]) -> str:
-    """Create zero-shot classification prompt for LLM APIs."""
-    prompt = f"""Classify the following government document into one of these categories:
-{chr(10).join(f'- {cat}' for cat in categories)}
-
-Document:
-{text[:500]}
-
-Respond with ONLY the category name, nothing else."""
-    return prompt
-
-
 if __name__ == '__main__':
     # Test classifier
     from sklearn.feature_extraction.text import TfidfVectorizer
-    
+
     texts = ["budget allocation", "policy implementation", "service request", "foia disclosure"]
     labels = [0, 1, 2, 3]
-    
+
     vectorizer = TfidfVectorizer()
     X = vectorizer.fit_transform(texts)
-    
+
     clf = TextClassifier('logistic_regression')
     clf.fit(X, labels)
-    
+
     pred = clf.predict(X)
     print(f"Predictions: {pred}")
     print("Training module ready.")

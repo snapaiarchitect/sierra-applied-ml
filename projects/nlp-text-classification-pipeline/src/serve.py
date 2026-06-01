@@ -110,8 +110,10 @@ async def classify_document(request: DocumentRequest):
         pred = model.predict(X)[0]
         proba = model.predict_proba(X)[0]
         
-        # Map to category name
-        label_map = {0: 'Budget', 1: 'Policy', 2: 'Service_Request', 3: 'FOIA'}
+        # Map to category name using 20 Newsgroups target names
+        from sklearn.datasets import fetch_20newsgroups
+        _target_names = fetch_20newsgroups(subset='train', remove=('headers', 'footers', 'quotes')).target_names
+        label_map = {i: name for i, name in enumerate(_target_names)}
         category = label_map.get(pred, str(pred))
         
         return ClassificationResponse(

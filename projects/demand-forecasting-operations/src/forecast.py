@@ -18,7 +18,7 @@ class DemandForecaster:
         self.fitted = False
         self.feature_cols = None
         
-    def fit(self, df: pd.DataFrame, target_col: str = 'demand',
+    def fit(self, df: pd.DataFrame, target_col: str = 'cnt',
             feature_cols: Optional[List[str]] = None):
         """Train forecasting model."""
         if feature_cols is None:
@@ -104,7 +104,7 @@ class DemandForecaster:
         future_df['forecast'] = predictions
         return future_df
     
-    def evaluate(self, df: pd.DataFrame, target_col: str = 'demand') -> Dict:
+    def evaluate(self, df: pd.DataFrame, target_col: str = 'cnt') -> Dict:
         """Evaluate model performance."""
         y_true = df[target_col].values
         y_pred = self.predict(df)
@@ -173,7 +173,7 @@ class EnsembleForecaster:
         
         return np.sum(predictions, axis=0)
     
-    def evaluate(self, df: pd.DataFrame, target_col: str = 'demand') -> Dict:
+    def evaluate(self, df: pd.DataFrame, target_col: str = 'cnt') -> Dict:
         """Evaluate ensemble performance."""
         y_true = df[target_col].values
         y_pred = self.predict(df)
@@ -198,8 +198,8 @@ def run_prophet_forecast(df: pd.DataFrame, periods: int = 30,
         from prophet import Prophet
         
         # Prepare data
-        prophet_df = df.reset_index()[['datetime', 'demand']].rename(
-            columns={'datetime': 'ds', 'demand': 'y'}
+        prophet_df = df.reset_index()[['datetime', 'cnt']].rename(
+            columns={'datetime': 'ds', 'cnt': 'y'}
         )
         
         # Fit
