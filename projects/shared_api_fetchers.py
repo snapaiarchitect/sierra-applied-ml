@@ -9,9 +9,12 @@ These are enhanced fetchers that integrate APIs from the other agent's build:
 
 from __future__ import annotations
 
-import io, os, zipfile
+import io
+import os
+import zipfile
 from pathlib import Path
 from typing import Any, List, Optional
+
 import requests
 from dotenv import load_dotenv
 
@@ -19,22 +22,29 @@ from dotenv import load_dotenv
 # Kaggle API — NASA C-MAPSS fallback
 # ──────────────────────────────────────────────────────────
 
-def download_cmapss_kaggle(data_dir: str | Path, dataset_slug: Optional[str] = None) -> Path:
+
+def download_cmapss_kaggle(
+    data_dir: str | Path, dataset_slug: Optional[str] = None
+) -> Path:
     """
     Download NASA C-MAPSS via Kaggle API.
     Fallback if direct NASA download is unavailable.
-    
+
     Requires KAGGLE_USERNAME and KAGGLE_KEY env vars.
     Default dataset slug: 'behrad3d/nasa-cmaps'
     """
     load_dotenv()
     slug = dataset_slug or os.getenv("CMAPSS_DATASET_SLUG", "behrad3d/nasa-cmaps")
     if not (os.getenv("KAGGLE_USERNAME") and os.getenv("KAGGLE_KEY")):
-        raise ValueError("Set KAGGLE_USERNAME and KAGGLE_KEY before using Kaggle download.")
+        raise ValueError(
+            "Set KAGGLE_USERNAME and KAGGLE_KEY before using Kaggle download."
+        )
     try:
         from kaggle.api.kaggle_api_extended import KaggleApi
     except ImportError as exc:
-        raise ImportError("Install kaggle to use this downloader: pip install kaggle") from exc
+        raise ImportError(
+            "Install kaggle to use this downloader: pip install kaggle"
+        ) from exc
     out = Path(data_dir)
     out.mkdir(parents=True, exist_ok=True)
     api = KaggleApi()
@@ -47,10 +57,11 @@ def download_cmapss_kaggle(data_dir: str | Path, dataset_slug: Optional[str] = N
 # Reddit/PRAW — Live text data for NLP
 # ──────────────────────────────────────────────────────────
 
+
 def fetch_reddit_posts(subreddit: str, limit: int = 25) -> List[str]:
     """
     Fetch live posts from Reddit using PRAW.
-    
+
     Requires REDDIT_CLIENT_ID, REDDIT_CLIENT_SECRET, REDDIT_USER_AGENT env vars.
     Returns list of post texts (title + selftext).
     """
@@ -61,7 +72,9 @@ def fetch_reddit_posts(subreddit: str, limit: int = 25) -> List[str]:
     try:
         import praw
     except ImportError as exc:
-        raise ImportError("Install praw to use Reddit fetcher: pip install praw") from exc
+        raise ImportError(
+            "Install praw to use Reddit fetcher: pip install praw"
+        ) from exc
     reddit = praw.Reddit(
         client_id=os.getenv("REDDIT_CLIENT_ID"),
         client_secret=os.getenv("REDDIT_CLIENT_SECRET"),
@@ -78,10 +91,13 @@ def fetch_reddit_posts(subreddit: str, limit: int = 25) -> List[str]:
 # OpenWeatherMap — Weather enrichment for bike demand
 # ──────────────────────────────────────────────────────────
 
-def fetch_weather(city: str | None = None, api_key: str | None = None) -> dict[str, Any]:
+
+def fetch_weather(
+    city: str | None = None, api_key: str | None = None
+) -> dict[str, Any]:
     """
     Fetch current weather from OpenWeatherMap API.
-    
+
     Requires OPENWEATHER_API_KEY env var.
     Returns JSON dict with temperature, humidity, weather condition, etc.
     """
@@ -93,7 +109,7 @@ def fetch_weather(city: str | None = None, api_key: str | None = None) -> dict[s
     r = requests.get(
         "https://api.openweathermap.org/data/2.5/weather",
         params={"q": q, "appid": key, "units": "metric"},
-        timeout=10
+        timeout=10,
     )
     r.raise_for_status()
     return r.json()
@@ -102,6 +118,7 @@ def fetch_weather(city: str | None = None, api_key: str | None = None) -> dict[s
 # ──────────────────────────────────────────────────────────
 # Citi Bike GBFS — Real-time station status
 # ──────────────────────────────────────────────────────────
+
 
 def fetch_citibike_station_status() -> dict[str, Any]:
     """
@@ -119,7 +136,11 @@ def fetch_citibike_station_status() -> dict[str, Any]:
 # UCI Bike Sharing — Direct download (alternative to Kaggle)
 # ──────────────────────────────────────────────────────────
 
-def download_bike_data(data_dir: str | Path, url: str = "https://archive.ics.uci.edu/ml/machine-learning-databases/00275/Bike-Sharing-Dataset.zip") -> Path:
+
+def download_bike_data(
+    data_dir: str | Path,
+    url: str = "https://archive.ics.uci.edu/ml/machine-learning-databases/00275/Bike-Sharing-Dataset.zip",
+) -> Path:
     """
     Download UCI Bike Sharing dataset directly.
     No API key required.

@@ -25,6 +25,7 @@ DATA DESCRIPTION:
     - Categories: comp.*, rec.*, sci.*, talk.*, misc.*, alt.*, soc.*
     - Already REAL — verified via sklearn.datasets source code
 """
+
 from sklearn.datasets import fetch_20newsgroups
 
 
@@ -36,10 +37,10 @@ def verify_newsgroups():
 
     # Load training subset
     newsgroups = fetch_20newsgroups(
-        subset='train',
-        remove=('headers', 'footers', 'quotes'),
+        subset="train",
+        remove=("headers", "footers", "quotes"),
         shuffle=True,
-        random_state=42
+        random_state=42,
     )
 
     print(f"   ✓ Loaded: {len(newsgroups.data):,} documents")
@@ -50,8 +51,10 @@ def verify_newsgroups():
     print(f"   ... and {len(newsgroups.target_names) - 5} more")
 
     # Show a sample
-    print(f"\n📄 Sample document (category: {newsgroups.target_names[newsgroups.target[0]]}):")
-    print("   " + newsgroups.data[0][:200].replace('\n', ' ') + "...")
+    print(
+        f"\n📄 Sample document (category: {newsgroups.target_names[newsgroups.target[0]]}):"
+    )
+    print("   " + newsgroups.data[0][:200].replace("\n", " ") + "...")
 
     print("\n✅ 20 Newsgroups is VERIFIED REAL — no replacement needed.")
     print("   generate_data.py was NEVER used for this project.")

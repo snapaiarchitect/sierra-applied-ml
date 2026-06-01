@@ -1,12 +1,14 @@
-import streamlit as st
-import pandas as pd
 import json
 from pathlib import Path
+
+import pandas as pd
+import streamlit as st
 
 st.set_page_config(page_title="Predictive Maintenance — Transit Systems", layout="wide")
 
 st.title("🔧 Predictive Maintenance Dashboard")
 st.caption("WMATA transit asset risk scoring — Powered by real MTA/NYC Open Data")
+
 
 @st.cache_data
 def load_data():
@@ -16,6 +18,7 @@ def load_data():
     with open("results.json") as f:
         results = json.load(f)
     return df, charts, results
+
 
 try:
     df, charts, results = load_data()
@@ -34,17 +37,22 @@ if data_loaded:
 
     # Risk distribution
     st.subheader("Risk Tier Distribution")
-    tier_counts = df['risk_tier'].value_counts()
+    tier_counts = df["risk_tier"].value_counts()
     st.bar_chart(tier_counts)
 
     # Anomaly vs Risk
     st.subheader("Anomaly Detection by Risk Tier")
-    anomaly_by_tier = df.groupby('risk_tier')['anomaly'].mean().sort_values(ascending=False)
+    anomaly_by_tier = (
+        df.groupby("risk_tier")["anomaly"].mean().sort_values(ascending=False)
+    )
     st.bar_chart(anomaly_by_tier)
 
     # Data table
     st.subheader("Asset Risk Table")
-    st.dataframe(df.sort_values('combined_risk', ascending=False).head(50), use_container_width=True)
+    st.dataframe(
+        df.sort_values("combined_risk", ascending=False).head(50),
+        use_container_width=True,
+    )
 
     # Model results
     st.subheader("Model Performance")

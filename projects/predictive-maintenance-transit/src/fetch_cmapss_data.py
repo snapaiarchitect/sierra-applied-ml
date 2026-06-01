@@ -25,24 +25,26 @@ CMAPSS_FILES = [
 ]
 
 # Raw data URLs from a reliable GitHub mirror
-# (NASA direct download: https://ti.arc.nasa.gov/m/project/prognostic-repository/download/ 
+# (NASA direct download: https://ti.arc.nasa.gov/m/project/prognostic-repository/download/
 #  currently serves HTML instead of the zip file)
 GITHUB_MIRROR = "https://raw.githubusercontent.com/ankur-mali/Predictive-Maintenance-Using-AI-/main/"
+
 
 def ensure_dir(path: Path):
     """Create directory if it doesn't exist."""
     path.mkdir(parents=True, exist_ok=True)
 
+
 def download_file(url: str, dest: Path, retries: int = 3, backoff: float = 2.0) -> bool:
     """
     Download a file with exponential backoff retry logic.
-    
+
     Args:
         url: Remote file URL
         dest: Local destination path
         retries: Number of retry attempts
         backoff: Initial backoff seconds (doubles each retry)
-    
+
     Returns:
         True if download succeeded, False otherwise
     """
@@ -64,62 +66,66 @@ def download_file(url: str, dest: Path, retries: int = 3, backoff: float = 2.0) 
                 wait *= 2
     return False
 
+
 def fetch_cmapss_data(raw_dir: Path = None, processed_dir: Path = None) -> dict:
     """
     Download CMAPSS dataset files to local directories.
-    
+
     Returns:
         dict with 'success', 'files', 'raw_dir', 'error' keys
     """
     project_root = Path(__file__).resolve().parent.parent
-    
+
     if raw_dir is None:
         raw_dir = project_root / "data" / "raw"
     if processed_dir is None:
         processed_dir = project_root / "data" / "processed"
-    
+
     ensure_dir(raw_dir)
     ensure_dir(processed_dir)
-    
+
     downloaded = []
     failed = []
-    
+
     print(f"Downloading CMAPSS dataset to {raw_dir}")
     print(f"Source: NASA Prognostics Center of Excellence")
     print(f"Mirror: GitHub raw (ankur-mali/Predictive-Maintenance-Using-AI-)")
     print("-" * 50)
-    
+
     for fname in CMAPSS_FILES:
         dest = raw_dir / fname
         if dest.exists():
-            print(f"  ⏭ {fname} already exists ({dest.stat().st_size:,} bytes) — skipping")
+            print(
+                f"  ⏭ {fname} already exists ({dest.stat().st_size:,} bytes) — skipping"
+            )
             downloaded.append(dest)
             continue
-        
+
         url = GITHUB_MIRROR + fname
         if download_file(url, dest, retries=3, backoff=2.0):
             downloaded.append(dest)
         else:
             failed.append(fname)
-    
+
     print("-" * 50)
-    
+
     if failed:
         return {
             "success": False,
             "files": downloaded,
             "raw_dir": raw_dir,
-            "error": f"Failed to download: {', '.join(failed)}"
+            "error": f"Failed to download: {', '.join(failed)}",
         }
-    
+
     print(f"✓ All {len(downloaded)} CMAPSS files ready in {raw_dir}")
     return {
         "success": True,
         "files": downloaded,
         "raw_dir": raw_dir,
         "processed_dir": processed_dir,
-        "error": None
+        "error": None,
     }
+
 
 def main():
     result = fetch_cmapss_data()
@@ -127,6 +133,7 @@ def main():
         print(f"\n✗ FAILED: {result['error']}")
         sys.exit(1)
     print("\n✓ CMAPSS data fetch complete. Ready for analysis.")
+
 
 if __name__ == "__main__":
     main()

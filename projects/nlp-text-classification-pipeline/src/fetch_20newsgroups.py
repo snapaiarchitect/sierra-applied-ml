@@ -18,8 +18,8 @@ OUTPUT:
     data/raw/20newsgroups_stats.csv     — Dataset statistics (class distribution, lengths)
 """
 
-import json
 import csv
+import json
 import os
 from pathlib import Path
 
@@ -73,7 +73,9 @@ def fetch_and_save(subset: str, out_dir: Path) -> dict:
         "subset": subset,
         "n_samples": len(records),
         "n_classes": len(data.target_names),
-        "avg_length": round(sum(text_lengths) / len(text_lengths), 1) if text_lengths else 0,
+        "avg_length": (
+            round(sum(text_lengths) / len(text_lengths), 1) if text_lengths else 0
+        ),
         "min_length": min(text_lengths) if text_lengths else 0,
         "max_length": max(text_lengths) if text_lengths else 0,
         "class_counts": class_counts,
@@ -97,10 +99,26 @@ def main():
     stats_path = raw_dir / "20newsgroups_stats.csv"
     with open(stats_path, "w", newline="", encoding="utf-8") as f:
         writer = csv.writer(f)
-        writer.writerow(["subset", "n_samples", "n_classes", "avg_length", "min_length", "max_length"])
+        writer.writerow(
+            [
+                "subset",
+                "n_samples",
+                "n_classes",
+                "avg_length",
+                "min_length",
+                "max_length",
+            ]
+        )
         for s in (train_stats, test_stats):
             writer.writerow(
-                [s["subset"], s["n_samples"], s["n_classes"], s["avg_length"], s["min_length"], s["max_length"]]
+                [
+                    s["subset"],
+                    s["n_samples"],
+                    s["n_classes"],
+                    s["avg_length"],
+                    s["min_length"],
+                    s["max_length"],
+                ]
             )
         writer.writerow([])
         writer.writerow(["subset", "class_name", "count"])
@@ -110,8 +128,12 @@ def main():
 
     print(f"    ✓ Saved statistics → {stats_path}")
     print()
-    print(f"Train: {train_stats['n_samples']:,} docs | Test: {test_stats['n_samples']:,} docs")
-    print(f"Classes: {train_stats['n_classes']} | Avg length: {train_stats['avg_length']} tokens")
+    print(
+        f"Train: {train_stats['n_samples']:,} docs | Test: {test_stats['n_samples']:,} docs"
+    )
+    print(
+        f"Classes: {train_stats['n_classes']} | Avg length: {train_stats['avg_length']} tokens"
+    )
     print()
     print("=" * 60)
     print("Fetch complete — all data is REAL (sklearn 20 Newsgroups)")

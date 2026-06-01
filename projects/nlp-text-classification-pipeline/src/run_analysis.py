@@ -5,23 +5,30 @@ and writes results in the canonical schema expected by dashboards and tests.
 """
 
 import json
+
 from sklearn.datasets import fetch_20newsgroups
-from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.dummy import DummyClassifier
-from sklearn.naive_bayes import MultinomialNB
+from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.linear_model import LogisticRegression
-from sklearn.svm import LinearSVC
-from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
+from sklearn.metrics import accuracy_score, f1_score, precision_score, recall_score
 from sklearn.model_selection import train_test_split
+from sklearn.naive_bayes import MultinomialNB
+from sklearn.svm import LinearSVC
 
 
 def main() -> None:
     # Load dataset using canonical sklearn train/test split (no leakage)
     train_data = fetch_20newsgroups(
-        subset="train", remove=("headers", "footers", "quotes"), shuffle=True, random_state=42
+        subset="train",
+        remove=("headers", "footers", "quotes"),
+        shuffle=True,
+        random_state=42,
     )
     test_data = fetch_20newsgroups(
-        subset="test", remove=("headers", "footers", "quotes"), shuffle=True, random_state=42
+        subset="test",
+        remove=("headers", "footers", "quotes"),
+        shuffle=True,
+        random_state=42,
     )
     X_train, y_train = train_data.data, train_data.target
     X_test, y_test = test_data.data, test_data.target
@@ -47,8 +54,12 @@ def main() -> None:
         y_pred = model.predict(X_test_tfidf)
         model_results[name] = {
             "accuracy": float(accuracy_score(y_test, y_pred)),
-            "precision": float(precision_score(y_test, y_pred, average="weighted", zero_division=0)),
-            "recall": float(recall_score(y_test, y_pred, average="weighted", zero_division=0)),
+            "precision": float(
+                precision_score(y_test, y_pred, average="weighted", zero_division=0)
+            ),
+            "recall": float(
+                recall_score(y_test, y_pred, average="weighted", zero_division=0)
+            ),
             "f1": float(f1_score(y_test, y_pred, average="weighted", zero_division=0)),
         }
 

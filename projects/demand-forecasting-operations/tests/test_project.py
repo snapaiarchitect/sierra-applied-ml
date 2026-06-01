@@ -6,11 +6,12 @@ sys.path.insert(0, str(Path(__file__).parent.parent / "src"))
 
 def test_imports():
     """Verify all src modules are importable."""
+    import evaluate
     import fetch_bike_data
+    import forecast
     import load_bike
     import preprocess
-    import forecast
-    import evaluate
+
     assert True
 
 
@@ -38,6 +39,7 @@ def test_figures_dir_exists():
 def test_results_json_exists():
     """Verify results.json is present and valid."""
     import json
+
     results_file = Path(__file__).parent.parent / "results.json"
     assert results_file.exists()
     with open(results_file) as f:
@@ -63,10 +65,12 @@ def test_create_lag_features_produces_expected_columns():
     import pandas as pd
     from preprocess import create_lag_features
 
-    df = pd.DataFrame({
-        "datetime": pd.date_range("2023-01-01", periods=5, freq="h"),
-        "cnt": [1.0, 2.0, 3.0, 4.0, 5.0],
-    })
+    df = pd.DataFrame(
+        {
+            "datetime": pd.date_range("2023-01-01", periods=5, freq="h"),
+            "cnt": [1.0, 2.0, 3.0, 4.0, 5.0],
+        }
+    )
     result = create_lag_features(df, target_col="cnt", lags=[1, 2])
     assert "cnt_lag_1" in result.columns
     assert "cnt_lag_2" in result.columns
@@ -79,10 +83,12 @@ def test_split_time_series_respects_temporal_order():
     import pandas as pd
     from preprocess import split_time_series
 
-    df = pd.DataFrame({
-        "datetime": pd.date_range("2023-01-01", periods=100, freq="h"),
-        "cnt": range(100),
-    })
+    df = pd.DataFrame(
+        {
+            "datetime": pd.date_range("2023-01-01", periods=100, freq="h"),
+            "cnt": range(100),
+        }
+    )
     train, test = split_time_series(df, test_days=1)
     assert train["datetime"].max() < test["datetime"].min()
     assert len(test) <= 24

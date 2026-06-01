@@ -24,10 +24,11 @@ CITATION:
       organization={IEEE}
     }
 """
-import urllib.request
-import zipfile
+
 import os
 import shutil
+import urllib.request
+import zipfile
 
 
 def download_nasa_turbofan():
@@ -50,18 +51,22 @@ def download_nasa_turbofan():
     print(f"   ✓ Downloaded: {zip_path} ({size_mb:.1f} MB)")
 
     # The NASA archive is a nested ZIP: outer → inner CMAPSSData.zip
-    with zipfile.ZipFile(zip_path, 'r') as zip_ref:
+    with zipfile.ZipFile(zip_path, "r") as zip_ref:
         zip_ref.extractall(outer_dir)
 
-    inner_zip = os.path.join(outer_dir, "6. Turbofan Engine Degradation Simulation Data Set", "CMAPSSData.zip")
-    with zipfile.ZipFile(inner_zip, 'r') as zip_ref:
+    inner_zip = os.path.join(
+        outer_dir,
+        "6. Turbofan Engine Degradation Simulation Data Set",
+        "CMAPSSData.zip",
+    )
+    with zipfile.ZipFile(inner_zip, "r") as zip_ref:
         zip_ref.extractall(extract_dir)
     print(f"   ✓ Extracted nested archive to: {extract_dir}/")
 
     # List contents
     for root, dirs, files in os.walk(extract_dir):
         for file in sorted(files):
-            if file.endswith('.txt'):
+            if file.endswith(".txt"):
                 print(f"      📄 {file}")
 
     # Cleanup
